@@ -9,7 +9,14 @@
       "Skill(update-config)",
       "Bash(npm install *)",
       "Bash(grep -E '\\\\.\\(png|jpg|jpeg|svg|gif\\)$')",
-      "Bash(vercel deploy *)"
+      "Bash(vercel deploy *)",
+      "Bash(node *)",
+      "Bash(cat)",
+      "Bash(chmod +x /tmp/setup-tables.sh)",
+      "Bash(/tmp/setup-tables.sh)",
+      "Bash(pkill *)",
+      "Bash(npx supabase *)",
+      "Bash(npm uninstall *)"
     ]
   }
 }
