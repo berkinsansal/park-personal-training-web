@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 
 const links = [
   { href: "#hakkimizda", label: "Hakkimizda" },
@@ -14,8 +15,9 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur border-b border-zinc-800">
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
-        <a href="#" className="text-amber-400 font-bold text-xl tracking-wide">
-          PARK PT
+        <a href="#" className="flex items-center gap-3">
+          <Image src="/logo.png" alt="Park PT Logo" width={40} height={40} />
+          <span className="hidden sm:inline text-amber-400 font-bold text-lg tracking-wide">PARK PT</span>
         </a>
         <ul className="hidden md:flex gap-8">
           {links.map((l) => (
