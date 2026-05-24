@@ -1,0 +1,78 @@
+-- Create tables for admin-editable sections
+
+-- Hero Section
+CREATE TABLE IF NOT EXISTS hero (
+  id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  title TEXT NOT NULL,
+  subtitle TEXT NOT NULL,
+  cta_button_text TEXT NOT NULL DEFAULT 'Get Started',
+  cta_button_url TEXT NOT NULL DEFAULT '/contact',
+  background_image_url TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- About Section
+CREATE TABLE IF NOT EXISTS about (
+  id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  title TEXT NOT NULL,
+  description TEXT NOT NULL,
+  image_url TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Services
+CREATE TABLE IF NOT EXISTS services (
+  id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  name TEXT NOT NULL,
+  description TEXT NOT NULL,
+  price NUMERIC(10, 2),
+  icon_url TEXT,
+  order_index INT DEFAULT 0,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Teachers/Trainers
+CREATE TABLE IF NOT EXISTS teachers (
+  id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  name TEXT NOT NULL,
+  bio TEXT,
+  specialty TEXT,
+  image_url TEXT,
+  order_index INT DEFAULT 0,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Contact Section
+CREATE TABLE IF NOT EXISTS contact (
+  id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  title TEXT NOT NULL,
+  email TEXT NOT NULL,
+  phone TEXT,
+  address TEXT,
+  description TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Enable RLS (Row Level Security)
+ALTER TABLE hero ENABLE ROW LEVEL SECURITY;
+ALTER TABLE about ENABLE ROW LEVEL SECURITY;
+ALTER TABLE services ENABLE ROW LEVEL SECURITY;
+ALTER TABLE teachers ENABLE ROW LEVEL SECURITY;
+ALTER TABLE contact ENABLE ROW LEVEL SECURITY;
+
+-- Public read access (anyone can view)
+CREATE POLICY "Enable read access for all users" ON hero
+  FOR SELECT USING (true);
+CREATE POLICY "Enable read access for all users" ON about
+  FOR SELECT USING (true);
+CREATE POLICY "Enable read access for all users" ON services
+  FOR SELECT USING (true);
+CREATE POLICY "Enable read access for all users" ON teachers
+  FOR SELECT USING (true);
+CREATE POLICY "Enable read access for all users" ON contact
+  FOR SELECT USING (true);
