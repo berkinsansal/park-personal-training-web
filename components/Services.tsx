@@ -1,33 +1,28 @@
 const services = [
   {
-    icon: "🏋️",
-    title: "Bire Bir Personal Training",
-    desc: "Tamamen sana ozel, egitmenin gozetiminde yoğun ve verimli antrenman seansları. Hedeflerine en hizli sekilde ulasmanin yolu.",
-  },
-  {
-    icon: "👥",
-    title: "Kucuk Grup Dersleri",
-    desc: "3-6 kisilik gruplarla dinamik ve motive edici antrenman deneyimi. Hem sosyal hem de etkili bir calisma ortami.",
-  },
-  {
-    icon: "🥗",
-    title: "Beslenme Danismanligi",
-    desc: "Antrenman programinla uyumlu, kisisellestirilmis beslenme planlari. Yediklerinle performansinizi ve sonuclari maksimize edin.",
-  },
-  {
-    icon: "📊",
-    title: "Vucut Analizi ve Takip",
-    desc: "Duzenli vucut olcumu ve ilerleme takibi ile motivasyonunu canli tut. Sonuclari gorunce devam etmek kolaylasiyor.",
+    icon: "💪",
+    title: "Fitness",
+    desc: "Kişisel hedeflerine uygun, uzman eğitmen gözetiminde yoğun ve verimli fitness antrenmanları. Vücudunu güçlendir, sağlıklı yaşamı keşfet.",
   },
   {
     icon: "🧘",
-    title: "Mobility ve Esneklik",
-    desc: "Gunluk hayatini kolaylastiracak hareket kalitesi ve esneklik calismalari. Sakatliklari onle, daha rahat hisset.",
+    title: "Pilates",
+    desc: "Derin kas gruplarını çalıştıran, duruşunu düzelten ve esnekliğini artıran pilates dersleri. Hem zihin hem beden için mükemmel bir denge.",
   },
   {
-    icon: "💪",
-    title: "Online Koçluk",
-    desc: "Studyoya gelemesen bile durma. Uzaktan antrenman takibi, video analizi ve destek ile hedeflerine ulasmayi surdurebilirsin.",
+    icon: "🥊",
+    title: "Boks & Kickboks & Muay Thai",
+    desc: "Dövüş sporlarının gücünü fitness ile buluşturan dinamik dersler. Kondisyon, koordinasyon ve öz savunma becerilerini aynı anda geliştir.",
+  },
+  {
+    icon: "🎀",
+    title: "Pole Dance",
+    desc: "Akrobasi ve dansı bir araya getiren, üst vücut gücünü ve esnekliği geliştiren pole dance dersleri. Her seviyeye uygun, eğlenceli bir antrenman.",
+  },
+  {
+    icon: "🏋️",
+    title: "Condition & Strength",
+    desc: "Kondisyonunu zirveye taşıyan ve kas gücünü sistematik şekilde artıran özel programlar. Performansını bir üst seviyeye çıkar.",
   },
 ];
 
@@ -43,7 +38,7 @@ export default function Services() {
             Ne Sunuyoruz?
           </h2>
           <p className="mt-4 text-zinc-400 text-lg max-w-2xl mx-auto">
-            Her seviyeye ve hedefe uygun programlarla seni en iyi sekilde
+            Her seviyeye ve hedefe uygun programlarla seni en iyi şekilde
             destekliyoruz.
           </p>
         </div>

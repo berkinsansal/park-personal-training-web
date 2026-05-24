@@ -1,8 +1,8 @@
 const stats = [
-  { value: "500+", label: "Mutlu Uye" },
-  { value: "10+", label: "Yil Deneyim" },
-  { value: "8", label: "Uzman Egitmen" },
-  { value: "15+", label: "Program Cesidi" },
+  { value: "500+", label: "Mutlu Üye" },
+  { value: "10+", label: "Yıl Deneyim" },
+  { value: "3", label: "Uzman Eğitmen" },
+  { value: "5", label: "Program Çeşidi" },
 ];
 
 export default function About() {
@@ -12,28 +12,28 @@ export default function About() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div>
             <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">
-              Hakkimizda
+              Hakkımızda
             </span>
             <h2 className="mt-3 text-4xl md:text-5xl font-black text-white leading-tight">
-              Seni Taniyor,<br />
-              <span className="text-amber-400">Sana Ozel</span> Calisiyoruz
+              Seni Tanıyor,<br />
+              <span className="text-amber-400">Sana Özel</span> Çalışıyoruz
             </h2>
             <p className="mt-6 text-zinc-400 text-lg leading-relaxed">
-              Park Personal Training olarak her bireyin farkli oldugunu
-              biliyoruz. Uzman egitmenlerimiz, senim hedeflerini, yasamtarzini
-              ve fiziksel durumunu analiz ederek tamamen sana ozel bir antrenman
-              ve beslenme plani olusturuyor.
+              Park Personal Training olarak her bireyin farklı olduğunu
+              biliyoruz. Uzman eğitmenlerimiz, senin hedeflerini, yaşam tarzını
+              ve fiziksel durumunu analiz ederek tamamen sana özel bir antrenman
+              ve beslenme planı oluşturuyor.
             </p>
             <p className="mt-4 text-zinc-400 text-lg leading-relaxed">
-              Kucuk grup derslerinden bire bir antrenmanlarimiza kadar herkese
-              uygun bir program sunuyoruz. Studyomuzda profesyonel ekipmanlar ve
-              sicak bir atmosfer seni bekliyor.
+              Küçük grup derslerinden bire bir antrenmanlarımıza kadar herkese
+              uygun bir program sunuyoruz. Stüdyomuzda profesyonel ekipmanlar ve
+              sıcak bir atmosfer seni bekliyor.
             </p>
             <a
               href="#iletisim"
               className="mt-8 inline-block px-6 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
             >
-              Bize Ulasin
+              Bize Ulaşın
             </a>
           </div>
           <div className="grid grid-cols-2 gap-6">

@@ -4,14 +4,14 @@ export default function Contact() {
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">
-            Iletisim
+            İletişim
           </span>
           <h2 className="mt-3 text-4xl md:text-5xl font-black text-white">
-            Harekete Gec
+            Harekete Geç
           </h2>
           <p className="mt-4 text-zinc-400 text-lg max-w-xl mx-auto">
-            Sormak istedigin bir sey mi var? Bize Instagram uzerinden ulasabilir
-            ya da asagidaki formu doldurabilirsin.
+            Sormak istediğin bir şey mi var? Bize Instagram üzerinden ulaşabilir
+            ya da aşağıdaki formu doldurabilirsin.
           </p>
         </div>
 
@@ -36,6 +36,21 @@ export default function Contact() {
               </div>
             </a>
 
+            <a
+              href="tel:05412368206"
+              className="flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group"
+            >
+              <div className="w-12 h-12 rounded-xl bg-zinc-700 flex items-center justify-center flex-shrink-0">
+                <svg className="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </div>
+              <div>
+                <div className="text-white font-bold group-hover:text-amber-400 transition-colors">Telefon</div>
+                <div className="text-zinc-400 text-sm">0541 236 82 06</div>
+              </div>
+            </a>
+
             <div className="flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
               <div className="w-12 h-12 rounded-xl bg-zinc-700 flex items-center justify-center flex-shrink-0">
                 <svg className="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -45,7 +60,8 @@ export default function Contact() {
               </div>
               <div>
                 <div className="text-white font-bold">Adres</div>
-                <div className="text-zinc-400 text-sm">Istanbul, Turkiye</div>
+                <div className="text-zinc-400 text-sm">Park Caddesi 19/A-3</div>
+                <div className="text-zinc-400 text-sm">Çankaya / Ankara</div>
               </div>
             </div>
 
@@ -56,7 +72,7 @@ export default function Contact() {
                 </svg>
               </div>
               <div>
-                <div className="text-white font-bold">Calisma Saatleri</div>
+                <div className="text-white font-bold">Çalışma Saatleri</div>
                 <div className="text-zinc-400 text-sm">Pzt - Cmt: 07:00 - 21:00</div>
                 <div className="text-zinc-400 text-sm">Pazar: 09:00 - 17:00</div>
               </div>
@@ -65,7 +81,7 @@ export default function Contact() {
 
           <form className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4">
             <div>
-              <label className="block text-zinc-400 text-sm mb-2">Adiniz Soyadiniz</label>
+              <label className="block text-zinc-400 text-sm mb-2">Adınız Soyadınız</label>
               <input
                 type="text"
                 placeholder="Ali Veli"
@@ -81,7 +97,7 @@ export default function Contact() {
               />
             </div>
             <div>
-              <label className="block text-zinc-400 text-sm mb-2">Mesajiniz</label>
+              <label className="block text-zinc-400 text-sm mb-2">Mesajınız</label>
               <textarea
                 rows={4}
                 placeholder="Merhaba, bilgi almak istiyorum..."
@@ -92,7 +108,7 @@ export default function Contact() {
               type="submit"
               className="w-full py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
             >
-              Mesaj Gonder
+              Mesaj Gönder
             </button>
           </form>
         </div>
