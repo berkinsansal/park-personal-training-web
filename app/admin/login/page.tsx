@@ -1,6 +1,11 @@
+'use client';
+
+import { useActionState } from 'react';
 import { loginAction } from '../actions';
 
-export default function LoginPage({ searchParams }: { searchParams: Promise<{ error?: string }> }) {
+export default function LoginPage() {
+  const [state, action, pending] = useActionState(loginAction, null);
+
   return (
     <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
@@ -10,7 +15,7 @@ export default function LoginPage({ searchParams }: { searchParams: Promise<{ er
         </div>
 
         <form
-          action={loginAction}
+          action={action}
           className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4"
         >
           <div>
@@ -34,11 +39,16 @@ export default function LoginPage({ searchParams }: { searchParams: Promise<{ er
             />
           </div>
 
+          {state?.error && (
+            <p className="text-red-400 text-sm">{state.error}</p>
+          )}
+
           <button
             type="submit"
-            className="w-full py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider mt-2"
+            disabled={pending}
+            className="w-full py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider mt-2 disabled:opacity-50"
           >
-            Giriş Yap
+            {pending ? 'Giriş yapılıyor...' : 'Giriş Yap'}
           </button>
         </form>
       </div>

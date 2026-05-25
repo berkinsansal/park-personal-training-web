@@ -11,7 +11,7 @@ async function requireAuth() {
 }
 
 // Auth
-export async function loginAction(formData: FormData) {
+export async function loginAction(_prev: unknown, formData: FormData) {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
 
@@ -30,7 +30,7 @@ export async function logoutAction() {
 }
 
 // Site Info
-export async function updateSiteInfoAction(formData: FormData) {
+export async function updateSiteInfoAction(_prev: unknown, formData: FormData) {
   await requireAuth();
   const db = createAdminClient();
 
