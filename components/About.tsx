@@ -1,11 +1,18 @@
-const stats = [
-  { value: "500+", label: "Mutlu Üye" },
-  { value: "10+", label: "Yıl Deneyim" },
-  { value: "3", label: "Uzman Eğitmen" },
-  { value: "5", label: "Program Çeşidi" },
-];
+type Props = {
+  happyCustomers: number;
+  yearsExperience: number;
+  teacherCount: number;
+  serviceCount: number;
+};
 
-export default function About() {
+export default function About({ happyCustomers, yearsExperience, teacherCount, serviceCount }: Props) {
+  const stats = [
+    { value: `${happyCustomers}+`, label: "Mutlu Üye" },
+    { value: `${yearsExperience}+`, label: "Yıl Deneyim" },
+    { value: String(teacherCount), label: "Uzman Eğitmen" },
+    { value: String(serviceCount), label: "Program Çeşidi" },
+  ];
+
   return (
     <section id="hakkimizda" className="py-24 bg-zinc-900">
       <div className="max-w-6xl mx-auto px-6">

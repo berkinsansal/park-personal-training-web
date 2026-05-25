@@ -1,4 +1,20 @@
-export default function Contact() {
+type SiteInfo = {
+  ig_handle: string;
+  phone: string;
+  address_line1: string;
+  address_line2: string;
+  weekday_hours: string;
+  weekend_hours: string;
+} | null;
+
+export default function Contact({ siteInfo }: { siteInfo: SiteInfo }) {
+  const ig = siteInfo?.ig_handle ?? '';
+  const phone = siteInfo?.phone ?? '';
+  const address1 = siteInfo?.address_line1 ?? '';
+  const address2 = siteInfo?.address_line2 ?? '';
+  const weekday = siteInfo?.weekday_hours ?? '';
+  const weekend = siteInfo?.weekend_hours ?? '';
+
   return (
     <section id="iletisim" className="py-24 bg-zinc-950">
       <div className="max-w-4xl mx-auto px-6">
@@ -18,7 +34,7 @@ export default function Contact() {
         <div className="grid md:grid-cols-2 gap-10">
           <div className="flex flex-col gap-6">
             <a
-              href="https://instagram.com/parkpersonaltraining"
+              href={`https://instagram.com/${ig}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group"
@@ -32,12 +48,12 @@ export default function Contact() {
                 <div className="text-white font-bold group-hover:text-amber-400 transition-colors">
                   Instagram
                 </div>
-                <div className="text-zinc-400 text-sm">@parkpersonaltraining</div>
+                <div className="text-zinc-400 text-sm">@{ig}</div>
               </div>
             </a>
 
             <a
-              href="tel:05412368206"
+              href={`tel:${phone}`}
               className="flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group"
             >
               <div className="w-12 h-12 rounded-xl bg-zinc-700 flex items-center justify-center flex-shrink-0">
@@ -47,7 +63,7 @@ export default function Contact() {
               </div>
               <div>
                 <div className="text-white font-bold group-hover:text-amber-400 transition-colors">Telefon</div>
-                <div className="text-zinc-400 text-sm">0541 236 82 06</div>
+                <div className="text-zinc-400 text-sm">{phone}</div>
               </div>
             </a>
 
@@ -60,8 +76,8 @@ export default function Contact() {
               </div>
               <div>
                 <div className="text-white font-bold">Adres</div>
-                <div className="text-zinc-400 text-sm">Park Caddesi 19/A-3</div>
-                <div className="text-zinc-400 text-sm">Çankaya / Ankara</div>
+                <div className="text-zinc-400 text-sm">{address1}</div>
+                <div className="text-zinc-400 text-sm">{address2}</div>
               </div>
             </div>
 
@@ -73,8 +89,8 @@ export default function Contact() {
               </div>
               <div>
                 <div className="text-white font-bold">Çalışma Saatleri</div>
-                <div className="text-zinc-400 text-sm">Pzt - Cmt: 07:00 - 21:00</div>
-                <div className="text-zinc-400 text-sm">Pazar: 09:00 - 17:00</div>
+                <div className="text-zinc-400 text-sm">{weekday}</div>
+                <div className="text-zinc-400 text-sm">{weekend}</div>
               </div>
             </div>
           </div>

@@ -1,22 +1,12 @@
-const teachers = [
-  {
-    name: "Kemal Bilge",
-    ig: "kemalbilge14",
-    initials: "KB",
-  },
-  {
-    name: "Kadir Özdemir",
-    ig: "kadrozdemirr",
-    initials: "KÖ",
-  },
-  {
-    name: "Kutlu Olatunji",
-    ig: "kutluolatunjii",
-    initials: "KO",
-  },
-];
+type Teacher = {
+  id: number;
+  name: string;
+  ig_handle: string;
+  initials: string;
+  order_index: number;
+};
 
-export default function Teachers() {
+export default function Teachers({ teachers }: { teachers: Teacher[] }) {
   return (
     <section id="egitmenler" className="py-24 bg-zinc-900">
       <div className="max-w-6xl mx-auto px-6">
@@ -35,7 +25,7 @@ export default function Teachers() {
         <div className="flex flex-wrap justify-center gap-6">
           {teachers.map((t) => (
             <div
-              key={t.name}
+              key={t.id}
               className="bg-zinc-800 rounded-2xl p-8 border border-zinc-700 hover:border-amber-400/40 transition-all duration-300 text-center group w-72"
             >
               <div className="w-24 h-24 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center mx-auto mb-5 text-3xl font-black text-zinc-950 group-hover:scale-105 transition-transform">
@@ -43,12 +33,12 @@ export default function Teachers() {
               </div>
               <h3 className="text-white font-bold text-xl">{t.name}</h3>
               <a
-                href={`https://instagram.com/${t.ig}`}
+                href={`https://instagram.com/${t.ig_handle}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 mt-3 text-zinc-400 hover:text-amber-400 transition-colors text-sm"
               >
-                @{t.ig}
+                @{t.ig_handle}
               </a>
             </div>
           ))}
