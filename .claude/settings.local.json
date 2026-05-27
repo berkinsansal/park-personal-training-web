@@ -16,7 +16,14 @@
       "Bash(/tmp/setup-tables.sh)",
       "Bash(pkill *)",
       "Bash(npx supabase *)",
-      "Bash(npm uninstall *)"
+      "Bash(npm uninstall *)",
+      "Bash(npx vercel *)",
+      "Bash(kill %1)",
+      "Bash(grep -E \"\\\\.\\(ts|tsx|js|jsx|json|mjs|config\\)$\")",
+      "Bash(xargs grep -l \"middleware\")",
+      "Bash(rm \"C:/GitHub/park-personal-training-web/lib/supabase.ts\")",
+      "Bash(rmdir \"C:/GitHub/park-personal-training-web/app/api\")",
+      "Bash(npx tsc *)"
     ]
   }
 }
