@@ -1,10 +1,4 @@
-type Service = {
-  id: number;
-  icon: string;
-  title: string;
-  description: string;
-  order_index: number;
-};
+import type { Service } from '@/lib/types';
 
 export default function Services({ services }: { services: Service[] }) {
   return (

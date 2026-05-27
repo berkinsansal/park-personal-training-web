@@ -1,10 +1,4 @@
-type Teacher = {
-  id: number;
-  name: string;
-  ig_handle: string;
-  initials: string;
-  order_index: number;
-};
+import type { Teacher } from '@/lib/types';
 
 export default function Teachers({ teachers }: { teachers: Teacher[] }) {
   return (

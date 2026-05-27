@@ -2,14 +2,8 @@
 
 import { useState } from 'react';
 import { addServiceAction, updateServiceAction, deleteServiceAction } from '../actions';
-
-type Service = {
-  id: number;
-  icon: string;
-  title: string;
-  description: string;
-  order_index: number;
-};
+import type { Service } from '@/lib/types';
+import { inputCls } from './styles';
 
 export default function ServicesPanel({ services }: { services: Service[] }) {
   const [list, setList] = useState(services);
@@ -135,4 +129,3 @@ function ServiceForm({ defaults, onSubmit, onCancel, label }: {
   );
 }
 
-const inputCls = 'w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-amber-400 transition-colors';

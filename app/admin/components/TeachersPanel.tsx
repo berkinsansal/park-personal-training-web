@@ -2,14 +2,8 @@
 
 import { useState } from 'react';
 import { addTeacherAction, updateTeacherAction, deleteTeacherAction } from '../actions';
-
-type Teacher = {
-  id: number;
-  name: string;
-  ig_handle: string;
-  initials: string;
-  order_index: number;
-};
+import type { Teacher } from '@/lib/types';
+import { inputCls } from './styles';
 
 export default function TeachersPanel({ teachers }: { teachers: Teacher[] }) {
   const [list, setList] = useState(teachers);
@@ -139,4 +133,3 @@ function TeacherForm({ defaults, onSubmit, onCancel, label }: {
   );
 }
 
-const inputCls = 'w-full bg-zinc-800 border border-zinc-700 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-amber-400 transition-colors';

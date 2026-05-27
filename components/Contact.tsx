@@ -1,13 +1,6 @@
-type SiteInfo = {
-  ig_handle: string;
-  phone: string;
-  address_line1: string;
-  address_line2: string;
-  weekday_hours: string;
-  weekend_hours: string;
-} | null;
+import type { SiteInfo } from '@/lib/types';
 
-export default function Contact({ siteInfo }: { siteInfo: SiteInfo }) {
+export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
   const ig = siteInfo?.ig_handle ?? '';
   const phone = siteInfo?.phone ?? '';
   const address1 = siteInfo?.address_line1 ?? '';

@@ -2,17 +2,7 @@
 
 import { useActionState } from 'react';
 import { updateSiteInfoAction } from '../actions';
-
-type SiteInfo = {
-  ig_handle: string;
-  phone: string;
-  address_line1: string;
-  address_line2: string;
-  weekday_hours: string;
-  weekend_hours: string;
-  happy_customers: number;
-  years_experience: number;
-};
+import type { SiteInfo } from '@/lib/types';
 
 export default function SiteInfoForm({ data }: { data: SiteInfo | null }) {
   const [state, action, pending] = useActionState(updateSiteInfoAction, null);
