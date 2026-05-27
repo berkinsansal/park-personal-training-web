@@ -1,43 +1,6 @@
 # Park Personal Training — Web
 
-A personal training business website with a content management system backed by Supabase.
-
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+A Turkish personal training studio website with a Supabase-backed content management system. The public site is a single-page marketing site; the admin dashboard at `/admin` lets the business owner edit all dynamic content without touching code.
 
 ## Tech Stack
 
@@ -46,25 +9,64 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 | Framework | Next.js 16 (App Router) |
 | Language | TypeScript |
 | Styling | Tailwind CSS v4 |
-| Database | Supabase (PostgreSQL) |
+| Database | Supabase (PostgreSQL + Auth) |
 | Deployment | Vercel |
 
 ## Project Structure
 
 ```
-app/                  # Next.js App Router pages and API routes
-components/           # Page section components (Hero, About, Services, etc.)
-lib/                  # Shared utilities (Supabase client)
+app/
+  page.tsx                    # Public homepage (server component, fetches all data)
+  layout.tsx                  # Root layout
+  admin/
+    page.tsx                  # Admin dashboard (server component)
+    login/page.tsx            # Login page
+    actions.ts                # Server actions: auth + all CRUD operations
+    components/
+      SiteInfoForm.tsx        # Edit site-wide info (contact details, stats)
+      ServicesPanel.tsx       # Add / edit / delete services
+      TeachersPanel.tsx       # Add / edit / delete trainers
+      styles.ts               # Shared Tailwind class strings
+components/                   # Public page sections
+  Navbar.tsx                  # Fixed top nav with mobile drawer
+  Hero.tsx                    # Full-screen hero (static)
+  About.tsx                   # Stats grid (data from DB)
+  Services.tsx                # Services grid (data from DB)
+  Teachers.tsx                # Trainer cards (data from DB)
+  Contact.tsx                 # Contact info + placeholder form
+  Footer.tsx                  # Footer with Instagram link
+lib/
+  types.ts                    # Shared TypeScript types (SiteInfo, Service, Teacher)
+  supabase-server.ts          # Supabase clients: session (SSR) + admin (service key)
+proxy.ts                      # Auth guard — redirects unauthenticated /admin/* to /admin/login
 supabase/
-  config.toml         # Supabase project reference
-  migrations/         # Database schema migrations (versioned)
-public/               # Static assets (logo, images)
+  config.toml                 # Supabase project reference
+  migrations/                 # Versioned SQL migrations
+  seed.sql                    # Initial data for site_info, services, teachers
 ```
+
+## Database Schema
+
+Three tables, all with RLS enabled and a public read policy.
+
+| Table | Purpose |
+|---|---|
+| `site_info` | Single-row table: contact details, working hours, Instagram handle, stats |
+| `services` | Offered services: emoji icon, title, description, display order |
+| `teachers` | Trainers: name, Instagram handle, initials, display order |
+
+The admin user is created directly in the Supabase dashboard (Authentication → Users). There is no public sign-up.
+
+## Authentication
+
+- Supabase email/password auth
+- `proxy.ts` (Next.js 16's middleware convention) checks the session cookie on every `/admin/*` request and redirects to `/admin/login` if unauthenticated
+- All server actions additionally call `requireAuth()` as a second check before touching the database
+- The admin dashboard uses the Supabase **service key** (`SUPABASE_SECRET_KEY`) to bypass RLS for reads and writes; public pages use it too since they only read public data
 
 ## Prerequisites
 
 - Node.js 18+
-- [Supabase CLI](https://supabase.com/docs/guides/cli) (`npm install -g supabase`)
 - A [Supabase](https://supabase.com) project
 - A [Vercel](https://vercel.com) account (for deployment)
 
@@ -86,51 +88,47 @@ NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
 SUPABASE_SECRET_KEY=sb_secret_...
 ```
 
-Get these values from your Supabase project:
-- Dashboard → Settings → API → **Project URL**
-- Dashboard → Settings → API → **Publishable** key (safe for client-side)
-- Dashboard → Settings → API → **Secret** key (server-side only, never expose)
+Get these from your Supabase project → Settings → API:
+- **Project URL**
+- **Publishable key** — safe for client bundles
+- **Secret key** — server-only, never expose to the browser
 
-> `.env.local` is git-ignored and will never be committed.
+`.env.local` is git-ignored and will never be committed.
 
-### 3. Link Supabase project
+### 3. Apply database migrations
+
+Using the Supabase CLI:
 
 ```bash
 npx supabase login
 npx supabase link --project-ref <your-project-id>
-```
-
-### 4. Apply database migrations
-
-```bash
 npx supabase db push
 ```
 
-This creates all required tables in your Supabase project.
+Or paste the SQL from `supabase/migrations/` directly in the Supabase SQL editor.
 
-### 5. Start the development server
+### 4. Seed initial data
+
+```bash
+npx supabase db push --include-seed
+```
+
+Or run `supabase/seed.sql` in the Supabase SQL editor.
+
+### 5. Create the admin user
+
+In the Supabase dashboard → Authentication → Users → **Add user**.  
+Use whatever email and password you want — these are the credentials for `/admin/login`.
+
+### 6. Start the development server
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open [http://localhost:3000](http://localhost:3000) for the public site and [http://localhost:3000/admin](http://localhost:3000/admin) for the dashboard.
 
-## Database Schema
-
-Migrations live in `supabase/migrations/`. Apply them with `npx supabase db push`.
-
-| Table | Purpose |
-|---|---|
-| `hero` | Hero section: title, subtitle, CTA button |
-| `about` | About section: description, image |
-| `services` | Services list: name, description, price |
-| `teachers` | Trainers: name, bio, specialty, image |
-| `contact` | Contact section: email, phone, address |
-
-All tables have Row Level Security (RLS) enabled with public read access.
-
-### Adding a new migration
+## Adding a database migration
 
 ```bash
 npx supabase migration new <migration_name>
@@ -140,11 +138,9 @@ npx supabase db push
 
 ## Deployment
 
-### Vercel
-
 1. Push the repo to GitHub
 2. Import the project on [Vercel](https://vercel.com)
-3. Add the environment variables from `.env.local` in Vercel project settings
-4. Deploy
+3. Add the three environment variables in Vercel project settings
+4. Deploy — Vercel detects Next.js automatically
 
-> The `SUPABASE_SECRET_KEY` must also be added to Vercel's environment variables for server-side API routes to work.
+The `SUPABASE_SECRET_KEY` must be present in Vercel's environment for server-side data fetching and admin actions to work.
