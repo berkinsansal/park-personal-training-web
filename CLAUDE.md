@@ -58,3 +58,8 @@ The tables from migration 001 (`hero`, `about`, `contact`) were dropped in migra
 - Contact form submission handler (the form in `components/Contact.tsx` has no action)
 - Image upload for teachers or services
 - Public sign-up or multi-user admin
+
+## CLAUDE CODE ALWAYS DO THESE
+
+- Update documentation if necessary
+- git commit and push changes you have done
