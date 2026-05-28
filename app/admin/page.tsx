@@ -12,6 +12,7 @@ async function AdminContent() {
   await connection();
   const locale = await getLocale();
   const dict = getDict(locale);
+  const t = dict.admin;
   const db = createAdminClient();
 
   const [{ data: siteInfo }, { data: services }, { data: teachers }] = await Promise.all([
@@ -21,22 +22,7 @@ async function AdminContent() {
   ]);
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-10 flex flex-col gap-10">
-      <SiteInfoForm data={siteInfo} dict={dict} />
-      <ServicesPanel services={services ?? []} dict={dict} />
-      <TeachersPanel teachers={teachers ?? []} dict={dict} />
-    </main>
-  );
-}
-
-export default async function AdminPage() {
-  await connection();
-  const locale = await getLocale();
-  const dict = getDict(locale);
-  const t = dict.admin;
-
-  return (
-    <div className="min-h-screen bg-zinc-950">
+    <>
       <header className="border-b border-zinc-800 bg-zinc-900 px-6 py-4 flex items-center justify-between">
         <div>
           <h1 className="text-white font-black text-xl">{t.title}</h1>
@@ -51,8 +37,19 @@ export default async function AdminPage() {
           </button>
         </form>
       </header>
+      <main className="max-w-4xl mx-auto px-6 py-10 flex flex-col gap-10">
+        <SiteInfoForm data={siteInfo} dict={dict} />
+        <ServicesPanel services={services ?? []} dict={dict} />
+        <TeachersPanel teachers={teachers ?? []} dict={dict} />
+      </main>
+    </>
+  );
+}
 
-      <Suspense fallback={<div className="max-w-4xl mx-auto px-6 py-10 text-zinc-500 text-sm">{t.loading}</div>}>
+export default function AdminPage() {
+  return (
+    <div className="min-h-screen bg-zinc-950">
+      <Suspense>
         <AdminContent />
       </Suspense>
     </div>
