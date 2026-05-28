@@ -10,7 +10,7 @@ interface LocationMapProps {
 
 export default function LocationMap({ latitude, longitude, locale }: LocationMapProps) {
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
-  const embedUrl = `https://maps.google.com/maps?q=${latitude},${longitude}&hl=${locale}&z=15&output=embed`;
+  const embedUrl = `https://maps.google.com/maps?q=${latitude},${longitude}&hl=${locale}&z=18&output=embed`;
 
   return (
     <section className="py-24 bg-zinc-900">
