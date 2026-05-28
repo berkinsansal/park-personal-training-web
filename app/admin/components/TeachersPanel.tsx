@@ -42,7 +42,7 @@ export default function TeachersPanel({ teachers, dict }: { teachers: Teacher[];
         const newIdx = sorted[idx].order_index;
         sorted[idx].order_index = sorted[swapIdx].order_index;
         sorted[swapIdx].order_index = newIdx;
-        return sorted;
+        return sorted.sort((a, b) => a.order_index - b.order_index);
       });
     } finally {
       setPendingOp(null);

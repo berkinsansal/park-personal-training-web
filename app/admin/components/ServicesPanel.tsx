@@ -42,7 +42,7 @@ export default function ServicesPanel({ services, dict }: { services: Service[];
         const newIdx = sorted[idx].order_index;
         sorted[idx].order_index = sorted[swapIdx].order_index;
         sorted[swapIdx].order_index = newIdx;
-        return sorted;
+        return sorted.sort((a, b) => a.order_index - b.order_index);
       });
     } finally {
       setPendingOp(null);
