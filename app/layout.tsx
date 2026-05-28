@@ -21,12 +21,11 @@ export async function generateMetadata(): Promise<Metadata> {
       };
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const locale = await getLocale();
   return (
-    <html lang={locale} className={`${geist.variable} scroll-smooth`}>
+    <html lang="tr" className={`${geist.variable} scroll-smooth`}>
       <body className="bg-zinc-950 text-white antialiased">{children}</body>
     </html>
   );
