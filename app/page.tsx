@@ -61,11 +61,15 @@ export async function generateMetadata(): Promise<Metadata> {
       };
 }
 
-export default async function Home() {
+async function HomeShell() {
   const locale = await getLocale();
+  return <HomeContent locale={locale} />;
+}
+
+export default function Home() {
   return (
     <Suspense>
-      <HomeContent locale={locale} />
+      <HomeShell />
     </Suspense>
   );
 }
