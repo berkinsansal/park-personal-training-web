@@ -30,3 +30,9 @@ INSERT INTO teachers (name, ig_handle, order_index) VALUES
   ('Kemal Bilge', 'kemalbilge14', 1),
   ('Kadir Özdemir', 'kadrozdemirr', 2),
   ('Kutlu Olatunji', 'kutluolatunjii', 3);
+
+-- Playlists
+INSERT INTO playlists (spotify_id, trainer_name, order_index) VALUES
+  ('37i9dQZF1DX8FwnYE6PRvL', 'Kemal Bilge', 1),
+  ('37i9dQZF1DX32NsLKyzScr', 'Kadir Özdemir', 2),
+  ('37i9dQZF1DX8a1tdzq5tbM', 'Kutlu Olatunji', 3);

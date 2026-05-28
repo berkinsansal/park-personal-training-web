@@ -32,3 +32,10 @@ export type Teacher = {
   photo_url: string;
   order_index: number;
 };
+
+export type Playlist = {
+  id: number;
+  spotify_id: string;
+  trainer_name: string;
+  order_index: number;
+};

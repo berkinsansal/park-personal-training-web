@@ -254,3 +254,67 @@ export async function reorderTeacherAction(id: number, direction: 'up' | 'down')
   invalidateHomepage();
   return { success: true };
 }
+
+// Playlists
+export async function addPlaylistAction(formData: FormData) {
+  await requireAuth();
+  const db = createAdminClient();
+
+  const { data, error } = await db.from('playlists').insert({
+    spotify_id: formData.get('spotify_id'),
+    trainer_name: formData.get('trainer_name'),
+    order_index: Number(formData.get('order_index') || 0),
+  }).select('*').single();
+
+  if (error) return { error: error.message };
+  invalidateHomepage();
+  return { success: true, data };
+}
+
+export async function updatePlaylistAction(formData: FormData) {
+  await requireAuth();
+  const db = createAdminClient();
+
+  const { error } = await db.from('playlists').update({
+    spotify_id: formData.get('spotify_id'),
+    trainer_name: formData.get('trainer_name'),
+    order_index: Number(formData.get('order_index') || 0),
+    updated_at: new Date().toISOString(),
+  }).eq('id', Number(formData.get('id')));
+
+  if (error) return { error: error.message };
+  invalidateHomepage();
+  return { success: true };
+}
+
+export async function deletePlaylistAction(id: number) {
+  await requireAuth();
+  const db = createAdminClient();
+
+  const { error } = await db.from('playlists').delete().eq('id', id);
+  if (error) return { error: error.message };
+  invalidateHomepage();
+  return { success: true };
+}
+
+export async function reorderPlaylistAction(id: number, direction: 'up' | 'down') {
+  await requireAuth();
+  const db = createAdminClient();
+
+  const { data: items } = await db.from('playlists').select('id, order_index').order('order_index');
+  if (!items) return { error: 'Playlists not found' };
+
+  const idx = items.findIndex((p) => p.id === id);
+  if (idx === -1) return { error: 'Playlist not found' };
+
+  const swapIdx = direction === 'up' ? idx - 1 : idx + 1;
+  if (swapIdx < 0 || swapIdx >= items.length) return { error: 'Cannot reorder' };
+
+  await Promise.all([
+    db.from('playlists').update({ order_index: items[swapIdx].order_index, updated_at: new Date().toISOString() }).eq('id', id),
+    db.from('playlists').update({ order_index: items[idx].order_index, updated_at: new Date().toISOString() }).eq('id', items[swapIdx].id),
+  ]);
+
+  invalidateHomepage();
+  return { success: true };
+}

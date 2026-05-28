@@ -4,12 +4,13 @@ import { getLocale } from '@/lib/locale';
 import { getDict, type Locale, type Dict } from '@/lib/i18n';
 import { cacheLife, cacheTag } from 'next/cache';
 import { createAdminClient } from '@/lib/supabase-server';
-import type { SiteInfo, Service, Teacher } from '@/lib/types';
+import type { SiteInfo, Service, Teacher, Playlist } from '@/lib/types';
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Services from "@/components/Services";
 import Teachers from "@/components/Teachers";
+import Playlists from "@/components/Playlists";
 import Contact from "@/components/Contact";
 import LocationMap from "@/components/LocationMap";
 import Footer from "@/components/Footer";
@@ -22,10 +23,11 @@ async function HomeContent({ locale }: { locale: Locale }) {
   const t = getDict(locale);
   const db = createAdminClient();
 
-  const [{ data: siteInfo }, { data: services }, { data: teachers }] = await Promise.all([
+  const [{ data: siteInfo }, { data: services }, { data: teachers }, { data: playlists }] = await Promise.all([
     db.from('site_info').select('*').single(),
     db.from('services').select('*').order('order_index'),
     db.from('teachers').select('*').order('order_index'),
+    db.from('playlists').select('*').order('order_index'),
   ]);
 
   return (
@@ -42,6 +44,7 @@ async function HomeContent({ locale }: { locale: Locale }) {
         />
         <Services services={(services as Service[] | null) ?? []} locale={locale} dict={t} />
         <Teachers teachers={(teachers as Teacher[] | null) ?? []} dict={t} />
+        <Playlists playlists={(playlists as Playlist[] | null) ?? []} dict={t} />
         <Contact siteInfo={siteInfo as SiteInfo | null} locale={locale} dict={t} />
         {siteInfo && <LocationMap latitude={siteInfo.latitude} longitude={siteInfo.longitude} locale={locale} />}
       </main>
