@@ -27,6 +27,6 @@ export type Teacher = {
   id: number;
   name: string;
   ig_handle: string;
-  initials: string;
+  photo_url: string;
   order_index: number;
 };

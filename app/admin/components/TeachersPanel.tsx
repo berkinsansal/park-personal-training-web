@@ -32,7 +32,7 @@ export default function TeachersPanel({ teachers, dict }: { teachers: Teacher[];
       id,
       name: fd.get('name') as string,
       ig_handle: fd.get('ig_handle') as string,
-      initials: fd.get('initials') as string,
+      photo_url: teacher.photo_url,
       order_index: Number(fd.get('order_index')),
     } : teacher));
     setEditingId(null);
@@ -80,8 +80,14 @@ export default function TeachersPanel({ teachers, dict }: { teachers: Teacher[];
             />
           ) : (
             <div key={teacher.id} className="flex items-center gap-3 bg-zinc-900 border border-zinc-800 rounded-xl p-4">
-              <div className="w-10 h-10 rounded-full bg-amber-400/10 border border-amber-400/30 flex items-center justify-center shrink-0">
-                <span className="text-amber-400 font-bold text-sm">{teacher.initials}</span>
+              <div className="w-10 h-10 rounded-full bg-amber-400/10 border border-amber-400/30 flex items-center justify-center shrink-0 overflow-hidden">
+                {teacher.photo_url ? (
+                  <img src={teacher.photo_url} alt={teacher.name} className="w-full h-full object-cover rounded-full" />
+                ) : (
+                  <span className="text-amber-400 font-bold text-sm">
+                    {teacher.name.split(' ').map((w: string) => w[0]).join('').toUpperCase().slice(0, 2)}
+                  </span>
+                )}
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-white font-semibold text-sm">{teacher.name}</p>
@@ -126,10 +132,13 @@ function TeacherForm({ t, defaults, onSubmit, onCancel, label }: {
           <label className="block text-zinc-400 text-xs mb-1">{t.igHandle}</label>
           <input name="ig_handle" defaultValue={defaults?.ig_handle} required className={inputCls} />
         </div>
-        <div>
-          <label className="block text-zinc-400 text-xs mb-1">{t.initials}</label>
-          <input name="initials" defaultValue={defaults?.initials} required maxLength={3} className={inputCls} />
-        </div>
+      </div>
+      <div>
+        <label className="block text-zinc-400 text-xs mb-1">{t.photo}</label>
+        {defaults?.photo_url && (
+          <img src={defaults.photo_url} alt={defaults.name} className="w-12 h-12 rounded-full object-cover mb-2 border border-zinc-700" />
+        )}
+        <input name="photo" type="file" accept="image/*" className={inputCls} />
       </div>
       <div className="flex gap-2">
         <button type="submit" className="px-4 py-2 bg-amber-400 text-zinc-950 font-bold rounded-lg text-xs hover:bg-amber-300 transition-colors">{label}</button>

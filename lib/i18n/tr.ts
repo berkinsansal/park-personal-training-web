@@ -99,7 +99,7 @@ export const tr = {
       name: 'Ad Soyad',
       order: 'Sıra',
       igHandle: 'Instagram Kullanıcı Adı',
-      initials: 'Baş Harfler',
+      photo: 'Fotoğraf',
       edit: 'Düzenle',
       delete: 'Sil',
       update: 'Güncelle',

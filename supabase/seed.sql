@@ -24,7 +24,7 @@ INSERT INTO services (icon, title, description, title_en, description_en, order_
   ('🏋️', 'Condition & Strength', 'Kondisyonunu zirveye taşıyan ve kas gücünü sistematik şekilde artıran özel programlar. Performansını bir üst seviyeye çıkar.', 'Condition & Strength', 'Special programs that take your conditioning to the peak and systematically increase muscle strength. Take your performance to the next level.', 5);
 
 -- Teachers
-INSERT INTO teachers (name, ig_handle, initials, order_index) VALUES
-  ('Kemal Bilge', 'kemalbilge14', 'KB', 1),
-  ('Kadir Özdemir', 'kadrozdemirr', 'KÖ', 2),
-  ('Kutlu Olatunji', 'kutluolatunjii', 'KO', 3);
+INSERT INTO teachers (name, ig_handle, order_index) VALUES
+  ('Kemal Bilge', 'kemalbilge14', 1),
+  ('Kadir Özdemir', 'kadrozdemirr', 2),
+  ('Kutlu Olatunji', 'kutluolatunjii', 3);

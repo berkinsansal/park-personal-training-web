@@ -99,7 +99,7 @@ export const en = {
       name: 'Full Name',
       order: 'Order',
       igHandle: 'Instagram Username',
-      initials: 'Initials',
+      photo: 'Photo',
       edit: 'Edit',
       delete: 'Delete',
       update: 'Update',
