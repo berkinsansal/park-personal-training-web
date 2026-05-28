@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { addTeacherAction, updateTeacherAction, deleteTeacherAction } from '../actions';
+import { addTeacherAction, updateTeacherAction, deleteTeacherAction, reorderTeacherAction } from '../actions';
 import type { Teacher } from '@/lib/types';
 import type { Dict } from '@/lib/i18n';
 import { inputCls } from './styles';
@@ -20,6 +20,22 @@ export default function TeachersPanel({ teachers, dict }: { teachers: Teacher[];
     if (res?.error) return flash(res.error);
     setList((prev) => prev.filter((teacher) => teacher.id !== id));
     flash(t.deleted);
+  };
+
+  const handleReorder = async (id: number, direction: 'up' | 'down') => {
+    const res = await reorderTeacherAction(id, direction);
+    if (res?.error) return flash(res.error);
+    setList((prev) => {
+      const sorted = [...prev].sort((a, b) => a.order_index - b.order_index);
+      const idx = sorted.findIndex((t) => t.id === id);
+      if (idx === -1) return prev;
+      const swapIdx = direction === 'up' ? idx - 1 : idx + 1;
+      if (swapIdx < 0 || swapIdx >= sorted.length) return prev;
+      const newIdx = sorted[idx].order_index;
+      sorted[idx].order_index = sorted[swapIdx].order_index;
+      sorted[swapIdx].order_index = newIdx;
+      return sorted;
+    });
   };
 
   const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -93,9 +109,15 @@ export default function TeachersPanel({ teachers, dict }: { teachers: Teacher[];
                 <p className="text-white font-semibold text-sm">{teacher.name}</p>
                 <p className="text-zinc-500 text-xs mt-0.5">@{teacher.ig_handle}</p>
               </div>
-              <div className="flex gap-2 shrink-0">
-                <button onClick={() => setEditingId(teacher.id)} className="text-xs text-zinc-400 hover:text-amber-400 transition-colors">{t.edit}</button>
-                <button onClick={() => handleDelete(teacher.id)} className="text-xs text-zinc-400 hover:text-red-400 transition-colors">{t.delete}</button>
+              <div className="flex flex-col gap-1 shrink-0">
+                <div className="flex gap-2">
+                  <button onClick={() => handleReorder(teacher.id, 'up')} disabled={teacher.order_index === Math.min(...list.map(t => t.order_index))} className="text-xs text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors" title="Move up">↑</button>
+                  <button onClick={() => handleReorder(teacher.id, 'down')} disabled={teacher.order_index === Math.max(...list.map(t => t.order_index))} className="text-xs text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors" title="Move down">↓</button>
+                </div>
+                <div className="flex gap-2">
+                  <button onClick={() => setEditingId(teacher.id)} className="text-xs text-zinc-400 hover:text-amber-400 transition-colors">{t.edit}</button>
+                  <button onClick={() => handleDelete(teacher.id)} className="text-xs text-zinc-400 hover:text-red-400 transition-colors">{t.delete}</button>
+                </div>
               </div>
             </div>
           )
@@ -117,16 +139,11 @@ function TeacherForm({ t, defaults, onSubmit, onCancel, label }: {
   return (
     <form onSubmit={onSubmit} className="bg-zinc-900 border border-amber-400/30 rounded-xl p-4 flex flex-col gap-3 mb-3">
       {defaults && <input type="hidden" name="id" value={defaults.id} />}
-      <div className="grid grid-cols-2 gap-3">
-        <div>
-          <label className="block text-zinc-400 text-xs mb-1">{t.name}</label>
-          <input name="name" defaultValue={defaults?.name} required className={inputCls} />
-        </div>
-        <div>
-          <label className="block text-zinc-400 text-xs mb-1">{t.order}</label>
-          <input name="order_index" type="number" defaultValue={defaults?.order_index ?? 0} className={inputCls} />
-        </div>
+      <div>
+        <label className="block text-zinc-400 text-xs mb-1">{t.name}</label>
+        <input name="name" defaultValue={defaults?.name} required className={inputCls} />
       </div>
+      {defaults && <input type="hidden" name="order_index" value={defaults.order_index} />}
       <div className="grid grid-cols-2 gap-3">
         <div>
           <label className="block text-zinc-400 text-xs mb-1">{t.igHandle}</label>

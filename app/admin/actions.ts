@@ -109,6 +109,29 @@ export async function deleteServiceAction(id: number) {
   return { success: true };
 }
 
+export async function reorderServiceAction(id: number, direction: 'up' | 'down') {
+  await requireAuth();
+  const db = createAdminClient();
+
+  const { data: current } = await db.from('services').select('order_index').eq('id', id).single();
+  if (!current) return { error: 'Service not found' };
+
+  const { data: other } = await db.from('services')
+    .select('id, order_index')
+    .eq('order_index', direction === 'up' ? current.order_index - 1 : current.order_index + 1)
+    .single();
+
+  if (!other) return { error: 'Cannot reorder' };
+
+  await Promise.all([
+    db.from('services').update({ order_index: other.order_index, updated_at: new Date().toISOString() }).eq('id', id),
+    db.from('services').update({ order_index: current.order_index, updated_at: new Date().toISOString() }).eq('id', other.id),
+  ]);
+
+  invalidateHomepage();
+  return { success: true };
+}
+
 // Teachers
 const PHOTO_EXTS = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
 
@@ -199,6 +222,29 @@ export async function deleteTeacherAction(id: number) {
       await db.storage.from('teacher-photos').remove([storagePath]);
     }
   }
+
+  invalidateHomepage();
+  return { success: true };
+}
+
+export async function reorderTeacherAction(id: number, direction: 'up' | 'down') {
+  await requireAuth();
+  const db = createAdminClient();
+
+  const { data: current } = await db.from('teachers').select('order_index').eq('id', id).single();
+  if (!current) return { error: 'Teacher not found' };
+
+  const { data: other } = await db.from('teachers')
+    .select('id, order_index')
+    .eq('order_index', direction === 'up' ? current.order_index - 1 : current.order_index + 1)
+    .single();
+
+  if (!other) return { error: 'Cannot reorder' };
+
+  await Promise.all([
+    db.from('teachers').update({ order_index: other.order_index, updated_at: new Date().toISOString() }).eq('id', id),
+    db.from('teachers').update({ order_index: current.order_index, updated_at: new Date().toISOString() }).eq('id', other.id),
+  ]);
 
   invalidateHomepage();
   return { success: true };
