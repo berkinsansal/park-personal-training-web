@@ -114,7 +114,7 @@ export const en = {
       add: '+ Add',
       cancel: 'Cancel',
       spotifyId: 'Spotify Playlist ID',
-      trainerName: 'Trainer Name',
+      title: 'Title',
       order: 'Order',
       edit: 'Edit',
       delete: 'Delete',

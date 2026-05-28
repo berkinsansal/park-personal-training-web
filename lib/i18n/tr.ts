@@ -114,7 +114,7 @@ export const tr = {
       add: '+ Ekle',
       cancel: 'İptal',
       spotifyId: 'Spotify Çalma Listesi ID',
-      trainerName: 'Eğitmen Adı',
+      title: 'Başlık',
       order: 'Sıra',
       edit: 'Düzenle',
       delete: 'Sil',

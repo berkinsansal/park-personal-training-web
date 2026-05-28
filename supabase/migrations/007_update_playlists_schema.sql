@@ -1,0 +1,14 @@
+-- Drop and recreate playlists table without trainer_name
+DROP TABLE IF EXISTS playlists;
+
+CREATE TABLE playlists (
+  id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  spotify_id TEXT NOT NULL,
+  title TEXT NOT NULL,
+  order_index INT NOT NULL DEFAULT 0,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE playlists ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "public_read" ON playlists FOR SELECT USING (true);

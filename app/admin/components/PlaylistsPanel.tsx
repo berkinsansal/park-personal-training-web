@@ -62,7 +62,7 @@ export default function PlaylistsPanel({ playlists, dict }: { playlists: Playlis
         return {
           id,
           spotify_id: fd.get('spotify_id') as string,
-          trainer_name: fd.get('trainer_name') as string,
+          title: fd.get('title') as string,
           order_index: Number(fd.get('order_index')),
         };
       }));
@@ -124,7 +124,7 @@ export default function PlaylistsPanel({ playlists, dict }: { playlists: Playlis
           ) : (
             <div key={playlist.id} className={`flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-xl p-4 transition-opacity ${pendingOp === `delete:${playlist.id}` ? 'opacity-50 pointer-events-none' : ''}`}>
               <div className="flex-1 min-w-0">
-                <p className="text-white font-semibold text-sm">{playlist.trainer_name}</p>
+                <p className="text-white font-semibold text-sm">{playlist.title}</p>
                 <p className="text-zinc-500 text-xs mt-0.5">ID: {playlist.spotify_id}</p>
               </div>
               <div className="flex flex-col gap-1 shrink-0">
@@ -161,8 +161,8 @@ function PlaylistForm({ t, defaults, onSubmit, onCancel, label, pendingOp }: {
       {defaults && <input type="hidden" name="id" value={defaults.id} />}
       {defaults && <input type="hidden" name="order_index" value={defaults.order_index} />}
       <div>
-        <label className="block text-zinc-400 text-xs mb-1">{t.trainerName}</label>
-        <input name="trainer_name" defaultValue={defaults?.trainer_name} required disabled={pendingOp !== null} className={inputCls} />
+        <label className="block text-zinc-400 text-xs mb-1">{t.title}</label>
+        <input name="title" defaultValue={defaults?.title} required disabled={pendingOp !== null} className={inputCls} />
       </div>
       <div>
         <label className="block text-zinc-400 text-xs mb-1">{t.spotifyId}</label>
