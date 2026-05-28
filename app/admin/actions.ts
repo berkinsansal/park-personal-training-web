@@ -2,6 +2,7 @@
 
 import { createAdminClient, createSessionClient } from '@/lib/supabase-server';
 import { redirect } from 'next/navigation';
+import { updateTag } from 'next/cache';
 
 async function requireAuth() {
   const supabase = await createSessionClient();
@@ -47,6 +48,7 @@ export async function updateSiteInfoAction(_prev: unknown, formData: FormData) {
   }).eq('id', 1);
 
   if (error) return { error: error.message };
+  updateTag('homepage');
   return { success: true };
 }
 
@@ -63,6 +65,7 @@ export async function addServiceAction(formData: FormData) {
   });
 
   if (error) return { error: error.message };
+  updateTag('homepage');
   return { success: true };
 }
 
@@ -79,6 +82,7 @@ export async function updateServiceAction(formData: FormData) {
   }).eq('id', Number(formData.get('id')));
 
   if (error) return { error: error.message };
+  updateTag('homepage');
   return { success: true };
 }
 
@@ -88,6 +92,7 @@ export async function deleteServiceAction(id: number) {
 
   const { error } = await db.from('services').delete().eq('id', id);
   if (error) return { error: error.message };
+  updateTag('homepage');
   return { success: true };
 }
 
@@ -104,6 +109,7 @@ export async function addTeacherAction(formData: FormData) {
   });
 
   if (error) return { error: error.message };
+  updateTag('homepage');
   return { success: true };
 }
 
@@ -120,6 +126,7 @@ export async function updateTeacherAction(formData: FormData) {
   }).eq('id', Number(formData.get('id')));
 
   if (error) return { error: error.message };
+  updateTag('homepage');
   return { success: true };
 }
 
@@ -129,5 +136,6 @@ export async function deleteTeacherAction(id: number) {
 
   const { error } = await db.from('teachers').delete().eq('id', id);
   if (error) return { error: error.message };
+  updateTag('homepage');
   return { success: true };
 }

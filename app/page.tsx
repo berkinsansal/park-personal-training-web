@@ -1,5 +1,6 @@
-export const dynamic = 'force-dynamic';
+'use cache'
 
+import { cacheLife, cacheTag } from 'next/cache';
 import { createAdminClient } from '@/lib/supabase-server';
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -10,6 +11,9 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 export default async function Home() {
+  cacheLife('max');
+  cacheTag('homepage');
+
   const db = createAdminClient();
 
   const [{ data: siteInfo }, { data: services }, { data: teachers }] = await Promise.all([

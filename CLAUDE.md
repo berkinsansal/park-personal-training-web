@@ -12,13 +12,19 @@ A Turkish personal training studio marketing site with an admin CMS. Two audienc
 
 ## Architecture Decisions
 
-**All data fetching is server-side.** The homepage and admin page are async Server Components that fetch from Supabase at request time. There is no client-side data fetching and no React Query / SWR. Both pages use `export const dynamic = 'force-dynamic'` to disable static caching on Vercel.
+**All data fetching is server-side.** No client-side data fetching, no React Query / SWR.
+
+**The homepage is statically cached using Next.js 16 Cache Components.** `app/page.tsx` uses `'use cache'` with `cacheLife('max')` and `cacheTag('homepage')`. The page is prerendered and served from cache until an admin mutates content. `cacheComponents: true` is set in `next.config.ts`. `app/admin/page.tsx` remains fully dynamic.
+
+**Cache invalidation on mutation.** Every server action in `app/admin/actions.ts` calls `updateTag('homepage')` after a successful DB write. This immediately expires the homepage cache so the next visitor gets fresh data. `updateTag` is used (not `revalidateTag`) because we're inside Server Actions and want immediate expiry rather than stale-while-revalidate.
 
 **Server Actions for all mutations.** CRUD in the admin panel uses `'use server'` actions in `app/admin/actions.ts`. No API routes exist.
 
 **Two Supabase clients, never mix them:**
 - `createSessionClient()` — SSR client, reads the session cookie, used for auth checks. Use in server actions that need to verify the user.
 - `createAdminClient()` — uses the service key, bypasses RLS. Use for all data reads and writes (the tables have public read RLS, and the service key handles admin writes).
+
+**Admin page stays dynamic.** `app/admin/page.tsx` keeps `export const dynamic = 'force-dynamic'` so the dashboard always shows the latest DB state.
 
 **Auth has two layers:**
 1. `proxy.ts` at the project root — Next.js 16's middleware convention (renamed from `middleware.ts`). Guards every `/admin/*` route at the edge.
