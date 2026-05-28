@@ -7,6 +7,8 @@ interface LocationMapProps {
 
 export default function LocationMap({ lat, lon }: LocationMapProps) {
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${lat},${lon}`;
+  // Zoom level: lower !1d value = higher zoom. 1200 gives good detail view with marker visible
+  const embedUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1200!2d${lon}!3d${lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x0!2z${lat},${lon}!5e0!3m2!1str!2str!4v${Date.now()}`;
 
   return (
     <section className="py-24 bg-zinc-900">
@@ -25,7 +27,7 @@ export default function LocationMap({ lat, lon }: LocationMapProps) {
               loading="lazy"
               allowFullScreen
               referrerPolicy="no-referrer-when-downgrade"
-              src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3059.563!2d${lon}!3d${lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x0!2zM8O5wrg2JzExLjkiTiAzMsK0NDAn0JMiRQ!5e0!3m2!1str!2str!4v1234567890`}
+              src={embedUrl}
             />
           </div>
         </a>
