@@ -24,7 +24,7 @@ A Turkish personal training studio marketing site with an admin CMS. Two audienc
 - `createSessionClient()` — SSR client, reads the session cookie, used for auth checks. Use in server actions that need to verify the user.
 - `createAdminClient()` — uses the service key, bypasses RLS. Use for all data reads and writes (the tables have public read RLS, and the service key handles admin writes).
 
-**Admin page stays dynamic.** `app/admin/page.tsx` keeps `export const dynamic = 'force-dynamic'` so the dashboard always shows the latest DB state.
+**Admin page stays dynamic.** `app/admin/page.tsx` has no `'use cache'` directive, so with `cacheComponents: true` it is dynamic by default — the dashboard always shows the latest DB state.
 
 **Auth has two layers:**
 1. `proxy.ts` at the project root — Next.js 16's middleware convention (renamed from `middleware.ts`). Guards every `/admin/*` route at the edge.
