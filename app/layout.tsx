@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import { getLocale } from "@/lib/locale";
 import "./globals.css";
 
 const geist = Geist({
@@ -8,18 +7,10 @@ const geist = Geist({
   subsets: ["latin"],
 });
 
-export async function generateMetadata(): Promise<Metadata> {
-  const locale = await getLocale();
-  return locale === 'en'
-    ? {
-        title: "Park Personal Training | Professional Fitness Studio",
-        description: "Reach your goals with expert trainers at Park Personal Training studio.",
-      }
-    : {
-        title: "Park Personal Training | Profesyonel Fitness Studyosu",
-        description: "Park Personal Training studyosunda uzman egitmenlerimizle hedeflerinize ulasin.",
-      };
-}
+export const metadata: Metadata = {
+  title: "Park Personal Training | Profesyonel Fitness Studyosu",
+  description: "Park Personal Training studyosunda uzman egitmenlerimizle hedeflerinize ulasin.",
+};
 
 export default function RootLayout({
   children,

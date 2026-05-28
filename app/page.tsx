@@ -1,4 +1,5 @@
 import { Suspense } from 'react';
+import type { Metadata } from 'next';
 import { getLocale } from '@/lib/locale';
 import { getDict, type Locale, type Dict } from '@/lib/i18n';
 import { cacheLife, cacheTag } from 'next/cache';
@@ -45,6 +46,19 @@ async function HomeContent({ locale }: { locale: Locale }) {
       <Footer igHandle={(siteInfo as SiteInfo | null)?.ig_handle ?? ''} dict={t} />
     </>
   );
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return locale === 'en'
+    ? {
+        title: "Park Personal Training | Professional Fitness Studio",
+        description: "Reach your goals with expert trainers at Park Personal Training studio.",
+      }
+    : {
+        title: "Park Personal Training | Profesyonel Fitness Studyosu",
+        description: "Park Personal Training studyosunda uzman egitmenlerimizle hedeflerinize ulasin.",
+      };
 }
 
 export default async function Home() {
