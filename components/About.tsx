@@ -1,16 +1,20 @@
+import type { Dict } from "@/lib/i18n";
+
 type Props = {
+  dict: Dict;
   happyCustomers: number;
   yearsExperience: number;
   teacherCount: number;
   serviceCount: number;
 };
 
-export default function About({ happyCustomers, yearsExperience, teacherCount, serviceCount }: Props) {
+export default function About({ dict, happyCustomers, yearsExperience, teacherCount, serviceCount }: Props) {
+  const t = dict.about;
   const stats = [
-    { value: `${happyCustomers}+`, label: "Mutlu Üye" },
-    { value: `${yearsExperience}+`, label: "Yıl Deneyim" },
-    { value: String(teacherCount), label: "Uzman Eğitmen" },
-    { value: String(serviceCount), label: "Program Çeşidi" },
+    { value: `${happyCustomers}+`, label: t.statHappyCustomers },
+    { value: `${yearsExperience}+`, label: t.statYearsExperience },
+    { value: String(teacherCount), label: t.statTeachers },
+    { value: String(serviceCount), label: t.statServices },
   ];
 
   return (
@@ -19,28 +23,23 @@ export default function About({ happyCustomers, yearsExperience, teacherCount, s
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div>
             <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">
-              Hakkımızda
+              {t.label}
             </span>
             <h2 className="mt-3 text-4xl md:text-5xl font-black text-white leading-tight">
-              Seni Tanıyor,<br />
-              <span className="text-amber-400">Sana Özel</span> Çalışıyoruz
+              {t.heading1}<br />
+              <span className="text-amber-400">{t.heading2}</span> {t.heading3}
             </h2>
             <p className="mt-6 text-zinc-400 text-lg leading-relaxed">
-              Park Personal Training olarak her bireyin farklı olduğunu
-              biliyoruz. Uzman eğitmenlerimiz, senin hedeflerini, yaşam tarzını
-              ve fiziksel durumunu analiz ederek tamamen sana özel bir antrenman
-              ve beslenme planı oluşturuyor.
+              {t.p1}
             </p>
             <p className="mt-4 text-zinc-400 text-lg leading-relaxed">
-              Küçük grup derslerinden bire bir antrenmanlarımıza kadar herkese
-              uygun bir program sunuyoruz. Stüdyomuzda profesyonel ekipmanlar ve
-              sıcak bir atmosfer seni bekliyor.
+              {t.p2}
             </p>
             <a
               href="#iletisim"
               className="mt-8 inline-block px-6 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
             >
-              Bize Ulaşın
+              {t.cta}
             </a>
           </div>
           <div className="grid grid-cols-2 gap-6">

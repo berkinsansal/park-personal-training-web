@@ -1,26 +1,27 @@
 import type { SiteInfo } from '@/lib/types';
+import type { Dict, Locale } from '@/lib/i18n';
 
-export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
+export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo | null; locale: Locale; dict: Dict }) {
+  const t = dict.contact;
   const ig = siteInfo?.ig_handle ?? '';
   const phone = siteInfo?.phone ?? '';
-  const address1 = siteInfo?.address_line1 ?? '';
-  const address2 = siteInfo?.address_line2 ?? '';
-  const weekday = siteInfo?.weekday_hours ?? '';
-  const weekend = siteInfo?.weekend_hours ?? '';
+  const address1 = locale === 'en' ? ((siteInfo?.address_line1_en || siteInfo?.address_line1) ?? '') : siteInfo?.address_line1 ?? '';
+  const address2 = locale === 'en' ? ((siteInfo?.address_line2_en || siteInfo?.address_line2) ?? '') : siteInfo?.address_line2 ?? '';
+  const weekday = locale === 'en' ? ((siteInfo?.weekday_hours_en || siteInfo?.weekday_hours) ?? '') : siteInfo?.weekday_hours ?? '';
+  const weekend = locale === 'en' ? ((siteInfo?.weekend_hours_en || siteInfo?.weekend_hours) ?? '') : siteInfo?.weekend_hours ?? '';
 
   return (
     <section id="iletisim" className="py-24 bg-zinc-950">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">
-            İletişim
+            {t.label}
           </span>
           <h2 className="mt-3 text-4xl md:text-5xl font-black text-white">
-            Harekete Geç
+            {t.heading}
           </h2>
           <p className="mt-4 text-zinc-400 text-lg max-w-xl mx-auto">
-            Sormak istediğin bir şey mi var? Bize Instagram üzerinden ulaşabilir
-            ya da aşağıdaki formu doldurabilirsin.
+            {t.description}
           </p>
         </div>
 
@@ -55,7 +56,7 @@ export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
                 </svg>
               </div>
               <div>
-                <div className="text-white font-bold group-hover:text-amber-400 transition-colors">Telefon</div>
+                <div className="text-white font-bold group-hover:text-amber-400 transition-colors">{t.phone}</div>
                 <div className="text-zinc-400 text-sm">{phone}</div>
               </div>
             </a>
@@ -68,7 +69,7 @@ export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
                 </svg>
               </div>
               <div>
-                <div className="text-white font-bold">Adres</div>
+                <div className="text-white font-bold">{t.address}</div>
                 <div className="text-zinc-400 text-sm">{address1}</div>
                 <div className="text-zinc-400 text-sm">{address2}</div>
               </div>
@@ -81,7 +82,7 @@ export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
                 </svg>
               </div>
               <div>
-                <div className="text-white font-bold">Çalışma Saatleri</div>
+                <div className="text-white font-bold">{t.hours}</div>
                 <div className="text-zinc-400 text-sm">{weekday}</div>
                 <div className="text-zinc-400 text-sm">{weekend}</div>
               </div>
@@ -90,26 +91,26 @@ export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
 
           <form className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4">
             <div>
-              <label className="block text-zinc-400 text-sm mb-2">Adınız Soyadınız</label>
+              <label className="block text-zinc-400 text-sm mb-2">{t.nameLabel}</label>
               <input
                 type="text"
-                placeholder="Ali Veli"
+                placeholder={t.namePlaceholder}
                 className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm"
               />
             </div>
             <div>
-              <label className="block text-zinc-400 text-sm mb-2">Telefon veya E-posta</label>
+              <label className="block text-zinc-400 text-sm mb-2">{t.contactLabel}</label>
               <input
                 type="text"
-                placeholder="0555 000 00 00"
+                placeholder={t.contactPlaceholder}
                 className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm"
               />
             </div>
             <div>
-              <label className="block text-zinc-400 text-sm mb-2">Mesajınız</label>
+              <label className="block text-zinc-400 text-sm mb-2">{t.messageLabel}</label>
               <textarea
                 rows={4}
-                placeholder="Merhaba, bilgi almak istiyorum..."
+                placeholder={t.messagePlaceholder}
                 className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm resize-none"
               />
             </div>
@@ -117,7 +118,7 @@ export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
               type="submit"
               className="w-full py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
             >
-              Mesaj Gönder
+              {t.submit}
             </button>
           </form>
         </div>

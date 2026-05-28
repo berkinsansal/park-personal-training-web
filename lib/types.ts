@@ -5,6 +5,10 @@ export type SiteInfo = {
   address_line2: string;
   weekday_hours: string;
   weekend_hours: string;
+  address_line1_en: string;
+  address_line2_en: string;
+  weekday_hours_en: string;
+  weekend_hours_en: string;
   happy_customers: number;
   years_experience: number;
 };
@@ -14,6 +18,8 @@ export type Service = {
   icon: string;
   title: string;
   description: string;
+  title_en: string;
+  description_en: string;
   order_index: number;
 };
 

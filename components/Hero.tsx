@@ -1,6 +1,8 @@
 import Image from "next/image";
+import type { Dict } from "@/lib/i18n";
 
-export default function Hero() {
+export default function Hero({ dict }: { dict: Dict }) {
+  const t = dict.hero;
   return (
     <section
       id="hero"
@@ -17,7 +19,7 @@ export default function Hero() {
           <Image src="/logo.png" alt="Park Personal Training" width={180} height={180} priority />
         </div>
         <div className="inline-block mb-6 px-4 py-1.5 rounded-full border border-amber-400/30 bg-amber-400/10 text-amber-400 text-sm font-medium tracking-widest uppercase">
-          Profesyonel Fitness Stüdyosu
+          {t.badge}
         </div>
         <h1 className="text-5xl md:text-7xl font-black mb-6 leading-none tracking-tight">
           <span className="text-white">PARK</span>{" "}
@@ -26,21 +28,20 @@ export default function Hero() {
           <span className="text-white">TRAINING</span>
         </h1>
         <p className="text-xl md:text-2xl text-zinc-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-          Hedeflerine ulaşmak için doğru adressin burada. Uzman eğitmenlerimizle
-          sana özel programlarla en iyi versiyonun ol.
+          {t.subtitle}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="#iletisim"
             className="px-8 py-4 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
           >
-            Hemen Başvur
+            {t.cta}
           </a>
           <a
             href="#hizmetler"
             className="px-8 py-4 border border-zinc-600 text-white font-medium rounded-lg hover:border-amber-400 hover:text-amber-400 transition-colors text-sm uppercase tracking-wider"
           >
-            Hizmetleri Gör
+            {t.ctaSecondary}
           </a>
         </div>
       </div>

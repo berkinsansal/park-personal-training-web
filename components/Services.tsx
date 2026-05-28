@@ -1,19 +1,20 @@
 import type { Service } from '@/lib/types';
+import type { Dict, Locale } from '@/lib/i18n';
 
-export default function Services({ services }: { services: Service[] }) {
+export default function Services({ services, locale, dict }: { services: Service[]; locale: Locale; dict: Dict }) {
+  const t = dict.services;
   return (
     <section id="hizmetler" className="py-24 bg-zinc-950">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">
-            Hizmetlerimiz
+            {t.label}
           </span>
           <h2 className="mt-3 text-4xl md:text-5xl font-black text-white">
-            Ne Sunuyoruz?
+            {t.heading}
           </h2>
           <p className="mt-4 text-zinc-400 text-lg max-w-2xl mx-auto">
-            Her seviyeye ve hedefe uygun programlarla seni en iyi şekilde
-            destekliyoruz.
+            {t.description}
           </p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -24,9 +25,11 @@ export default function Services({ services }: { services: Service[] }) {
             >
               <div className="text-4xl mb-4">{s.icon}</div>
               <h3 className="text-white font-bold text-lg mb-3 group-hover:text-amber-400 transition-colors">
-                {s.title}
+                {locale === 'en' ? (s.title_en || s.title) : s.title}
               </h3>
-              <p className="text-zinc-400 text-sm leading-relaxed">{s.description}</p>
+              <p className="text-zinc-400 text-sm leading-relaxed">
+                {locale === 'en' ? (s.description_en || s.description) : s.description}
+              </p>
             </div>
           ))}
         </div>

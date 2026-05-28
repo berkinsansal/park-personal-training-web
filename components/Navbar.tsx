@@ -1,16 +1,18 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import LanguageSwitcher from "./LanguageSwitcher";
+import type { Dict, Locale } from "@/lib/i18n";
 
-const links = [
-  { href: "#hakkimizda", label: "Hakkımızda" },
-  { href: "#hizmetler", label: "Hizmetler" },
-  { href: "#egitmenler", label: "Eğitmenler" },
-  { href: "#iletisim", label: "İletişim" },
-];
-
-export default function Navbar() {
+export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale }) {
   const [open, setOpen] = useState(false);
+
+  const links = [
+    { href: "#hakkimizda", label: dict.nav.about },
+    { href: "#hizmetler", label: dict.nav.services },
+    { href: "#egitmenler", label: dict.nav.teachers },
+    { href: "#iletisim", label: dict.nav.contact },
+  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur border-b border-zinc-800">
@@ -19,7 +21,7 @@ export default function Navbar() {
           <Image src="/logo.png" alt="Park Personal Training Logo" width={40} height={40} />
           <span className="hidden sm:inline text-amber-400 font-bold text-lg tracking-wide">Park Personal Training</span>
         </a>
-        <ul className="hidden md:flex gap-8">
+        <ul className="hidden md:flex gap-8 items-center">
           {links.map((l) => (
             <li key={l.href}>
               <a
@@ -30,6 +32,9 @@ export default function Navbar() {
               </a>
             </li>
           ))}
+          <li>
+            <LanguageSwitcher locale={locale} />
+          </li>
         </ul>
         <button
           className="md:hidden text-zinc-300"
@@ -57,6 +62,7 @@ export default function Navbar() {
               {l.label}
             </a>
           ))}
+          <LanguageSwitcher locale={locale} />
         </div>
       )}
     </nav>

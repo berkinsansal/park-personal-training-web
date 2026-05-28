@@ -1,6 +1,7 @@
 import Image from "next/image";
+import type { Dict } from "@/lib/i18n";
 
-export default function Footer({ igHandle }: { igHandle: string }) {
+export default function Footer({ igHandle, dict }: { igHandle: string; dict: Dict }) {
   return (
     <footer className="bg-zinc-900 border-t border-zinc-800 py-8">
       <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
@@ -9,7 +10,7 @@ export default function Footer({ igHandle }: { igHandle: string }) {
           <span className="text-amber-400 font-black text-xl tracking-wide">Park Personal Training</span>
         </div>
         <p className="text-zinc-500 text-sm text-center">
-          &copy; {new Date().getFullYear()} Park Personal Training. Tüm hakları saklıdır.
+          &copy; {new Date().getFullYear()} Park Personal Training. {dict.footer.copyright}
         </p>
         <a
           href={`https://instagram.com/${igHandle}`}

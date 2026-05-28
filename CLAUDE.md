@@ -14,9 +14,11 @@ A Turkish personal training studio marketing site with an admin CMS. Two audienc
 
 **All data fetching is server-side.** No client-side data fetching, no React Query / SWR.
 
-**The homepage is statically cached using Next.js 16 Cache Components.** `app/page.tsx` uses `'use cache'` with `cacheLife('max')` and `cacheTag('homepage')`. The page is prerendered and served from cache until an admin mutates content. `cacheComponents: true` is set in `next.config.ts`. `app/admin/page.tsx` remains fully dynamic.
+**The homepage is statically cached using Next.js 16 Cache Components.** `app/page.tsx` has an outer `Home` component (reads locale cookie, dynamic) and an inner `HomeContent({ locale })` cached component that uses `'use cache'`, `cacheLife('max')`, and `cacheTag('homepage-tr')` or `cacheTag('homepage-en')`. Each locale has its own cache entry. `cacheComponents: true` is set in `next.config.ts`. `app/admin/page.tsx` remains fully dynamic.
 
-**Cache invalidation on mutation.** Every server action in `app/admin/actions.ts` calls `updateTag('homepage')` after a successful DB write. This immediately expires the homepage cache so the next visitor gets fresh data. `updateTag` is used (not `revalidateTag`) because we're inside Server Actions and want immediate expiry rather than stale-while-revalidate.
+**Cache invalidation on mutation.** Every server action in `app/admin/actions.ts` calls `invalidateHomepage()` (a helper that calls `updateTag('homepage-tr')` and `updateTag('homepage-en')`) after a successful DB write. Both locale caches are expired simultaneously. `updateTag` is used (not `revalidateTag`) because we're inside Server Actions and want immediate expiry rather than stale-while-revalidate.
+
+**Multi-language (TR/EN).** The site supports Turkish (default) and English. Locale is persisted in a `locale` cookie (1-year expiry) and read via `getLocale()` in `lib/locale.ts`. UI strings live in `lib/i18n/tr.ts` and `lib/i18n/en.ts`; `getDict(locale)` returns the right dict. DB content that is locale-specific (address, working hours, service titles/descriptions) has `_en` variants in the DB — see migration `003_i18n_columns.sql`. The `locale` cookie is set by `setLocaleAction` in `app/actions.ts`, triggered by the `LanguageSwitcher` component in the navbar. Public components receive `dict: Dict` and `locale: Locale` props from the server-rendered page; admin components receive `dict: Dict` for translated labels/buttons.
 
 **Server Actions for all mutations.** CRUD in the admin panel uses `'use server'` actions in `app/admin/actions.ts`. No API routes exist.
 

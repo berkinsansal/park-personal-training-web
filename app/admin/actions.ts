@@ -11,6 +11,11 @@ async function requireAuth() {
   return supabase;
 }
 
+function invalidateHomepage() {
+  updateTag('homepage-tr');
+  updateTag('homepage-en');
+}
+
 // Auth
 export async function loginAction(_prev: unknown, formData: FormData) {
   const email = formData.get('email') as string;
@@ -42,13 +47,17 @@ export async function updateSiteInfoAction(_prev: unknown, formData: FormData) {
     address_line2: formData.get('address_line2'),
     weekday_hours: formData.get('weekday_hours'),
     weekend_hours: formData.get('weekend_hours'),
+    address_line1_en: formData.get('address_line1_en'),
+    address_line2_en: formData.get('address_line2_en'),
+    weekday_hours_en: formData.get('weekday_hours_en'),
+    weekend_hours_en: formData.get('weekend_hours_en'),
     happy_customers: Number(formData.get('happy_customers')),
     years_experience: Number(formData.get('years_experience')),
     updated_at: new Date().toISOString(),
   }).eq('id', 1);
 
   if (error) return { error: error.message };
-  updateTag('homepage');
+  invalidateHomepage();
   return { success: true };
 }
 
@@ -61,11 +70,13 @@ export async function addServiceAction(formData: FormData) {
     icon: formData.get('icon'),
     title: formData.get('title'),
     description: formData.get('description'),
+    title_en: formData.get('title_en') ?? '',
+    description_en: formData.get('description_en') ?? '',
     order_index: Number(formData.get('order_index') || 0),
   });
 
   if (error) return { error: error.message };
-  updateTag('homepage');
+  invalidateHomepage();
   return { success: true };
 }
 
@@ -77,12 +88,14 @@ export async function updateServiceAction(formData: FormData) {
     icon: formData.get('icon'),
     title: formData.get('title'),
     description: formData.get('description'),
+    title_en: formData.get('title_en') ?? '',
+    description_en: formData.get('description_en') ?? '',
     order_index: Number(formData.get('order_index') || 0),
     updated_at: new Date().toISOString(),
   }).eq('id', Number(formData.get('id')));
 
   if (error) return { error: error.message };
-  updateTag('homepage');
+  invalidateHomepage();
   return { success: true };
 }
 
@@ -92,7 +105,7 @@ export async function deleteServiceAction(id: number) {
 
   const { error } = await db.from('services').delete().eq('id', id);
   if (error) return { error: error.message };
-  updateTag('homepage');
+  invalidateHomepage();
   return { success: true };
 }
 
@@ -109,7 +122,7 @@ export async function addTeacherAction(formData: FormData) {
   });
 
   if (error) return { error: error.message };
-  updateTag('homepage');
+  invalidateHomepage();
   return { success: true };
 }
 
@@ -126,7 +139,7 @@ export async function updateTeacherAction(formData: FormData) {
   }).eq('id', Number(formData.get('id')));
 
   if (error) return { error: error.message };
-  updateTag('homepage');
+  invalidateHomepage();
   return { success: true };
 }
 
@@ -136,6 +149,6 @@ export async function deleteTeacherAction(id: number) {
 
   const { error } = await db.from('teachers').delete().eq('id', id);
   if (error) return { error: error.message };
-  updateTag('homepage');
+  invalidateHomepage();
   return { success: true };
 }

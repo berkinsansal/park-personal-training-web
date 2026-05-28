@@ -1,7 +1,9 @@
-'use cache'
-
+import { Suspense } from 'react';
+import { getLocale } from '@/lib/locale';
+import { getDict, type Locale, type Dict } from '@/lib/i18n';
 import { cacheLife, cacheTag } from 'next/cache';
 import { createAdminClient } from '@/lib/supabase-server';
+import type { SiteInfo, Service, Teacher } from '@/lib/types';
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -10,10 +12,12 @@ import Teachers from "@/components/Teachers";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
-export default async function Home() {
+async function HomeContent({ locale }: { locale: Locale }) {
+  'use cache';
+  cacheTag(`homepage-${locale}`);
   cacheLife('max');
-  cacheTag('homepage');
 
+  const t = getDict(locale);
   const db = createAdminClient();
 
   const [{ data: siteInfo }, { data: services }, { data: teachers }] = await Promise.all([
@@ -24,20 +28,30 @@ export default async function Home() {
 
   return (
     <>
-      <Navbar />
+      <Navbar dict={t} locale={locale} />
       <main>
-        <Hero />
+        <Hero dict={t} />
         <About
-          happyCustomers={siteInfo?.happy_customers ?? 0}
-          yearsExperience={siteInfo?.years_experience ?? 0}
+          dict={t}
+          happyCustomers={(siteInfo as SiteInfo | null)?.happy_customers ?? 0}
+          yearsExperience={(siteInfo as SiteInfo | null)?.years_experience ?? 0}
           teacherCount={teachers?.length ?? 0}
           serviceCount={services?.length ?? 0}
         />
-        <Services services={services ?? []} />
-        <Teachers teachers={teachers ?? []} />
-        <Contact siteInfo={siteInfo} />
+        <Services services={(services as Service[] | null) ?? []} locale={locale} dict={t} />
+        <Teachers teachers={(teachers as Teacher[] | null) ?? []} dict={t} />
+        <Contact siteInfo={siteInfo as SiteInfo | null} locale={locale} dict={t} />
       </main>
-      <Footer igHandle={siteInfo?.ig_handle ?? ''} />
+      <Footer igHandle={(siteInfo as SiteInfo | null)?.ig_handle ?? ''} dict={t} />
     </>
+  );
+}
+
+export default async function Home() {
+  const locale = await getLocale();
+  return (
+    <Suspense>
+      <HomeContent locale={locale} />
+    </Suspense>
   );
 }
