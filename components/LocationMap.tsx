@@ -7,7 +7,7 @@ interface LocationMapProps {
 
 export default function LocationMap({ latitude, longitude }: LocationMapProps) {
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
-  const embedUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1200!2d${longitude}!3d${latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0:0x0!2z${latitude},${longitude}!5e0!3m2!1str!2str!4v${Date.now()}`;
+  const embedUrl = `https://maps.google.com/maps?q=${latitude},${longitude}&hl=en&z=15&output=embed`;
 
   return (
     <section className="py-24 bg-zinc-900">
