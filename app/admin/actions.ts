@@ -66,18 +66,18 @@ export async function addServiceAction(formData: FormData) {
   await requireAuth();
   const db = createAdminClient();
 
-  const { error } = await db.from('services').insert({
+  const { data, error } = await db.from('services').insert({
     icon: formData.get('icon'),
     title: formData.get('title'),
     description: formData.get('description'),
     title_en: formData.get('title_en') ?? '',
     description_en: formData.get('description_en') ?? '',
     order_index: Number(formData.get('order_index') || 0),
-  });
+  }).select('*').single();
 
   if (error) return { error: error.message };
   invalidateHomepage();
-  return { success: true };
+  return { success: true, data };
 }
 
 export async function updateServiceAction(formData: FormData) {
@@ -113,19 +113,18 @@ export async function reorderServiceAction(id: number, direction: 'up' | 'down')
   await requireAuth();
   const db = createAdminClient();
 
-  const { data: current } = await db.from('services').select('order_index').eq('id', id).single();
-  if (!current) return { error: 'Service not found' };
+  const { data: items } = await db.from('services').select('id, order_index').order('order_index');
+  if (!items) return { error: 'Services not found' };
 
-  const { data: other } = await db.from('services')
-    .select('id, order_index')
-    .eq('order_index', direction === 'up' ? current.order_index - 1 : current.order_index + 1)
-    .single();
+  const idx = items.findIndex((s) => s.id === id);
+  if (idx === -1) return { error: 'Service not found' };
 
-  if (!other) return { error: 'Cannot reorder' };
+  const swapIdx = direction === 'up' ? idx - 1 : idx + 1;
+  if (swapIdx < 0 || swapIdx >= items.length) return { error: 'Cannot reorder' };
 
   await Promise.all([
-    db.from('services').update({ order_index: other.order_index, updated_at: new Date().toISOString() }).eq('id', id),
-    db.from('services').update({ order_index: current.order_index, updated_at: new Date().toISOString() }).eq('id', other.id),
+    db.from('services').update({ order_index: items[swapIdx].order_index, updated_at: new Date().toISOString() }).eq('id', id),
+    db.from('services').update({ order_index: items[idx].order_index, updated_at: new Date().toISOString() }).eq('id', items[swapIdx].id),
   ]);
 
   invalidateHomepage();
@@ -144,27 +143,29 @@ export async function addTeacherAction(formData: FormData) {
   await requireAuth();
   const db = createAdminClient();
 
-  const { data, error } = await db.from('teachers').insert({
+  const { data: inserted, error } = await db.from('teachers').insert({
     name: formData.get('name'),
     ig_handle: formData.get('ig_handle'),
     order_index: Number(formData.get('order_index') || 0),
-  }).select('id').single();
+  }).select('*').single();
 
   if (error) return { error: error.message };
 
+  let photo_url = '';
   const photo = formData.get('photo');
   if (photo instanceof File && photo.size > 0) {
     const ext = getFileExt(photo);
-    const path = `${data.id}.${ext}`;
+    const path = `${inserted.id}.${ext}`;
     const { error: uploadError } = await db.storage.from('teacher-photos').upload(path, photo, { upsert: true });
     if (!uploadError) {
       const { data: { publicUrl } } = db.storage.from('teacher-photos').getPublicUrl(path);
-      await db.from('teachers').update({ photo_url: publicUrl }).eq('id', data.id);
+      await db.from('teachers').update({ photo_url: publicUrl }).eq('id', inserted.id);
+      photo_url = publicUrl;
     }
   }
 
   invalidateHomepage();
-  return { success: true };
+  return { success: true, data: { ...inserted, photo_url } };
 }
 
 export async function updateTeacherAction(formData: FormData) {
@@ -179,12 +180,14 @@ export async function updateTeacherAction(formData: FormData) {
     updated_at: new Date().toISOString(),
   };
 
+  let photoUrl: string | null = null;
   const removePhoto = formData.get('removePhoto') === 'on';
   const photo = formData.get('photo');
 
   if (removePhoto) {
     await Promise.allSettled(PHOTO_EXTS.map((e) => db.storage.from('teacher-photos').remove([`${id}.${e}`])));
     updates.photo_url = '';
+    photoUrl = '';
   }
 
   if (photo instanceof File && photo.size > 0) {
@@ -197,13 +200,14 @@ export async function updateTeacherAction(formData: FormData) {
     if (!uploadError) {
       const { data: { publicUrl } } = db.storage.from('teacher-photos').getPublicUrl(path);
       updates.photo_url = publicUrl;
+      photoUrl = publicUrl;
     }
   }
 
   const { error } = await db.from('teachers').update(updates).eq('id', id);
   if (error) return { error: error.message };
   invalidateHomepage();
-  return { success: true };
+  return { success: true, photoUrl };
 }
 
 export async function deleteTeacherAction(id: number) {
@@ -231,19 +235,18 @@ export async function reorderTeacherAction(id: number, direction: 'up' | 'down')
   await requireAuth();
   const db = createAdminClient();
 
-  const { data: current } = await db.from('teachers').select('order_index').eq('id', id).single();
-  if (!current) return { error: 'Teacher not found' };
+  const { data: items } = await db.from('teachers').select('id, order_index').order('order_index');
+  if (!items) return { error: 'Teachers not found' };
 
-  const { data: other } = await db.from('teachers')
-    .select('id, order_index')
-    .eq('order_index', direction === 'up' ? current.order_index - 1 : current.order_index + 1)
-    .single();
+  const idx = items.findIndex((t) => t.id === id);
+  if (idx === -1) return { error: 'Teacher not found' };
 
-  if (!other) return { error: 'Cannot reorder' };
+  const swapIdx = direction === 'up' ? idx - 1 : idx + 1;
+  if (swapIdx < 0 || swapIdx >= items.length) return { error: 'Cannot reorder' };
 
   await Promise.all([
-    db.from('teachers').update({ order_index: other.order_index, updated_at: new Date().toISOString() }).eq('id', id),
-    db.from('teachers').update({ order_index: current.order_index, updated_at: new Date().toISOString() }).eq('id', other.id),
+    db.from('teachers').update({ order_index: items[swapIdx].order_index, updated_at: new Date().toISOString() }).eq('id', id),
+    db.from('teachers').update({ order_index: items[idx].order_index, updated_at: new Date().toISOString() }).eq('id', items[swapIdx].id),
   ]);
 
   invalidateHomepage();
