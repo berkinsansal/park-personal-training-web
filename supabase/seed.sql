@@ -1,5 +1,5 @@
 -- Site info (single row)
-INSERT INTO site_info (ig_handle, phone, address_line1, address_line2, weekday_hours, weekend_hours, address_line1_en, address_line2_en, weekday_hours_en, weekend_hours_en, happy_customers, years_experience)
+INSERT INTO site_info (ig_handle, phone, address_line1, address_line2, weekday_hours, weekend_hours, address_line1_en, address_line2_en, weekday_hours_en, weekend_hours_en, happy_customers, years_experience, latitude, longitude)
 VALUES (
   'parkpersonaltraining',
   '05412368206',
@@ -12,7 +12,9 @@ VALUES (
   'Mon - Sat: 07:00 - 21:00',
   'Sun: 09:00 - 17:00',
   500,
-  10
+  10,
+  39.86198383858591,
+  32.673266845737885
 );
 
 -- Services

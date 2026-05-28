@@ -11,6 +11,8 @@ export type SiteInfo = {
   weekend_hours_en: string;
   happy_customers: number;
   years_experience: number;
+  latitude: number;
+  longitude: number;
 };
 
 export type Service = {

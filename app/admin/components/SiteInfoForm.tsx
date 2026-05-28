@@ -27,6 +27,8 @@ export default function SiteInfoForm({ data, dict }: { data: SiteInfo | null; di
         <Field label={t.weekendHoursEn} name="weekend_hours_en" defaultValue={data.weekend_hours_en} />
         <Field label={t.happyCustomers} name="happy_customers" type="number" defaultValue={String(data.happy_customers)} />
         <Field label={t.yearsExperience} name="years_experience" type="number" defaultValue={String(data.years_experience)} />
+        <Field label={t.latitude} name="latitude" type="number" step="0.00000001" defaultValue={String(data.latitude)} />
+        <Field label={t.longitude} name="longitude" type="number" step="0.00000001" defaultValue={String(data.longitude)} />
 
         <div className="sm:col-span-2 flex items-center gap-4 pt-2">
           <button
@@ -44,11 +46,12 @@ export default function SiteInfoForm({ data, dict }: { data: SiteInfo | null; di
   );
 }
 
-function Field({ label, name, defaultValue, type = 'text' }: {
+function Field({ label, name, defaultValue, type = 'text', step }: {
   label: string;
   name: string;
   defaultValue: string;
   type?: string;
+  step?: string;
 }) {
   return (
     <div>
@@ -57,6 +60,7 @@ function Field({ label, name, defaultValue, type = 'text' }: {
         type={type}
         name={name}
         defaultValue={defaultValue}
+        step={step}
         className="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-amber-400 transition-colors"
       />
     </div>

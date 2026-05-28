@@ -71,6 +71,8 @@ export const tr = {
       weekendHoursEn: 'Hafta sonu Saatler (İngilizce)',
       happyCustomers: 'Mutlu Müşteri Sayısı',
       yearsExperience: 'Deneyim Yılı',
+      latitude: 'Harita Enlemi (Latitude)',
+      longitude: 'Harita Boylamı (Longitude)',
       save: 'Kaydet',
       saving: 'Kaydediliyor...',
       saved: 'Kaydedildi!',

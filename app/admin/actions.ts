@@ -53,6 +53,8 @@ export async function updateSiteInfoAction(_prev: unknown, formData: FormData) {
     weekend_hours_en: formData.get('weekend_hours_en'),
     happy_customers: Number(formData.get('happy_customers')),
     years_experience: Number(formData.get('years_experience')),
+    latitude: Number(formData.get('latitude')),
+    longitude: Number(formData.get('longitude')),
     updated_at: new Date().toISOString(),
   }).eq('id', 1);
 

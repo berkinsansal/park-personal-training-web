@@ -43,7 +43,7 @@ async function HomeContent({ locale }: { locale: Locale }) {
         <Services services={(services as Service[] | null) ?? []} locale={locale} dict={t} />
         <Teachers teachers={(teachers as Teacher[] | null) ?? []} dict={t} />
         <Contact siteInfo={siteInfo as SiteInfo | null} locale={locale} dict={t} />
-        <LocationMap lat={39.86198383858591} lon={32.673266845737885} />
+        {siteInfo && <LocationMap latitude={siteInfo.latitude} longitude={siteInfo.longitude} />}
       </main>
       <Footer igHandle={(siteInfo as SiteInfo | null)?.ig_handle ?? ''} dict={t} />
     </>

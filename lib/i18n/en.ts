@@ -71,6 +71,8 @@ export const en = {
       weekendHoursEn: 'Weekend Hours (English)',
       happyCustomers: 'Happy Customers',
       yearsExperience: 'Years of Experience',
+      latitude: 'Map Latitude',
+      longitude: 'Map Longitude',
       save: 'Save',
       saving: 'Saving...',
       saved: 'Saved!',
