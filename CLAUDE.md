@@ -70,4 +70,6 @@ The tables from migration 001 (`hero`, `about`, `contact`) were dropped in migra
 ## CLAUDE CODE ALWAYS DO THESE
 
 - Update documentation if necessary
-- git commit and push changes you have done
+- Commit and push changes you have done to git
+- If DB schema changed, update SupaBase side too
+- If new column/table added to DB, seed the initial data
