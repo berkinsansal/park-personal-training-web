@@ -28,7 +28,6 @@
       "Bash(curl *)",
       "Bash(supabase db *)",
       "Bash(supabase link *)",
-      "Bash(psql \"postgresql://postgres:[your-password]@db.ktdtdseaxzsstmeasdka.supabase.co:5432/postgres\")",
       "Bash(supabase projects *)",
       "Read(//tmp/**)"
     ]
