@@ -156,9 +156,18 @@ export async function updateTeacherAction(formData: FormData) {
     updated_at: new Date().toISOString(),
   };
 
+  const removePhoto = formData.get('removePhoto') === 'on';
   const photo = formData.get('photo');
-  if (photo instanceof File && photo.size > 0) {
+
+  if (removePhoto) {
     await Promise.allSettled(PHOTO_EXTS.map((e) => db.storage.from('teacher-photos').remove([`${id}.${e}`])));
+    updates.photo_url = '';
+  }
+
+  if (photo instanceof File && photo.size > 0) {
+    if (!removePhoto) {
+      await Promise.allSettled(PHOTO_EXTS.map((e) => db.storage.from('teacher-photos').remove([`${id}.${e}`])));
+    }
     const ext = getFileExt(photo);
     const path = `${id}.${ext}`;
     const { error: uploadError } = await db.storage.from('teacher-photos').upload(path, photo, { upsert: true });

@@ -136,7 +136,13 @@ function TeacherForm({ t, defaults, onSubmit, onCancel, label }: {
       <div>
         <label className="block text-zinc-400 text-xs mb-1">{t.photo}</label>
         {defaults?.photo_url && (
-          <img src={defaults.photo_url} alt={defaults.name} className="w-12 h-12 rounded-full object-cover mb-2 border border-zinc-700" />
+          <>
+            <img src={defaults.photo_url} alt={defaults.name} className="w-12 h-12 rounded-full object-cover mb-2 border border-zinc-700" />
+            <label className="flex items-center gap-2 text-zinc-400 text-xs cursor-pointer mb-2">
+              <input type="checkbox" name="removePhoto" className="w-3 h-3 rounded border-zinc-600 cursor-pointer" />
+              Remove photo
+            </label>
+          </>
         )}
         <input name="photo" type="file" accept="image/*" className={inputCls} />
       </div>
