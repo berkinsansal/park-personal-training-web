@@ -1,13 +1,16 @@
 'use client';
 
+import type { Locale } from '@/lib/i18n';
+
 interface LocationMapProps {
   latitude: number;
   longitude: number;
+  locale: Locale;
 }
 
-export default function LocationMap({ latitude, longitude }: LocationMapProps) {
+export default function LocationMap({ latitude, longitude, locale }: LocationMapProps) {
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
-  const embedUrl = `https://maps.google.com/maps?q=${latitude},${longitude}&hl=en&z=15&output=embed`;
+  const embedUrl = `https://maps.google.com/maps?q=${latitude},${longitude}&hl=${locale}&z=15&output=embed`;
 
   return (
     <section className="py-24 bg-zinc-900">
