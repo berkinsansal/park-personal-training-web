@@ -23,7 +23,8 @@
       "Bash(xargs grep -l \"middleware\")",
       "Bash(rm \"C:/GitHub/park-personal-training-web/lib/supabase.ts\")",
       "Bash(rmdir \"C:/GitHub/park-personal-training-web/app/api\")",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(xargs grep -l \"revalidatePath\\\\|revalidate\\\\|static\\\\|ISR\")"
     ]
   }
 }
