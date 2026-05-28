@@ -49,6 +49,11 @@ export const en = {
     messagePlaceholder: 'Hello, I would like more information...',
     submit: 'Send Message',
   },
+  playlists: {
+    label: 'Music',
+    heading: 'Playlists',
+    description: 'Music to accompany your workouts',
+  },
   footer: {
     copyright: 'All rights reserved.',
   },

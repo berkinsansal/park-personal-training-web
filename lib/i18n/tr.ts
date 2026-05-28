@@ -49,6 +49,11 @@ export const tr = {
     messagePlaceholder: 'Merhaba, bilgi almak istiyorum...',
     submit: 'Mesaj Gönder',
   },
+  playlists: {
+    label: 'Müzik',
+    heading: 'Çalma Listeleri',
+    description: 'Antrenmanlarınız sırasında size eşlik edecek müzik',
+  },
   footer: {
     copyright: 'Tüm hakları saklıdır.',
   },
