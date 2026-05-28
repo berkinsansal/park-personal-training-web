@@ -4,7 +4,7 @@ import type { Dict } from '@/lib/i18n';
 export default function Playlists({ playlists, dict }: { playlists: Playlist[]; dict: Dict }) {
   const strings = dict.playlists;
   return (
-    <section className="py-16 bg-zinc-950">
+    <section className="py-16 bg-zinc-900">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-12">
           <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">

@@ -10,6 +10,9 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
   const weekday = locale === 'en' ? ((siteInfo?.weekday_hours_en || siteInfo?.weekday_hours) ?? '') : siteInfo?.weekday_hours ?? '';
   const weekend = locale === 'en' ? ((siteInfo?.weekend_hours_en || siteInfo?.weekend_hours) ?? '') : siteInfo?.weekend_hours ?? '';
 
+  const mapsUrl = siteInfo ? `https://www.google.com/maps/search/?api=1&query=${siteInfo.latitude},${siteInfo.longitude}` : '';
+  const embedUrl = siteInfo ? `https://maps.google.com/maps?q=${siteInfo.latitude},${siteInfo.longitude}&hl=${locale}&z=18&output=embed` : '';
+
   return (
     <section id="iletisim" className="py-24 bg-zinc-950">
       <div className="max-w-4xl mx-auto px-6">
@@ -25,7 +28,7 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10">
+        <div className="grid md:grid-cols-2 gap-10 mb-16">
           <div className="flex flex-col gap-6">
             <a
               href={`https://instagram.com/${ig}`}
@@ -122,6 +125,27 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
             </button>
           </form>
         </div>
+
+        {embedUrl && (
+          <a
+            href={mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block group rounded-2xl overflow-hidden border border-zinc-700 hover:border-amber-400/50 transition-all duration-300 cursor-pointer hover:shadow-lg hover:shadow-amber-400/10"
+          >
+            <div style={{ filter: 'invert(0.93) hue-rotate(180deg)' }}>
+              <iframe
+                width="100%"
+                height="450"
+                style={{ border: 0 }}
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                src={embedUrl}
+              />
+            </div>
+          </a>
+        )}
       </div>
     </section>
   );
