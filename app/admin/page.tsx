@@ -1,10 +1,13 @@
+import { connection } from 'next/server';
+import { Suspense } from 'react';
 import { createAdminClient } from '@/lib/supabase-server';
 import SiteInfoForm from './components/SiteInfoForm';
 import ServicesPanel from './components/ServicesPanel';
 import TeachersPanel from './components/TeachersPanel';
 import { logoutAction } from './actions';
 
-export default async function AdminPage() {
+async function AdminContent() {
+  await connection();
   const db = createAdminClient();
 
   const [{ data: siteInfo }, { data: services }, { data: teachers }] = await Promise.all([
@@ -13,6 +16,16 @@ export default async function AdminPage() {
     db.from('teachers').select('*').order('order_index'),
   ]);
 
+  return (
+    <main className="max-w-4xl mx-auto px-6 py-10 flex flex-col gap-10">
+      <SiteInfoForm data={siteInfo} />
+      <ServicesPanel services={services ?? []} />
+      <TeachersPanel teachers={teachers ?? []} />
+    </main>
+  );
+}
+
+export default function AdminPage() {
   return (
     <div className="min-h-screen bg-zinc-950">
       <header className="border-b border-zinc-800 bg-zinc-900 px-6 py-4 flex items-center justify-between">
@@ -30,11 +43,9 @@ export default async function AdminPage() {
         </form>
       </header>
 
-      <main className="max-w-4xl mx-auto px-6 py-10 flex flex-col gap-10">
-        <SiteInfoForm data={siteInfo} />
-        <ServicesPanel services={services ?? []} />
-        <TeachersPanel teachers={teachers ?? []} />
-      </main>
+      <Suspense fallback={<div className="max-w-4xl mx-auto px-6 py-10 text-zinc-500 text-sm">Yükleniyor...</div>}>
+        <AdminContent />
+      </Suspense>
     </div>
   );
 }
