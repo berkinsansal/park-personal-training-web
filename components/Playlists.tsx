@@ -3,9 +3,9 @@ import type { Dict } from '@/lib/i18n';
 
 export default function Playlists({ playlists, dict }: { playlists: Playlist[]; dict: Dict }) {
   return (
-    <section className="py-24 bg-zinc-950">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-16">
+    <section className="py-16 bg-zinc-950">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-12">
           <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">
             Spotify
           </span>
@@ -16,10 +16,9 @@ export default function Playlists({ playlists, dict }: { playlists: Playlist[]; 
             Antrenmanlarınız sırasında size eşlik edecek müzik
           </p>
         </div>
-        <div className="flex flex-col gap-8 max-w-2xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {playlists.map((playlist) => (
-            <div key={playlist.id} className="flex flex-col items-center">
-              <p className="text-white font-semibold text-lg mb-4">{playlist.title}</p>
+            <div key={playlist.id} className="flex justify-center">
               <iframe
                 style={{ borderRadius: '12px' }}
                 src={`https://open.spotify.com/embed/playlist/${playlist.spotify_id}?utm_source=generator&theme=0`}

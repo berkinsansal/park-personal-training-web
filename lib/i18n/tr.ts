@@ -114,8 +114,6 @@ export const tr = {
       add: '+ Ekle',
       cancel: 'İptal',
       spotifyId: 'Spotify Çalma Listesi ID',
-      title: 'Başlık',
-      order: 'Sıra',
       edit: 'Düzenle',
       delete: 'Sil',
       update: 'Güncelle',

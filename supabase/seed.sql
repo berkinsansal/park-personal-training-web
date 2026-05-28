@@ -32,7 +32,7 @@ INSERT INTO teachers (name, ig_handle, order_index) VALUES
   ('Kutlu Olatunji', 'kutluolatunjii', 3);
 
 -- Playlists
-INSERT INTO playlists (spotify_id, title, order_index) VALUES
-  ('37i9dQZF1DX8FwnYE6PRvL', 'High Energy Workouts', 1),
-  ('37i9dQZF1DX32NsLKyzScr', 'Motivation Mix', 2),
-  ('37i9dQZF1DX8a1tdzq5tbM', 'Strength Training', 3);
+INSERT INTO playlists (spotify_id, order_index) VALUES
+  ('37i9dQZF1DX8FwnYE6PRvL', 1),
+  ('37i9dQZF1DX32NsLKyzScr', 2),
+  ('37i9dQZF1DX8a1tdzq5tbM', 3);

@@ -114,8 +114,6 @@ export const en = {
       add: '+ Add',
       cancel: 'Cancel',
       spotifyId: 'Spotify Playlist ID',
-      title: 'Title',
-      order: 'Order',
       edit: 'Edit',
       delete: 'Delete',
       update: 'Update',

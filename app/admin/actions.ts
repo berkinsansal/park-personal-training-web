@@ -262,7 +262,6 @@ export async function addPlaylistAction(formData: FormData) {
 
   const { data, error } = await db.from('playlists').insert({
     spotify_id: formData.get('spotify_id'),
-    title: formData.get('title'),
     order_index: Number(formData.get('order_index') || 0),
   }).select('*').single();
 
@@ -277,7 +276,6 @@ export async function updatePlaylistAction(formData: FormData) {
 
   const { error } = await db.from('playlists').update({
     spotify_id: formData.get('spotify_id'),
-    title: formData.get('title'),
     order_index: Number(formData.get('order_index') || 0),
     updated_at: new Date().toISOString(),
   }).eq('id', Number(formData.get('id')));
