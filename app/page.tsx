@@ -11,6 +11,7 @@ import About from "@/components/About";
 import Services from "@/components/Services";
 import Teachers from "@/components/Teachers";
 import Contact from "@/components/Contact";
+import LocationMap from "@/components/LocationMap";
 import Footer from "@/components/Footer";
 
 async function HomeContent({ locale }: { locale: Locale }) {
@@ -42,6 +43,7 @@ async function HomeContent({ locale }: { locale: Locale }) {
         <Services services={(services as Service[] | null) ?? []} locale={locale} dict={t} />
         <Teachers teachers={(teachers as Teacher[] | null) ?? []} dict={t} />
         <Contact siteInfo={siteInfo as SiteInfo | null} locale={locale} dict={t} />
+        <LocationMap lat={39.86198383858591} lon={32.673266845737885} />
       </main>
       <Footer igHandle={(siteInfo as SiteInfo | null)?.ig_handle ?? ''} dict={t} />
     </>
