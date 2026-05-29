@@ -52,7 +52,7 @@ export const en = {
   playlists: {
     label: 'Music',
     heading: 'Playlists',
-    description: 'Music to accompany your workouts',
+    description: 'Train to the sound of our gym. Discover the Spotify playlists we play on the floor to keep energy high, motivation strong, and every workout moving.',
   },
   footer: {
     copyright: 'All rights reserved.',
