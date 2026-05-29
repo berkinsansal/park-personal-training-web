@@ -137,13 +137,13 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
               <iframe
                 width="100%"
                 height="450"
-                style={{ border: 0 }}
+                style={{ border: 0, pointerEvents: 'none' }}
                 loading="lazy"
                 allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
                 src={embedUrl}
               />
-              <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }} />
+              <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} />
             </div>
           </a>
         )}
