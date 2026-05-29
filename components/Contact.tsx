@@ -75,7 +75,7 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
                 </svg>
               </div>
               <div>
-                <div className="text-white font-bold group-hover:text-amber-400 transition-colors">Email</div>
+                <div className="text-white font-bold group-hover:text-amber-400 transition-colors">{t.email}</div>
                 <div className="text-zinc-400 text-sm">{email}</div>
               </div>
             </a>

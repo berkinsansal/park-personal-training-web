@@ -39,6 +39,7 @@ export const tr = {
     heading: 'Harekete Geç',
     description: 'Sormak istediğin bir şey mi var? Bize Instagram üzerinden ulaşabilir ya da aşağıdaki formu doldurabilirsin.',
     phone: 'Telefon',
+    email: 'E-posta',
     address: 'Adres',
     hours: 'Çalışma Saatleri',
     nameLabel: 'Adınız Soyadınız',
