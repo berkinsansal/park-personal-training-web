@@ -50,7 +50,7 @@ export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale })
           <Image src="/logo.png" alt="Park Personal Training Logo" width={40} height={40} className="rounded-full bg-amber-400/10 border border-amber-400/30" />
           <span className="hidden lg:inline text-amber-400 font-bold text-lg tracking-wide">Park Personal Training</span>
         </a>
-        <ul className="hidden lg:flex gap-8 items-center">
+        <ul className="hidden md:flex gap-8 items-center">
           {links.map((l) => (
             <li key={l.href}>
               <a
@@ -67,7 +67,7 @@ export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale })
           </li>
         </ul>
         <button
-          className="lg:hidden text-zinc-300"
+          className="md:hidden text-zinc-300"
           onClick={() => setOpen(!open)}
           aria-label="Menu"
         >
@@ -81,7 +81,7 @@ export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale })
         </button>
       </div>
       {open && (
-        <div className="lg:hidden bg-zinc-900 border-t border-zinc-800 px-6 py-4 flex flex-col gap-3">
+        <div className="md:hidden bg-zinc-900 border-t border-zinc-800 px-6 py-4 flex flex-col gap-3">
           {links.map((l) => (
             <a
               key={l.href}
