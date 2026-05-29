@@ -116,7 +116,6 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
               <label className="block text-zinc-400 text-sm mb-2">{t.nameLabel}</label>
               <input
                 type="text"
-                placeholder={t.namePlaceholder}
                 className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm"
               />
             </div>
@@ -124,7 +123,6 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
               <label className="block text-zinc-400 text-sm mb-2">{t.contactLabel}</label>
               <input
                 type="text"
-                placeholder={t.contactPlaceholder}
                 className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm"
               />
             </div>
@@ -132,7 +130,6 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
               <label className="block text-zinc-400 text-sm mb-2">{t.messageLabel}</label>
               <textarea
                 rows={4}
-                placeholder={t.messagePlaceholder}
                 className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm resize-none"
               />
             </div>

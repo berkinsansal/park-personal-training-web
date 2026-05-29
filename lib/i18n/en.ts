@@ -43,11 +43,8 @@ export const en = {
     address: 'Address',
     hours: 'Working Hours',
     nameLabel: 'Full Name',
-    namePlaceholder: 'John Doe',
     contactLabel: 'Phone or Email',
-    contactPlaceholder: '+1 555 000 0000',
     messageLabel: 'Your Message',
-    messagePlaceholder: 'Hello, I would like more information...',
     submit: 'Send Message',
   },
   playlists: {

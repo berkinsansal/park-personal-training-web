@@ -43,11 +43,8 @@ export const tr = {
     address: 'Adres',
     hours: 'Çalışma Saatleri',
     nameLabel: 'Adınız Soyadınız',
-    namePlaceholder: 'Ali Veli',
     contactLabel: 'Telefon veya E-posta',
-    contactPlaceholder: '0555 000 00 00',
     messageLabel: 'Mesajınız',
-    messagePlaceholder: 'Merhaba, bilgi almak istiyorum...',
     submit: 'Mesaj Gönder',
   },
   playlists: {
