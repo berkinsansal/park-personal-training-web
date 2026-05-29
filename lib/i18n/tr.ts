@@ -38,6 +38,7 @@ export const tr = {
     label: 'İletişim',
     heading: 'Harekete Geç',
     description: 'Sormak istediğin bir şey mi var? Bize Instagram üzerinden ulaşabilir ya da aşağıdaki formu doldurabilirsin.',
+    formHeading: 'Bize Ulaşın',
     phone: 'Telefon',
     email: 'E-posta',
     address: 'Adres',

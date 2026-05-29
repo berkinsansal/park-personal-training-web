@@ -38,6 +38,7 @@ export const en = {
     label: 'Contact',
     heading: 'Take Action',
     description: 'Have a question? Reach us on Instagram or fill out the form below.',
+    formHeading: 'Contact Us',
     phone: 'Phone',
     email: 'Email',
     address: 'Address',
