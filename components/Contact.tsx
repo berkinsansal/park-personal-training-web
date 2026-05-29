@@ -14,7 +14,7 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
   const embedUrl = siteInfo ? `https://maps.google.com/maps?q=${siteInfo.latitude},${siteInfo.longitude}&hl=${locale}&z=18&output=embed` : '';
 
   return (
-    <section id="iletisim" className="py-24 bg-zinc-950">
+    <section id="iletisim" className="py-24 bg-zinc-900">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">
