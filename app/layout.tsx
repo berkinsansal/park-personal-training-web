@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import LocaleUpdater from "@/components/LocaleUpdater";
 import "./globals.css";
 
 const geist = Geist({
@@ -17,11 +18,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="tr" className={`${geist.variable} scroll-smooth`}>
-      <head>
-        {/* Update lang attribute from locale cookie on every page load/navigation */}
-        <script dangerouslySetInnerHTML={{ __html: `(function(){var m=document.cookie.match(/locale=([^;]+)/);if(m)document.documentElement.lang=m[1]})()` }} />
-      </head>
-      <body className="bg-zinc-950 text-white antialiased">{children}</body>
+      <head />
+      <body className="bg-zinc-950 text-white antialiased">
+        <LocaleUpdater />
+        {children}
+      </body>
     </html>
   );
 }
