@@ -13,7 +13,7 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
   const mapsUrl = siteInfo ? `https://www.google.com/maps/search/?api=1&query=${siteInfo.latitude},${siteInfo.longitude}` : '';
 
   return (
-    <section id="iletisim" className="py-24 bg-zinc-900">
+    <section id="iletisim" className="py-24 bg-zinc-950">
       <div className="max-w-4xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">
