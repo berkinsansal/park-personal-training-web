@@ -39,8 +39,8 @@ export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale })
     { href: "#hakkimizda", label: dict.nav.about, key: "about" },
     { href: "#hizmetler", label: dict.nav.services, key: "services" },
     { href: "#egitmenler", label: dict.nav.teachers, key: "teachers" },
-    { href: "#iletisim", label: dict.nav.contact, key: "contact" },
     { href: "#muzik", label: dict.playlists.label, key: "playlists" },
+    { href: "#iletisim", label: dict.nav.contact, key: "contact" },
   ];
 
   return (
