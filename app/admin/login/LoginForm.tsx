@@ -2,15 +2,19 @@
 
 import { useActionState } from 'react';
 import { loginAction } from '../actions';
-import type { Dict } from '@/lib/i18n';
+import LocaleSwitcher from '../components/LocaleSwitcher';
+import type { Dict, Locale } from '@/lib/i18n';
 
-export default function LoginForm({ dict }: { dict: Dict }) {
+export default function LoginForm({ dict, locale }: { dict: Dict; locale: Locale }) {
   const t = dict.admin.login;
   const [state, action, pending] = useActionState(loginAction, null);
 
   return (
     <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
+        <div className="flex justify-center mb-8">
+          <LocaleSwitcher locale={locale} />
+        </div>
         <div className="text-center mb-8">
           <h1 className="text-2xl font-black text-white">{t.title}</h1>
           <p className="text-zinc-400 text-sm mt-1">{t.subtitle}</p>

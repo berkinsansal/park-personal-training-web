@@ -7,6 +7,7 @@ import SiteInfoForm from './components/SiteInfoForm';
 import ServicesPanel from './components/ServicesPanel';
 import TeachersPanel from './components/TeachersPanel';
 import PlaylistsPanel from './components/PlaylistsPanel';
+import LocaleSwitcher from './components/LocaleSwitcher';
 import { logoutAction } from './actions';
 
 async function AdminContent() {
@@ -30,14 +31,17 @@ async function AdminContent() {
           <h1 className="text-white font-black text-xl">{t.title}</h1>
           <p className="text-zinc-500 text-xs mt-0.5">{t.subtitle}</p>
         </div>
-        <form action={logoutAction}>
-          <button
-            type="submit"
-            className="text-sm text-zinc-400 hover:text-white transition-colors border border-zinc-700 hover:border-zinc-500 rounded-lg px-4 py-2"
-          >
-            {t.logout}
-          </button>
-        </form>
+        <div className="flex items-center gap-4">
+          <LocaleSwitcher locale={locale} />
+          <form action={logoutAction}>
+            <button
+              type="submit"
+              className="text-sm text-zinc-400 hover:text-white transition-colors border border-zinc-700 hover:border-zinc-500 rounded-lg px-4 py-2"
+            >
+              {t.logout}
+            </button>
+          </form>
+        </div>
       </header>
       <main className="max-w-4xl mx-auto px-6 py-10 flex flex-col gap-10">
         <SiteInfoForm data={siteInfo} dict={dict} />

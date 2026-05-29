@@ -8,7 +8,7 @@ async function LoginContent() {
   await connection();
   const locale = await getLocale();
   const dict = getDict(locale);
-  return <LoginForm dict={dict} />;
+  return <LoginForm dict={dict} locale={locale} />;
 }
 
 export default function LoginPage() {
