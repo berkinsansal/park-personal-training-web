@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import { cookies } from "next/headers";
 import "./globals.css";
 
 const geist = Geist({
@@ -12,15 +13,15 @@ export const metadata: Metadata = {
   description: "Park Personal Training studyosunda uzman egitmenlerimizle hedeflerinize ulasin.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const cookieStore = await cookies();
+  const locale = cookieStore.get("locale")?.value || "tr";
+
   return (
-    <html lang="tr" className={`${geist.variable} scroll-smooth`}>
-      <head>
-        {/* Set lang from cookie before paint so CSS text-transform uses the correct locale rules */}
-        <script dangerouslySetInnerHTML={{ __html: `(function(){var m=document.cookie.match(/locale=([^;]+)/);document.documentElement.lang=m?m[1]:'tr'})()` }} />
-      </head>
+    <html lang={locale} className={`${geist.variable} scroll-smooth`}>
+      <head></head>
       <body className="bg-zinc-950 text-white antialiased">{children}</body>
     </html>
   );
