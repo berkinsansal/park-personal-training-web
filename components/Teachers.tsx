@@ -31,7 +31,7 @@ export default function Teachers({ teachers, dict }: { teachers: Teacher[]; dict
                 <img
                   src={teacher.photo_url}
                   alt={teacher.name}
-                  className="w-24 h-24 rounded-full object-cover mx-auto mb-5 group-hover:scale-105 transition-transform"
+                  className="w-24 h-24 rounded-full object-cover mx-auto mb-5 group-hover:scale-105 transition-transform bg-amber-400/10 border border-amber-400/30"
                 />
               ) : (
                 <div className="w-24 h-24 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center mx-auto mb-5 text-3xl font-black text-zinc-950 group-hover:scale-105 transition-transform">

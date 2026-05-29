@@ -47,7 +47,7 @@ export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale })
     <nav className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur border-b border-zinc-800">
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
         <a href="#" className="flex items-center gap-3">
-          <Image src="/logo.png" alt="Park Personal Training Logo" width={40} height={40} />
+          <Image src="/logo.png" alt="Park Personal Training Logo" width={40} height={40} className="rounded-full bg-amber-400/10 border border-amber-400/30" />
           <span className="hidden sm:inline text-amber-400 font-bold text-lg tracking-wide">Park Personal Training</span>
         </a>
         <ul className="hidden md:flex gap-6 items-center">
