@@ -17,6 +17,7 @@ export default function SiteInfoForm({ data, dict }: { data: SiteInfo | null; di
       <form action={action} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Field label={t.igHandle} name="ig_handle" defaultValue={data.ig_handle} />
         <Field label={t.phone} name="phone" defaultValue={data.phone} />
+        <Field label={t.email} name="email" defaultValue={data.email} />
         <Field label={t.addressLine1} name="address_line1" defaultValue={data.address_line1} />
         <Field label={t.addressLine1En} name="address_line1_en" defaultValue={data.address_line1_en} />
         <Field label={t.addressLine2} name="address_line2" defaultValue={data.address_line2} />

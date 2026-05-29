@@ -66,6 +66,7 @@ export const tr = {
       heading: 'Genel Bilgiler',
       igHandle: 'Instagram Hesabı',
       phone: 'Telefon',
+      email: 'E-posta',
       addressLine1: 'Adres Satır 1',
       addressLine2: 'Adres Satır 2',
       addressLine1En: 'Adres Satır 1 (İngilizce)',

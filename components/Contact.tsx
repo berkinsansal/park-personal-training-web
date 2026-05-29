@@ -5,6 +5,7 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
   const t = dict.contact;
   const ig = siteInfo?.ig_handle ?? '';
   const phone = siteInfo?.phone ?? '';
+  const email = siteInfo?.email ?? '';
   const address1 = locale === 'en' ? ((siteInfo?.address_line1_en || siteInfo?.address_line1) ?? '') : siteInfo?.address_line1 ?? '';
   const address2 = locale === 'en' ? ((siteInfo?.address_line2_en || siteInfo?.address_line2) ?? '') : siteInfo?.address_line2 ?? '';
   const weekday = locale === 'en' ? ((siteInfo?.weekday_hours_en || siteInfo?.weekday_hours) ?? '') : siteInfo?.weekday_hours ?? '';
@@ -65,6 +66,21 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
             </a>
 
             <a
+              href={`mailto:${email}`}
+              className="flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group"
+            >
+              <div className="w-12 h-12 rounded-xl bg-zinc-700 flex items-center justify-center flex-shrink-0">
+                <svg className="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div>
+                <div className="text-white font-bold group-hover:text-amber-400 transition-colors">Email</div>
+                <div className="text-zinc-400 text-sm">{email}</div>
+              </div>
+            </a>
+
+            <
               href={mapsUrl}
               className="flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group"
             >

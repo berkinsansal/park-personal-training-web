@@ -66,6 +66,7 @@ export const en = {
       heading: 'General Info',
       igHandle: 'Instagram Handle',
       phone: 'Phone',
+      email: 'Email',
       addressLine1: 'Address Line 1',
       addressLine2: 'Address Line 2',
       addressLine1En: 'Address Line 1 (English)',

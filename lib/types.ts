@@ -1,6 +1,7 @@
 export type SiteInfo = {
   ig_handle: string;
   phone: string;
+  email: string;
   address_line1: string;
   address_line2: string;
   weekday_hours: string;

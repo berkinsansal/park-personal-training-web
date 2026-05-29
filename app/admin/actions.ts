@@ -43,6 +43,7 @@ export async function updateSiteInfoAction(_prev: unknown, formData: FormData) {
   const { error } = await db.from('site_info').update({
     ig_handle: formData.get('ig_handle'),
     phone: formData.get('phone'),
+    email: formData.get('email'),
     address_line1: formData.get('address_line1'),
     address_line2: formData.get('address_line2'),
     weekday_hours: formData.get('weekday_hours'),
