@@ -8,6 +8,8 @@ const geist = Geist({
   subsets: ["latin"],
 });
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Park Personal Training | Profesyonel Fitness Studyosu",
   description: "Park Personal Training studyosunda uzman egitmenlerimizle hedeflerinize ulasin.",
