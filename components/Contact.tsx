@@ -120,7 +120,14 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
               />
             </div>
             <div>
-              <label className="block text-zinc-400 text-sm mb-2">{t.contactLabel}</label>
+              <label className="block text-zinc-400 text-sm mb-2">{t.phoneLabel}</label>
+              <input
+                type="text"
+                className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-zinc-400 text-sm mb-2">{t.emailLabel}</label>
               <input
                 type="text"
                 className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm"
