@@ -133,7 +133,7 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
             rel="noopener noreferrer"
             className="block group rounded-2xl overflow-hidden border border-zinc-700 hover:border-amber-400/50 transition-all duration-300 cursor-pointer hover:shadow-lg hover:shadow-amber-400/10"
           >
-            <div style={{ filter: 'invert(0.93) hue-rotate(180deg)' }}>
+            <div style={{ filter: 'invert(0.93) hue-rotate(180deg)', position: 'relative' }}>
               <iframe
                 width="100%"
                 height="450"
@@ -143,6 +143,7 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
                 referrerPolicy="no-referrer-when-downgrade"
                 src={embedUrl}
               />
+              <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }} />
             </div>
           </a>
         )}
