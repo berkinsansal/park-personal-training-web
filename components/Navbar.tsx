@@ -48,7 +48,7 @@ export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale })
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
         <a href="#" className="flex items-center gap-3">
           <Image src="/logo.png" alt="Park Personal Training Logo" width={40} height={40} className="rounded-full bg-amber-400/10 border border-amber-400/30" />
-          <span className="hidden sm:inline text-amber-400 font-bold text-lg tracking-wide">Park Personal Training</span>
+          <span className="hidden lg:inline text-amber-400 font-bold text-lg tracking-wide">Park Personal Training</span>
         </a>
         <ul className="hidden lg:flex gap-8 items-center">
           {links.map((l) => (
@@ -57,7 +57,7 @@ export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale })
                 href={l.href}
                 className="flex items-center gap-2 text-zinc-300 hover:text-amber-400 transition-colors text-sm font-medium uppercase tracking-wider"
               >
-                <span className="text-base">{navIcons[l.key as keyof typeof navIcons]}</span>
+                <span className="hidden xl:inline text-base">{navIcons[l.key as keyof typeof navIcons]}</span>
                 {l.label}
               </a>
             </li>
