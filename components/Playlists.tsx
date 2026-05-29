@@ -17,7 +17,7 @@ export default function Playlists({ playlists, dict }: { playlists: Playlist[]; 
             {strings.description}
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {playlists.map((playlist) => (
             <div key={playlist.id} className="flex justify-center overflow-hidden">
               <iframe
@@ -25,7 +25,7 @@ export default function Playlists({ playlists, dict }: { playlists: Playlist[]; 
                 src={`https://open.spotify.com/embed/playlist/${playlist.spotify_id}?utm_source=generator&theme=0`}
                 width="100%"
                 height="352"
-                className="h-[120px] sm:h-[200px] md:h-[352px]"
+                className="h-[152px] md:h-[360px]"
                 frameBorder="0"
                 allowFullScreen
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
