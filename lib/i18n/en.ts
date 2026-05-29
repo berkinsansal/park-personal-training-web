@@ -58,7 +58,7 @@ export const en = {
     copyright: 'All rights reserved.',
   },
   admin: {
-    title: 'Park PT — Admin',
+    title: 'Park Personal Training — Admin',
     subtitle: 'Content Management',
     logout: 'Log Out',
     loading: 'Loading...',
@@ -127,7 +127,7 @@ export const en = {
       added: 'Added. Refresh the page.',
     },
     login: {
-      title: 'Park PT',
+      title: 'Park Personal Training',
       subtitle: 'Admin Panel',
       email: 'Email',
       password: 'Password',
