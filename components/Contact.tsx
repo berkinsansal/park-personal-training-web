@@ -64,7 +64,10 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
               </div>
             </a>
 
-            <div className="flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
+            <a
+              href={mapsUrl}
+              className="flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group"
+            >
               <div className="w-12 h-12 rounded-xl bg-zinc-700 flex items-center justify-center flex-shrink-0">
                 <svg className="w-6 h-6 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -76,7 +79,7 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
                 <div className="text-zinc-400 text-sm">{address1}</div>
                 <div className="text-zinc-400 text-sm">{address2}</div>
               </div>
-            </div>
+            </a>
 
             <div className="flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6">
               <div className="w-12 h-12 rounded-xl bg-zinc-700 flex items-center justify-center flex-shrink-0">
