@@ -80,7 +80,7 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
               </div>
             </a>
 
-            <
+            <a
               href={mapsUrl}
               className="flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group"
             >
