@@ -11,7 +11,6 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
   const weekend = locale === 'en' ? ((siteInfo?.weekend_hours_en || siteInfo?.weekend_hours) ?? '') : siteInfo?.weekend_hours ?? '';
 
   const mapsUrl = siteInfo ? `https://www.google.com/maps/search/?api=1&query=${siteInfo.latitude},${siteInfo.longitude}` : '';
-  const embedUrl = siteInfo ? `https://maps.google.com/maps?q=${siteInfo.latitude},${siteInfo.longitude}&hl=${locale}&z=18&output=embed` : '';
 
   return (
     <section id="iletisim" className="py-24 bg-zinc-900">
@@ -126,24 +125,19 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
           </form>
         </div>
 
-        {embedUrl && (
+        {siteInfo && (
           <a
             href={mapsUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="block group rounded-2xl overflow-hidden border border-zinc-700 hover:border-amber-400/50 transition-all duration-300 cursor-pointer hover:shadow-lg hover:shadow-amber-400/10"
           >
-            <div style={{ filter: 'invert(0.93) hue-rotate(180deg)' }}>
-              <iframe
-                width="100%"
-                height="450"
-                style={{ border: 0 }}
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-                src={embedUrl}
-              />
-            </div>
+            <img
+              src={`https://maps.googleapis.com/maps/api/staticmap?center=${siteInfo.latitude},${siteInfo.longitude}&zoom=18&size=800x450&markers=color:red|${siteInfo.latitude},${siteInfo.longitude}&style=element:labels|visibility:off&style=feature:water|color:0x1a1a2e&style=feature:landscape|color:0x16213e&style=feature:road|color:0x333333&style=feature:poi|visibility:off`}
+              alt="Location"
+              className="w-full h-[450px] object-cover"
+              loading="lazy"
+            />
           </a>
         )}
       </div>
