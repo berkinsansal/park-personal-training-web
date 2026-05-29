@@ -50,18 +50,15 @@ export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale })
           <Image src="/logo.png" alt="Park Personal Training Logo" width={40} height={40} className="rounded-full bg-amber-400/10 border border-amber-400/30" />
           <span className="hidden sm:inline text-amber-400 font-bold text-lg tracking-wide">Park Personal Training</span>
         </a>
-        <ul className="hidden md:flex gap-6 items-center">
+        <ul className="hidden md:flex gap-8 items-center">
           {links.map((l) => (
-            <li key={l.href} className="group relative">
+            <li key={l.href}>
               <a
                 href={l.href}
-                className="flex flex-col items-center justify-center gap-1 text-zinc-300 hover:text-amber-400 transition-colors"
-                title={l.label}
+                className="flex items-center gap-2 text-zinc-300 hover:text-amber-400 transition-colors text-sm font-medium uppercase tracking-wider"
               >
                 <span className="text-base">{navIcons[l.key as keyof typeof navIcons]}</span>
-                <span className="text-xs opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-                  {l.label}
-                </span>
+                {l.label}
               </a>
             </li>
           ))}
