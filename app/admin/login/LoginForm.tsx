@@ -30,7 +30,6 @@ export default function LoginForm({ dict, locale }: { dict: Dict; locale: Locale
               type="email"
               name="email"
               required
-              defaultValue="admin@parkpt.com"
               className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm"
             />
           </div>
