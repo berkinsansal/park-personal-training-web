@@ -8,7 +8,7 @@ export default function Playlists({ playlists, dict }: { playlists: Playlist[]; 
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-12">
           <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">
-            Spotify
+            {strings.label}
           </span>
           <h2 className="mt-3 text-4xl md:text-5xl font-black text-white">
             {strings.heading}
