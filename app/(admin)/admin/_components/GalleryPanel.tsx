@@ -76,6 +76,8 @@ export default function GalleryPanel({ gallery, dict }: { gallery: GalleryPhoto[
   const handleAdd = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
+    const maxOrder = list.length > 0 ? Math.max(...list.map(p => p.order_index)) : -1;
+    fd.set('order_index', String(maxOrder + 1));
     setPendingOp('add');
     try {
       const res = await addGalleryPhotoAction(fd);
@@ -199,15 +201,7 @@ function GalleryForm({
         />
       </div>
 
-      <div className="mb-4">
-        <label className="block text-zinc-300 text-sm font-medium mb-2">{t.order}</label>
-        <input
-          type="number"
-          name="order_index"
-          defaultValue={defaults?.order_index || 0}
-          className={inputCls}
-        />
-      </div>
+      <input type="hidden" name="order_index" defaultValue={defaults?.order_index || 0} />
 
       <div className="flex gap-2">
         <button

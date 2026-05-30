@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import type { Dict } from "@/lib/i18n";
 import type { GalleryPhoto } from "@/lib/types";
 
@@ -11,6 +14,15 @@ type Props = {
 };
 
 export default function About({ dict, happyCustomers, yearsExperience, teacherCount, serviceCount, gallery }: Props) {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % gallery.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + gallery.length) % gallery.length);
+  };
   const t = dict.about;
   const stats = [
     { value: `${happyCustomers}+`, label: t.statHappyCustomers },
@@ -59,24 +71,46 @@ export default function About({ dict, happyCustomers, yearsExperience, teacherCo
 
         {gallery.length > 0 && (
           <div className="mt-16">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {gallery.map((photo) => (
-                <div
-                  key={photo.id}
-                  className="group relative overflow-hidden rounded-2xl bg-zinc-800 border border-zinc-700 hover:border-amber-400/50 transition-all duration-300 aspect-video"
-                >
-                  <img
-                    src={photo.image_url}
-                    alt={photo.alt_text}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    {photo.alt_text && (
-                      <p className="text-white text-sm font-medium">{photo.alt_text}</p>
-                    )}
+            <div className="relative">
+              <div className="relative overflow-hidden rounded-2xl bg-zinc-800 border border-zinc-700 aspect-video">
+                <img
+                  src={gallery[currentSlide].image_url}
+                  alt={gallery[currentSlide].alt_text}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {gallery.length > 1 && (
+                <>
+                  <button
+                    onClick={prevSlide}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 transition-colors text-white p-2 rounded-full"
+                    aria-label="Previous photo"
+                  >
+                    ←
+                  </button>
+                  <button
+                    onClick={nextSlide}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 transition-colors text-white p-2 rounded-full"
+                    aria-label="Next photo"
+                  >
+                    →
+                  </button>
+
+                  <div className="flex justify-center gap-2 mt-4">
+                    {gallery.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setCurrentSlide(idx)}
+                        className={`w-2 h-2 rounded-full transition-all ${
+                          idx === currentSlide ? 'bg-amber-400 w-6' : 'bg-zinc-600 hover:bg-zinc-500'
+                        }`}
+                        aria-label={`Go to photo ${idx + 1}`}
+                      />
+                    ))}
                   </div>
-                </div>
-              ))}
+                </>
+              )}
             </div>
           </div>
         )}
