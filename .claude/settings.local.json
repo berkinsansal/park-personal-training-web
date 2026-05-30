@@ -29,7 +29,8 @@
       "Bash(supabase db *)",
       "Bash(supabase link *)",
       "Bash(supabase projects *)",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "Bash(git rm *)"
     ]
   }
 }
