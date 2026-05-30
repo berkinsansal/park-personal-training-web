@@ -85,7 +85,7 @@ export default function About({ dict, happyCustomers, yearsExperience, teacherCo
 
             {gallery.length > 0 && (
               <div className="mt-16">
-                <div className="overflow-hidden rounded-2xl bg-zinc-800 border border-zinc-700 aspect-video cursor-grab active:cursor-grabbing" onPointerDown={handlePointerDown} onPointerUp={handlePointerUp}>
+                <div className="overflow-hidden rounded-2xl bg-zinc-800 border border-zinc-700 aspect-video hover:border-amber-400/50 transition-all duration-300" onPointerDown={handlePointerDown} onPointerUp={handlePointerUp}>
                   <img
                     src={gallery[currentSlide].image_url}
                     alt={gallery[currentSlide].alt_text}
@@ -101,7 +101,7 @@ export default function About({ dict, happyCustomers, yearsExperience, teacherCo
                       className="px-3 py-2 text-white bg-zinc-800 hover:bg-zinc-700 rounded-full transition-colors"
                       aria-label="Previous photo"
                     >
-                      ←
+                      &lt;
                     </button>
                     <div className="flex justify-center gap-2">
                       {gallery.map((_, idx) => (
@@ -120,7 +120,7 @@ export default function About({ dict, happyCustomers, yearsExperience, teacherCo
                       className="px-3 py-2 text-white bg-zinc-800 hover:bg-zinc-700 rounded-full transition-colors"
                       aria-label="Next photo"
                     >
-                      →
+                      &gt;
                     </button>
                   </div>
                 )}
