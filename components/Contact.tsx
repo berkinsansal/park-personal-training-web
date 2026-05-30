@@ -1,6 +1,5 @@
 import type { SiteInfo } from '@/lib/types';
 import type { Dict, Locale } from '@/lib/i18n';
-import ContactForm from './ContactForm';
 
 export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo | null; locale: Locale; dict: Dict }) {
   const t = dict.contact;
@@ -112,7 +111,43 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
             </div>
           </div>
 
-          <ContactForm dict={dict} />
+          <form className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4">
+            <h3 className="text-amber-400 font-bold text-lg mb-6">{t.formHeading}</h3>
+            <div>
+              <label className="block text-zinc-400 text-sm mb-2">{t.nameLabel}</label>
+              <input
+                type="text"
+                className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-zinc-400 text-sm mb-2">{t.phoneLabel}</label>
+              <input
+                type="text"
+                className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-zinc-400 text-sm mb-2">{t.emailLabel}</label>
+              <input
+                type="text"
+                className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-zinc-400 text-sm mb-2">{t.messageLabel}</label>
+              <textarea
+                rows={4}
+                className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm resize-none"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
+            >
+              {t.submit}
+            </button>
+          </form>
         </div>
 
         {embedUrl && (
