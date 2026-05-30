@@ -15,7 +15,7 @@ type Props = {
 
 export default function About({ dict, happyCustomers, yearsExperience, teacherCount, serviceCount, gallery }: Props) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [touchStart, setTouchStart] = useState(0);
+  const [dragStart, setDragStart] = useState(0);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % gallery.length);
@@ -25,13 +25,13 @@ export default function About({ dict, happyCustomers, yearsExperience, teacherCo
     setCurrentSlide((prev) => (prev - 1 + gallery.length) % gallery.length);
   };
 
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX);
+  const handlePointerDown = (e: React.PointerEvent) => {
+    setDragStart(e.clientX);
   };
 
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const touchEnd = e.changedTouches[0].clientX;
-    const diff = touchStart - touchEnd;
+  const handlePointerUp = (e: React.PointerEvent) => {
+    const dragEnd = e.clientX;
+    const diff = dragStart - dragEnd;
     if (Math.abs(diff) > 50) {
       if (diff > 0) nextSlide();
       else prevSlide();
@@ -86,7 +86,7 @@ export default function About({ dict, happyCustomers, yearsExperience, teacherCo
             {gallery.length > 0 && (
               <div className="mt-16">
                 <div className="relative">
-                  <div className="relative overflow-hidden rounded-2xl bg-zinc-800 border border-zinc-700 aspect-video cursor-grab active:cursor-grabbing" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+                  <div className="relative overflow-hidden rounded-2xl bg-zinc-800 border border-zinc-700 aspect-video cursor-grab active:cursor-grabbing" onPointerDown={handlePointerDown} onPointerUp={handlePointerUp}>
                     <img
                       src={gallery[currentSlide].image_url}
                       alt={gallery[currentSlide].alt_text}
