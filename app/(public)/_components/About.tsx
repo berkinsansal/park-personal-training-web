@@ -15,6 +15,7 @@ type Props = {
 
 export default function About({ dict, happyCustomers, yearsExperience, teacherCount, serviceCount, gallery }: Props) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [touchStart, setTouchStart] = useState(0);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % gallery.length);
@@ -22,6 +23,19 @@ export default function About({ dict, happyCustomers, yearsExperience, teacherCo
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + gallery.length) % gallery.length);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const touchEnd = e.changedTouches[0].clientX;
+    const diff = touchStart - touchEnd;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) nextSlide();
+      else prevSlide();
+    }
   };
   const t = dict.about;
   const stats = [
@@ -72,11 +86,12 @@ export default function About({ dict, happyCustomers, yearsExperience, teacherCo
             {gallery.length > 0 && (
               <div className="mt-16">
                 <div className="relative">
-                  <div className="relative overflow-hidden rounded-2xl bg-zinc-800 border border-zinc-700 aspect-video">
+                  <div className="relative overflow-hidden rounded-2xl bg-zinc-800 border border-zinc-700 aspect-video cursor-grab active:cursor-grabbing" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
                     <img
                       src={gallery[currentSlide].image_url}
                       alt={gallery[currentSlide].alt_text}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover select-none"
+                      draggable={false}
                     />
                   </div>
 
