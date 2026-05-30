@@ -22,12 +22,6 @@ export default function ContactForm({ t }: { t: Dict['contact'] }) {
   const formRef = useRef<HTMLFormElement>(null);
   const [state, action] = useActionState(sendContactAction, null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    action(formData);
-  };
-
   useEffect(() => {
     if (state?.success) {
       formRef.current?.reset();
@@ -35,7 +29,7 @@ export default function ContactForm({ t }: { t: Dict['contact'] }) {
   }, [state?.success]);
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4">
+    <form ref={formRef} action={action} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4">
       <h3 className="text-amber-400 font-bold text-lg mb-6">{t.formHeading}</h3>
       <div>
         <label className="block text-zinc-400 text-sm mb-2">{t.nameLabel}</label>
