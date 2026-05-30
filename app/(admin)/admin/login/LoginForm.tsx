@@ -60,7 +60,7 @@ export default function LoginForm({ dict, locale }: { dict: Dict; locale: Locale
 
         <div className="text-center mt-6">
           <Link href="/" className="text-zinc-400 text-sm hover:text-white transition-colors">
-            ← Back to Home
+            {t.backToHome}
           </Link>
         </div>
       </div>

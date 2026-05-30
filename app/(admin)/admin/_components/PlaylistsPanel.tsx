@@ -127,7 +127,7 @@ export default function PlaylistsPanel({ playlists, dict }: { playlists: Playlis
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-white font-semibold text-sm">{playlist.spotify_id}</p>
-                <p className="text-zinc-500 text-xs mt-0.5">Spotify Playlist</p>
+                <p className="text-zinc-500 text-xs mt-0.5">{t.spotifyPlaylistLabel}</p>
               </div>
               <div className="flex flex-col gap-1 shrink-0">
                 <div className="flex gap-2">

@@ -187,7 +187,7 @@ function TeacherForm({ t, defaults, onSubmit, onCancel, label, pendingOp }: {
             <img src={defaults.photo_url} alt={defaults.name} className="w-12 h-12 rounded-full object-cover mb-2 border border-zinc-700" />
             <label className="flex items-center gap-2 text-zinc-400 text-xs cursor-pointer mb-2">
               <input type="checkbox" name="removePhoto" disabled={pendingOp !== null} className="w-3 h-3 rounded border-zinc-600 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed" />
-              Remove photo
+              {t.removePhoto}
             </label>
           </>
         )}

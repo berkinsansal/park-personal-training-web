@@ -4,6 +4,7 @@ export const tr = {
     services: 'Hizmetler',
     teachers: 'Eğitmenler',
     contact: 'İletişim',
+    menuAriaLabel: 'Menü',
   },
   hero: {
     subtitle: 'Hedeflerine ulaşmak için doğru yer. Uzman eğitmenlerimizle sana özel programlarla en iyi versiyonun ol.',
@@ -111,6 +112,7 @@ export const tr = {
       order: 'Sıra',
       igHandle: 'Instagram Kullanıcı Adı',
       photo: 'Fotoğraf',
+      removePhoto: 'Fotoğrafı Kaldır',
       edit: 'Düzenle',
       delete: 'Sil',
       update: 'Güncelle',
@@ -123,6 +125,7 @@ export const tr = {
       add: '+ Ekle',
       cancel: 'İptal',
       spotifyId: 'Spotify Çalma Listesi ID',
+      spotifyPlaylistLabel: 'Spotify Çalma Listesi',
       edit: 'Düzenle',
       delete: 'Sil',
       update: 'Güncelle',
@@ -138,6 +141,7 @@ export const tr = {
       submit: 'Giriş Yap',
       submitting: 'Giriş yapılıyor...',
       error: 'Geçersiz e-posta veya şifre.',
+      backToHome: '← Ana Sayfaya Dön',
     },
   },
 };

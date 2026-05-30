@@ -4,6 +4,7 @@ export const en = {
     services: 'Services',
     teachers: 'Trainers',
     contact: 'Contact',
+    menuAriaLabel: 'Menu',
   },
   hero: {
     subtitle: "The right place to reach your goals. Become the best version of yourself with personalized programs led by expert trainers.",
@@ -111,6 +112,7 @@ export const en = {
       order: 'Order',
       igHandle: 'Instagram Username',
       photo: 'Photo',
+      removePhoto: 'Remove photo',
       edit: 'Edit',
       delete: 'Delete',
       update: 'Update',
@@ -123,6 +125,7 @@ export const en = {
       add: '+ Add',
       cancel: 'Cancel',
       spotifyId: 'Spotify Playlist ID',
+      spotifyPlaylistLabel: 'Spotify Playlist',
       edit: 'Edit',
       delete: 'Delete',
       update: 'Update',
@@ -138,6 +141,7 @@ export const en = {
       submit: 'Log In',
       submitting: 'Logging in...',
       error: 'Invalid email or password.',
+      backToHome: '← Back to Home',
     },
   },
 };
