@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState, useTransition } from 'react';
-import { sendContactAction } from '@/app/actions';
+import { sendContactAction } from '@/app/(public)/actions';
 import type { Dict } from '@/lib/i18n';
 
 function SubmitButton({ label, pending }: { label: string; pending: boolean }) {
