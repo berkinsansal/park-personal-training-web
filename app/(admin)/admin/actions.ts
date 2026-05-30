@@ -3,6 +3,8 @@
 import { createAdminClient, createSessionClient } from '@/lib/supabase-server';
 import { redirect } from 'next/navigation';
 import { updateTag } from 'next/cache';
+import { getLocale } from '@/lib/locale';
+import { getDict } from '@/lib/i18n';
 
 async function requireAuth() {
   const supabase = await createSessionClient();
@@ -16,6 +18,31 @@ function invalidateHomepage() {
   updateTag('homepage-en');
 }
 
+async function reorderItem(
+  table: 'services' | 'teachers' | 'playlists',
+  id: number,
+  direction: 'up' | 'down',
+) {
+  const db = createAdminClient();
+  const { data: items } = await db.from(table).select('id, order_index').order('order_index');
+  if (!items) return { error: 'Not found' };
+
+  const idx = items.findIndex((x) => x.id === id);
+  if (idx === -1) return { error: 'Not found' };
+
+  const swapIdx = direction === 'up' ? idx - 1 : idx + 1;
+  if (swapIdx < 0 || swapIdx >= items.length) return { error: 'Cannot reorder' };
+
+  const now = new Date().toISOString();
+  await Promise.all([
+    db.from(table).update({ order_index: items[swapIdx].order_index, updated_at: now }).eq('id', id),
+    db.from(table).update({ order_index: items[idx].order_index, updated_at: now }).eq('id', items[swapIdx].id),
+  ]);
+
+  invalidateHomepage();
+  return { success: true };
+}
+
 // Auth
 export async function loginAction(_prev: unknown, formData: FormData) {
   const email = formData.get('email') as string;
@@ -24,7 +51,10 @@ export async function loginAction(_prev: unknown, formData: FormData) {
   const supabase = await createSessionClient();
   const { error } = await supabase.auth.signInWithPassword({ email, password });
 
-  if (error) return { error: 'Geçersiz e-posta veya şifre.' };
+  if (error) {
+    const locale = await getLocale();
+    return { error: getDict(locale).admin.login.error };
+  }
 
   redirect('/admin');
 }
@@ -114,24 +144,7 @@ export async function deleteServiceAction(id: number) {
 
 export async function reorderServiceAction(id: number, direction: 'up' | 'down') {
   await requireAuth();
-  const db = createAdminClient();
-
-  const { data: items } = await db.from('services').select('id, order_index').order('order_index');
-  if (!items) return { error: 'Services not found' };
-
-  const idx = items.findIndex((s) => s.id === id);
-  if (idx === -1) return { error: 'Service not found' };
-
-  const swapIdx = direction === 'up' ? idx - 1 : idx + 1;
-  if (swapIdx < 0 || swapIdx >= items.length) return { error: 'Cannot reorder' };
-
-  await Promise.all([
-    db.from('services').update({ order_index: items[swapIdx].order_index, updated_at: new Date().toISOString() }).eq('id', id),
-    db.from('services').update({ order_index: items[idx].order_index, updated_at: new Date().toISOString() }).eq('id', items[swapIdx].id),
-  ]);
-
-  invalidateHomepage();
-  return { success: true };
+  return reorderItem('services', id, direction);
 }
 
 // Teachers
@@ -236,24 +249,7 @@ export async function deleteTeacherAction(id: number) {
 
 export async function reorderTeacherAction(id: number, direction: 'up' | 'down') {
   await requireAuth();
-  const db = createAdminClient();
-
-  const { data: items } = await db.from('teachers').select('id, order_index').order('order_index');
-  if (!items) return { error: 'Teachers not found' };
-
-  const idx = items.findIndex((t) => t.id === id);
-  if (idx === -1) return { error: 'Teacher not found' };
-
-  const swapIdx = direction === 'up' ? idx - 1 : idx + 1;
-  if (swapIdx < 0 || swapIdx >= items.length) return { error: 'Cannot reorder' };
-
-  await Promise.all([
-    db.from('teachers').update({ order_index: items[swapIdx].order_index, updated_at: new Date().toISOString() }).eq('id', id),
-    db.from('teachers').update({ order_index: items[idx].order_index, updated_at: new Date().toISOString() }).eq('id', items[swapIdx].id),
-  ]);
-
-  invalidateHomepage();
-  return { success: true };
+  return reorderItem('teachers', id, direction);
 }
 
 // Playlists
@@ -298,22 +294,5 @@ export async function deletePlaylistAction(id: number) {
 
 export async function reorderPlaylistAction(id: number, direction: 'up' | 'down') {
   await requireAuth();
-  const db = createAdminClient();
-
-  const { data: items } = await db.from('playlists').select('id, order_index').order('order_index');
-  if (!items) return { error: 'Playlists not found' };
-
-  const idx = items.findIndex((p) => p.id === id);
-  if (idx === -1) return { error: 'Playlist not found' };
-
-  const swapIdx = direction === 'up' ? idx - 1 : idx + 1;
-  if (swapIdx < 0 || swapIdx >= items.length) return { error: 'Cannot reorder' };
-
-  await Promise.all([
-    db.from('playlists').update({ order_index: items[swapIdx].order_index, updated_at: new Date().toISOString() }).eq('id', id),
-    db.from('playlists').update({ order_index: items[idx].order_index, updated_at: new Date().toISOString() }).eq('id', items[swapIdx].id),
-  ]);
-
-  invalidateHomepage();
-  return { success: true };
+  return reorderItem('playlists', id, direction);
 }

@@ -48,6 +48,7 @@ export const en = {
     emailLabel: 'Email',
     messageLabel: 'Your Message',
     submit: 'Send Message',
+    emailSubject: 'New contact form message',
     successMessage: 'Your message was sent! We\'ll get back to you soon.',
     errorMessage: 'Something went wrong. Please try again.',
     validationError: 'Please fill in all required fields.',

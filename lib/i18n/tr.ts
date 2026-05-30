@@ -48,6 +48,7 @@ export const tr = {
     emailLabel: 'E-posta',
     messageLabel: 'Mesajınız',
     submit: 'Mesaj Gönder',
+    emailSubject: 'Yeni iletişim formu mesajı',
     successMessage: 'Mesajınız gönderildi! En kısa sürede size dönüş yapacağız.',
     errorMessage: 'Bir hata oluştu. Lütfen tekrar deneyin.',
     validationError: 'Lütfen tüm gerekli alanları doldurunuz.',
