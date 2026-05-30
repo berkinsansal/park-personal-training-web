@@ -33,7 +33,9 @@
       "Bash(git rm *)",
       "Bash(mkdir -p \"app/\\(public\\)\")",
       "Bash(mkdir -p \"app/\\(admin\\)\")",
-      "Bash(git mv *)"
+      "Bash(git mv *)",
+      "Bash(supabase status *)",
+      "Bash(supabase migration *)"
     ]
   }
 }

@@ -39,3 +39,10 @@ export type Playlist = {
   spotify_id: string;
   order_index: number;
 };
+
+export type GalleryPhoto = {
+  id: number;
+  image_url: string;
+  alt_text: string;
+  order_index: number;
+};

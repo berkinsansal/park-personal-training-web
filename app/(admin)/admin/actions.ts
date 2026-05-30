@@ -19,7 +19,7 @@ function invalidateHomepage() {
 }
 
 async function reorderItem(
-  table: 'services' | 'teachers' | 'playlists',
+  table: 'services' | 'teachers' | 'playlists' | 'gallery',
   id: number,
   direction: 'up' | 'down',
 ) {
@@ -295,4 +295,94 @@ export async function deletePlaylistAction(id: number) {
 export async function reorderPlaylistAction(id: number, direction: 'up' | 'down') {
   await requireAuth();
   return reorderItem('playlists', id, direction);
+}
+
+// Gallery
+const GALLERY_EXTS = ['jpg', 'jpeg', 'png', 'webp'];
+
+export async function addGalleryPhotoAction(formData: FormData) {
+  await requireAuth();
+  const db = createAdminClient();
+
+  const { data: inserted, error } = await db.from('gallery').insert({
+    alt_text: formData.get('alt_text') || '',
+    image_url: '',
+    order_index: Number(formData.get('order_index') || 0),
+  }).select('*').single();
+
+  if (error) return { error: error.message };
+
+  let image_url = '';
+  const image = formData.get('image');
+  if (image instanceof File && image.size > 0) {
+    const ext = getFileExt(image);
+    const path = `${inserted.id}.${ext}`;
+    const { error: uploadError } = await db.storage.from('gallery-images').upload(path, image, { upsert: true });
+    if (!uploadError) {
+      const { data: { publicUrl } } = db.storage.from('gallery-images').getPublicUrl(path);
+      await db.from('gallery').update({ image_url: publicUrl }).eq('id', inserted.id);
+      image_url = publicUrl;
+    }
+  }
+
+  invalidateHomepage();
+  return { success: true, data: { ...inserted, image_url } };
+}
+
+export async function updateGalleryPhotoAction(formData: FormData) {
+  await requireAuth();
+  const db = createAdminClient();
+  const id = Number(formData.get('id'));
+
+  const updates: Record<string, unknown> = {
+    alt_text: formData.get('alt_text') || '',
+    order_index: Number(formData.get('order_index') || 0),
+    updated_at: new Date().toISOString(),
+  };
+
+  let imageUrl: string | null = null;
+  const image = formData.get('image');
+
+  if (image instanceof File && image.size > 0) {
+    await Promise.allSettled(GALLERY_EXTS.map((e) => db.storage.from('gallery-images').remove([`${id}.${e}`])));
+    const ext = getFileExt(image);
+    const path = `${id}.${ext}`;
+    const { error: uploadError } = await db.storage.from('gallery-images').upload(path, image, { upsert: true });
+    if (!uploadError) {
+      const { data: { publicUrl } } = db.storage.from('gallery-images').getPublicUrl(path);
+      updates.image_url = publicUrl;
+      imageUrl = publicUrl;
+    }
+  }
+
+  const { error } = await db.from('gallery').update(updates).eq('id', id);
+  if (error) return { error: error.message };
+  invalidateHomepage();
+  return { success: true, imageUrl };
+}
+
+export async function deleteGalleryPhotoAction(id: number) {
+  await requireAuth();
+  const db = createAdminClient();
+
+  const { data: photo } = await db.from('gallery').select('image_url').eq('id', id).single();
+  const { error } = await db.from('gallery').delete().eq('id', id);
+  if (error) return { error: error.message };
+
+  if (photo?.image_url) {
+    const marker = '/gallery-images/';
+    const idx = photo.image_url.indexOf(marker);
+    if (idx !== -1) {
+      const storagePath = photo.image_url.slice(idx + marker.length);
+      await db.storage.from('gallery-images').remove([storagePath]);
+    }
+  }
+
+  invalidateHomepage();
+  return { success: true };
+}
+
+export async function reorderGalleryPhotoAction(id: number, direction: 'up' | 'down') {
+  await requireAuth();
+  return reorderItem('gallery', id, direction);
 }

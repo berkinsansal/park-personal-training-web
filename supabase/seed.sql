@@ -37,3 +37,9 @@ INSERT INTO playlists (spotify_id, order_index) VALUES
   ('37i9dQZF1DX8FwnYE6PRvL', 1),
   ('37i9dQZF1DX32NsLKyzScr', 2),
   ('37i9dQZF1DX8a1tdzq5tbM', 3);
+
+-- Gallery (with placeholder URLs - will be replaced with actual uploads)
+INSERT INTO gallery (image_url, alt_text, order_index) VALUES
+  ('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=600&fit=crop', 'Modern gym equipment and training space', 1),
+  ('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=600&fit=crop', 'Group fitness class in session', 2),
+  ('https://images.unsplash.com/photo-1539571696357-5a69c006b310?w=800&h=600&fit=crop', 'Personal training one-on-one session', 3);

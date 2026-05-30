@@ -9,6 +9,7 @@ import SiteInfoForm from './_components/SiteInfoForm';
 import ServicesPanel from './_components/ServicesPanel';
 import TeachersPanel from './_components/TeachersPanel';
 import PlaylistsPanel from './_components/PlaylistsPanel';
+import GalleryPanel from './_components/GalleryPanel';
 import LocaleSwitcher from './_components/LocaleSwitcher';
 import { logoutAction } from './actions';
 
@@ -19,11 +20,12 @@ async function AdminContent() {
   const t = dict.admin;
   const db = createAdminClient();
 
-  const [{ data: siteInfo }, { data: services }, { data: teachers }, { data: playlists }] = await Promise.all([
+  const [{ data: siteInfo }, { data: services }, { data: teachers }, { data: playlists }, { data: gallery }] = await Promise.all([
     db.from('site_info').select('*').single(),
     db.from('services').select('*').order('order_index'),
     db.from('teachers').select('*').order('order_index'),
     db.from('playlists').select('*').order('order_index'),
+    db.from('gallery').select('*').order('order_index'),
   ]);
 
   return (
@@ -58,6 +60,7 @@ async function AdminContent() {
         <SiteInfoForm data={siteInfo} dict={dict} />
         <ServicesPanel services={services ?? []} dict={dict} />
         <TeachersPanel teachers={teachers ?? []} dict={dict} />
+        <GalleryPanel gallery={gallery ?? []} dict={dict} />
         <PlaylistsPanel playlists={playlists ?? []} dict={dict} />
       </main>
     </>
