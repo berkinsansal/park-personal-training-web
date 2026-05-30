@@ -2,6 +2,8 @@
 
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { getLocale } from '@/lib/locale';
+import { getDict } from '@/lib/i18n';
 
 export async function setLocaleAction(_prev: unknown, formData: FormData) {
   const locale = formData.get('locale') as string;
@@ -13,20 +15,24 @@ export async function setLocaleAction(_prev: unknown, formData: FormData) {
 }
 
 export async function sendContactAction(_prev: unknown, formData: FormData) {
+  const locale = await getLocale();
+  const dict = getDict(locale);
+  const t = dict.contact;
+
   const name = formData.get('name')?.toString().trim() ?? '';
   const phone = formData.get('phone')?.toString().trim() ?? '';
   const email = formData.get('email')?.toString().trim() ?? '';
   const message = formData.get('message')?.toString().trim() ?? '';
 
   if (!name || !message || (!phone && !email)) {
-    return { error: 'Please fill in all required fields.' };
+    return { error: t.validationError };
   }
 
   const db = (await import('@/lib/supabase-server')).createAdminClient();
   const { data: siteInfo } = await db.from('site_info').select('email').single();
 
   if (!siteInfo?.email) {
-    return { error: 'Unable to send message. Please try again later.' };
+    return { error: t.sendError };
   }
 
   const { Resend } = await import('resend');

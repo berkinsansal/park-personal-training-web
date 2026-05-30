@@ -49,6 +49,8 @@ export const en = {
     submit: 'Send Message',
     successMessage: 'Your message was sent! We\'ll get back to you soon.',
     errorMessage: 'Something went wrong. Please try again.',
+    validationError: 'Please fill in all required fields.',
+    sendError: 'Unable to send message. Please try again later.',
   },
   playlists: {
     label: 'Music',

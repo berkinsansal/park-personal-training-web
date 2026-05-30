@@ -49,6 +49,8 @@ export const tr = {
     submit: 'Mesaj Gönder',
     successMessage: 'Mesajınız gönderildi! En kısa sürede size dönüş yapacağız.',
     errorMessage: 'Bir hata oluştu. Lütfen tekrar deneyin.',
+    validationError: 'Lütfen tüm gerekli alanları doldurunuz.',
+    sendError: 'Mesaj gönderilemedi. Lütfen daha sonra tekrar deneyiniz.',
   },
   playlists: {
     label: 'Müzik',
