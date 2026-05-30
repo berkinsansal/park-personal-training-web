@@ -43,7 +43,8 @@ A Turkish personal training studio marketing site with an admin CMS. Two audienc
 | Shared TS types | `lib/types.ts` |
 | Supabase clients | `lib/supabase-server.ts` |
 | Auth middleware | `proxy.ts` (root) |
-| Public server actions | `app/(public)/actions.ts` |
+| Shared server actions | `app/actions.ts` (`setLocaleAction`) |
+| Public-only server actions | `app/(public)/actions.ts` (`sendContactAction`) |
 | All admin server actions | `app/(admin)/admin/actions.ts` |
 | Shared admin input style | `app/(admin)/admin/_components/styles.ts` → `inputCls` |
 | DB schema | `supabase/migrations/002_redesign_schema.sql` |

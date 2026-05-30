@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState } from 'react';
-import { setLocaleAction } from '@/app/(public)/actions';
+import { setLocaleAction } from '@/app/actions';
 import type { Locale } from '@/lib/i18n';
 
 export default function LanguageSwitcher({ locale }: { locale: Locale }) {
