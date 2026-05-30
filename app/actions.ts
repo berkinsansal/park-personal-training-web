@@ -35,8 +35,8 @@ export async function sendContactAction(_prev: unknown, formData: FormData) {
   const { error } = await resend.emails.send({
     from: 'onboarding@resend.dev',
     to: siteInfo.email,
-    subject: `New contact form message from ${name}`,
-    text: `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\n\nMessage:\n${message}`,
+    subject: `Yeni iletişim formu mesajı (${name})`,
+    text: `Ad Soyad: ${name}\nTelefon: ${phone}\nE-posta: ${email}\n\nMesaj:\n${message}`,
   });
 
   if (error) return { error: error.message };
