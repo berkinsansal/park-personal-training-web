@@ -13,7 +13,7 @@ export default function About({ dict, happyCustomers, yearsExperience, teacherCo
   const stats = [
     { value: `${happyCustomers}+`, label: t.statHappyCustomers },
     { value: `${yearsExperience}+`, label: t.statYearsExperience },
-    { value: String(teacherCount), label: t.statTeachers },
+    { value: `${teacherCount}+`, label: t.statTeachers },
     { value: String(serviceCount), label: t.statServices },
   ];
 
