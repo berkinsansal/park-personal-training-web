@@ -18,9 +18,6 @@ export default function Hero({ dict }: { dict: Dict }) {
         <div className="flex justify-center mb-8">
           <Image src="/logo.png" alt="Park Personal Training" width={180} height={180} priority />
         </div>
-        <div className="inline-block mb-6 px-4 py-1.5 rounded-full border border-amber-400/30 bg-amber-400/10 text-amber-400 text-sm font-medium tracking-widest uppercase">
-          {t.badge}
-        </div>
         <h1 className="text-5xl md:text-7xl font-black mb-6 leading-none tracking-tight">
           <span className="text-white">PARK</span>{" "}
           <span className="text-amber-400">PERSONAL</span>
@@ -45,11 +42,14 @@ export default function Hero({ dict }: { dict: Dict }) {
           </a>
         </div>
       </div>
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 animate-bounce hidden sm:block">
+      <a
+        href="#hakkimizda"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 animate-bounce"
+      >
         <svg className="w-6 h-6 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
-      </div>
+      </a>
     </section>
   );
 }
