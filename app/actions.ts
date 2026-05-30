@@ -2,7 +2,6 @@
 
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import { Resend } from 'resend';
 
 export async function setLocaleAction(_prev: unknown, formData: FormData) {
   const locale = formData.get('locale') as string;
@@ -23,6 +22,7 @@ export async function sendContactAction(_prev: unknown, formData: FormData) {
     return { error: 'Please fill in all required fields.' };
   }
 
+  const { Resend } = await import('resend');
   const resend = new Resend(process.env.RESEND_API_KEY);
   const to = process.env.CONTACT_FORM_EMAIL ?? '';
 
