@@ -66,10 +66,8 @@ async function AdminContent() {
 
 export default function AdminPage() {
   return (
-    <div className="min-h-screen bg-zinc-950">
-      <Suspense>
-        <AdminContent />
-      </Suspense>
-    </div>
+    <Suspense>
+      <AdminContent />
+    </Suspense>
   );
 }
