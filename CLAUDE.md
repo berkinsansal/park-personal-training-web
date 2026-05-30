@@ -28,7 +28,7 @@ A Turkish personal training studio marketing site with an admin CMS. Two audienc
 
 **Admin page stays dynamic.** `app/(admin)/admin/page.tsx` has no `'use cache'` directive, so with `cacheComponents: true` it is dynamic by default — the dashboard always shows the latest DB state.
 
-**Route groups separate the two audiences.** `app/(public)/` contains the public marketing site routes. `app/(admin)/` contains the admin CMS routes. Route group folders are omitted from URL paths — `/` and `/admin` are unaffected.
+**Route groups separate the two audiences.** `app/(public)/` contains the public marketing site routes with its own root layout (includes `scroll-smooth`, marketing metadata). `app/(admin)/` contains the admin CMS routes with its own root layout (admin metadata, no `scroll-smooth`). Route group folders are omitted from URL paths — `/` and `/admin` are unaffected.
 
 **Auth has two layers:**
 1. `proxy.ts` at the project root — Next.js 16's middleware convention (renamed from `middleware.ts`). Guards every `/admin/*` route at the edge.
