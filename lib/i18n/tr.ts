@@ -47,6 +47,8 @@ export const tr = {
     emailLabel: 'E-posta',
     messageLabel: 'Mesajınız',
     submit: 'Mesaj Gönder',
+    successMessage: 'Mesajınız gönderildi! En kısa sürede size dönüş yapacağız.',
+    errorMessage: 'Bir hata oluştu. Lütfen tekrar deneyin.',
   },
   playlists: {
     label: 'Müzik',
