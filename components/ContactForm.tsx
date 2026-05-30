@@ -1,12 +1,10 @@
 'use client';
 
-import { useActionState, useRef, useEffect } from 'react';
-import { useFormStatus } from 'react-dom';
+import { useRef, useState, useTransition } from 'react';
 import { sendContactAction } from '@/app/actions';
 import type { Dict } from '@/lib/i18n';
 
-function SubmitButton({ label }: { label: string }) {
-  const { pending } = useFormStatus();
+function SubmitButton({ label, pending }: { label: string; pending: boolean }) {
   return (
     <button
       type="submit"
@@ -20,16 +18,23 @@ function SubmitButton({ label }: { label: string }) {
 
 export default function ContactForm({ t }: { t: Dict['contact'] }) {
   const formRef = useRef<HTMLFormElement>(null);
-  const [state, action] = useActionState(sendContactAction, null);
+  const [isPending, startTransition] = useTransition();
+  const [state, setState] = useState<{ error?: string; success?: boolean } | null>(null);
 
-  useEffect(() => {
-    if (state?.success) {
-      formRef.current?.reset();
-    }
-  }, [state?.success]);
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    startTransition(async () => {
+      const result = await sendContactAction(null, formData);
+      setState(result);
+      if (result?.success) {
+        formRef.current?.reset();
+      }
+    });
+  };
 
   return (
-    <form ref={formRef} action={action} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4">
+    <form ref={formRef} onSubmit={handleSubmit} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4">
       <h3 className="text-amber-400 font-bold text-lg mb-6">{t.formHeading}</h3>
       <div>
         <label className="block text-zinc-400 text-sm mb-2">{t.nameLabel}</label>
@@ -67,7 +72,7 @@ export default function ContactForm({ t }: { t: Dict['contact'] }) {
       {state?.error && <p className="text-red-400 text-sm">{state.error}</p>}
       {state?.success && <p className="text-green-400 text-sm">{t.successMessage}</p>}
 
-      <SubmitButton label={t.submit} />
+      <SubmitButton label={t.submit} pending={isPending} />
     </form>
   );
 }
