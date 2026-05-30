@@ -5,14 +5,14 @@ import { getDict, type Locale, type Dict } from '@/lib/i18n';
 import { cacheLife, cacheTag } from 'next/cache';
 import { createAdminClient } from '@/lib/supabase-server';
 import type { SiteInfo, Service, Teacher, Playlist } from '@/lib/types';
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Services from "@/components/Services";
-import Teachers from "@/components/Teachers";
-import Playlists from "@/components/Playlists";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import Navbar from "@/app/(public)/_components/Navbar";
+import Hero from "@/app/(public)/_components/Hero";
+import About from "@/app/(public)/_components/About";
+import Services from "@/app/(public)/_components/Services";
+import Teachers from "@/app/(public)/_components/Teachers";
+import Playlists from "@/app/(public)/_components/Playlists";
+import Contact from "@/app/(public)/_components/Contact";
+import Footer from "@/app/(public)/_components/Footer";
 
 async function HomeContent({ locale }: { locale: Locale }) {
   'use cache';

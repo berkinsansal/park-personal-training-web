@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import LocaleUpdater from "@/components/LocaleUpdater";
+import LocaleUpdater from "@/app/_components/LocaleUpdater";
 import "../globals.css";
 
 const geist = Geist({

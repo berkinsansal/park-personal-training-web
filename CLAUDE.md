@@ -61,7 +61,8 @@ The tables from migration 001 (`hero`, `about`, `contact`) were dropped in migra
 ## Key Conventions
 
 - Admin panel form inputs use `inputCls` from `app/(admin)/admin/_components/styles.ts`
-- Public section components receive data as props from the server-rendered page — they are not aware of Supabase
+- Public section components live in `app/(public)/_components/` and receive data as props from the server-rendered page — they are not aware of Supabase
+- `app/_components/` holds components shared between route groups (currently just `LocaleUpdater`)
 - The `Hero` component has no dynamic data; it is fully static
 - Turkish UI strings are hardcoded in components — there is no i18n library
 
