@@ -5,11 +5,11 @@ import Image from "next/image";
 import { createAdminClient } from '@/lib/supabase-server';
 import { getLocale } from '@/lib/locale';
 import { getDict } from '@/lib/i18n';
-import SiteInfoForm from './components/SiteInfoForm';
-import ServicesPanel from './components/ServicesPanel';
-import TeachersPanel from './components/TeachersPanel';
-import PlaylistsPanel from './components/PlaylistsPanel';
-import LocaleSwitcher from './components/LocaleSwitcher';
+import SiteInfoForm from './_components/SiteInfoForm';
+import ServicesPanel from './_components/ServicesPanel';
+import TeachersPanel from './_components/TeachersPanel';
+import PlaylistsPanel from './_components/PlaylistsPanel';
+import LocaleSwitcher from './_components/LocaleSwitcher';
 import { logoutAction } from './actions';
 
 async function AdminContent() {
