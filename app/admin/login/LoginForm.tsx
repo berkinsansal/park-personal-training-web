@@ -56,6 +56,12 @@ export default function LoginForm({ dict, locale }: { dict: Dict; locale: Locale
             {pending ? t.submitting : t.submit}
           </button>
         </form>
+
+        <div className="text-center mt-6">
+          <a href="/" className="text-zinc-400 text-sm hover:text-white transition-colors">
+            ← Back to Home
+          </a>
+        </div>
       </div>
     </div>
   );

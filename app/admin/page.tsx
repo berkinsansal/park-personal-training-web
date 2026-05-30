@@ -27,10 +27,10 @@ async function AdminContent() {
   return (
     <>
       <header className="border-b border-zinc-800 bg-zinc-900 px-6 py-4 flex items-center justify-between">
-        <div>
+        <a href="/" className="hover:opacity-80 transition-opacity">
           <h1 className="text-white font-black text-xl">{t.title}</h1>
           <p className="text-zinc-500 text-xs mt-0.5">{t.subtitle}</p>
-        </div>
+        </a>
         <div className="flex items-center gap-4">
           <LocaleSwitcher locale={locale} />
           <form action={logoutAction}>
