@@ -34,9 +34,11 @@ export default function About({ dict, happyCustomers, yearsExperience, teacherCo
     const diffX = dragStart.x - dragEnd.x;
     const diffY = dragStart.y - dragEnd.y;
 
-    // Only trigger slide if horizontal movement is more than vertical (with 50px threshold)
     if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
       if (diffX > 0) nextSlide();
+      else prevSlide();
+    } else if (Math.abs(diffY) > 50 && Math.abs(diffY) > Math.abs(diffX)) {
+      if (diffY > 0) nextSlide();
       else prevSlide();
     }
   };
