@@ -30,7 +30,10 @@
       "Bash(supabase link *)",
       "Bash(supabase projects *)",
       "Read(//tmp/**)",
-      "Bash(git rm *)"
+      "Bash(git rm *)",
+      "Bash(mkdir -p \"app/\\(public\\)\")",
+      "Bash(mkdir -p \"app/\\(admin\\)\")",
+      "Bash(git mv *)"
     ]
   }
 }
