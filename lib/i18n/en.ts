@@ -59,8 +59,8 @@ export const en = {
     copyright: 'All rights reserved.',
   },
   admin: {
-    title: 'Park Personal Training — Admin',
-    subtitle: 'Content Management',
+    title: 'Park Personal Training',
+    subtitle: 'Admin — Content Management',
     logout: 'Log Out',
     loading: 'Loading...',
     siteInfo: {

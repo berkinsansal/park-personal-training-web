@@ -59,8 +59,8 @@ export const tr = {
     copyright: 'Tüm hakları saklıdır.',
   },
   admin: {
-    title: 'Park Personal Training — Admin',
-    subtitle: 'İçerik Yönetimi',
+    title: 'Park Personal Training',
+    subtitle: 'Admin — İçerik Yönetimi',
     logout: 'Çıkış',
     loading: 'Yükleniyor...',
     siteInfo: {

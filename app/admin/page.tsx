@@ -1,5 +1,7 @@
 import { connection } from 'next/server';
 import { Suspense } from 'react';
+import Link from 'next/link';
+import Image from "next/image";
 import { createAdminClient } from '@/lib/supabase-server';
 import { getLocale } from '@/lib/locale';
 import { getDict } from '@/lib/i18n';
@@ -27,10 +29,19 @@ async function AdminContent() {
   return (
     <>
       <header className="border-b border-zinc-800 bg-zinc-900 px-6 py-4 flex items-center justify-between">
-        <a href="/" className="hover:opacity-80 transition-opacity">
-          <h1 className="text-white font-black text-xl">{t.title}</h1>
-          <p className="text-zinc-500 text-xs mt-0.5">{t.subtitle}</p>
-        </a>
+        <Link href="/" className="hover:opacity-80 transition-opacity flex items-center gap-3">
+          <Image
+            src="/logo.png"
+            alt="Park Personal Training Logo"
+            width={40}
+            height={40}
+            className="rounded-full bg-amber-400/10 border border-amber-400/30"
+          />
+          <div>
+            <h1 className="text-amber-400 font-bold text-lg tracking-wide">{t.title}</h1>
+            <p className="text-zinc-500 text-sm mt-0.5">{t.subtitle}</p>
+          </div>
+        </Link>
         <div className="flex items-center gap-4">
           <LocaleSwitcher locale={locale} />
           <form action={logoutAction}>

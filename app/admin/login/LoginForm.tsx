@@ -4,6 +4,7 @@ import { useActionState } from 'react';
 import { loginAction } from '../actions';
 import LocaleSwitcher from '../components/LocaleSwitcher';
 import type { Dict, Locale } from '@/lib/i18n';
+import Link from 'next/link';
 
 export default function LoginForm({ dict, locale }: { dict: Dict; locale: Locale }) {
   const t = dict.admin.login;
@@ -16,7 +17,7 @@ export default function LoginForm({ dict, locale }: { dict: Dict; locale: Locale
           <LocaleSwitcher locale={locale} />
         </div>
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-black text-white">{t.title}</h1>
+          <h1 className="text-2xl font-black text-amber-400">{t.title}</h1>
           <p className="text-zinc-400 text-sm mt-1">{t.subtitle}</p>
         </div>
 
@@ -58,9 +59,9 @@ export default function LoginForm({ dict, locale }: { dict: Dict; locale: Locale
         </form>
 
         <div className="text-center mt-6">
-          <a href="/" className="text-zinc-400 text-sm hover:text-white transition-colors">
+          <Link href="/" className="text-zinc-400 text-sm hover:text-white transition-colors">
             ← Back to Home
-          </a>
+          </Link>
         </div>
       </div>
     </div>
