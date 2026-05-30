@@ -15,7 +15,7 @@ type Props = {
 
 export default function About({ dict, happyCustomers, yearsExperience, teacherCount, serviceCount, gallery }: Props) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [dragStart, setDragStart] = useState(0);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % gallery.length);
@@ -26,14 +26,17 @@ export default function About({ dict, happyCustomers, yearsExperience, teacherCo
   };
 
   const handlePointerDown = (e: React.PointerEvent) => {
-    setDragStart(e.clientX);
+    setDragStart({ x: e.clientX, y: e.clientY });
   };
 
   const handlePointerUp = (e: React.PointerEvent) => {
-    const dragEnd = e.clientX;
-    const diff = dragStart - dragEnd;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) nextSlide();
+    const dragEnd = { x: e.clientX, y: e.clientY };
+    const diffX = dragStart.x - dragEnd.x;
+    const diffY = dragStart.y - dragEnd.y;
+
+    // Only trigger slide if horizontal movement is more than vertical (with 50px threshold)
+    if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+      if (diffX > 0) nextSlide();
       else prevSlide();
     }
   };
