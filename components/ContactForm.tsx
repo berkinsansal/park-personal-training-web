@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState } from 'react';
+import { useActionState, useRef } from 'react';
 import { useFormStatus } from 'react-dom';
 import { sendContactAction } from '@/app/actions';
 import type { Dict } from '@/lib/i18n';
@@ -19,10 +19,18 @@ function SubmitButton({ label }: { label: string }) {
 }
 
 export default function ContactForm({ t }: { t: Dict['contact'] }) {
+  const formRef = useRef<HTMLFormElement>(null);
   const [state, action] = useActionState(sendContactAction, null);
 
+  const handleAction = async (formData: FormData) => {
+    const result = await action(formData);
+    if (result?.success) {
+      formRef.current?.reset();
+    }
+  };
+
   return (
-    <form action={action} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4">
+    <form ref={formRef} action={handleAction} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4">
       <h3 className="text-amber-400 font-bold text-lg mb-6">{t.formHeading}</h3>
       <div>
         <label className="block text-zinc-400 text-sm mb-2">{t.nameLabel}</label>
