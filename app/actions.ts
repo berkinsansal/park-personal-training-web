@@ -22,13 +22,19 @@ export async function sendContactAction(_prev: unknown, formData: FormData) {
     return { error: 'Please fill in all required fields.' };
   }
 
+  const db = (await import('@/lib/supabase-server')).createAdminClient();
+  const { data: siteInfo } = await db.from('site_info').select('email').single();
+
+  if (!siteInfo?.email) {
+    return { error: 'Unable to send message. Please try again later.' };
+  }
+
   const { Resend } = await import('resend');
   const resend = new Resend(process.env.RESEND_API_KEY);
-  const to = process.env.CONTACT_FORM_EMAIL ?? '';
 
   const { error } = await resend.emails.send({
     from: 'onboarding@resend.dev',
-    to,
+    to: siteInfo.email,
     subject: `New contact form message from ${name}`,
     text: `Name: ${name}\nPhone: ${phone}\nEmail: ${email}\n\nMessage:\n${message}`,
   });
