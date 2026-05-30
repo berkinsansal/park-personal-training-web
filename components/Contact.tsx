@@ -111,9 +111,8 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
             </div>
           </div>
 
-          <div>
+          <form className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4">
             <h3 className="text-amber-400 font-bold text-lg mb-6">{t.formHeading}</h3>
-            <form className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4">
             <div>
               <label className="block text-zinc-400 text-sm mb-2">{t.nameLabel}</label>
               <input
@@ -149,7 +148,6 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
               {t.submit}
             </button>
           </form>
-            </div>
         </div>
 
         {embedUrl && (
