@@ -4,7 +4,6 @@ export const en = {
     services: 'Services',
     teachers: 'Trainers',
     contact: 'Contact',
-    menuAriaLabel: 'Menu',
   },
   hero: {
     subtitle: "The right place to reach your goals. Become the best version of yourself with personalized programs led by expert trainers.",

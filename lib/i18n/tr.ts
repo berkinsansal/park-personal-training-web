@@ -4,7 +4,6 @@ export const tr = {
     services: 'Hizmetler',
     teachers: 'Eğitmenler',
     contact: 'İletişim',
-    menuAriaLabel: 'Menü',
   },
   hero: {
     subtitle: 'Hedeflerine ulaşmak için doğru yer. Uzman eğitmenlerimizle sana özel programlarla en iyi versiyonun ol.',

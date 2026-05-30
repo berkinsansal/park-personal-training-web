@@ -73,7 +73,6 @@ export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale })
         <button
           className="md:hidden text-zinc-300"
           onClick={() => setOpen(!open)}
-          aria-label={dict.nav.menuAriaLabel}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             {open ? (

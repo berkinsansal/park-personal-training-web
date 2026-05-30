@@ -99,7 +99,6 @@ export default function About({ dict, happyCustomers, yearsExperience, teacherCo
                     <button
                       onClick={prevSlide}
                       className="px-3 py-2 text-white bg-zinc-800 hover:bg-zinc-700 rounded-full transition-colors"
-                      aria-label="Previous photo"
                     >
                       &lt;
                     </button>
@@ -111,14 +110,12 @@ export default function About({ dict, happyCustomers, yearsExperience, teacherCo
                           className={`w-2 h-2 rounded-full transition-all ${
                             idx === currentSlide ? 'bg-amber-400 w-6' : 'bg-zinc-600 hover:bg-zinc-500'
                           }`}
-                          aria-label={`Go to photo ${idx + 1}`}
                         />
                       ))}
                     </div>
                     <button
                       onClick={nextSlide}
                       className="px-3 py-2 text-white bg-zinc-800 hover:bg-zinc-700 rounded-full transition-colors"
-                      aria-label="Next photo"
                     >
                       &gt;
                     </button>
