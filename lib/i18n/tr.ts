@@ -6,7 +6,6 @@ export const tr = {
     contact: 'İletişim',
   },
   hero: {
-    badge: 'Profesyonel Fitness Stüdyosu',
     subtitle: 'Hedeflerine ulaşmak için doğru yer. Uzman eğitmenlerimizle sana özel programlarla en iyi versiyonun ol.',
     cta: 'Hemen Başvur',
     ctaSecondary: 'Hizmetleri Gör',

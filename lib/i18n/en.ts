@@ -6,7 +6,6 @@ export const en = {
     contact: 'Contact',
   },
   hero: {
-    badge: 'Professional Fitness Studio',
     subtitle: "The right place to reach your goals. Become the best version of yourself with personalized programs led by expert trainers.",
     cta: 'Get Started',
     ctaSecondary: 'View Services',
