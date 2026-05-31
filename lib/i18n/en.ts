@@ -1,4 +1,8 @@
 export const en = {
+  meta: {
+    title: 'Professional Fitness Studio',
+    description: 'Reach your goals with expert trainers at our studio.',
+  },
   nav: {
     about: 'About',
     services: 'Services',
@@ -62,7 +66,6 @@ export const en = {
     copyright: 'All rights reserved.',
   },
   admin: {
-    title: 'Park Personal Training',
     subtitle: 'Admin — Content Management',
     logout: 'Log Out',
     loading: 'Loading...',
@@ -148,7 +151,6 @@ export const en = {
       added: 'Added. Refresh the page.',
     },
     login: {
-      title: 'Park Personal Training',
       subtitle: 'Admin Panel',
       email: 'Email',
       password: 'Password',

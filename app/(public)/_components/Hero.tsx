@@ -1,7 +1,23 @@
 import Image from "next/image";
 import type { Dict } from "@/lib/i18n";
+import { siteConfig } from "@/lib/site.config";
 
 export default function Hero({ dict }: { dict: Dict }) {
+  const alternatingText = () => {
+    return (
+    <>
+      {siteConfig.siteName.toUpperCase().split(" ").map((word, index) => (
+        <span
+          key={`${word}-${index}`}
+          className={index % 2 === 0 ? "text-white" : "text-amber-400"}
+        >
+          {index > 0 && " "}
+          {word}
+        </span>
+      ))}
+    </>
+  );
+  };
   const t = dict.hero;
   return (
     <section
@@ -16,13 +32,10 @@ export default function Hero({ dict }: { dict: Dict }) {
       />
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
         <div className="flex justify-center mb-8">
-          <Image src="/logo.png" alt="Park Personal Training" width={180} height={180} priority />
+          <Image src="/logo.png" alt={`${siteConfig.siteName} Logo`} width={180} height={180} priority />
         </div>
-        <h1 className="text-5xl md:text-7xl font-black mb-6 leading-none tracking-tight">
-          <span className="text-white">PARK</span>{" "}
-          <span className="text-amber-400">PERSONAL</span>
-          <br />
-          <span className="text-white">TRAINING</span>
+        <h1 className="text-5xl md:text-7xl font-black mb-6 leading-none tracking-tight text-amber-400">
+          {alternatingText()}
         </h1>
         <p className="text-xl md:text-2xl text-zinc-400 mb-10 max-w-2xl mx-auto leading-relaxed">
           {t.subtitle}

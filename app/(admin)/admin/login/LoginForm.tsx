@@ -5,6 +5,7 @@ import { loginAction } from '../actions';
 import LocaleSwitcher from '../_components/LocaleSwitcher';
 import type { Dict, Locale } from '@/lib/i18n';
 import Link from 'next/link';
+import { siteConfig } from '@/lib/site.config';
 
 export default function LoginForm({ dict, locale }: { dict: Dict; locale: Locale }) {
   const t = dict.admin.login;
@@ -17,7 +18,7 @@ export default function LoginForm({ dict, locale }: { dict: Dict; locale: Locale
           <LocaleSwitcher locale={locale} />
         </div>
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-black text-amber-400">{t.title}</h1>
+          <h1 className="text-2xl font-black text-amber-400">{siteConfig.siteName}</h1>
           <p className="text-zinc-400 text-sm mt-1">{t.subtitle}</p>
         </div>
 

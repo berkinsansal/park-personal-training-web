@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import LanguageSwitcher from "./LanguageSwitcher";
 import type { Dict, Locale } from "@/lib/i18n";
+import { siteConfig } from "@/lib/site.config";
 
 const navIcons = {
   about: (
@@ -51,8 +52,8 @@ export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale })
     <nav className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur border-b border-zinc-800">
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
         <a href="#" className="flex items-center gap-3">
-          <Image src="/logo.png" alt="Park Personal Training Logo" width={40} height={40} className="rounded-full bg-amber-400/10 border border-amber-400/30" />
-          <span className="hidden lg:inline text-amber-400 font-bold text-lg tracking-wide">Park Personal Training</span>
+          <Image src="/logo.png" alt={`${siteConfig.siteName} Logo`} width={40} height={40} className="rounded-full bg-amber-400/10 border border-amber-400/30" />
+          <span className="hidden lg:inline text-amber-400 font-bold text-lg tracking-wide">{siteConfig.siteName}</span>
         </a>
         <ul className="hidden md:flex gap-8 items-center">
           {links.map((l) => (

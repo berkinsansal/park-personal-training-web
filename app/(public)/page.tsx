@@ -4,6 +4,7 @@ import { getLocale } from '@/lib/locale';
 import { getDict, type Locale, type Dict } from '@/lib/i18n';
 import { cacheLife, cacheTag } from 'next/cache';
 import { createAdminClient } from '@/lib/supabase-server';
+import { siteConfig } from '@/lib/site.config';
 import type { SiteInfo, Service, Teacher, Playlist, GalleryPhoto } from '@/lib/types';
 import Navbar from "@/app/(public)/_components/Navbar";
 import Hero from "@/app/(public)/_components/Hero";
@@ -55,15 +56,11 @@ async function HomeContent({ locale }: { locale: Locale }) {
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
-  return locale === 'en'
-    ? {
-        title: "Park Personal Training | Professional Fitness Studio",
-        description: "Reach your goals with expert trainers at Park Personal Training studio.",
-      }
-    : {
-        title: "Park Personal Training | Profesyonel Fitness Studyosu",
-        description: "Park Personal Training studyosunda uzman egitmenlerimizle hedeflerinize ulasin.",
-      };
+  const dict = getDict(locale);
+  return {
+    title: `${siteConfig.siteName} | ${dict.meta.title}`,
+    description: dict.meta.description,
+  };
 }
 
 async function HomeShell() {

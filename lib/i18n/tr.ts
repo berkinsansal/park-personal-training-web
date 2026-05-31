@@ -1,4 +1,8 @@
 export const tr = {
+  meta: {
+    title: 'Profesyonel Fitness Stüdyosu',
+    description: 'Uzman eğitmenlerimizle hedeflerinize ulaşın.',
+  },
   nav: {
     about: 'Hakkımızda',
     services: 'Hizmetler',
@@ -62,7 +66,6 @@ export const tr = {
     copyright: 'Tüm hakları saklıdır.',
   },
   admin: {
-    title: 'Park Personal Training',
     subtitle: 'Admin — İçerik Yönetimi',
     logout: 'Çıkış',
     loading: 'Yükleniyor...',
@@ -148,7 +151,6 @@ export const tr = {
       added: 'Eklendi. Sayfayı yenileyin.',
     },
     login: {
-      title: 'Park Personal Training',
       subtitle: 'Admin Paneli',
       email: 'E-posta',
       password: 'Şifre',

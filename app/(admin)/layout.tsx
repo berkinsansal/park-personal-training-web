@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import LocaleUpdater from "@/app/_components/LocaleUpdater";
+import { siteConfig } from "@/lib/site.config";
 import "../globals.css";
 
 const geist = Geist({
@@ -9,8 +10,7 @@ const geist = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Admin | Park Personal Training",
-  description: "",
+  title: `Admin | ${siteConfig.siteName}`,
 };
 
 export default function AdminLayout({

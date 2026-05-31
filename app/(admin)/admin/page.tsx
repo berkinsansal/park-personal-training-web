@@ -3,6 +3,7 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 import Image from "next/image";
 import { createAdminClient } from '@/lib/supabase-server';
+import { siteConfig } from '@/lib/site.config';
 import { getLocale } from '@/lib/locale';
 import { getDict } from '@/lib/i18n';
 import SiteInfoForm from './_components/SiteInfoForm';
@@ -34,13 +35,13 @@ async function AdminContent() {
         <Link href="/" className="hover:opacity-80 transition-opacity flex items-center gap-3">
           <Image
             src="/logo.png"
-            alt="Park Personal Training Logo"
+            alt={`${siteConfig.siteName} Logo`}
             width={40}
             height={40}
             className="rounded-full bg-amber-400/10 border border-amber-400/30"
           />
           <div>
-            <h1 className="text-amber-400 font-bold text-lg tracking-wide">{t.title}</h1>
+            <h1 className="text-amber-400 font-bold text-lg tracking-wide">{siteConfig.siteName}</h1>
             <p className="text-zinc-500 text-sm mt-0.5">{t.subtitle}</p>
           </div>
         </Link>
