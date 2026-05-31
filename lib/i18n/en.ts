@@ -19,7 +19,7 @@ export const en = {
     heading1: 'We Know You,',
     heading2: 'We Work',
     heading3: 'Just for You',
-    p1: 'At Park Personal Training, we know every individual is different. Our expert trainers analyze your goals, lifestyle, and physical condition to create a workout and nutrition plan that is completely tailored to you.',
+    p1: 'We know every individual is different. Our expert trainers analyze your goals, lifestyle, and physical condition to create a workout and nutrition plan that is completely tailored to you.',
     p2: 'From small group classes to one-on-one training sessions, we offer a program for everyone. Professional equipment and a welcoming atmosphere await you at our studio.',
     cta: 'Contact Us',
     statHappyCustomers: 'Happy Members',

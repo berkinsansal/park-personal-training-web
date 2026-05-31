@@ -19,7 +19,7 @@ export const tr = {
     heading1: 'Seni Tanıyor,',
     heading2: 'Sana Özel',
     heading3: 'Çalışıyoruz',
-    p1: 'Park Personal Training olarak her bireyin farklı olduğunu biliyoruz. Uzman eğitmenlerimiz, senin hedeflerini, yaşam tarzını ve fiziksel durumunu analiz ederek tamamen sana özel bir antrenman ve beslenme planı oluşturuyor.',
+    p1: 'Her bireyin farklı olduğunu biliyoruz. Uzman eğitmenlerimiz, senin hedeflerini, yaşam tarzını ve fiziksel durumunu analiz ederek tamamen sana özel bir antrenman ve beslenme planı oluşturuyor.',
     p2: 'Küçük grup derslerinden bire bir antrenmanlarımıza kadar herkese uygun bir program sunuyoruz. Stüdyomuzda profesyonel ekipmanlar ve sıcak bir atmosfer seni bekliyor.',
     cta: 'Bize Ulaşın',
     statHappyCustomers: 'Mutlu Üye',
