@@ -28,7 +28,7 @@ export async function sendContactAction(_prev: unknown, formData: FormData) {
   const resend = new Resend(process.env.RESEND_API_KEY);
 
   const { error } = await resend.emails.send({
-    from: 'onboarding@resend.dev',
+    from: process.env.RESEND_FROM_EMAIL!,
     to: siteInfo.email,
     subject: `${t.emailSubject} (${name})`,
     text: [
