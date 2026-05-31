@@ -53,7 +53,7 @@ export default function About({ dict, happyCustomers, yearsExperience, teacherCo
   return (
     <section id="hakkimizda" className="py-24 bg-zinc-900">
       <div className="max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-start mb-16">
+        <div className="grid md:grid-cols-2 gap-16 items-start">
           <div>
             <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">
               {t.label}
