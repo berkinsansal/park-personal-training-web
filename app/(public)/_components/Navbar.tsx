@@ -41,11 +41,11 @@ export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale })
   const [open, setOpen] = useState(false);
 
   const links = [
-    { href: "#hakkimizda", label: dict.nav.about, key: "about" },
-    { href: "#hizmetler", label: dict.nav.services, key: "services" },
-    { href: "#egitmenler", label: dict.nav.teachers, key: "teachers" },
-    { href: "#muzik", label: dict.playlists.label, key: "playlists" },
-    { href: "#iletisim", label: dict.nav.contact, key: "contact" },
+    { href: "#about", label: dict.nav.about, key: "about" },
+    { href: "#services", label: dict.nav.services, key: "services" },
+    { href: "#trainers", label: dict.nav.teachers, key: "teachers" },
+    { href: "#music", label: dict.playlists.label, key: "playlists" },
+    { href: "#contact", label: dict.nav.contact, key: "contact" },
   ];
 
   return (

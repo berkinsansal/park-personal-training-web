@@ -42,13 +42,13 @@ export default function Hero({ dict }: { dict: Dict }) {
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
-            href="#iletisim"
+            href="#contact"
             className="px-8 py-4 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
           >
             {t.cta}
           </a>
           <a
-            href="#hizmetler"
+            href="#services"
             className="px-8 py-4 border border-zinc-600 text-white font-medium rounded-lg hover:border-amber-400 hover:text-amber-400 transition-colors text-sm uppercase tracking-wider"
           >
             {t.ctaSecondary}
@@ -56,7 +56,7 @@ export default function Hero({ dict }: { dict: Dict }) {
         </div>
       </div>
       <a
-        href="#hakkimizda"
+        href="#about"
         className="absolute bottom-4 left-1/2 -translate-x-1/2 animate-bounce"
       >
         <svg className="w-6 h-6 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">

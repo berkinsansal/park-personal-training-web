@@ -4,7 +4,7 @@ import type { Dict, Locale } from '@/lib/i18n';
 export default function Services({ services, locale, dict }: { services: Service[]; locale: Locale; dict: Dict }) {
   const t = dict.services;
   return (
-    <section id="hizmetler" className="py-24 bg-zinc-950">
+    <section id="services" className="py-24 bg-zinc-950">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">

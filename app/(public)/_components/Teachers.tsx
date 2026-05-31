@@ -8,7 +8,7 @@ function getInitials(name: string) {
 export default function Teachers({ teachers, dict }: { teachers: Teacher[]; dict: Dict }) {
   const strings = dict.teachers;
   return (
-    <section id="egitmenler" className="py-24 bg-zinc-900">
+    <section id="trainers" className="py-24 bg-zinc-900">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
           <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">

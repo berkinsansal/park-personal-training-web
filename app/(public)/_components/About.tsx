@@ -51,7 +51,7 @@ export default function About({ dict, happyCustomers, yearsExperience, teacherCo
   ];
 
   return (
-    <section id="hakkimizda" className="py-24 bg-zinc-900">
+    <section id="about" className="py-24 bg-zinc-900">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16 items-start">
           <div>
@@ -69,7 +69,7 @@ export default function About({ dict, happyCustomers, yearsExperience, teacherCo
               {t.p2}
             </p>
             <a
-              href="#iletisim"
+              href="#contact"
               className="mt-8 inline-block px-6 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
             >
               {t.cta}
