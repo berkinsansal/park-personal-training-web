@@ -14,7 +14,7 @@ A Turkish personal training studio marketing site with an admin CMS. Two audienc
 
 **All data fetching is server-side.** No client-side data fetching, no React Query / SWR.
 
-**The homepage is statically cached using Next.js 16 Cache Components.** `app/page.tsx` has an outer `Home` component (reads locale cookie, dynamic) and an inner `HomeContent({ locale })` cached component that uses `'use cache'`, `cacheLife('max')`, and `cacheTag('homepage-tr')` or `cacheTag('homepage-en')`. Each locale has its own cache entry. `cacheComponents: true` is set in `next.config.ts`. `app/admin/page.tsx` remains fully dynamic.
+**The homepage uses remote caching for data fetching.** `app/(public)/page.tsx` has three layers: `Home` (Suspense wrapper), `HomeShell` (reads locale cookie, dynamic), and `HomeContent({ locale })` (renders the page). Data is fetched via `getHomepageData(locale)`, a function-level cache using `'use cache: remote'`, `cacheLife('max')`, and `cacheTag('homepage-tr')` or `cacheTag('homepage-en')`. Remote caching stores entries in Vercel's shared cache (not in-memory), so they persist across serverless instances and survive cold starts. Each locale has its own cache entry. `cacheComponents: true` is set in `next.config.ts`. The function throws on Supabase errors to prevent rendering with empty data.
 
 **Cache invalidation on mutation.** Every server action in `app/(admin)/admin/actions.ts` calls `invalidateHomepage()` (a helper that calls `updateTag('homepage-tr')` and `updateTag('homepage-en')`) after a successful DB write. Both locale caches are expired simultaneously. `updateTag` is used (not `revalidateTag`) because we're inside Server Actions and want immediate expiry rather than stale-while-revalidate.
 

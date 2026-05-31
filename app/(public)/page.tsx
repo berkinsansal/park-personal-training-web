@@ -15,21 +15,45 @@ import Playlists from "@/app/(public)/_components/Playlists";
 import Contact from "@/app/(public)/_components/Contact";
 import Footer from "@/app/(public)/_components/Footer";
 
-async function HomeContent({ locale }: { locale: Locale }) {
-  'use cache';
+async function getHomepageData(locale: Locale) {
+  'use cache: remote';
   cacheTag(`homepage-${locale}`);
   cacheLife('max');
 
-  const t = getDict(locale);
   const db = createAdminClient();
 
-  const [{ data: siteInfo }, { data: services }, { data: teachers }, { data: gallery }, { data: playlists }] = await Promise.all([
+  const [siteInfoRes, servicesRes, teachersRes, galleryRes, playlistsRes] = await Promise.all([
     db.from('site_info').select('*').single(),
     db.from('services').select('*').order('order_index'),
     db.from('teachers').select('*').order('order_index'),
     db.from('gallery').select('*').order('order_index'),
     db.from('playlists').select('*').order('order_index'),
   ]);
+
+  const errors = [
+    siteInfoRes.error && `site_info: ${siteInfoRes.error.message}`,
+    servicesRes.error && `services: ${servicesRes.error.message}`,
+    teachersRes.error && `teachers: ${teachersRes.error.message}`,
+    galleryRes.error && `gallery: ${galleryRes.error.message}`,
+    playlistsRes.error && `playlists: ${playlistsRes.error.message}`,
+  ].filter(Boolean);
+
+  if (errors.length > 0) {
+    throw new Error(`Homepage data fetch failed: ${errors.join(', ')}`);
+  }
+
+  return {
+    siteInfo: siteInfoRes.data as SiteInfo,
+    services: servicesRes.data as Service[],
+    teachers: teachersRes.data as Teacher[],
+    gallery: galleryRes.data as GalleryPhoto[],
+    playlists: playlistsRes.data as Playlist[],
+  };
+}
+
+async function HomeContent({ locale }: { locale: Locale }) {
+  const t = getDict(locale);
+  const { siteInfo, services, teachers, gallery, playlists } = await getHomepageData(locale);
 
   return (
     <>
@@ -38,18 +62,18 @@ async function HomeContent({ locale }: { locale: Locale }) {
         <Hero dict={t} />
         <About
           dict={t}
-          happyCustomers={(siteInfo as SiteInfo | null)?.happy_customers ?? 0}
-          yearsExperience={(siteInfo as SiteInfo | null)?.years_experience ?? 0}
-          teacherCount={teachers?.length ?? 0}
-          serviceCount={services?.length ?? 0}
-          gallery={(gallery as GalleryPhoto[] | null) ?? []}
+          happyCustomers={siteInfo.happy_customers}
+          yearsExperience={siteInfo.years_experience}
+          teacherCount={teachers.length}
+          serviceCount={services.length}
+          gallery={gallery}
         />
-        <Services services={(services as Service[] | null) ?? []} locale={locale} dict={t} />
-        <Teachers teachers={(teachers as Teacher[] | null) ?? []} dict={t} />
-        <Playlists playlists={(playlists as Playlist[] | null) ?? []} dict={t} />
-        <Contact siteInfo={siteInfo as SiteInfo | null} locale={locale} dict={t} />
+        <Services services={services} locale={locale} dict={t} />
+        <Teachers teachers={teachers} dict={t} />
+        <Playlists playlists={playlists} dict={t} />
+        <Contact siteInfo={siteInfo} locale={locale} dict={t} />
       </main>
-      <Footer igHandle={(siteInfo as SiteInfo | null)?.ig_handle ?? ''} dict={t} />
+      <Footer igHandle={siteInfo.ig_handle ?? ''} dict={t} />
     </>
   );
 }
