@@ -35,7 +35,8 @@
       "Bash(mkdir -p \"app/\\(admin\\)\")",
       "Bash(git mv *)",
       "Bash(supabase status *)",
-      "Bash(supabase migration *)"
+      "Bash(supabase migration *)",
+      "Bash(xargs ls -la)"
     ]
   }
 }
