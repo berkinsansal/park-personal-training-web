@@ -13,7 +13,7 @@ export default function Hero({ dict }: { dict: Dict }) {
     const onScroll = () => {
       rafId = requestAnimationFrame(() => {
         const progress = Math.min(window.scrollY / window.innerHeight, 1);
-        const scale = 1 + progress * 0.55;
+        const scale = 1 + progress * 2;
         if (logoRef.current) {
           logoRef.current.style.transform = `scale(${scale})`;
         }
@@ -30,19 +30,17 @@ export default function Hero({ dict }: { dict: Dict }) {
     return (
     <>
       {siteConfig.siteName.toUpperCase().split(" ").map((word, index) => (
-        <span
+        <div
           key={`${word}-${index}`}
           className={index % 2 === 0 ? "text-white" : "text-amber-400"}
           style={{
-            display: 'inline-block',
             animation: 'word-reveal 0.6s ease forwards',
             animationDelay: `${0.3 + index * 0.12}s`,
             animationFillMode: 'backwards',
           }}
         >
-          {index > 0 && " "}
           {word}
-        </span>
+        </div>
       ))}
     </>
   );
@@ -61,7 +59,7 @@ export default function Hero({ dict }: { dict: Dict }) {
       />
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
         <div className="flex justify-center mb-8" ref={logoRef} style={{ willChange: 'transform' }}>
-          <Image src="/logo.png" alt={`${siteConfig.siteName} Logo`} width={180} height={180} priority />
+          <Image src="/logo.png" alt={`${siteConfig.siteName} Logo`} width={200} height={200} priority />
         </div>
         <h1 className="text-5xl md:text-7xl font-black mb-6 leading-none tracking-tight text-amber-400">
           {alternatingText()}
