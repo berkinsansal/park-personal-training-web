@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import LanguageSwitcher from "./LanguageSwitcher";
 import type { Dict, Locale } from "@/lib/i18n";
@@ -39,6 +39,13 @@ const navIcons = {
 
 export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale }) {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const links = [
     { href: "#about", label: dict.nav.about, key: "about" },
@@ -49,7 +56,11 @@ export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale })
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-zinc-950/90 backdrop-blur border-b border-zinc-800">
+    <nav className={`fixed top-0 left-0 right-0 z-50 backdrop-blur transition-all duration-500 ${
+      scrolled
+        ? 'bg-zinc-950/98 border-b border-amber-400/20 shadow-lg shadow-amber-400/5'
+        : 'bg-zinc-950/90 border-b border-zinc-800'
+    }`}>
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
         <a href="#" className="flex items-center gap-3">
           <Image src="/logo.png" alt={`${siteConfig.siteName} Logo`} width={40} height={40} className="rounded-full bg-amber-400/10 border border-amber-400/30" />

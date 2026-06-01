@@ -1,6 +1,7 @@
 import type { SiteInfo } from '@/lib/types';
 import type { Dict, Locale } from '@/lib/i18n';
 import ContactForm from './ContactForm';
+import { AnimateIn } from './AnimateIn';
 
 export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo | null; locale: Locale; dict: Dict }) {
   const t = dict.contact;
@@ -18,20 +19,23 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
   return (
     <section id="contact" className="py-24 bg-zinc-950">
       <div className="max-w-4xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">
-            {t.label}
-          </span>
-          <h2 className="mt-3 text-4xl md:text-5xl font-black text-white">
-            {t.heading}
-          </h2>
-          <p className="mt-4 text-zinc-400 text-lg max-w-xl mx-auto">
-            {t.description}
-          </p>
-        </div>
+        <AnimateIn>
+          <div className="text-center mb-16">
+            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">
+              {t.label}
+            </span>
+            <h2 className="mt-3 text-4xl md:text-5xl font-black text-white">
+              {t.heading}
+            </h2>
+            <p className="mt-4 text-zinc-400 text-lg max-w-xl mx-auto">
+              {t.description}
+            </p>
+          </div>
+        </AnimateIn>
 
         <div className="grid md:grid-cols-2 gap-10 mb-16">
-          <div className="flex flex-col gap-6">
+          <AnimateIn delay={0}>
+            <div className="flex flex-col gap-6">
             <a
               href={`https://instagram.com/${ig}`}
               target="_blank"
@@ -110,9 +114,12 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
                 <div className="text-zinc-400 text-sm">{weekend}</div>
               </div>
             </div>
-          </div>
+            </div>
+          </AnimateIn>
 
-          <ContactForm t={t} />
+          <AnimateIn delay={150}>
+            <ContactForm t={t} />
+          </AnimateIn>
         </div>
 
         {embedUrl && (

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { Dict } from "@/lib/i18n";
 import type { GalleryPhoto } from "@/lib/types";
 
@@ -13,9 +13,30 @@ type Props = {
   gallery: GalleryPhoto[];
 };
 
+function useCountUp(target: number, duration: number, active: boolean) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!active) return;
+    const start = performance.now();
+    let rafId: number;
+    const raf = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * target));
+      if (progress < 1) rafId = requestAnimationFrame(raf);
+    };
+    rafId = requestAnimationFrame(raf);
+    return () => cancelAnimationFrame(rafId);
+  }, [active, target, duration]);
+  return count;
+}
+
 export default function About({ dict, happyCustomers, yearsExperience, trainerCount, serviceCount, gallery }: Props) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const statsRef = useRef<HTMLDivElement>(null);
+  const [statsVisible, setStatsVisible] = useState(false);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % gallery.length);
@@ -42,6 +63,22 @@ export default function About({ dict, happyCustomers, yearsExperience, trainerCo
       else prevSlide();
     }
   };
+
+  useEffect(() => {
+    const el = statsRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStatsVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
   const t = dict.about;
   const stats = [
     { value: `${happyCustomers}+`, label: t.statHappyCustomers },
@@ -76,16 +113,22 @@ export default function About({ dict, happyCustomers, yearsExperience, trainerCo
             </a>
           </div>
           <div>
-            <div className="grid grid-cols-2 gap-6">
-              {stats.map((s) => (
-                <div
-                  key={s.label}
-                  className="bg-zinc-800 rounded-2xl p-8 text-center border border-zinc-700 hover:border-amber-400/50 transition-colors"
-                >
-                  <div className="text-4xl font-black text-amber-400">{s.value}</div>
-                  <div className="mt-2 text-zinc-400 text-sm font-medium">{s.label}</div>
-                </div>
-              ))}
+            <div className="grid grid-cols-2 gap-6" ref={statsRef}>
+              {stats.map((s, i) => {
+                const numMatch = s.value.match(/\d+/);
+                const num = numMatch ? parseInt(numMatch[0]) : 0;
+                const suffix = s.value.replace(/\d+/g, '');
+                const counted = useCountUp(num, 1400, statsVisible);
+                return (
+                  <div
+                    key={s.label}
+                    className="bg-zinc-800 rounded-2xl p-8 text-center border border-zinc-700 hover:border-amber-400/50 transition-colors"
+                  >
+                    <div className="text-4xl font-black text-amber-400">{counted}{suffix}</div>
+                    <div className="mt-2 text-zinc-400 text-sm font-medium">{s.label}</div>
+                  </div>
+                );
+              })}
             </div>
 
             {gallery.length > 0 && (
