@@ -1,8 +1,15 @@
+'use client';
+
+import { useState } from 'react';
 import type { Playlist } from '@/lib/types';
 import type { Dict } from '@/lib/i18n';
 
 export default function Playlists({ playlists, dict }: { playlists: Playlist[]; dict: Dict }) {
   const strings = dict.playlists;
+  const [selectedId, setSelectedId] = useState(playlists[0]?.id || '');
+
+  const selectedPlaylist = playlists.find((p) => p.id === selectedId);
+
   return (
     <section id="music" className="py-16 bg-green-500/20">
       <div className="max-w-7xl mx-auto px-6">
@@ -17,12 +24,31 @@ export default function Playlists({ playlists, dict }: { playlists: Playlist[]; 
             {strings.description}
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {playlists.map((playlist) => (
-            <div key={playlist.id} className="flex justify-center overflow-hidden">
+
+        <div className="flex flex-col gap-8">
+          {playlists.length > 0 && (
+            <div className="flex flex-wrap justify-center gap-3">
+              {playlists.map((playlist) => (
+                <button
+                  key={playlist.id}
+                  onClick={() => setSelectedId(playlist.id)}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                    selectedId === playlist.id
+                      ? 'bg-amber-400 text-black'
+                      : 'bg-zinc-700 text-white hover:bg-zinc-600'
+                  }`}
+                >
+                  {playlist.title}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {selectedPlaylist && (
+            <div className="flex justify-center overflow-hidden">
               <iframe
                 style={{ borderRadius: '12px' }}
-                src={`https://open.spotify.com/embed/playlist/${playlist.spotify_id}?utm_source=generator&theme=0`}
+                src={`https://open.spotify.com/embed/playlist/${selectedPlaylist.spotify_id}?utm_source=generator&theme=0`}
                 width="100%"
                 height="352"
                 className="h-[152px] md:h-[360px]"
@@ -32,7 +58,7 @@ export default function Playlists({ playlists, dict }: { playlists: Playlist[]; 
                 loading="lazy"
               />
             </div>
-          ))}
+          )}
         </div>
       </div>
     </section>
