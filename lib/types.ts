@@ -37,6 +37,8 @@ export type Trainer = {
 export type Playlist = {
   id: number;
   spotify_id: string;
+  title: string;
+  type: string;
   order_index: number;
 };
 
