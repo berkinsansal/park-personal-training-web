@@ -36,8 +36,7 @@
       "Bash(git mv *)",
       "Bash(supabase status *)",
       "Bash(supabase migration *)",
-      "Bash(xargs ls -la)",
-      "Bash(cat C:\\\\\\\\Users\\\\\\\\z0045zpw\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\claude\\\\\\\\c--GitHub-park-personal-training-web\\\\\\\\3658cfca-4329-4f94-b737-8c259efd4463\\\\\\\\tasks\\\\\\\\bz94j4lhs.output)"
+      "Bash(xargs ls -la)"
     ]
   }
 }
