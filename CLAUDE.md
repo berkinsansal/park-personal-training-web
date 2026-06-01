@@ -34,7 +34,7 @@ A Turkish personal training studio marketing site with an admin CMS. Two audienc
 1. `proxy.ts` at the project root — Next.js 16's middleware convention (renamed from `middleware.ts`). Guards every `/admin/*` route at the edge.
 2. `requireAuth()` in `app/(admin)/admin/actions.ts` — called at the top of every mutating server action as a belt-and-suspenders check.
 
-**Shared types live in `lib/types.ts`.** Never redefine `SiteInfo`, `Service`, or `Teacher` locally — import from there. The `SiteInfo` type has all 8 fields; components that only display a subset still receive the full type.
+**Shared types live in `lib/types.ts`.** Never redefine `SiteInfo`, `Service`, or `Trainer` locally — import from there. The `SiteInfo` type has all 8 fields; components that only display a subset still receive the full type.
 
 ## File Locations
 
@@ -54,7 +54,7 @@ A Turkish personal training studio marketing site with an admin CMS. Two audienc
 
 - `site_info` — single row, site-wide settings (contact info, stats, IG handle)
 - `services` — list of offered services with emoji icon and display order
-- `teachers` — list of trainers with initials and IG handle
+- `trainers` — list of trainers with initials and IG handle
 
 The tables from migration 001 (`hero`, `about`, `contact`) were dropped in migration 002 and no longer exist.
 
@@ -69,7 +69,7 @@ The tables from migration 001 (`hero`, `about`, `contact`) were dropped in migra
 ## What Does Not Exist Yet
 
 - Contact form submission handler (the form in `components/Contact.tsx` has no action)
-- Image upload for teachers or services
+- Image upload for trainers or services
 - Public sign-up or multi-user admin
 
 ## CLAUDE CODE ALWAYS DO THESE

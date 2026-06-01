@@ -34,8 +34,8 @@ CREATE TABLE IF NOT EXISTS services (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- Teachers/Trainers
-CREATE TABLE IF NOT EXISTS teachers (
+-- Trainers
+CREATE TABLE IF NOT EXISTS trainers (
   id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   name TEXT NOT NULL,
   bio TEXT,
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS contact (
 ALTER TABLE hero ENABLE ROW LEVEL SECURITY;
 ALTER TABLE about ENABLE ROW LEVEL SECURITY;
 ALTER TABLE services ENABLE ROW LEVEL SECURITY;
-ALTER TABLE teachers ENABLE ROW LEVEL SECURITY;
+ALTER TABLE trainers ENABLE ROW LEVEL SECURITY;
 ALTER TABLE contact ENABLE ROW LEVEL SECURITY;
 
 -- Public read access (anyone can view)
@@ -72,7 +72,7 @@ CREATE POLICY "Enable read access for all users" ON about
   FOR SELECT USING (true);
 CREATE POLICY "Enable read access for all users" ON services
   FOR SELECT USING (true);
-CREATE POLICY "Enable read access for all users" ON teachers
+CREATE POLICY "Enable read access for all users" ON trainers
   FOR SELECT USING (true);
 CREATE POLICY "Enable read access for all users" ON contact
   FOR SELECT USING (true);

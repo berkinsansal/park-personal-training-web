@@ -6,7 +6,7 @@ export const en = {
   nav: {
     about: 'About',
     services: 'Services',
-    teachers: 'Trainers',
+    trainers: 'Trainers',
     contact: 'Contact',
   },
   hero: {
@@ -24,7 +24,7 @@ export const en = {
     cta: 'Contact Us',
     statHappyCustomers: 'Happy Members',
     statYearsExperience: 'Years Experience',
-    statTeachers: 'Expert Trainers',
+    statTrainers: 'Expert Trainers',
     statServices: 'Program Types',
   },
   services: {
@@ -32,7 +32,7 @@ export const en = {
     heading: 'What Do We Offer?',
     description: 'We support you in the best way possible with programs suitable for every level and goal.',
   },
-  teachers: {
+  trainers: {
     label: 'Our Team',
     heading: 'Expert Trainers',
     description: 'Our certified and experienced trainers are here to help you reach your goals.',
@@ -107,7 +107,7 @@ export const en = {
       updated: 'Updated.',
       added: 'Added. Refresh the page.',
     },
-    teachers: {
+    trainers: {
       heading: 'Trainers',
       add: '+ Add',
       cancel: 'Cancel',

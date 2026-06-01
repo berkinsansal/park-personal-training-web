@@ -1,12 +1,12 @@
-import type { Teacher } from '@/lib/types';
+import type { Trainer } from '@/lib/types';
 import type { Dict } from '@/lib/i18n';
 
 function getInitials(name: string) {
   return name.split(' ').map((w) => w[0]).join('').toUpperCase().slice(0, 2);
 }
 
-export default function Teachers({ teachers, dict }: { teachers: Teacher[]; dict: Dict }) {
-  const strings = dict.teachers;
+export default function Trainers({ trainers, dict }: { trainers: Trainer[]; dict: Dict }) {
+  const strings = dict.trainers;
   return (
     <section id="trainers" className="py-24 bg-zinc-900">
       <div className="max-w-6xl mx-auto px-6">
@@ -22,30 +22,30 @@ export default function Teachers({ teachers, dict }: { teachers: Teacher[]; dict
           </p>
         </div>
         <div className="flex flex-wrap justify-center gap-6">
-          {teachers.map((teacher) => (
+          {trainers.map((trainer) => (
             <div
-              key={teacher.id}
+              key={trainer.id}
               className="bg-zinc-800 rounded-2xl p-8 border border-zinc-700 hover:border-amber-400/40 transition-all duration-300 text-center group w-72"
             >
-              {teacher.photo_url ? (
+              {trainer.photo_url ? (
                 <img
-                  src={teacher.photo_url}
-                  alt={teacher.name}
+                  src={trainer.photo_url}
+                  alt={trainer.name}
                   className="w-24 h-24 rounded-full object-cover mx-auto mb-5 group-hover:scale-105 transition-transform bg-amber-400/10 border border-amber-400/30"
                 />
               ) : (
                 <div className="w-24 h-24 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center mx-auto mb-5 text-3xl font-black text-zinc-950 group-hover:scale-105 transition-transform">
-                  {getInitials(teacher.name)}
+                  {getInitials(trainer.name)}
                 </div>
               )}
-              <h3 className="text-white font-bold text-xl">{teacher.name}</h3>
+              <h3 className="text-white font-bold text-xl">{trainer.name}</h3>
               <a
-                href={`https://instagram.com/${teacher.ig_handle}`}
+                href={`https://instagram.com/${trainer.ig_handle}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 mt-3 text-zinc-400 hover:text-amber-400 transition-colors text-sm"
               >
-                @{teacher.ig_handle}
+                @{trainer.ig_handle}
               </a>
             </div>
           ))}

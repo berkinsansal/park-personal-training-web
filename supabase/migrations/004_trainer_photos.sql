@@ -1,5 +1,5 @@
 -- Remove initials column (now computed from name in application code)
-ALTER TABLE teachers DROP COLUMN initials;
+ALTER TABLE trainers DROP COLUMN initials;
 
 -- Add photo_url column (empty string = no photo uploaded)
-ALTER TABLE teachers ADD COLUMN photo_url TEXT NOT NULL DEFAULT '';
+ALTER TABLE trainers ADD COLUMN photo_url TEXT NOT NULL DEFAULT '';

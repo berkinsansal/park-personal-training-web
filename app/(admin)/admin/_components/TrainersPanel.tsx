@@ -1,14 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import { addTeacherAction, updateTeacherAction, deleteTeacherAction, reorderTeacherAction } from '../actions';
-import type { Teacher } from '@/lib/types';
+import { addTrainerAction, updateTrainerAction, deleteTrainerAction, reorderTrainerAction } from '../actions';
+import type { Trainer } from '@/lib/types';
 import type { Dict } from '@/lib/i18n';
 import { inputCls } from './styles';
 
-export default function TeachersPanel({ teachers, dict }: { teachers: Teacher[]; dict: Dict }) {
-  const t = dict.admin.teachers;
-  const [list, setList] = useState(teachers);
+export default function TrainersPanel({ trainers, dict }: { trainers: Trainer[]; dict: Dict }) {
+  const t = dict.admin.trainers;
+  const [list, setList] = useState(trainers);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [adding, setAdding] = useState(false);
   const [feedback, setFeedback] = useState('');
@@ -19,9 +19,9 @@ export default function TeachersPanel({ teachers, dict }: { teachers: Teacher[];
   const handleDelete = async (id: number) => {
     setPendingOp(`delete:${id}`);
     try {
-      const res = await deleteTeacherAction(id);
+      const res = await deleteTrainerAction(id);
       if (res?.error) return flash(res.error);
-      setList((prev) => prev.filter((teacher) => teacher.id !== id));
+      setList((prev) => prev.filter((trainer) => trainer.id !== id));
       flash(t.deleted);
     } finally {
       setPendingOp(null);
@@ -31,7 +31,7 @@ export default function TeachersPanel({ teachers, dict }: { teachers: Teacher[];
   const handleReorder = async (id: number, direction: 'up' | 'down') => {
     setPendingOp(`${direction}:${id}`);
     try {
-      const res = await reorderTeacherAction(id, direction);
+      const res = await reorderTrainerAction(id, direction);
       if (res?.error) return flash(res.error);
       setList((prev) => {
         const sorted = [...prev].sort((a, b) => a.order_index - b.order_index);
@@ -55,15 +55,15 @@ export default function TeachersPanel({ teachers, dict }: { teachers: Teacher[];
     const id = Number(fd.get('id'));
     setPendingOp(`update:${id}`);
     try {
-      const res = await updateTeacherAction(fd);
+      const res = await updateTrainerAction(fd);
       if (res?.error) return flash(res.error);
-      setList((prev) => prev.map((teacher) => {
-        if (teacher.id !== id) return teacher;
+      setList((prev) => prev.map((trainer) => {
+        if (trainer.id !== id) return trainer;
         return {
           id,
           name: fd.get('name') as string,
           ig_handle: fd.get('ig_handle') as string,
-          photo_url: res.photoUrl ?? teacher.photo_url,
+          photo_url: res.photoUrl ?? trainer.photo_url,
           order_index: Number(fd.get('order_index')),
         };
       }));
@@ -79,7 +79,7 @@ export default function TeachersPanel({ teachers, dict }: { teachers: Teacher[];
     const fd = new FormData(e.currentTarget);
     setPendingOp('add');
     try {
-      const res = await addTeacherAction(fd);
+      const res = await addTrainerAction(fd);
       if (res?.error) return flash(res.error);
       if (res.data) {
         setList((prev) => [...prev, res.data].sort((a, b) => a.order_index - b.order_index));
@@ -107,44 +107,44 @@ export default function TeachersPanel({ teachers, dict }: { teachers: Teacher[];
       {feedback && <p className="text-amber-400 text-sm mb-3">{feedback}</p>}
 
       {adding && (
-        <TeacherForm t={t} onSubmit={handleAdd} onCancel={() => setAdding(false)} label={t.add.replace('+ ', '')} pendingOp={pendingOp} />
+        <TrainerForm t={t} onSubmit={handleAdd} onCancel={() => setAdding(false)} label={t.add.replace('+ ', '')} pendingOp={pendingOp} />
       )}
 
       <div className="flex flex-col gap-3">
-        {list.map((teacher) =>
-          editingId === teacher.id ? (
-            <TeacherForm
-              key={teacher.id}
+        {list.map((trainer) =>
+          editingId === trainer.id ? (
+            <TrainerForm
+              key={trainer.id}
               t={t}
-              defaults={teacher}
+              defaults={trainer}
               onSubmit={handleUpdate}
               onCancel={() => setEditingId(null)}
               label={t.update}
               pendingOp={pendingOp}
             />
           ) : (
-            <div key={teacher.id} className={`flex items-center gap-3 bg-zinc-900 border border-zinc-800 rounded-xl p-4 transition-opacity ${pendingOp === `delete:${teacher.id}` ? 'opacity-50 pointer-events-none' : ''}`}>
+            <div key={trainer.id} className={`flex items-center gap-3 bg-zinc-900 border border-zinc-800 rounded-xl p-4 transition-opacity ${pendingOp === `delete:${trainer.id}` ? 'opacity-50 pointer-events-none' : ''}`}>
               <div className="w-10 h-10 rounded-full bg-amber-400/10 border border-amber-400/30 flex items-center justify-center shrink-0 overflow-hidden">
-                {teacher.photo_url ? (
-                  <img src={teacher.photo_url} alt={teacher.name} className="w-full h-full object-cover rounded-full" />
+                {trainer.photo_url ? (
+                  <img src={trainer.photo_url} alt={trainer.name} className="w-full h-full object-cover rounded-full" />
                 ) : (
                   <span className="text-amber-400 font-bold text-sm">
-                    {teacher.name.split(' ').map((w: string) => w[0]).join('').toUpperCase().slice(0, 2)}
+                    {trainer.name.split(' ').map((w: string) => w[0]).join('').toUpperCase().slice(0, 2)}
                   </span>
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-white font-semibold text-sm">{teacher.name}</p>
-                <p className="text-zinc-500 text-xs mt-0.5">@{teacher.ig_handle}</p>
+                <p className="text-white font-semibold text-sm">{trainer.name}</p>
+                <p className="text-zinc-500 text-xs mt-0.5">@{trainer.ig_handle}</p>
               </div>
               <div className="flex flex-col gap-1 shrink-0">
                 <div className="flex gap-2">
-                  <button onClick={() => handleReorder(teacher.id, 'up')} disabled={pendingOp !== null || teacher.order_index === Math.min(...list.map(t => t.order_index))} className={`text-xs transition-colors ${pendingOp === `up:${teacher.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move up">↑</button>
-                  <button onClick={() => handleReorder(teacher.id, 'down')} disabled={pendingOp !== null || teacher.order_index === Math.max(...list.map(t => t.order_index))} className={`text-xs transition-colors ${pendingOp === `down:${teacher.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move down">↓</button>
+                  <button onClick={() => handleReorder(trainer.id, 'up')} disabled={pendingOp !== null || trainer.order_index === Math.min(...list.map(t => t.order_index))} className={`text-xs transition-colors ${pendingOp === `up:${trainer.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move up">↑</button>
+                  <button onClick={() => handleReorder(trainer.id, 'down')} disabled={pendingOp !== null || trainer.order_index === Math.max(...list.map(t => t.order_index))} className={`text-xs transition-colors ${pendingOp === `down:${trainer.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move down">↓</button>
                 </div>
                 <div className="flex gap-2">
-                  <button onClick={() => setEditingId(teacher.id)} disabled={pendingOp !== null} className="text-xs text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">{t.edit}</button>
-                  <button onClick={() => handleDelete(teacher.id)} disabled={pendingOp !== null} className="text-xs text-zinc-400 hover:text-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">{t.delete}</button>
+                  <button onClick={() => setEditingId(trainer.id)} disabled={pendingOp !== null} className="text-xs text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">{t.edit}</button>
+                  <button onClick={() => handleDelete(trainer.id)} disabled={pendingOp !== null} className="text-xs text-zinc-400 hover:text-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">{t.delete}</button>
                 </div>
               </div>
             </div>
@@ -155,11 +155,11 @@ export default function TeachersPanel({ teachers, dict }: { teachers: Teacher[];
   );
 }
 
-type TeacherStrings = Dict['admin']['teachers'];
+type TrainerStrings = Dict['admin']['trainers'];
 
-function TeacherForm({ t, defaults, onSubmit, onCancel, label, pendingOp }: {
-  t: TeacherStrings;
-  defaults?: Teacher;
+function TrainerForm({ t, defaults, onSubmit, onCancel, label, pendingOp }: {
+  t: TrainerStrings;
+  defaults?: Trainer;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   onCancel: () => void;
   label: string;

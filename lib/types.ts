@@ -26,7 +26,7 @@ export type Service = {
   order_index: number;
 };
 
-export type Teacher = {
+export type Trainer = {
   id: number;
   name: string;
   ig_handle: string;

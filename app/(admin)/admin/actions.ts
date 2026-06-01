@@ -19,7 +19,7 @@ function invalidateHomepage() {
 }
 
 async function reorderItem(
-  table: 'services' | 'teachers' | 'playlists' | 'gallery',
+  table: 'services' | 'trainers' | 'playlists' | 'gallery',
   id: number,
   direction: 'up' | 'down',
 ) {
@@ -147,7 +147,7 @@ export async function reorderServiceAction(id: number, direction: 'up' | 'down')
   return reorderItem('services', id, direction);
 }
 
-// Teachers
+// Trainers
 const PHOTO_EXTS = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
 
 function getFileExt(file: File): string {
@@ -155,11 +155,11 @@ function getFileExt(file: File): string {
   return parts.length > 1 ? parts.pop()!.toLowerCase() : 'jpg';
 }
 
-export async function addTeacherAction(formData: FormData) {
+export async function addTrainerAction(formData: FormData) {
   await requireAuth();
   const db = createAdminClient();
 
-  const { data: inserted, error } = await db.from('teachers').insert({
+  const { data: inserted, error } = await db.from('trainers').insert({
     name: formData.get('name'),
     ig_handle: formData.get('ig_handle'),
     order_index: Number(formData.get('order_index') || 0),
@@ -172,10 +172,10 @@ export async function addTeacherAction(formData: FormData) {
   if (photo instanceof File && photo.size > 0) {
     const ext = getFileExt(photo);
     const path = `${inserted.id}.${ext}`;
-    const { error: uploadError } = await db.storage.from('teacher-photos').upload(path, photo, { upsert: true });
+    const { error: uploadError } = await db.storage.from('trainer-photos').upload(path, photo, { upsert: true });
     if (!uploadError) {
-      const { data: { publicUrl } } = db.storage.from('teacher-photos').getPublicUrl(path);
-      await db.from('teachers').update({ photo_url: publicUrl }).eq('id', inserted.id);
+      const { data: { publicUrl } } = db.storage.from('trainer-photos').getPublicUrl(path);
+      await db.from('trainers').update({ photo_url: publicUrl }).eq('id', inserted.id);
       photo_url = publicUrl;
     }
   }
@@ -184,7 +184,7 @@ export async function addTeacherAction(formData: FormData) {
   return { success: true, data: { ...inserted, photo_url } };
 }
 
-export async function updateTeacherAction(formData: FormData) {
+export async function updateTrainerAction(formData: FormData) {
   await requireAuth();
   const db = createAdminClient();
   const id = Number(formData.get('id'));
@@ -201,45 +201,45 @@ export async function updateTeacherAction(formData: FormData) {
   const photo = formData.get('photo');
 
   if (removePhoto) {
-    await Promise.allSettled(PHOTO_EXTS.map((e) => db.storage.from('teacher-photos').remove([`${id}.${e}`])));
+    await Promise.allSettled(PHOTO_EXTS.map((e) => db.storage.from('trainer-photos').remove([`${id}.${e}`])));
     updates.photo_url = '';
     photoUrl = '';
   }
 
   if (photo instanceof File && photo.size > 0) {
     if (!removePhoto) {
-      await Promise.allSettled(PHOTO_EXTS.map((e) => db.storage.from('teacher-photos').remove([`${id}.${e}`])));
+      await Promise.allSettled(PHOTO_EXTS.map((e) => db.storage.from('trainer-photos').remove([`${id}.${e}`])));
     }
     const ext = getFileExt(photo);
     const path = `${id}.${ext}`;
-    const { error: uploadError } = await db.storage.from('teacher-photos').upload(path, photo, { upsert: true });
+    const { error: uploadError } = await db.storage.from('trainer-photos').upload(path, photo, { upsert: true });
     if (!uploadError) {
-      const { data: { publicUrl } } = db.storage.from('teacher-photos').getPublicUrl(path);
+      const { data: { publicUrl } } = db.storage.from('trainer-photos').getPublicUrl(path);
       updates.photo_url = publicUrl;
       photoUrl = publicUrl;
     }
   }
 
-  const { error } = await db.from('teachers').update(updates).eq('id', id);
+  const { error } = await db.from('trainers').update(updates).eq('id', id);
   if (error) return { error: error.message };
   invalidateHomepage();
   return { success: true, photoUrl };
 }
 
-export async function deleteTeacherAction(id: number) {
+export async function deleteTrainerAction(id: number) {
   await requireAuth();
   const db = createAdminClient();
 
-  const { data: teacher } = await db.from('teachers').select('photo_url').eq('id', id).single();
-  const { error } = await db.from('teachers').delete().eq('id', id);
+  const { data: trainer } = await db.from('trainers').select('photo_url').eq('id', id).single();
+  const { error } = await db.from('trainers').delete().eq('id', id);
   if (error) return { error: error.message };
 
-  if (teacher?.photo_url) {
-    const marker = '/teacher-photos/';
-    const idx = teacher.photo_url.indexOf(marker);
+  if (trainer?.photo_url) {
+    const marker = '/trainer-photos/';
+    const idx = trainer.photo_url.indexOf(marker);
     if (idx !== -1) {
-      const storagePath = teacher.photo_url.slice(idx + marker.length);
-      await db.storage.from('teacher-photos').remove([storagePath]);
+      const storagePath = trainer.photo_url.slice(idx + marker.length);
+      await db.storage.from('trainer-photos').remove([storagePath]);
     }
   }
 
@@ -247,9 +247,9 @@ export async function deleteTeacherAction(id: number) {
   return { success: true };
 }
 
-export async function reorderTeacherAction(id: number, direction: 'up' | 'down') {
+export async function reorderTrainerAction(id: number, direction: 'up' | 'down') {
   await requireAuth();
-  return reorderItem('teachers', id, direction);
+  return reorderItem('trainers', id, direction);
 }
 
 // Playlists

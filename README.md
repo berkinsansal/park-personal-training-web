@@ -25,24 +25,24 @@ app/
     components/
       SiteInfoForm.tsx        # Edit site-wide info (contact details, stats)
       ServicesPanel.tsx       # Add / edit / delete services
-      TeachersPanel.tsx       # Add / edit / delete trainers
+      TrainersPanel.tsx       # Add / edit / delete trainers
       styles.ts               # Shared Tailwind class strings
 components/                   # Public page sections
   Navbar.tsx                  # Fixed top nav with mobile drawer
   Hero.tsx                    # Full-screen hero (static)
   About.tsx                   # Stats grid (data from DB)
   Services.tsx                # Services grid (data from DB)
-  Teachers.tsx                # Trainer cards (data from DB)
+  Trainers.tsx                # Trainer cards (data from DB)
   Contact.tsx                 # Contact info + placeholder form
   Footer.tsx                  # Footer with Instagram link
 lib/
-  types.ts                    # Shared TypeScript types (SiteInfo, Service, Teacher)
+  types.ts                    # Shared TypeScript types (SiteInfo, Service, Trainer)
   supabase-server.ts          # Supabase clients: session (SSR) + admin (service key)
 proxy.ts                      # Auth guard — redirects unauthenticated /admin/* to /admin/login
 supabase/
   config.toml                 # Supabase project reference
   migrations/                 # Versioned SQL migrations
-  seed.sql                    # Initial data for site_info, services, teachers
+  seed.sql                    # Initial data for site_info, services, trainers
 ```
 
 ## Database Schema
@@ -53,7 +53,7 @@ Three tables, all with RLS enabled and a public read policy.
 |---|---|
 | `site_info` | Single-row table: contact details, working hours, Instagram handle, stats |
 | `services` | Offered services: emoji icon, title, description, display order |
-| `teachers` | Trainers: name, Instagram handle, initials, display order |
+| `trainers` | Trainers: name, Instagram handle, initials, display order |
 
 The admin user is created directly in the Supabase dashboard (Authentication → Users). There is no public sign-up.
 

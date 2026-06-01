@@ -8,12 +8,12 @@ type Props = {
   dict: Dict;
   happyCustomers: number;
   yearsExperience: number;
-  teacherCount: number;
+  trainerCount: number;
   serviceCount: number;
   gallery: GalleryPhoto[];
 };
 
-export default function About({ dict, happyCustomers, yearsExperience, teacherCount, serviceCount, gallery }: Props) {
+export default function About({ dict, happyCustomers, yearsExperience, trainerCount, serviceCount, gallery }: Props) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
@@ -46,7 +46,7 @@ export default function About({ dict, happyCustomers, yearsExperience, teacherCo
   const stats = [
     { value: `${happyCustomers}+`, label: t.statHappyCustomers },
     { value: `${yearsExperience}+`, label: t.statYearsExperience },
-    { value: `${teacherCount}+`, label: t.statTeachers },
+    { value: `${trainerCount}+`, label: t.statTrainers },
     { value: String(serviceCount), label: t.statServices },
   ];
 

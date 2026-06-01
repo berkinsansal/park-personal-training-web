@@ -15,9 +15,9 @@ CREATE TABLE services (
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- Rebuild teachers to match component data
-DROP TABLE IF EXISTS teachers;
-CREATE TABLE teachers (
+-- Rebuild trainers to match component data
+DROP TABLE IF EXISTS trainers;
+CREATE TABLE trainers (
   id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   name TEXT NOT NULL,
   ig_handle TEXT NOT NULL,
@@ -44,10 +44,10 @@ CREATE TABLE site_info (
 
 -- RLS
 ALTER TABLE services ENABLE ROW LEVEL SECURITY;
-ALTER TABLE teachers ENABLE ROW LEVEL SECURITY;
+ALTER TABLE trainers ENABLE ROW LEVEL SECURITY;
 ALTER TABLE site_info ENABLE ROW LEVEL SECURITY;
 
 -- Public read access
 CREATE POLICY "public_read" ON services FOR SELECT USING (true);
-CREATE POLICY "public_read" ON teachers FOR SELECT USING (true);
+CREATE POLICY "public_read" ON trainers FOR SELECT USING (true);
 CREATE POLICY "public_read" ON site_info FOR SELECT USING (true);

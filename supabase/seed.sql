@@ -26,8 +26,8 @@ INSERT INTO services (icon, title, description, title_en, description_en, order_
   ('🎀', 'Pole Dance', 'Akrobasi ve dansı bir araya getiren, üst vücut gücünü ve esnekliği geliştiren pole dance dersleri. Her seviyeye uygun, eğlenceli bir antrenman.', 'Pole Dance', 'Pole dance classes that combine acrobatics and dance, developing upper body strength and flexibility. A fun workout suitable for all levels.', 4),
   ('🏋️', 'Condition & Strength', 'Kondisyonunu zirveye taşıyan ve kas gücünü sistematik şekilde artıran özel programlar. Performansını bir üst seviyeye çıkar.', 'Condition & Strength', 'Special programs that take your conditioning to the peak and systematically increase muscle strength. Take your performance to the next level.', 5);
 
--- Teachers
-INSERT INTO teachers (name, ig_handle, order_index) VALUES
+-- Trainers
+INSERT INTO trainers (name, ig_handle, order_index) VALUES
   ('Kemal Bilge', 'kemalbilge14', 1),
   ('Kadir Özdemir', 'kadrozdemirr', 2),
   ('Kutlu Olatunji', 'kutluolatunjii', 3);

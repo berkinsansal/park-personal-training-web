@@ -5,12 +5,12 @@ import { getDict, type Locale, type Dict } from '@/lib/i18n';
 import { cacheLife, cacheTag } from 'next/cache';
 import { createAdminClient } from '@/lib/supabase-server';
 import { siteConfig } from '@/lib/site.config';
-import type { SiteInfo, Service, Teacher, Playlist, GalleryPhoto } from '@/lib/types';
+import type { SiteInfo, Service, Trainer, Playlist, GalleryPhoto } from '@/lib/types';
 import Navbar from "@/app/(public)/_components/Navbar";
 import Hero from "@/app/(public)/_components/Hero";
 import About from "@/app/(public)/_components/About";
 import Services from "@/app/(public)/_components/Services";
-import Teachers from "@/app/(public)/_components/Teachers";
+import Trainers from "@/app/(public)/_components/Trainers";
 import Playlists from "@/app/(public)/_components/Playlists";
 import Contact from "@/app/(public)/_components/Contact";
 import Footer from "@/app/(public)/_components/Footer";
@@ -22,10 +22,10 @@ async function getHomepageData(locale: Locale) {
 
   const db = createAdminClient();
 
-  const [siteInfoRes, servicesRes, teachersRes, galleryRes, playlistsRes] = await Promise.all([
+  const [siteInfoRes, servicesRes, trainersRes, galleryRes, playlistsRes] = await Promise.all([
     db.from('site_info').select('*').single(),
     db.from('services').select('*').order('order_index'),
-    db.from('teachers').select('*').order('order_index'),
+    db.from('trainers').select('*').order('order_index'),
     db.from('gallery').select('*').order('order_index'),
     db.from('playlists').select('*').order('order_index'),
   ]);
@@ -33,7 +33,7 @@ async function getHomepageData(locale: Locale) {
   const errors = [
     siteInfoRes.error && `site_info: ${siteInfoRes.error.message}`,
     servicesRes.error && `services: ${servicesRes.error.message}`,
-    teachersRes.error && `teachers: ${teachersRes.error.message}`,
+    trainersRes.error && `trainers: ${trainersRes.error.message}`,
     galleryRes.error && `gallery: ${galleryRes.error.message}`,
     playlistsRes.error && `playlists: ${playlistsRes.error.message}`,
   ].filter(Boolean);
@@ -45,7 +45,7 @@ async function getHomepageData(locale: Locale) {
   return {
     siteInfo: siteInfoRes.data as SiteInfo,
     services: servicesRes.data as Service[],
-    teachers: teachersRes.data as Teacher[],
+    trainers: trainersRes.data as Trainer[],
     gallery: galleryRes.data as GalleryPhoto[],
     playlists: playlistsRes.data as Playlist[],
   };
@@ -53,7 +53,7 @@ async function getHomepageData(locale: Locale) {
 
 async function HomeContent({ locale }: { locale: Locale }) {
   const t = getDict(locale);
-  const { siteInfo, services, teachers, gallery, playlists } = await getHomepageData(locale);
+  const { siteInfo, services, trainers, gallery, playlists } = await getHomepageData(locale);
 
   return (
     <>
@@ -64,12 +64,12 @@ async function HomeContent({ locale }: { locale: Locale }) {
           dict={t}
           happyCustomers={siteInfo.happy_customers}
           yearsExperience={siteInfo.years_experience}
-          teacherCount={teachers.length}
+          trainerCount={trainers.length}
           serviceCount={services.length}
           gallery={gallery}
         />
         <Services services={services} locale={locale} dict={t} />
-        <Teachers teachers={teachers} dict={t} />
+        <Trainers trainers={trainers} dict={t} />
         <Playlists playlists={playlists} dict={t} />
         <Contact siteInfo={siteInfo} locale={locale} dict={t} />
       </main>

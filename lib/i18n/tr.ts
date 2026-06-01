@@ -6,7 +6,7 @@ export const tr = {
   nav: {
     about: 'Hakkımızda',
     services: 'Hizmetler',
-    teachers: 'Eğitmenler',
+    trainers: 'Eğitmenler',
     contact: 'İletişim',
   },
   hero: {
@@ -24,7 +24,7 @@ export const tr = {
     cta: 'Bize Ulaşın',
     statHappyCustomers: 'Mutlu Üye',
     statYearsExperience: 'Yıl Deneyim',
-    statTeachers: 'Uzman Eğitmen',
+    statTrainers: 'Uzman Eğitmen',
     statServices: 'Program Çeşidi',
   },
   services: {
@@ -32,7 +32,7 @@ export const tr = {
     heading: 'Ne Sunuyoruz?',
     description: 'Her seviyeye ve hedefe uygun programlarla seni en iyi şekilde destekliyoruz.',
   },
-  teachers: {
+  trainers: {
     label: 'Ekibimiz',
     heading: 'Uzman Eğitmenlerimiz',
     description: 'Sertifikalı ve deneyimli eğitmenlerimiz, seni hedeflerine ulaştırmak için burada.',
@@ -107,7 +107,7 @@ export const tr = {
       updated: 'Güncellendi.',
       added: 'Eklendi. Sayfayı yenileyin.',
     },
-    teachers: {
+    trainers: {
       heading: 'Eğitmenler',
       add: '+ Ekle',
       cancel: 'İptal',

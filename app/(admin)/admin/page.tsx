@@ -8,7 +8,7 @@ import { getLocale } from '@/lib/locale';
 import { getDict } from '@/lib/i18n';
 import SiteInfoForm from './_components/SiteInfoForm';
 import ServicesPanel from './_components/ServicesPanel';
-import TeachersPanel from './_components/TeachersPanel';
+import TrainersPanel from './_components/TrainersPanel';
 import PlaylistsPanel from './_components/PlaylistsPanel';
 import GalleryPanel from './_components/GalleryPanel';
 import LocaleSwitcher from './_components/LocaleSwitcher';
@@ -21,10 +21,10 @@ async function AdminContent() {
   const t = dict.admin;
   const db = createAdminClient();
 
-  const [{ data: siteInfo }, { data: services }, { data: teachers }, { data: playlists }, { data: gallery }] = await Promise.all([
+  const [{ data: siteInfo }, { data: services }, { data: trainers }, { data: playlists }, { data: gallery }] = await Promise.all([
     db.from('site_info').select('*').single(),
     db.from('services').select('*').order('order_index'),
-    db.from('teachers').select('*').order('order_index'),
+    db.from('trainers').select('*').order('order_index'),
     db.from('playlists').select('*').order('order_index'),
     db.from('gallery').select('*').order('order_index'),
   ]);
@@ -60,7 +60,7 @@ async function AdminContent() {
       <main className="max-w-4xl mx-auto px-6 py-10 flex flex-col gap-10">
         <SiteInfoForm data={siteInfo} dict={dict} />
         <ServicesPanel services={services ?? []} dict={dict} />
-        <TeachersPanel teachers={teachers ?? []} dict={dict} />
+        <TrainersPanel trainers={trainers ?? []} dict={dict} />
         <GalleryPanel gallery={gallery ?? []} dict={dict} />
         <PlaylistsPanel playlists={playlists ?? []} dict={dict} />
       </main>
