@@ -258,6 +258,7 @@ export async function addPlaylistAction(formData: FormData) {
   const db = createAdminClient();
 
   const { data, error } = await db.from('playlists').insert({
+    title: formData.get('title'),
     spotify_id: formData.get('spotify_id'),
     order_index: Number(formData.get('order_index') || 0),
   }).select('*').single();
@@ -272,6 +273,7 @@ export async function updatePlaylistAction(formData: FormData) {
   const db = createAdminClient();
 
   const { error } = await db.from('playlists').update({
+    title: formData.get('title'),
     spotify_id: formData.get('spotify_id'),
     order_index: Number(formData.get('order_index') || 0),
     updated_at: new Date().toISOString(),

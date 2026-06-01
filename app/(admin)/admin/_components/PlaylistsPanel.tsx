@@ -62,6 +62,7 @@ export default function PlaylistsPanel({ playlists, dict }: { playlists: Playlis
         return {
           id,
           spotify_id: fd.get('spotify_id') as string,
+          title: fd.get('title') as string,
           order_index: Number(fd.get('order_index')),
         };
       }));
@@ -126,8 +127,8 @@ export default function PlaylistsPanel({ playlists, dict }: { playlists: Playlis
                 🎵
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-white font-semibold text-sm">{playlist.spotify_id}</p>
-                <p className="text-zinc-500 text-xs mt-0.5">{t.spotifyPlaylistLabel}</p>
+                <p className="text-white font-semibold text-sm">{playlist.title}</p>
+                <p className="text-zinc-500 text-xs mt-0.5">{playlist.spotify_id}</p>
               </div>
               <div className="flex flex-col gap-1 shrink-0">
                 <div className="flex gap-2">
@@ -162,6 +163,10 @@ function PlaylistForm({ t, defaults, onSubmit, onCancel, label, pendingOp }: {
     <form onSubmit={onSubmit} className="bg-zinc-900 border border-amber-400/30 rounded-xl p-4 flex flex-col gap-3 mb-3">
       {defaults && <input type="hidden" name="id" value={defaults.id} />}
       {defaults && <input type="hidden" name="order_index" value={defaults.order_index} />}
+      <div>
+        <label className="block text-zinc-400 text-xs mb-1">{t.title || 'Title'}</label>
+        <input name="title" defaultValue={defaults?.title} required disabled={pendingOp !== null} className={inputCls} placeholder="e.g. Morning Workout" />
+      </div>
       <div>
         <label className="block text-zinc-400 text-xs mb-1">{t.spotifyId}</label>
         <input name="spotify_id" defaultValue={defaults?.spotify_id} required disabled={pendingOp !== null} className={inputCls} placeholder="e.g. 37i9dQZF1DX8FwnYE6PRvL" />
