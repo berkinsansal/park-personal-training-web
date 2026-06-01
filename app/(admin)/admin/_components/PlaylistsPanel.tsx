@@ -164,7 +164,7 @@ function PlaylistForm({ t, defaults, onSubmit, onCancel, label, pendingOp }: {
       {defaults && <input type="hidden" name="id" value={defaults.id} />}
       {defaults && <input type="hidden" name="order_index" value={defaults.order_index} />}
       <div>
-        <label className="block text-zinc-400 text-xs mb-1">{t.title || 'Title'}</label>
+        <label className="block text-zinc-400 text-xs mb-1">{t.title}</label>
         <input name="title" defaultValue={defaults?.title} required disabled={pendingOp !== null} className={inputCls} placeholder="e.g. Morning Workout" />
       </div>
       <div>

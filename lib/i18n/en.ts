@@ -127,6 +127,7 @@ export const en = {
       heading: 'Spotify Playlists',
       add: '+ Add',
       cancel: 'Cancel',
+      title: 'Title',
       spotifyId: 'Spotify Playlist ID',
       spotifyPlaylistLabel: 'Spotify Playlist',
       edit: 'Edit',

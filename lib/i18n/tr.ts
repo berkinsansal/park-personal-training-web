@@ -127,6 +127,7 @@ export const tr = {
       heading: 'Spotify Çalma Listeleri',
       add: '+ Ekle',
       cancel: 'İptal',
+      title: 'Başlık',
       spotifyId: 'Spotify Çalma Listesi ID',
       spotifyPlaylistLabel: 'Spotify Çalma Listesi',
       edit: 'Düzenle',
