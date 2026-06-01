@@ -75,7 +75,7 @@ The tables from migration 001 (`hero`, `about`, `contact`) were dropped in migra
 ## CLAUDE CODE ALWAYS DO THESE
 
 - Update documentation if necessary
-- git COMMIT and PUSH changes you have done
+- git COMMIT and PUSH changes you have done (DO NOT commit .claude/settings.local.json)
 - If DB schema changed, migrate SupaBase remote side too
 - If new column/table added to DB, seed the initial data
 - FOR DB RELATED TASKS, DO ALL CLI CALLS BY YOURSELF, DO NOT GIVE ME INSTRUCTIONS IF YOU CAN DO IT BY CLI
