@@ -22,33 +22,53 @@ async function getHomepageData(locale: Locale) {
 
   const db = createAdminClient();
 
-  const [siteInfoRes, servicesRes, trainersRes, galleryRes, playlistsRes] = await Promise.all([
-    db.from('site_info').select('*').single(),
-    db.from('services').select('*').order('order_index'),
-    db.from('trainers').select('*').order('order_index'),
-    db.from('gallery').select('*').order('order_index'),
-    db.from('playlists').select('*').order('order_index'),
-  ]);
+  const fetchWithRetry = async (attempt = 0): Promise<any> => {
+    try {
+      const [siteInfoRes, servicesRes, trainersRes, galleryRes, playlistsRes] = await Promise.all([
+        db.from('site_info').select('*').single(),
+        db.from('services').select('*').order('order_index'),
+        db.from('trainers').select('*').order('order_index'),
+        db.from('gallery').select('*').order('order_index'),
+        db.from('playlists').select('*').order('order_index'),
+      ]);
 
-  const errors = [
-    siteInfoRes.error && `site_info: ${siteInfoRes.error.message}`,
-    servicesRes.error && `services: ${servicesRes.error.message}`,
-    trainersRes.error && `trainers: ${trainersRes.error.message}`,
-    galleryRes.error && `gallery: ${galleryRes.error.message}`,
-    playlistsRes.error && `playlists: ${playlistsRes.error.message}`,
-  ].filter(Boolean);
+      const errors = [
+        siteInfoRes.error && `site_info: ${siteInfoRes.error.message}`,
+        servicesRes.error && `services: ${servicesRes.error.message}`,
+        trainersRes.error && `trainers: ${trainersRes.error.message}`,
+        galleryRes.error && `gallery: ${galleryRes.error.message}`,
+        playlistsRes.error && `playlists: ${playlistsRes.error.message}`,
+      ].filter(Boolean);
 
-  if (errors.length > 0) {
-    throw new Error(`Homepage data fetch failed: ${errors.join(', ')}`);
-  }
+      if (errors.length > 0) {
+        const errorMsg = errors.join(', ');
+        console.error(`Homepage data fetch failed: ${errorMsg}`);
+        if (attempt < 2) {
+          await new Promise(r => setTimeout(r, Math.pow(2, attempt) * 100));
+          return fetchWithRetry(attempt + 1);
+        }
+        throw new Error(`Homepage data fetch failed: ${errorMsg}`);
+      }
 
-  return {
-    siteInfo: siteInfoRes.data as SiteInfo,
-    services: servicesRes.data as Service[],
-    trainers: trainersRes.data as Trainer[],
-    gallery: galleryRes.data as GalleryPhoto[],
-    playlists: playlistsRes.data as Playlist[],
+      return {
+        siteInfo: siteInfoRes.data as SiteInfo,
+        services: servicesRes.data as Service[],
+        trainers: trainersRes.data as Trainer[],
+        gallery: galleryRes.data as GalleryPhoto[],
+        playlists: playlistsRes.data as Playlist[],
+      };
+    } catch (error) {
+      if (attempt < 2) {
+        console.warn(`Homepage fetch attempt ${attempt + 1} failed, retrying...`);
+        await new Promise(r => setTimeout(r, Math.pow(2, attempt) * 100));
+        return fetchWithRetry(attempt + 1);
+      }
+      console.error('Fatal error fetching homepage data after 3 attempts:', error);
+      throw error;
+    }
   };
+
+  return fetchWithRetry();
 }
 
 async function HomeContent({ locale }: { locale: Locale }) {
