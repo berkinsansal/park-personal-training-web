@@ -49,9 +49,9 @@ export default function Playlists({ playlists, dict }: { playlists: Playlist[]; 
               <iframe
                 style={{ borderRadius: '12px' }}
                 src={`https://open.spotify.com/embed/playlist/${selectedPlaylist.spotify_id}?utm_source=generator&theme=0`}
-                width="100%"
+                width=""
                 height="352"
-                className="h-[152px] md:h-[360px]"
+                className="h-[152px] w-full md:h-[360px] md:w-[50%]"
                 frameBorder="0"
                 allowFullScreen
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
