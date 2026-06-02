@@ -15,7 +15,7 @@ export default function Hero({ dict }: { dict: Dict }) {
     const onScroll = () => {
       rafId = requestAnimationFrame(() => {
         const progress = Math.min(window.scrollY / window.innerHeight, 1);
-        const scale = 1 + progress * 2;
+        const scale = 1 + progress * 0.7;
         if (logoRef.current) {
           logoRef.current.style.transform = `scale(${scale})`;
         }

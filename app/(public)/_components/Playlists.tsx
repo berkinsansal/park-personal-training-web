@@ -51,7 +51,7 @@ export default function Playlists({ playlists, dict }: { playlists: Playlist[]; 
                 src={`https://open.spotify.com/embed/playlist/${selectedPlaylist.spotify_id}?utm_source=generator&theme=0`}
                 width=""
                 height="352"
-                className="h-[152px] w-full md:h-[360px] md:w-[50%]"
+                className="h-[360px] w-full md:h-[360px] md:w-[50%]"
                 frameBorder="0"
                 allowFullScreen
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
