@@ -1,10 +1,17 @@
-'use client';
-
 import Image from "next/image";
+import { cacheLife } from 'next/cache';
 import type { Dict } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site.config";
 
-export default function Footer({ igHandle, dict }: { igHandle: string; dict: Dict }) {
+async function getCurrentYear() {
+  'use cache';
+  cacheLife('days');
+  return new Date().getFullYear();
+}
+
+export default async function Footer({ igHandle, dict }: { igHandle: string; dict: Dict }) {
+  const currentYear = await getCurrentYear();
+
   return (
     <footer className="bg-zinc-900 border-t border-zinc-800 py-8">
       <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
@@ -13,7 +20,7 @@ export default function Footer({ igHandle, dict }: { igHandle: string; dict: Dic
           <span className="text-amber-400 font-black text-xl tracking-wide">{siteConfig.siteName}</span>
         </div>
         <p className="text-zinc-500 text-sm text-center">
-          &copy; {new Date().getFullYear()} {siteConfig.siteName}. {dict.footer.copyright}
+          &copy; {currentYear} {siteConfig.siteName}. {dict.footer.copyright}
         </p>
         <a
           href={`https://instagram.com/${igHandle}`}
