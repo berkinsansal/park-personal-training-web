@@ -36,7 +36,37 @@
       "Bash(git mv *)",
       "Bash(supabase status *)",
       "Bash(supabase migration *)",
-      "Bash(xargs ls -la)"
+      "Bash(xargs ls -la)",
+      "Bash(mkdir -p \"app/[...locale]/\\(admin\\)/admin\")",
+      "Bash(cp -r \"app/\\(admin\\)/admin\"/* \"app/[...locale]/\\(admin\\)/admin/\")",
+      "Bash(rm -rf \"app/[...locale]\")",
+      "Bash(mkdir -p \"app/\\(public\\)/[[...locale]]\" \"app/admin/login\" \"app/admin/[[...locale]]\")",
+      "Bash(cp -r app/\\\\[\\\\.\\\\.\\\\.locale\\\\]/\\\\\\(public\\\\\\)/* \"app/\\(public\\)/[[...locale]]/\")",
+      "Bash(cp -r \"app/[...locale]/\\(public\\)\"/* \"app/\\(public\\)/[[...locale]]/\")",
+      "Bash(git checkout *)",
+      "Bash(cp -r \"app/\\(public\\)/_components\" \"app/\\(public\\)/[[...locale]]/\")",
+      "Bash(cp -r \"app/\\(admin\\)/admin/_components\" \"app/admin/[[...locale]]/admin_components\")",
+      "Bash(git clean *)",
+      "Bash(rm -f \"app/actions.ts\" && mkdir -p \"app/[[...locale]]\" \"app/admin\" && echo \"Prepared directories\")",
+      "Bash(git show *)",
+      "Bash(mv \"app/admin/admin\" \"app/admin/\\\\[\\\\[...locale\\\\]\\\\]/\" && echo \"Moved admin page to correct location\")",
+      "Bash(rm -rf \"app/\\(public\\)\" \"app/\\(admin\\)\" \"app/admin/admin\" \"app/admin/[[...locale]]/login\" && rm -f \"lib/locale.ts\" \"app/_components/LocaleUpdater.tsx\" && echo \"Cleaned up old infrastructure\")",
+      "Bash(mkdir -p \"app/admin/[[...locale]]/admin/login\")",
+      "Bash(rm -rf \"app/admin/[[...locale]]/admin/login\")",
+      "Bash(mv \"app/admin/[[...locale]]/admin/login/\"* \"app/admin/login/\")",
+      "Bash(rm -rf \"app/admin/[[...locale]]/admin/login\" && npm run build 2>&1 | tail -50)",
+      "Bash(rm -rf \"app/admin/[[...locale]]\" && mkdir -p \"app/admin\" && mv \"app/admin/login\" \"app/admin/\" && echo \"Removed locale from admin\")",
+      "Bash(sed 's/const locale = await getLocale\\(\\);/const locale = \"tr\";/')",
+      "Bash(cp -r \"app/\\(admin\\)/admin/_components\" \"app/admin/\")",
+      "Bash(cp -r \"node_modules/.../bak/\"* \"app/admin/_components\")"
+    ],
+    "additionalDirectories": [
+      "C:\\GitHub\\park-personal-training-web\\app",
+      "C:\\GitHub\\park-personal-training-web\\app\\[[...locale]]",
+      "C:\\GitHub\\park-personal-training-web\\app\\admin\\[\\[...locale\\]",
+      "C:\\GitHub\\park-personal-training-web\\app\\admin\\[[...locale]]\\login",
+      "C:\\GitHub\\park-personal-training-web\\app\\admin\\[[...locale]]\\admin",
+      "C:\\GitHub\\park-personal-training-web\\app\\admin\\[[...locale]]"
     ]
   }
 }

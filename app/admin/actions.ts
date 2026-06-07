@@ -3,7 +3,6 @@
 import { createAdminClient, createSessionClient } from '@/lib/supabase-server';
 import { redirect } from 'next/navigation';
 import { updateTag } from 'next/cache';
-import { getLocale } from '@/lib/locale';
 import { getDict } from '@/lib/i18n';
 
 async function requireAuth() {
@@ -52,7 +51,7 @@ export async function loginAction(_prev: unknown, formData: FormData) {
   const { error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
-    const locale = await getLocale();
+    const locale = "tr";
     return { error: getDict(locale).admin.login.error };
   }
 

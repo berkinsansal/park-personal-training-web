@@ -1,19 +1,18 @@
-import { Suspense } from 'react';
 import type { Metadata } from 'next';
-import { getLocale } from '@/lib/locale';
 import { getDict, type Locale, type Dict } from '@/lib/i18n';
 import { cacheLife, cacheTag } from 'next/cache';
 import { createAdminClient } from '@/lib/supabase-server';
 import { siteConfig } from '@/lib/site.config';
 import type { SiteInfo, Service, Trainer, Playlist, GalleryPhoto } from '@/lib/types';
-import Navbar from "@/app/(public)/_components/Navbar";
-import Hero from "@/app/(public)/_components/Hero";
-import About from "@/app/(public)/_components/About";
-import Services from "@/app/(public)/_components/Services";
-import Trainers from "@/app/(public)/_components/Trainers";
-import Playlists from "@/app/(public)/_components/Playlists";
-import Contact from "@/app/(public)/_components/Contact";
-import Footer from "@/app/(public)/_components/Footer";
+import { getLocaleFromParams } from '@/lib/getLocaleFromParams';
+import Navbar from "@/app/[[...locale]]/_components/Navbar";
+import Hero from "@/app/[[...locale]]/_components/Hero";
+import About from "@/app/[[...locale]]/_components/About";
+import Services from "@/app/[[...locale]]/_components/Services";
+import Trainers from "@/app/[[...locale]]/_components/Trainers";
+import Playlists from "@/app/[[...locale]]/_components/Playlists";
+import Contact from "@/app/[[...locale]]/_components/Contact";
+import Footer from "@/app/[[...locale]]/_components/Footer";
 
 async function getHomepageData(locale: Locale) {
   'use cache: remote';
@@ -98,8 +97,12 @@ async function HomeContent({ locale }: { locale: Locale }) {
   );
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  const locale = await getLocale();
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale?: string[] };
+}): Promise<Metadata> {
+  const locale = getLocaleFromParams(params);
   const dict = getDict(locale);
   return {
     title: `${siteConfig.siteName} | ${dict.meta.title}`,
@@ -107,15 +110,12 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-async function HomeShell() {
-  const locale = await getLocale();
-  return <HomeContent locale={locale} />;
-}
+export const generateStaticParams = () => [
+  { locale: undefined },  // /
+  { locale: ['en'] },     // /en
+];
 
-export default function Home() {
-  return (
-    <Suspense>
-      <HomeShell />
-    </Suspense>
-  );
+export default function Home({ params }: { params: { locale?: string[] } }) {
+  const locale = getLocaleFromParams(params);
+  return <HomeContent locale={locale} />;
 }

@@ -1,10 +1,10 @@
 'use server';
 
-import { getLocale } from '@/lib/locale';
-import { getDict } from '@/lib/i18n';
+import { getDict, type Locale } from '@/lib/i18n';
 
 export async function sendContactAction(_prev: unknown, formData: FormData) {
-  const locale = await getLocale();
+  const localeStr = formData.get('locale')?.toString() ?? 'tr';
+  const locale: Locale = localeStr === 'en' ? 'en' : 'tr';
   const dict = getDict(locale);
   const t = dict.contact;
 

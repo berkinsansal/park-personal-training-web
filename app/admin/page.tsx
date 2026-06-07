@@ -1,10 +1,8 @@
 import { connection } from 'next/server';
-import { Suspense } from 'react';
 import Link from 'next/link';
 import Image from "next/image";
 import { createAdminClient } from '@/lib/supabase-server';
 import { siteConfig } from '@/lib/site.config';
-import { getLocale } from '@/lib/locale';
 import { getDict } from '@/lib/i18n';
 import SiteInfoForm from './_components/SiteInfoForm';
 import ServicesPanel from './_components/ServicesPanel';
@@ -16,8 +14,7 @@ import { logoutAction } from './actions';
 
 async function AdminContent() {
   await connection();
-  const locale = await getLocale();
-  const dict = getDict(locale);
+  const dict = getDict('tr');
   const t = dict.admin;
   const db = createAdminClient();
 
@@ -46,7 +43,7 @@ async function AdminContent() {
           </div>
         </Link>
         <div className="flex items-center gap-4">
-          <LocaleSwitcher locale={locale} />
+          <LocaleSwitcher locale="tr" />
           <form action={logoutAction}>
             <button
               type="submit"
@@ -68,10 +65,10 @@ async function AdminContent() {
   );
 }
 
+export const generateStaticParams = () => {
+  return [];
+};
+
 export default function AdminPage() {
-  return (
-    <Suspense>
-      <AdminContent />
-    </Suspense>
-  );
+  return <AdminContent />;
 }

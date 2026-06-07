@@ -1,8 +1,8 @@
 'use client';
 
 import { useRef, useState, useTransition } from 'react';
-import { sendContactAction } from '@/app/(public)/actions';
-import type { Dict } from '@/lib/i18n';
+import { sendContactAction } from '@/app/[[...locale]]/actions';
+import type { Dict, Locale } from '@/lib/i18n';
 
 function SubmitButton({ label, pending }: { label: string; pending: boolean }) {
   return (
@@ -16,7 +16,7 @@ function SubmitButton({ label, pending }: { label: string; pending: boolean }) {
   );
 }
 
-export default function ContactForm({ t }: { t: Dict['contact'] }) {
+export default function ContactForm({ t, locale }: { t: Dict['contact']; locale: Locale }) {
   const formRef = useRef<HTMLFormElement>(null);
   const [isPending, startTransition] = useTransition();
   const [state, setState] = useState<{ error?: string; success?: boolean } | null>(null);
@@ -24,6 +24,7 @@ export default function ContactForm({ t }: { t: Dict['contact'] }) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
+    formData.set('locale', locale);
     startTransition(async () => {
       const result = await sendContactAction(null, formData);
       setState(result);

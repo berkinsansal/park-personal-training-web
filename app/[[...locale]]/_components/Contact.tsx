@@ -118,7 +118,7 @@ export default function Contact({ siteInfo, locale, dict }: { siteInfo: SiteInfo
           </AnimateIn>
 
           <AnimateIn delay={150}>
-            <ContactForm t={t} />
+            <ContactForm t={t} locale={locale} />
           </AnimateIn>
         </div>
 
