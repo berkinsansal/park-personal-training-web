@@ -102,7 +102,8 @@ export async function generateMetadata({
 }: {
   params: { locale?: string[] };
 }): Promise<Metadata> {
-  const locale = getLocaleFromParams(params);
+  const resolvedParams = await params;
+  const locale = getLocaleFromParams(resolvedParams);
   const dict = getDict(locale);
   return {
     title: `${siteConfig.siteName} | ${dict.meta.title}`,
@@ -115,7 +116,8 @@ export const generateStaticParams = () => [
   { locale: ['en'] },     // /en
 ];
 
-export default function Home({ params }: { params: { locale?: string[] } }) {
-  const locale = getLocaleFromParams(params);
+export default async function Home({ params }: { params: { locale?: string[] } }) {
+  const resolvedParams = await params;
+  const locale = getLocaleFromParams(resolvedParams);
   return <HomeContent locale={locale} />;
 }

@@ -20,8 +20,8 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: Promise<{ locale?: string[] }>;
 }>) {
-  const { locale: localeSegments } = await params;
-  const locale = getLocaleFromParams({ locale: localeSegments });
+  const resolvedParams = await params;
+  const locale = getLocaleFromParams(resolvedParams);
   const htmlLang = locale === 'en' ? 'en' : 'tr';
 
   return (
