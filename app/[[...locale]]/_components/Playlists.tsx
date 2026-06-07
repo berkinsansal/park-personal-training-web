@@ -58,9 +58,8 @@ export default function Playlists({ playlists, dict }: { playlists: Playlist[]; 
                   width=""
                   height="352"
                   className="h-[360px] w-full md:h-[360px] md:w-[50%]"
-                  frameBorder="0"
                   allowFullScreen
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
                   loading="lazy"
                 />
               </div>
