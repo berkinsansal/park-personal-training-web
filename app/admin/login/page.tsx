@@ -8,6 +8,8 @@ async function LoginContent() {
   return <LoginForm dict={dict} locale="tr" />;
 }
 
+export const generateStaticParams = () => [];
+
 export default function LoginPage() {
   return <LoginContent />;
 }

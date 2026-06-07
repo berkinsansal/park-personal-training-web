@@ -1,3 +1,5 @@
+'use client';
+
 import Image from "next/image";
 import type { Dict } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site.config";
