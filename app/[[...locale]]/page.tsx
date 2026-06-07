@@ -43,7 +43,7 @@ async function getHomepageData(locale: Locale) {
         const errorMsg = errors.join(', ');
         console.error(`Homepage data fetch failed: ${errorMsg}`);
         if (attempt < 2) {
-          await new Promise(r => setTimeout(r, Math.pow(2, attempt) * 100));
+          await new Promise(r => setTimeout(r, Math.pow(2, attempt) * 500));
           return fetchWithRetry(attempt + 1);
         }
         throw new Error(`Homepage data fetch failed: ${errorMsg}`);
@@ -59,7 +59,7 @@ async function getHomepageData(locale: Locale) {
     } catch (error) {
       if (attempt < 2) {
         console.warn(`Homepage fetch attempt ${attempt + 1} failed, retrying...`);
-        await new Promise(r => setTimeout(r, Math.pow(2, attempt) * 100));
+        await new Promise(r => setTimeout(r, Math.pow(2, attempt) * 500));
         return fetchWithRetry(attempt + 1);
       }
       console.error('Fatal error fetching homepage data after 3 attempts:', error);
