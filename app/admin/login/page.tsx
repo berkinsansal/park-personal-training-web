@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { connection } from 'next/server';
 import { getDict } from '@/lib/i18n';
 import LoginForm from './LoginForm';
@@ -11,5 +12,9 @@ async function LoginContent() {
 export const generateStaticParams = () => [];
 
 export default function LoginPage() {
-  return <LoginContent />;
+  return (
+    <Suspense>
+      <LoginContent />
+    </Suspense>
+  );
 }

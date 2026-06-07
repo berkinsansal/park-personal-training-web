@@ -1,4 +1,5 @@
 import { connection } from 'next/server';
+import { Suspense } from 'react';
 import Link from 'next/link';
 import Image from "next/image";
 import { createAdminClient } from '@/lib/supabase-server';
@@ -70,5 +71,9 @@ export const generateStaticParams = () => {
 };
 
 export default function AdminPage() {
-  return <AdminContent />;
+  return (
+    <Suspense>
+      <AdminContent />
+    </Suspense>
+  );
 }
