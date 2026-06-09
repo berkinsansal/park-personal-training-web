@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import LanguageSwitcher from "./LanguageSwitcher";
+import LocaleSwitcher from "@/app/_components/LocaleSwitcher";
 import type { Dict, Locale } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site.config";
 
@@ -79,7 +79,7 @@ export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale })
             </li>
           ))}
           <li>
-            <LanguageSwitcher locale={locale} />
+            <LocaleSwitcher locale={locale} />
           </li>
         </ul>
         <button
@@ -108,7 +108,7 @@ export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale })
               {l.label}
             </a>
           ))}
-          <LanguageSwitcher locale={locale} />
+          <LocaleSwitcher locale={locale} />
         </div>
       )}
     </nav>

@@ -10,7 +10,7 @@ import ServicesPanel from './_components/ServicesPanel';
 import TrainersPanel from './_components/TrainersPanel';
 import PlaylistsPanel from './_components/PlaylistsPanel';
 import GalleryPanel from './_components/GalleryPanel';
-import LocaleSwitcher from './_components/LocaleSwitcher';
+import LocaleSwitcher from '@/app/_components/LocaleSwitcher';
 import { logoutAction } from './actions';
 
 async function AdminContent() {

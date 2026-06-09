@@ -2,7 +2,7 @@
 
 import { useActionState } from 'react';
 import { loginAction } from '../actions';
-import LocaleSwitcher from '../_components/LocaleSwitcher';
+import LocaleSwitcher from '@/app/_components/LocaleSwitcher';
 import type { Dict, Locale } from '@/lib/i18n';
 import Link from 'next/link';
 import { siteConfig } from '@/lib/site.config';
