@@ -4,6 +4,8 @@ import { createAdminClient, createSessionClient } from '@/lib/supabase-server';
 import { redirect } from 'next/navigation';
 import { updateTag } from 'next/cache';
 import { getDict } from '@/lib/i18n';
+import { cookies } from 'next/headers';
+import type { Locale } from '@/lib/i18n';
 
 async function requireAuth() {
   const supabase = await createSessionClient();
@@ -40,6 +42,12 @@ async function reorderItem(
 
   invalidateHomepage();
   return { success: true };
+}
+
+// Locale
+export async function setLocaleAction(locale: Locale) {
+  const cookieStore = await cookies();
+  cookieStore.set('locale', locale, { maxAge: 60 * 60 * 24 * 365 });
 }
 
 // Auth

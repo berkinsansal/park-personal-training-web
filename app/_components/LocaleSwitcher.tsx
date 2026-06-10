@@ -1,14 +1,23 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { setLocaleAction } from '@/app/admin/actions';
 import type { Locale } from '@/lib/i18n';
 
-export default function LocaleSwitcher({ locale }: { locale: Locale }) {
+export default function LocaleSwitcher({ locale, urlBased }: { locale: Locale; urlBased?: boolean }) {
   const router = useRouter();
 
-  const handleSwitch = () => {
-    const newPath = locale === 'tr' ? '/en' : '/';
-    router.push(newPath);
+  const handleSwitch = async () => {
+    const newLocale: Locale = locale === 'tr' ? 'en' : 'tr';
+
+    if (urlBased) {
+      // Public pages use URL-based routing
+      const newPath = newLocale === 'tr' ? '/' : '/en';
+      router.push(newPath);
+    } else {
+      // Admin pages use cookie-based locale
+      await setLocaleAction(newLocale);
+    }
   };
 
   return (

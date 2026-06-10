@@ -79,7 +79,7 @@ export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale })
             </li>
           ))}
           <li>
-            <LocaleSwitcher locale={locale} />
+            <LocaleSwitcher locale={locale} urlBased />
           </li>
         </ul>
         <button
@@ -108,7 +108,7 @@ export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale })
               {l.label}
             </a>
           ))}
-          <LocaleSwitcher locale={locale} />
+          <LocaleSwitcher locale={locale} urlBased />
         </div>
       )}
     </nav>

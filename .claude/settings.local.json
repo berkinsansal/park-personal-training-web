@@ -58,7 +58,8 @@
       "Bash(rm -rf \"app/admin/[[...locale]]\" && mkdir -p \"app/admin\" && mv \"app/admin/login\" \"app/admin/\" && echo \"Removed locale from admin\")",
       "Bash(sed 's/const locale = await getLocale\\(\\);/const locale = \"tr\";/')",
       "Bash(cp -r \"app/\\(admin\\)/admin/_components\" \"app/admin/\")",
-      "Bash(cp -r \"node_modules/.../bak/\"* \"app/admin/_components\")"
+      "Bash(cp -r \"node_modules/.../bak/\"* \"app/admin/_components\")",
+      "Bash(git diff *)"
     ],
     "additionalDirectories": [
       "C:\\GitHub\\park-personal-training-web\\app",
