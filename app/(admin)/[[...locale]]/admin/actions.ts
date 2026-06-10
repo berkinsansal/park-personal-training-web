@@ -3,9 +3,7 @@
 import { createAdminClient, createSessionClient } from '@/lib/supabase-server';
 import { redirect } from 'next/navigation';
 import { updateTag } from 'next/cache';
-import { getDict } from '@/lib/i18n';
-import { cookies } from 'next/headers';
-import type { Locale } from '@/lib/i18n';
+import { getDict, type Locale } from '@/lib/i18n';
 
 async function requireAuth() {
   const supabase = await createSessionClient();
@@ -44,26 +42,21 @@ async function reorderItem(
   return { success: true };
 }
 
-// Locale
-export async function setLocaleAction(locale: Locale) {
-  const cookieStore = await cookies();
-  cookieStore.set('locale', locale, { maxAge: 60 * 60 * 24 * 365 });
-}
-
 // Auth
 export async function loginAction(_prev: unknown, formData: FormData) {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
+  const locale = (formData.get('locale') as string) || 'tr';
 
   const supabase = await createSessionClient();
   const { error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
-    const locale = "tr";
-    return { error: getDict(locale).admin.login.error };
+    return { error: getDict(locale as Locale).admin.login.error };
   }
 
-  redirect('/admin');
+  const redirectPath = locale === 'en' ? '/en/admin' : '/admin';
+  redirect(redirectPath);
 }
 
 export async function logoutAction() {

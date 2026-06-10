@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState } from 'react';
-import { loginAction } from '../actions';
+import { loginAction } from './actions';
 import LocaleSwitcher from '@/app/_components/LocaleSwitcher';
 import type { Dict, Locale } from '@/lib/i18n';
 import Link from 'next/link';
@@ -15,7 +15,7 @@ export default function LoginForm({ dict, locale }: { dict: Dict; locale: Locale
     <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="flex justify-center mb-8">
-          <LocaleSwitcher locale={locale} />
+          <LocaleSwitcher locale={locale} isAdminPath />
         </div>
         <div className="text-center mb-8">
           <h1 className="text-2xl font-black text-amber-400">{siteConfig.siteName}</h1>
@@ -26,6 +26,7 @@ export default function LoginForm({ dict, locale }: { dict: Dict; locale: Locale
           action={action}
           className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4"
         >
+          <input type="hidden" name="locale" value={locale} />
           <div>
             <label className="block text-zinc-400 text-sm mb-2">{t.email}</label>
             <input
@@ -60,7 +61,7 @@ export default function LoginForm({ dict, locale }: { dict: Dict; locale: Locale
         </form>
 
         <div className="text-center mt-6">
-          <Link href="/" className="text-zinc-400 text-sm hover:text-white transition-colors">
+          <Link href={locale === 'en' ? '/en' : '/'} className="text-zinc-400 text-sm hover:text-white transition-colors">
             {t.backToHome}
           </Link>
         </div>

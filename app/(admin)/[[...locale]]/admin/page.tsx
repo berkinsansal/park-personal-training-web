@@ -4,18 +4,19 @@ import Link from 'next/link';
 import Image from "next/image";
 import { createAdminClient } from '@/lib/supabase-server';
 import { siteConfig } from '@/lib/site.config';
-import { getDict } from '@/lib/i18n';
-import SiteInfoForm from './_components/SiteInfoForm';
-import ServicesPanel from './_components/ServicesPanel';
-import TrainersPanel from './_components/TrainersPanel';
-import PlaylistsPanel from './_components/PlaylistsPanel';
-import GalleryPanel from './_components/GalleryPanel';
+import { getDict, type Locale } from '@/lib/i18n';
+import { getLocaleFromParams } from '@/lib/getLocaleFromParams';
+import SiteInfoForm from '../_components/SiteInfoForm';
+import ServicesPanel from '../_components/ServicesPanel';
+import TrainersPanel from '../_components/TrainersPanel';
+import PlaylistsPanel from '../_components/PlaylistsPanel';
+import GalleryPanel from '../_components/GalleryPanel';
 import LocaleSwitcher from '@/app/_components/LocaleSwitcher';
-import { logoutAction } from './actions';
+import { logoutAction } from '../actions';
 
-async function AdminContent() {
+async function AdminContent({ locale }: { locale: Locale }) {
   await connection();
-  const dict = getDict('tr');
+  const dict = getDict(locale);
   const t = dict.admin;
   const db = createAdminClient();
 
@@ -30,7 +31,7 @@ async function AdminContent() {
   return (
     <>
       <header className="border-b border-zinc-800 bg-zinc-900 px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="hover:opacity-80 transition-opacity flex items-center gap-3">
+        <Link href={locale === 'en' ? '/en' : '/'} className="hover:opacity-80 transition-opacity flex items-center gap-3">
           <Image
             src="/logo.png"
             alt={`${siteConfig.siteName} Logo`}
@@ -44,7 +45,7 @@ async function AdminContent() {
           </div>
         </Link>
         <div className="flex items-center gap-4">
-          <LocaleSwitcher locale="tr" />
+          <LocaleSwitcher locale={locale} isAdminPath />
           <form action={logoutAction}>
             <button
               type="submit"
@@ -70,10 +71,17 @@ export const generateStaticParams = () => {
   return [];
 };
 
-export default function AdminPage() {
+export default async function AdminPage({
+  params,
+}: Readonly<{
+  params: Promise<{ locale?: string[] }>;
+}>) {
+  const resolvedParams = await params;
+  const locale = getLocaleFromParams(resolvedParams);
+
   return (
     <Suspense>
-      <AdminContent />
+      <AdminContent locale={locale} />
     </Suspense>
   );
 }
