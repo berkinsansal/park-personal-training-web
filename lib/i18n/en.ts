@@ -2,6 +2,16 @@ export const en = {
   meta: {
     title: 'Professional Fitness Studio',
     description: 'Reach your goals with expert trainers at our studio.',
+    aboutTitle: 'About Us',
+    aboutDescription: 'Learn more about Park Personal Training and our expert team.',
+    servicesTitle: 'Our Services',
+    servicesDescription: 'Explore all our training services and programs.',
+    trainersTitle: 'Our Team',
+    trainersDescription: 'Meet our expert trainers who are dedicated to helping you achieve your fitness goals.',
+    musicTitle: 'Music',
+    musicDescription: 'Discover the Spotify playlists we play at our studio to keep you motivated during your workout.',
+    contactTitle: 'Contact Us',
+    contactDescription: 'Get in touch with Park Personal Training. Visit us or send us a message.',
   },
   nav: {
     about: 'About',
@@ -26,16 +36,19 @@ export const en = {
     statYearsExperience: 'Years Experience',
     statTrainers: 'Expert Trainers',
     statServices: 'Program Types',
+    learnMore: 'Learn More',
   },
   services: {
     label: 'Our Services',
     heading: 'What Do We Offer?',
     description: 'We support you in the best way possible with programs suitable for every level and goal.',
+    viewAll: 'View All Services',
   },
   trainers: {
     label: 'Our Team',
     heading: 'Expert Trainers',
     description: 'Our certified and experienced trainers are here to help you reach your goals.',
+    viewAll: 'Meet The Team',
   },
   contact: {
     label: 'Contact',
@@ -61,6 +74,7 @@ export const en = {
     label: 'Music',
     heading: 'Playlists',
     description: 'Train to the sound of our gym. Discover the Spotify playlists we play on the floor to keep energy high, motivation strong, and every workout moving.',
+    explorePlaylists: 'Explore Playlists',
   },
   footer: {
     copyright: 'All rights reserved.',

@@ -5,7 +5,9 @@ import Image from "next/image";
 import type { Dict } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site.config";
 
-export default function Hero({ dict }: { dict: Dict }) {
+import type { Locale } from '@/lib/i18n';
+
+export default function Hero({ dict, locale }: { dict: Dict; locale: Locale }) {
   const logoRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const blobsRef = useRef<HTMLDivElement>(null);
@@ -153,13 +155,13 @@ export default function Hero({ dict }: { dict: Dict }) {
           }}
         >
           <a
-            href="#contact"
+            href={locale === 'en' ? '/en/contact' : '/contact'}
             className="px-8 py-4 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
           >
             {t.cta}
           </a>
           <a
-            href="#services"
+            href={locale === 'en' ? '/en/services' : '/services'}
             className="px-8 py-4 border border-zinc-600 text-white font-medium rounded-lg hover:border-amber-400 hover:text-amber-400 transition-colors text-sm uppercase tracking-wider"
           >
             {t.ctaSecondary}
@@ -167,7 +169,7 @@ export default function Hero({ dict }: { dict: Dict }) {
         </div>
       </div>
       <a
-        href="#about"
+        href={locale === 'en' ? '/en/about' : '/about'}
         className="absolute bottom-4 left-1/2 -translate-x-1/2 animate-bounce"
       >
         <svg className="w-6 h-6 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">

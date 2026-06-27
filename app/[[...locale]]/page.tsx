@@ -1,98 +1,58 @@
 import type { Metadata } from 'next';
-import { getDict, type Locale, type Dict } from '@/lib/i18n';
-import { cacheLife, cacheTag } from 'next/cache';
-import { createAdminClient } from '@/lib/supabase-server';
+import { getDict, type Locale } from '@/lib/i18n';
 import { siteConfig } from '@/lib/site.config';
-import type { SiteInfo, Service, Trainer, Playlist, GalleryPhoto } from '@/lib/types';
 import { getLocaleFromParams } from '@/lib/getLocaleFromParams';
-import Navbar from "@/app/[[...locale]]/_components/Navbar";
+import { getSiteInfo, getServices, getTrainers } from '@/lib/data';
 import Hero from "@/app/[[...locale]]/_components/Hero";
-import About from "@/app/[[...locale]]/_components/About";
-import Services from "@/app/[[...locale]]/_components/Services";
-import Trainers from "@/app/[[...locale]]/_components/Trainers";
-import Playlists from "@/app/[[...locale]]/_components/Playlists";
-import Contact from "@/app/[[...locale]]/_components/Contact";
-import Footer from "@/app/[[...locale]]/_components/Footer";
-
-async function getHomepageData(locale: Locale) {
-  'use cache: remote';
-  cacheTag(`homepage-${locale}`);
-  cacheLife('max');
-
-  const db = createAdminClient();
-
-  const fetchWithRetry = async (attempt = 0): Promise<any> => {
-    try {
-      const [siteInfoRes, servicesRes, trainersRes, galleryRes, playlistsRes] = await Promise.all([
-        db.from('site_info').select('*').single(),
-        db.from('services').select('*').order('order_index'),
-        db.from('trainers').select('*').order('order_index'),
-        db.from('gallery').select('*').order('order_index'),
-        db.from('playlists').select('*').order('order_index'),
-      ]);
-
-      const errors = [
-        siteInfoRes.error && `site_info: ${siteInfoRes.error.message}`,
-        servicesRes.error && `services: ${servicesRes.error.message}`,
-        trainersRes.error && `trainers: ${trainersRes.error.message}`,
-        galleryRes.error && `gallery: ${galleryRes.error.message}`,
-        playlistsRes.error && `playlists: ${playlistsRes.error.message}`,
-      ].filter(Boolean);
-
-      if (errors.length > 0) {
-        const errorMsg = errors.join(', ');
-        console.error(`Homepage data fetch failed: ${errorMsg}`);
-        if (attempt < 2) {
-          await new Promise(r => setTimeout(r, Math.pow(2, attempt) * 500));
-          return fetchWithRetry(attempt + 1);
-        }
-        throw new Error(`Homepage data fetch failed: ${errorMsg}`);
-      }
-
-      return {
-        siteInfo: siteInfoRes.data as SiteInfo,
-        services: servicesRes.data as Service[],
-        trainers: trainersRes.data as Trainer[],
-        gallery: galleryRes.data as GalleryPhoto[],
-        playlists: playlistsRes.data as Playlist[],
-      };
-    } catch (error) {
-      if (attempt < 2) {
-        console.warn(`Homepage fetch attempt ${attempt + 1} failed, retrying...`);
-        await new Promise(r => setTimeout(r, Math.pow(2, attempt) * 500));
-        return fetchWithRetry(attempt + 1);
-      }
-      console.error('Fatal error fetching homepage data after 3 attempts:', error);
-      throw error;
-    }
-  };
-
-  return fetchWithRetry();
-}
+import AboutPreview from "@/app/[[...locale]]/_components/AboutPreview";
+import ServicesPreview from "@/app/[[...locale]]/_components/ServicesPreview";
+import TrainersPreview from "@/app/[[...locale]]/_components/TrainersPreview";
 
 async function HomeContent({ locale }: { locale: Locale }) {
   const t = getDict(locale);
-  const { siteInfo, services, trainers, gallery, playlists } = await getHomepageData(locale);
+  const [siteInfo, services, trainers] = await Promise.all([
+    getSiteInfo(),
+    getServices(),
+    getTrainers(),
+  ]);
 
   return (
     <>
-      <Navbar dict={t} locale={locale} />
-      <main>
-        <Hero dict={t} />
-        <About
-          dict={t}
-          happyCustomers={siteInfo.happy_customers}
-          yearsExperience={siteInfo.years_experience}
-          trainerCount={trainers.length}
-          serviceCount={services.length}
-          gallery={gallery}
-        />
-        <Services services={services} locale={locale} dict={t} />
-        <Trainers trainers={trainers} dict={t} />
-        <Playlists playlists={playlists} dict={t} />
-        <Contact siteInfo={siteInfo} locale={locale} dict={t} />
-      </main>
-      <Footer igHandle={siteInfo.ig_handle ?? ''} dict={t} />
+      <Hero dict={t} locale={locale} />
+      <AboutPreview
+        dict={t}
+        locale={locale}
+        happyCustomers={siteInfo.happy_customers}
+        yearsExperience={siteInfo.years_experience}
+        trainerCount={trainers.length}
+        serviceCount={services.length}
+      />
+      <ServicesPreview services={services} locale={locale} dict={t} />
+      <TrainersPreview trainers={trainers} locale={locale} dict={t} />
+      <section className="py-16 bg-zinc-950">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-black text-white mb-6">Discover Our Music</h2>
+          <p className="text-zinc-400 text-lg mb-8">Train to the sound of our gym with our curated Spotify playlists.</p>
+          <a
+            href={locale === 'en' ? '/en/music' : '/music'}
+            className="inline-block px-8 py-3 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600 transition-colors text-sm uppercase tracking-wider"
+          >
+            Explore Playlists
+          </a>
+        </div>
+      </section>
+      <section className="py-16 bg-zinc-900">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h2 className="text-3xl md:text-4xl font-black text-white mb-6">Ready to Start Your Journey?</h2>
+          <p className="text-zinc-400 text-lg mb-8">Get in touch with our team to discuss your fitness goals.</p>
+          <a
+            href={locale === 'en' ? '/en/contact' : '/contact'}
+            className="inline-block px-8 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
+          >
+            Contact Us
+          </a>
+        </div>
+      </section>
     </>
   );
 }

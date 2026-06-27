@@ -12,10 +12,6 @@ async function requireAuth() {
   return supabase;
 }
 
-function invalidateHomepage() {
-  updateTag('homepage-tr');
-  updateTag('homepage-en');
-}
 
 async function reorderItem(
   table: 'services' | 'trainers' | 'playlists' | 'gallery',
@@ -38,7 +34,7 @@ async function reorderItem(
     db.from(table).update({ order_index: items[idx].order_index, updated_at: now }).eq('id', items[swapIdx].id),
   ]);
 
-  invalidateHomepage();
+  updateTag(table);
   return { success: true };
 }
 
@@ -90,7 +86,7 @@ export async function updateSiteInfoAction(_prev: unknown, formData: FormData) {
   }).eq('id', 1);
 
   if (error) return { error: error.message };
-  invalidateHomepage();
+  updateTag('siteinfo');
   return { success: true };
 }
 
@@ -109,7 +105,7 @@ export async function addServiceAction(formData: FormData) {
   }).select('*').single();
 
   if (error) return { error: error.message };
-  invalidateHomepage();
+  updateTag('services');
   return { success: true, data };
 }
 
@@ -128,7 +124,7 @@ export async function updateServiceAction(formData: FormData) {
   }).eq('id', Number(formData.get('id')));
 
   if (error) return { error: error.message };
-  invalidateHomepage();
+  updateTag('services');
   return { success: true };
 }
 
@@ -138,7 +134,7 @@ export async function deleteServiceAction(id: number) {
 
   const { error } = await db.from('services').delete().eq('id', id);
   if (error) return { error: error.message };
-  invalidateHomepage();
+  updateTag('services');
   return { success: true };
 }
 
@@ -180,7 +176,7 @@ export async function addTrainerAction(formData: FormData) {
     }
   }
 
-  invalidateHomepage();
+  updateTag('trainers');
   return { success: true, data: { ...inserted, photo_url } };
 }
 
@@ -222,7 +218,7 @@ export async function updateTrainerAction(formData: FormData) {
 
   const { error } = await db.from('trainers').update(updates).eq('id', id);
   if (error) return { error: error.message };
-  invalidateHomepage();
+  updateTag('trainers');
   return { success: true, photoUrl };
 }
 
@@ -243,7 +239,7 @@ export async function deleteTrainerAction(id: number) {
     }
   }
 
-  invalidateHomepage();
+  updateTag('trainers');
   return { success: true };
 }
 
@@ -264,7 +260,7 @@ export async function addPlaylistAction(formData: FormData) {
   }).select('*').single();
 
   if (error) return { error: error.message };
-  invalidateHomepage();
+  updateTag('playlists');
   return { success: true, data };
 }
 
@@ -280,7 +276,7 @@ export async function updatePlaylistAction(formData: FormData) {
   }).eq('id', Number(formData.get('id')));
 
   if (error) return { error: error.message };
-  invalidateHomepage();
+  updateTag('playlists');
   return { success: true };
 }
 
@@ -290,7 +286,7 @@ export async function deletePlaylistAction(id: number) {
 
   const { error } = await db.from('playlists').delete().eq('id', id);
   if (error) return { error: error.message };
-  invalidateHomepage();
+  updateTag('playlists');
   return { success: true };
 }
 
@@ -327,7 +323,7 @@ export async function addGalleryPhotoAction(formData: FormData) {
     }
   }
 
-  invalidateHomepage();
+  updateTag('gallery');
   return { success: true, data: { ...inserted, image_url } };
 }
 
@@ -359,7 +355,7 @@ export async function updateGalleryPhotoAction(formData: FormData) {
 
   const { error } = await db.from('gallery').update(updates).eq('id', id);
   if (error) return { error: error.message };
-  invalidateHomepage();
+  updateTag('gallery');
   return { success: true, imageUrl };
 }
 
@@ -380,7 +376,7 @@ export async function deleteGalleryPhotoAction(id: number) {
     }
   }
 
-  invalidateHomepage();
+  updateTag('gallery');
   return { success: true };
 }
 

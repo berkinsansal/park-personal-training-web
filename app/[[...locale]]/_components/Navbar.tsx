@@ -1,6 +1,7 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import LocaleSwitcher from "@/app/_components/LocaleSwitcher";
 import type { Dict, Locale } from "@/lib/i18n";
 import { siteConfig } from "@/lib/site.config";
@@ -39,43 +40,33 @@ const navIcons = {
 
 export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale }) {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
+  const prefix = locale === 'en' ? '/en' : '';
   const links = [
-    { href: "#about", label: dict.nav.about, key: "about" },
-    { href: "#services", label: dict.nav.services, key: "services" },
-    { href: "#trainers", label: dict.nav.trainers, key: "trainers" },
-    { href: "#music", label: dict.playlists.label, key: "playlists" },
-    { href: "#contact", label: dict.nav.contact, key: "contact" },
+    { href: `${prefix}/about`, label: dict.nav.about, key: "about" },
+    { href: `${prefix}/services`, label: dict.nav.services, key: "services" },
+    { href: `${prefix}/trainers`, label: dict.nav.trainers, key: "trainers" },
+    { href: `${prefix}/music`, label: dict.playlists.label, key: "playlists" },
+    { href: `${prefix}/contact`, label: dict.nav.contact, key: "contact" },
   ];
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 backdrop-blur transition-all duration-500 ${
-      scrolled
-        ? 'bg-zinc-950/98 border-b border-amber-400/20 shadow-lg shadow-amber-400/5'
-        : 'bg-zinc-950/90 border-b border-zinc-800'
-    }`}>
+    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur bg-zinc-950/98 border-b border-amber-400/20 shadow-lg shadow-amber-400/5">
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
-        <a href="#" className="flex items-center gap-3">
+        <Link href={prefix || '/'} className="flex items-center gap-3">
           <Image src="/logo.png" alt={`${siteConfig.siteName} Logo`} width={40} height={40} className="rounded-full bg-amber-400/10 border border-amber-400/30" />
           <span className="hidden lg:inline text-amber-400 font-bold text-lg tracking-wide">{siteConfig.siteName}</span>
-        </a>
+        </Link>
         <ul className="hidden md:flex gap-8 items-center">
           {links.map((l) => (
-            <li key={l.href}>
-              <a
+            <li key={l.key}>
+              <Link
                 href={l.href}
                 className="flex items-center gap-2 text-zinc-300 hover:text-amber-400 transition-colors text-sm font-medium uppercase tracking-wider"
               >
                 <span className="hidden xl:inline text-base">{navIcons[l.key as keyof typeof navIcons]}</span>
                 {l.label}
-              </a>
+              </Link>
             </li>
           ))}
           <li>
@@ -98,15 +89,15 @@ export default function Navbar({ dict, locale }: { dict: Dict; locale: Locale })
       {open && (
         <div className="md:hidden bg-zinc-900 border-t border-zinc-800 px-6 py-4 flex flex-col gap-3">
           {links.map((l) => (
-            <a
-              key={l.href}
+            <Link
+              key={l.key}
               href={l.href}
               onClick={() => setOpen(false)}
               className="flex items-center gap-3 text-zinc-300 hover:text-amber-400 text-sm font-medium uppercase tracking-wider"
             >
               <span className="text-base">{navIcons[l.key as keyof typeof navIcons]}</span>
               {l.label}
-            </a>
+            </Link>
           ))}
           <LocaleSwitcher locale={locale} />
         </div>

@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import type { Dict, Locale } from "@/lib/i18n";
-import type { GalleryPhoto } from "@/lib/types";
 
 type Props = {
   dict: Dict;
@@ -11,7 +10,6 @@ type Props = {
   yearsExperience: number;
   trainerCount: number;
   serviceCount: number;
-  gallery: GalleryPhoto[];
 };
 
 function useCountUp(target: number, duration: number, active: boolean) {
@@ -33,37 +31,9 @@ function useCountUp(target: number, duration: number, active: boolean) {
   return count;
 }
 
-export default function About({ dict, locale, happyCustomers, yearsExperience, trainerCount, serviceCount, gallery }: Props) {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+export default function AboutPreview({ dict, locale, happyCustomers, yearsExperience, trainerCount, serviceCount }: Props) {
   const statsRef = useRef<HTMLDivElement>(null);
   const [statsVisible, setStatsVisible] = useState(false);
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % gallery.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + gallery.length) % gallery.length);
-  };
-
-  const handlePointerDown = (e: React.PointerEvent) => {
-    setDragStart({ x: e.clientX, y: e.clientY });
-  };
-
-  const handlePointerUp = (e: React.PointerEvent) => {
-    const dragEnd = { x: e.clientX, y: e.clientY };
-    const diffX = dragStart.x - dragEnd.x;
-    const diffY = dragStart.y - dragEnd.y;
-
-    if (Math.abs(diffX) > 50) {
-      if (diffX > 0) nextSlide();
-      else prevSlide();
-    } else if (Math.abs(diffY) > 50) {
-      if (diffY > 0) nextSlide();
-      else prevSlide();
-    }
-  };
 
   useEffect(() => {
     const el = statsRef.current;
@@ -80,6 +50,7 @@ export default function About({ dict, locale, happyCustomers, yearsExperience, t
     obs.observe(el);
     return () => obs.disconnect();
   }, []);
+
   const t = dict.about;
   const stats = [
     { value: `${happyCustomers}+`, label: t.statHappyCustomers },
@@ -89,7 +60,7 @@ export default function About({ dict, locale, happyCustomers, yearsExperience, t
   ];
 
   return (
-    <section id="about" className="py-24 bg-zinc-900">
+    <section className="py-24 bg-zinc-900">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16 items-start">
           <div>
@@ -103,19 +74,16 @@ export default function About({ dict, locale, happyCustomers, yearsExperience, t
             <p className="mt-6 text-zinc-400 text-lg leading-relaxed">
               {t.p1}
             </p>
-            <p className="mt-4 text-zinc-400 text-lg leading-relaxed">
-              {t.p2}
-            </p>
             <a
-              href={locale === 'en' ? '/en/contact' : '/contact'}
+              href={locale === 'en' ? '/en/about' : '/about'}
               className="mt-8 inline-block px-6 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
             >
-              {t.cta}
+              Learn More
             </a>
           </div>
           <div>
             <div className="grid grid-cols-2 gap-6" ref={statsRef}>
-              {stats.map((s, i) => {
+              {stats.map((s) => {
                 const numMatch = s.value.match(/\d+/);
                 const num = numMatch ? parseInt(numMatch[0]) : 0;
                 const suffix = s.value.replace(/\d+/g, '');
@@ -131,47 +99,6 @@ export default function About({ dict, locale, happyCustomers, yearsExperience, t
                 );
               })}
             </div>
-
-            {gallery.length > 0 && (
-              <div className="mt-16">
-                <div className="overflow-hidden rounded-2xl bg-zinc-800 border border-zinc-700 aspect-video hover:border-amber-400/50 transition-all duration-300 touch-none" onPointerDown={handlePointerDown} onPointerUp={handlePointerUp}>
-                  <img
-                    src={gallery[currentSlide].image_url}
-                    alt={gallery[currentSlide].alt_text}
-                    className="w-full h-full object-cover select-none"
-                    draggable={false}
-                  />
-                </div>
-
-                {gallery.length > 1 && (
-                  <div className="flex items-center justify-center gap-4 mt-4">
-                    <button
-                      onClick={prevSlide}
-                      className="px-3 py-2 text-white bg-zinc-800 hover:bg-zinc-700 rounded-full transition-colors"
-                    >
-                      &lt;
-                    </button>
-                    <div className="flex justify-center gap-2">
-                      {gallery.map((_, idx) => (
-                        <button
-                          key={idx}
-                          onClick={() => setCurrentSlide(idx)}
-                          className={`w-2 h-2 rounded-full transition-all ${
-                            idx === currentSlide ? 'bg-amber-400 w-6' : 'bg-zinc-600 hover:bg-zinc-500'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    <button
-                      onClick={nextSlide}
-                      className="px-3 py-2 text-white bg-zinc-800 hover:bg-zinc-700 rounded-full transition-colors"
-                    >
-                      &gt;
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
           </div>
         </div>
       </div>

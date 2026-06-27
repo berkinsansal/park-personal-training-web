@@ -1,21 +1,30 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import type { Locale } from '@/lib/i18n';
 
 export default function LocaleSwitcher({ locale, isAdminPath }: { locale: Locale; isAdminPath?: boolean }) {
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleSwitch = () => {
     const newLocale: Locale = locale === 'tr' ? 'en' : 'tr';
     let newPath: string;
 
     if (isAdminPath) {
-      // Admin pages: /admin ↔ /en/admin
-      newPath = newLocale === 'tr' ? '/admin' : '/en/admin';
+      // Admin pages: preserve path, switch between /admin and /en/admin
+      if (newLocale === 'en') {
+        newPath = `/en${pathname.replace(/^\/en/, '')}`;
+      } else {
+        newPath = pathname.replace(/^\/en/, '');
+      }
     } else {
-      // Public pages: / ↔ /en
-      newPath = newLocale === 'tr' ? '/' : '/en';
+      // Public pages: preserve path, switch between / and /en/
+      if (newLocale === 'en') {
+        newPath = `/en${pathname}`;
+      } else {
+        newPath = pathname.replace(/^\/en/, '') || '/';
+      }
     }
 
     router.push(newPath);

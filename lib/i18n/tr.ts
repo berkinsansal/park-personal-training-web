@@ -2,6 +2,16 @@ export const tr = {
   meta: {
     title: 'Profesyonel Fitness Stüdyosu',
     description: 'Uzman eğitmenlerimizle hedeflerinize ulaşın.',
+    aboutTitle: 'Hakkımızda',
+    aboutDescription: 'Park Personal Training hakkında daha fazla bilgi edinin ve uzman ekibimizi tanıyın.',
+    servicesTitle: 'Hizmetlerimiz',
+    servicesDescription: 'Tüm eğitim hizmetlerimizi ve programlarımızı keşfedin.',
+    trainersTitle: 'Ekibimiz',
+    trainersDescription: 'Fitness hedeflerinize ulaşmanızda size yardımcı olmaktan dedikedir uzman eğitmenlerimizi tanıyın.',
+    musicTitle: 'Müzik',
+    musicDescription: 'Antrenmanınız sırasında motivasyonunuzu yüksek tutmak için stüdyomuzda çalan Spotify çalma listelerini keşfedin.',
+    contactTitle: 'İletişim',
+    contactDescription: 'Park Personal Training ile iletişime geçin. Bizi ziyaret edin veya bize bir mesaj gönderin.',
   },
   nav: {
     about: 'Hakkımızda',
@@ -26,16 +36,19 @@ export const tr = {
     statYearsExperience: 'Yıl Deneyim',
     statTrainers: 'Uzman Eğitmen',
     statServices: 'Program Çeşidi',
+    learnMore: 'Daha Fazla',
   },
   services: {
     label: 'Hizmetlerimiz',
     heading: 'Ne Sunuyoruz?',
     description: 'Her seviyeye ve hedefe uygun programlarla seni en iyi şekilde destekliyoruz.',
+    viewAll: 'Tüm Hizmetler',
   },
   trainers: {
     label: 'Ekibimiz',
     heading: 'Uzman Eğitmenlerimiz',
     description: 'Sertifikalı ve deneyimli eğitmenlerimiz, seni hedeflerine ulaştırmak için burada.',
+    viewAll: 'Ekibi Tanı',
   },
   contact: {
     label: 'İletişim',
@@ -61,6 +74,7 @@ export const tr = {
     label: 'Müzik',
     heading: 'Çalma Listeleri',
     description: 'Spor salonumuzun müzikleri eşliğinde antrenman yapın. Enerjinizi yüksek tutmak, motivasyonunuzu artırmak ve her antrenmanı daha hareketli hale getirmek için salonumuzda çalan Spotify çalma listelerini keşfedin.',
+    explorePlaylists: 'Çalma Listelerini Keşfet',
   },
   footer: {
     copyright: 'Tüm hakları saklıdır.',
