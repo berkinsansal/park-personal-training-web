@@ -1,7 +1,7 @@
 'use client';
 
 import { useLocale, useTranslations } from 'next-intl';
-import { AnimateIn } from '../../../_components/AnimateIn';
+import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
 
 export default function ContactPreview() {
   const locale = useLocale();

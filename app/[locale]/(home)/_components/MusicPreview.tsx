@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 import type { Playlist } from '@/lib/types';
-import { AnimateIn } from '../../../_components/AnimateIn';
+import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
 
 export default function MusicPreview({ playlists }: { playlists: Playlist[] }) {
   const locale = useLocale();
