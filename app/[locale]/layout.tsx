@@ -52,7 +52,7 @@ export default async function RootLayout({
   const htmlLang = locale === 'en' ? 'en' : 'tr';
 
   return (
-    <html lang={htmlLang} className={`${geist.variable} scroll-smooth`}>
+    <html lang={htmlLang} className={`${geist.variable} scroll-smooth`} data-scroll-behavior="smooth">
       <head />
       <body className="bg-zinc-950 text-white antialiased">
         <Suspense fallback={null}>

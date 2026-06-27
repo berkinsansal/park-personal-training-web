@@ -11,6 +11,10 @@ body {
   font-family: var(--font-geist-sans), Arial, sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @keyframes word-reveal {
   from {
     opacity: 0;

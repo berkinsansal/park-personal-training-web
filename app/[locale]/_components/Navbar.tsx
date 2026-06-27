@@ -7,6 +7,11 @@ import LocaleSwitcher from "@/app/_components/LocaleSwitcher";
 import { siteConfig } from "@/lib/site.config";
 
 const navIcons = {
+  home: (
+    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+    </svg>
+  ),
   about: (
     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
       <path
@@ -44,6 +49,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   const links = [
+    { href: `/${locale}`, label: t('nav.home'), key: "home" },
     { href: `/${locale}/about`, label: t('nav.about'), key: "about" },
     { href: `/${locale}/services`, label: t('nav.services'), key: "services" },
     { href: `/${locale}/trainers`, label: t('nav.trainers'), key: "trainers" },
