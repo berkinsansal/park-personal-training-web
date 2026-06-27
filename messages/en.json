@@ -1,0 +1,178 @@
+{
+  "meta": {
+    "title": "Professional Fitness Studio",
+    "description": "Reach your goals with expert trainers at our studio.",
+    "aboutTitle": "About Us",
+    "aboutDescription": "Learn more about Park Personal Training and our expert team.",
+    "servicesTitle": "Our Services",
+    "servicesDescription": "Explore all our training services and programs.",
+    "trainersTitle": "Our Team",
+    "trainersDescription": "Meet our expert trainers who are dedicated to helping you achieve your fitness goals.",
+    "musicTitle": "Music",
+    "musicDescription": "Discover the Spotify playlists we play at our studio to keep you motivated during your workout.",
+    "contactTitle": "Contact Us",
+    "contactDescription": "Get in touch with Park Personal Training. Visit us or send us a message."
+  },
+  "nav": {
+    "about": "About",
+    "services": "Services",
+    "trainers": "Trainers",
+    "contact": "Contact"
+  },
+  "hero": {
+    "subtitle": "The right place to reach your goals. Become the best version of yourself with personalized programs led by expert trainers.",
+    "cta": "Get Started",
+    "ctaSecondary": "View Services"
+  },
+  "about": {
+    "label": "About Us",
+    "heading1": "We Know You,",
+    "heading2": "We Work",
+    "heading3": "Just for You",
+    "p1": "We know every individual is different. Our expert trainers analyze your goals, lifestyle, and physical condition to create a workout and nutrition plan that is completely tailored to you.",
+    "p2": "From small group classes to one-on-one training sessions, we offer a program for everyone. Professional equipment and a welcoming atmosphere await you at our studio.",
+    "cta": "Contact Us",
+    "statHappyCustomers": "Happy Members",
+    "statYearsExperience": "Years Experience",
+    "statTrainers": "Expert Trainers",
+    "statServices": "Program Types",
+    "learnMore": "Learn More"
+  },
+  "services": {
+    "label": "Our Services",
+    "heading": "What Do We Offer?",
+    "description": "We support you in the best way possible with programs suitable for every level and goal.",
+    "viewAll": "View All Services"
+  },
+  "trainers": {
+    "label": "Our Team",
+    "heading": "Expert Trainers",
+    "description": "Our certified and experienced trainers are here to help you reach your goals.",
+    "viewAll": "Meet The Team"
+  },
+  "contact": {
+    "label": "Contact",
+    "heading": "Take Action",
+    "description": "Have a question? Reach us on Instagram or fill out the form below.",
+    "formHeading": "Contact Us",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "hours": "Working Hours",
+    "nameLabel": "Full Name",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "messageLabel": "Your Message",
+    "submit": "Send Message",
+    "emailSubject": "New contact form message",
+    "successMessage": "Your message was sent! We'll get back to you soon.",
+    "errorMessage": "Something went wrong. Please try again.",
+    "validationError": "Please fill in all required fields.",
+    "sendError": "Unable to send message. Please try again later."
+  },
+  "playlists": {
+    "label": "Music",
+    "heading": "Playlists",
+    "description": "Train to the sound of our gym. Discover the Spotify playlists we play on the floor to keep energy high, motivation strong, and every workout moving.",
+    "explorePlaylists": "Explore Playlists"
+  },
+  "footer": {
+    "copyright": "All rights reserved."
+  },
+  "admin": {
+    "subtitle": "Admin — Content Management",
+    "logout": "Log Out",
+    "loading": "Loading...",
+    "siteInfo": {
+      "heading": "General Info",
+      "igHandle": "Instagram Handle",
+      "phone": "Phone",
+      "email": "Email",
+      "addressLine1": "Address Line 1",
+      "addressLine2": "Address Line 2",
+      "addressLine1En": "Address Line 1 (English)",
+      "addressLine2En": "Address Line 2 (English)",
+      "weekdayHours": "Weekday Hours",
+      "weekendHours": "Weekend Hours",
+      "weekdayHoursEn": "Weekday Hours (English)",
+      "weekendHoursEn": "Weekend Hours (English)",
+      "happyCustomers": "Happy Customers",
+      "yearsExperience": "Years of Experience",
+      "latitude": "Map Latitude",
+      "longitude": "Map Longitude",
+      "save": "Save",
+      "saving": "Saving...",
+      "saved": "Saved!"
+    },
+    "services": {
+      "heading": "Services",
+      "add": "+ Add",
+      "cancel": "Cancel",
+      "icon": "Icon (emoji)",
+      "order": "Order",
+      "title": "Title",
+      "titleEn": "Title (English)",
+      "description": "Description",
+      "descriptionEn": "Description (English)",
+      "edit": "Edit",
+      "delete": "Delete",
+      "update": "Update",
+      "deleted": "Deleted.",
+      "updated": "Updated.",
+      "added": "Added. Refresh the page."
+    },
+    "trainers": {
+      "heading": "Trainers",
+      "add": "+ Add",
+      "cancel": "Cancel",
+      "name": "Full Name",
+      "order": "Order",
+      "igHandle": "Instagram Username",
+      "photo": "Photo",
+      "removePhoto": "Remove photo",
+      "edit": "Edit",
+      "delete": "Delete",
+      "update": "Update",
+      "deleted": "Deleted.",
+      "updated": "Updated.",
+      "added": "Added. Refresh the page."
+    },
+    "playlists": {
+      "heading": "Spotify Playlists",
+      "add": "+ Add",
+      "cancel": "Cancel",
+      "title": "Title",
+      "spotifyId": "Spotify Playlist ID",
+      "spotifyPlaylistLabel": "Spotify Playlist",
+      "edit": "Edit",
+      "delete": "Delete",
+      "update": "Update",
+      "deleted": "Deleted.",
+      "updated": "Updated.",
+      "added": "Added. Refresh the page."
+    },
+    "gallery": {
+      "heading": "Gallery Photos",
+      "add": "+ Add",
+      "cancel": "Cancel",
+      "image": "Photo",
+      "altText": "Alt Text (Description)",
+      "order": "Order",
+      "edit": "Edit",
+      "delete": "Delete",
+      "update": "Update",
+      "deleted": "Deleted.",
+      "updated": "Updated.",
+      "added": "Added. Refresh the page."
+    },
+    "login": {
+      "subtitle": "Admin Panel",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Log In",
+      "submitting": "Logging in...",
+      "error": "Invalid email or password.",
+      "backToHome": "← Back to Home"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+import type { Metadata } from 'next';
+import { getTranslations } from 'next-intl/server';
+import { siteConfig } from '@/lib/site.config';
+import { getPlaylists } from '@/lib/data';
+import Playlists from "@/app/[locale]/_components/Playlists";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations('meta');
+  return {
+    title: `Music | ${siteConfig.siteName}`,
+    description: 'Discover the Spotify playlists we play at our studio to keep you motivated during your workout.',
+  };
+}
+
+async function MusicContent() {
+  const playlists = await getPlaylists();
+
+  return <Playlists playlists={playlists} />;
+}
+
+export default async function MusicPage() {
+  return <MusicContent />;
+}
