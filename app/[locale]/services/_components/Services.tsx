@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 import type { Service } from '@/lib/types';
-import { AnimateIn } from '../../../_components/AnimateIn';
+import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
 
 export default function Services({ services }: { services: Service[] }) {
   const locale = useLocale();

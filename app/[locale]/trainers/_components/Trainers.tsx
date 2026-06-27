@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import type { Trainer } from '@/lib/types';
-import { AnimateIn } from '../../../_components/AnimateIn';
+import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
 
 function getInitials(name: string) {
   return name.split(' ').map((w) => w[0]).join('').toUpperCase().slice(0, 2);

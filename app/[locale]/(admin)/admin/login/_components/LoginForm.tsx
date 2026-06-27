@@ -2,7 +2,7 @@
 
 import { useActionState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { loginAction } from '../../../actions';
+import { loginAction } from '../../actions';
 import LocaleSwitcher from '@/app/_components/LocaleSwitcher';
 import Link from 'next/link';
 import { siteConfig } from '@/lib/site.config';

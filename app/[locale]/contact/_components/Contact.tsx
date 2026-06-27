@@ -3,7 +3,7 @@
 import { useLocale, useTranslations } from 'next-intl';
 import type { SiteInfo } from '@/lib/types';
 import ContactForm from './ContactForm';
-import { AnimateIn } from '../../../_components/AnimateIn';
+import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
 
 export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
   const locale = useLocale();
