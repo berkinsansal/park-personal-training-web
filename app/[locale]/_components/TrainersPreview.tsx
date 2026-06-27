@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import type { Trainer } from '@/lib/types';
 import { AnimateIn } from './AnimateIn';
 
@@ -10,6 +10,7 @@ function getInitials(name: string) {
 
 export default function TrainersPreview({ trainers }: { trainers: Trainer[] }) {
   const t = useTranslations('trainers');
+  const locale = useLocale();
   const previewTrainers = trainers.slice(0, 3);
 
   return (
@@ -60,7 +61,7 @@ export default function TrainersPreview({ trainers }: { trainers: Trainer[] }) {
         </div>
         <div className="mt-12 text-center">
           <a
-            href="/trainers"
+            href={`/${locale}/trainers`}
             className="inline-block px-8 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
           >
             Meet The Team

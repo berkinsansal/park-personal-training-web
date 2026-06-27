@@ -8,7 +8,7 @@ import AboutPreview from "@/app/[locale]/_components/AboutPreview";
 import ServicesPreview from "@/app/[locale]/_components/ServicesPreview";
 import TrainersPreview from "@/app/[locale]/_components/TrainersPreview";
 
-async function HomeContent() {
+async function HomeContent({ locale }: { locale: string }) {
   const t = await getTranslations();
   const [siteInfo, services, trainers] = await Promise.all([
     getSiteInfo(),
@@ -32,7 +32,7 @@ async function HomeContent() {
           <h2 className="text-3xl md:text-4xl font-black text-white mb-6">Discover Our Music</h2>
           <p className="text-zinc-400 text-lg mb-8">Train to the sound of our gym with our curated Spotify playlists.</p>
           <a
-            href="/music"
+            href={`/${locale}/music`}
             className="inline-block px-8 py-3 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600 transition-colors text-sm uppercase tracking-wider"
           >
             Explore Playlists
@@ -44,7 +44,7 @@ async function HomeContent() {
           <h2 className="text-3xl md:text-4xl font-black text-white mb-6">Ready to Start Your Journey?</h2>
           <p className="text-zinc-400 text-lg mb-8">Get in touch with our team to discuss your fitness goals.</p>
           <a
-            href="/contact"
+            href={`/${locale}/contact`}
             className="inline-block px-8 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
           >
             Contact Us
@@ -67,6 +67,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function Home() {
-  return <HomeContent />;
+export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return <HomeContent locale={locale} />;
 }

@@ -44,7 +44,7 @@ export default function ServicesPreview({ services }: { services: Service[] }) {
         </div>
         <div className="mt-12 text-center">
           <a
-            href="/services"
+            href={`/${locale}/services`}
             className="inline-block px-8 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
           >
             View All Services

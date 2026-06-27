@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-async function ServicesContent() {
+async function ServicesContent({ locale }: { locale: string }) {
   const services = await getServices();
 
   return (
@@ -33,7 +33,7 @@ async function ServicesContent() {
                 Contact our team to learn more about which program is right for you.
               </p>
               <a
-                href="/contact"
+                href={`/${locale}/contact`}
                 className="inline-block px-8 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
               >
                 Contact Us
@@ -46,6 +46,7 @@ async function ServicesContent() {
   );
 }
 
-export default async function ServicesPage() {
-  return <ServicesContent />;
+export default async function ServicesPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return <ServicesContent locale={locale} />;
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 type Props = {
   happyCustomers: number;
@@ -31,6 +31,7 @@ function useCountUp(target: number, duration: number, active: boolean) {
 
 export default function AboutPreview({ happyCustomers, yearsExperience, trainerCount, serviceCount }: Props) {
   const t = useTranslations('about');
+  const locale = useLocale();
   const statsRef = useRef<HTMLDivElement>(null);
   const [statsVisible, setStatsVisible] = useState(false);
 
@@ -72,7 +73,7 @@ export default function AboutPreview({ happyCustomers, yearsExperience, trainerC
               {t('p1')}
             </p>
             <a
-              href="/about"
+              href={`/${locale}/about`}
               className="mt-8 inline-block px-6 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
             >
               Learn More

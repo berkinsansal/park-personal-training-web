@@ -2,11 +2,12 @@
 
 import { useEffect, useRef } from 'react';
 import Image from "next/image";
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { siteConfig } from "@/lib/site.config";
 
 export default function Hero() {
   const t = useTranslations();
+  const locale = useLocale();
   const logoRef = useRef<HTMLDivElement>(null);
   const glowRef = useRef<HTMLDivElement>(null);
   const blobsRef = useRef<HTMLDivElement>(null);
@@ -153,13 +154,13 @@ export default function Hero() {
           }}
         >
           <a
-            href="/contact"
+            href={`/${locale}/contact`}
             className="px-8 py-4 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
           >
             {t('hero.cta')}
           </a>
           <a
-            href="/services"
+            href={`/${locale}/services`}
             className="px-8 py-4 border border-zinc-600 text-white font-medium rounded-lg hover:border-amber-400 hover:text-amber-400 transition-colors text-sm uppercase tracking-wider"
           >
             {t('hero.ctaSecondary')}
@@ -167,7 +168,7 @@ export default function Hero() {
         </div>
       </div>
       <a
-        href="/about"
+        href={`/${locale}/about`}
         className="absolute bottom-4 left-1/2 -translate-x-1/2 animate-bounce"
       >
         <svg className="w-6 h-6 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
