@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import LocaleSwitcher from "@/app/_components/LocaleSwitcher";
 import { siteConfig } from "@/lib/site.config";
 
@@ -40,20 +40,21 @@ const navIcons = {
 
 export default function Navbar() {
   const t = useTranslations();
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
 
   const links = [
-    { href: "/about", label: t('nav.about'), key: "about" },
-    { href: "/services", label: t('nav.services'), key: "services" },
-    { href: "/trainers", label: t('nav.trainers'), key: "trainers" },
-    { href: "/music", label: t('playlists.label'), key: "playlists" },
-    { href: "/contact", label: t('nav.contact'), key: "contact" },
+    { href: `/${locale}/about`, label: t('nav.about'), key: "about" },
+    { href: `/${locale}/services`, label: t('nav.services'), key: "services" },
+    { href: `/${locale}/trainers`, label: t('nav.trainers'), key: "trainers" },
+    { href: `/${locale}/music`, label: t('playlists.label'), key: "playlists" },
+    { href: `/${locale}/contact`, label: t('nav.contact'), key: "contact" },
   ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur bg-zinc-950/98 border-b border-amber-400/20 shadow-lg shadow-amber-400/5">
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
-        <Link href="/" className="flex items-center gap-3">
+        <Link href={`/${locale}`} className="flex items-center gap-3">
           <Image src="/logo.png" alt={`${siteConfig.siteName} Logo`} width={40} height={40} className="rounded-full bg-amber-400/10 border border-amber-400/30" />
           <span className="hidden lg:inline text-amber-400 font-bold text-lg tracking-wide">{siteConfig.siteName}</span>
         </Link>
