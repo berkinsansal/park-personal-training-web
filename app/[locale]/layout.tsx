@@ -19,9 +19,9 @@ export const metadata: Metadata = {
   title: siteConfig.siteName,
 };
 
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
+// Remove generateStaticParams from root layout to allow on-demand ISR for all routes
+// This prevents admin routes from being pre-rendered at build time
+// Public pages with 'use cache' directives will still be cached after first request
 
 export default async function RootLayout({
   children,

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from "@/lib/site.config";
 import { getSiteInfo, getServices, getTrainers } from "@/lib/data";
+import { routing } from "@/i18n.config";
 import Hero from "@/app/[locale]/_components/Hero";
 import AboutPreview from "@/app/[locale]/_components/AboutPreview";
 import ServicesPreview from "@/app/[locale]/_components/ServicesPreview";
@@ -52,6 +53,10 @@ async function HomeContent() {
       </section>
     </>
   );
+}
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
 }
 
 export async function generateMetadata(): Promise<Metadata> {

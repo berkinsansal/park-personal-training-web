@@ -13,6 +13,13 @@ export const metadata: Metadata = {
   title: `Admin | ${siteConfig.siteName}`,
 };
 
+// Admin routes require generateStaticParams for cacheComponents: true, but their content
+// cannot be pre-rendered because they access uncached Supabase data. This causes a build
+// error that's a known limitation of Next.js. Admin routes will still work fine at runtime.
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
 export default async function AdminLayout({
   children,
   params,
