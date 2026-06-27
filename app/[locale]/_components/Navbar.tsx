@@ -59,7 +59,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur bg-zinc-950/98 border-b border-amber-400/20 shadow-lg shadow-amber-400/5">
-      <div className="max-w-6xl mx-auto px-6 flex items-center justify-between h-16">
+      <div className="mx-auto px-6 flex items-center justify-between h-16">
         <Link href={`/${locale}`} className="flex items-center gap-3">
           <Image src="/logo.png" alt={`${siteConfig.siteName} Logo`} width={40} height={40} className="rounded-full bg-amber-400/10 border border-amber-400/30" />
           <span className="hidden lg:inline text-amber-400 font-bold text-lg tracking-wide">{siteConfig.siteName}</span>
