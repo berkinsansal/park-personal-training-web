@@ -61,7 +61,8 @@
       "Bash(cp -r \"node_modules/.../bak/\"* \"app/admin/_components\")",
       "Bash(git diff *)",
       "Bash(npx next *)",
-      "WebFetch(domain:next-intl.dev)"
+      "WebFetch(domain:next-intl.dev)",
+      "Bash(cat > *)"
     ],
     "additionalDirectories": [
       "C:\\GitHub\\park-personal-training-web\\app",
@@ -69,7 +70,8 @@
       "C:\\GitHub\\park-personal-training-web\\app\\admin\\[\\[...locale\\]",
       "C:\\GitHub\\park-personal-training-web\\app\\admin\\[[...locale]]\\login",
       "C:\\GitHub\\park-personal-training-web\\app\\admin\\[[...locale]]\\admin",
-      "C:\\GitHub\\park-personal-training-web\\app\\admin\\[[...locale]]"
+      "C:\\GitHub\\park-personal-training-web\\app\\admin\\[[...locale]]",
+      "\\tmp"
     ]
   }
 }

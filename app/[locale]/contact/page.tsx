@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/lib/site.config';
 import { getSiteInfo } from '@/lib/data';
 import { routing } from '@/i18n.config';
-import Contact from "@/app/[locale]/_components/Contact";
+import Contact from "@/app/[locale]/contact/_components/Contact";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

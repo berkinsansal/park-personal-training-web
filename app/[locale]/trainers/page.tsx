@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/lib/site.config';
 import { getTrainers } from '@/lib/data';
 import { routing } from '@/i18n.config';
-import Trainers from "@/app/[locale]/_components/Trainers";
+import Trainers from "@/app/[locale]/trainers/_components/Trainers";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

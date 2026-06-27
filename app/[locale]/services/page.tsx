@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/lib/site.config';
 import { getServices } from '@/lib/data';
 import { routing } from '@/i18n.config';
-import Services from "@/app/[locale]/_components/Services";
+import Services from "@/app/[locale]/services/_components/Services";
 import { AnimateIn } from "@/app/[locale]/_components/AnimateIn";
 
 export function generateStaticParams() {

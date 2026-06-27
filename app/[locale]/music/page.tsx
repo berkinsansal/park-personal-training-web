@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/lib/site.config';
 import { getPlaylists } from '@/lib/data';
 import { routing } from '@/i18n.config';
-import Playlists from "@/app/[locale]/_components/Playlists";
+import Playlists from "@/app/[locale]/music/_components/Playlists";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

@@ -1,0 +1,105 @@
+'use client';
+
+import { useState, useEffect, useRef } from 'react';
+import { useTranslations, useLocale } from 'next-intl';
+
+type Props = {
+  happyCustomers: number;
+  yearsExperience: number;
+  trainerCount: number;
+  serviceCount: number;
+};
+
+function useCountUp(target: number, duration: number, active: boolean) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!active) return;
+    const start = performance.now();
+    let rafId: number;
+    const raf = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * target));
+      if (progress < 1) rafId = requestAnimationFrame(raf);
+    };
+    rafId = requestAnimationFrame(raf);
+    return () => cancelAnimationFrame(rafId);
+  }, [active, target, duration]);
+  return count;
+}
+
+export default function AboutPreview({ happyCustomers, yearsExperience, trainerCount, serviceCount }: Props) {
+  const t = useTranslations('about');
+  const locale = useLocale();
+  const statsRef = useRef<HTMLDivElement>(null);
+  const [statsVisible, setStatsVisible] = useState(false);
+
+  useEffect(() => {
+    const el = statsRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStatsVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+  const stats = [
+    { value: `${happyCustomers}+`, label: t('statHappyCustomers') },
+    { value: `${yearsExperience}+`, label: t('statYearsExperience') },
+    { value: `${trainerCount}+`, label: t('statTrainers') },
+    { value: String(serviceCount), label: t('statServices') },
+  ];
+
+  return (
+    <section className="py-24 bg-zinc-900">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="grid md:grid-cols-2 gap-16 items-start">
+          <div>
+            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">
+              {t('label')}
+            </span>
+            <h2 className="mt-3 text-4xl md:text-5xl font-black text-white leading-tight">
+              {t('heading1')}<br />
+              <span className="text-amber-400">{t('heading2')}</span> {t('heading3')}
+            </h2>
+            <p className="mt-6 text-zinc-400 text-lg leading-relaxed">
+              {t('p1')}
+            </p>
+            <a
+              href={`/${locale}/about`}
+              className="mt-8 inline-block px-6 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
+            >
+              Learn More
+            </a>
+          </div>
+          <div>
+            <div className="grid grid-cols-2 gap-6" ref={statsRef}>
+              {stats.map((s) => {
+                const numMatch = s.value.match(/\d+/);
+                const num = numMatch ? parseInt(numMatch[0]) : 0;
+                const suffix = s.value.replace(/\d+/g, '');
+                const counted = useCountUp(num, 1400, statsVisible);
+                return (
+                  <div
+                    key={s.label}
+                    className="bg-zinc-800 rounded-2xl p-8 text-center border border-zinc-700 hover:border-amber-400/50 transition-colors"
+                  >
+                    <div className="text-4xl font-black text-amber-400">{counted}{suffix}</div>
+                    <div className="mt-2 text-zinc-400 text-sm font-medium">{s.label}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

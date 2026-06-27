@@ -3,10 +3,10 @@ import { getTranslations } from 'next-intl/server';
 import { siteConfig } from "@/lib/site.config";
 import { getSiteInfo, getServices, getTrainers } from "@/lib/data";
 import { routing } from "@/i18n.config";
-import Hero from "@/app/[locale]/_components/Hero";
-import AboutPreview from "@/app/[locale]/_components/AboutPreview";
-import ServicesPreview from "@/app/[locale]/_components/ServicesPreview";
-import TrainersPreview from "@/app/[locale]/_components/TrainersPreview";
+import Hero from "@/app/[locale]/(home)/_components/Hero";
+import AboutPreview from "@/app/[locale]/(home)/_components/AboutPreview";
+import ServicesPreview from "@/app/[locale]/(home)/_components/ServicesPreview";
+import TrainersPreview from "@/app/[locale]/(home)/_components/TrainersPreview";
 
 async function HomeContent({ locale }: { locale: string }) {
   const t = await getTranslations();
