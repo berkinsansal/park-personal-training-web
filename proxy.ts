@@ -9,6 +9,11 @@ const intlMiddleware = createMiddleware(routing);
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Redirect root to default locale
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL('/tr', request.url));
+  }
+
   const intlResponse = intlMiddleware(request);
 
   if (!pathname.startsWith('/admin') && !pathname.startsWith('/en/admin')) {
