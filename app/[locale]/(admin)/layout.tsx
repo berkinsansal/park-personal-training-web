@@ -13,12 +13,6 @@ export const metadata: Metadata = {
   title: `Admin | ${siteConfig.siteName}`,
 };
 
-// Generate static params for all locales, but skip actual content generation for admin pages
-// Admin pages will handle errors gracefully during build-time pre-rendering
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
-
 export default async function AdminLayout({
   children,
   params,
