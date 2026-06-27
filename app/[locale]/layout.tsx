@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Geist } from "next/font/google";
 import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
@@ -19,9 +20,20 @@ export const metadata: Metadata = {
   title: siteConfig.siteName,
 };
 
-// Remove generateStaticParams from root layout to allow on-demand ISR for all routes
-// This prevents admin routes from being pre-rendered at build time
-// Public pages with 'use cache' directives will still be cached after first request
+async function LayoutShell({ children }: { children: React.ReactNode }) {
+  const messages = await getMessages();
+  const siteInfo = await getSiteInfo();
+
+  return (
+    <NextIntlClientProvider messages={messages}>
+      <Navbar />
+      <main>
+        {children}
+      </main>
+      <Footer igHandle={siteInfo.ig_handle ?? ''} />
+    </NextIntlClientProvider>
+  );
+}
 
 export default async function RootLayout({
   children,
@@ -37,21 +49,15 @@ export default async function RootLayout({
     notFound();
   }
 
-  const messages = await getMessages();
-  const siteInfo = await getSiteInfo();
   const htmlLang = locale === 'en' ? 'en' : 'tr';
 
   return (
     <html lang={htmlLang} className={`${geist.variable} scroll-smooth`}>
       <head />
       <body className="bg-zinc-950 text-white antialiased">
-        <NextIntlClientProvider messages={messages}>
-          <Navbar />
-          <main>
-            {children}
-          </main>
-          <Footer igHandle={siteInfo.ig_handle ?? ''} />
-        </NextIntlClientProvider>
+        <Suspense fallback={null}>
+          <LayoutShell>{children}</LayoutShell>
+        </Suspense>
       </body>
     </html>
   );
