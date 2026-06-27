@@ -59,7 +59,8 @@
       "Bash(sed 's/const locale = await getLocale\\(\\);/const locale = \"tr\";/')",
       "Bash(cp -r \"app/\\(admin\\)/admin/_components\" \"app/admin/\")",
       "Bash(cp -r \"node_modules/.../bak/\"* \"app/admin/_components\")",
-      "Bash(git diff *)"
+      "Bash(git diff *)",
+      "Bash(npx next *)"
     ],
     "additionalDirectories": [
       "C:\\GitHub\\park-personal-training-web\\app",
