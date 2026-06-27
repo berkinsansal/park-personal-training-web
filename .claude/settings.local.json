@@ -60,7 +60,8 @@
       "Bash(cp -r \"app/\\(admin\\)/admin/_components\" \"app/admin/\")",
       "Bash(cp -r \"node_modules/.../bak/\"* \"app/admin/_components\")",
       "Bash(git diff *)",
-      "Bash(npx next *)"
+      "Bash(npx next *)",
+      "WebFetch(domain:next-intl.dev)"
     ],
     "additionalDirectories": [
       "C:\\GitHub\\park-personal-training-web\\app",
