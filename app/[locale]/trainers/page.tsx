@@ -4,6 +4,7 @@ import { siteConfig } from '@/lib/site.config';
 import { getTrainers } from '@/lib/data';
 import { routing } from '@/i18n.config';
 import Trainers from "@/app/[locale]/trainers/_components/Trainers";
+import ContactPreview from "@/app/[locale]/(home)/_components/ContactPreview";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -20,7 +21,12 @@ export async function generateMetadata(): Promise<Metadata> {
 async function TrainersContent() {
   const trainers = await getTrainers();
 
-  return <Trainers trainers={trainers} />;
+  return (
+    <>
+      <Trainers trainers={trainers} />
+      <ContactPreview />
+    </>
+  );
 }
 
 export default async function TrainersPage() {
