@@ -1,4 +1,3 @@
-import { connection } from 'next/server';
 import { Suspense } from 'react';
 import Link from 'next/link';
 import Image from "next/image";
@@ -12,9 +11,9 @@ import PlaylistsPanel from './_components/PlaylistsPanel';
 import GalleryPanel from './_components/GalleryPanel';
 import LocaleSwitcher from '@/app/_components/LocaleSwitcher';
 import { logoutAction } from './actions';
+import { routing } from '@/i18n.config';
 
 async function AdminContent() {
-  await connection();
   const t = await getTranslations('admin');
   const db = createAdminClient();
 
@@ -65,13 +64,14 @@ async function AdminContent() {
   );
 }
 
-export const generateStaticParams = () => {
-  return [];
-};
 
-export default async function AdminPage() {
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export default function AdminPage() {
   return (
-    <Suspense>
+    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
       <AdminContent />
     </Suspense>
   );

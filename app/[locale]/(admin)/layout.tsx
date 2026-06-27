@@ -3,6 +3,8 @@ import { Geist } from "next/font/google";
 import { siteConfig } from "@/lib/site.config";
 import "../../globals.css";
 
+export const skipStaticGeneration = true;
+
 const geist = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],

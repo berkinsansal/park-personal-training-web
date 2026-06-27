@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useTranslations } from 'next-intl';
 import LocaleSwitcher from "@/app/_components/LocaleSwitcher";
 import { siteConfig } from "@/lib/site.config";
-import type { Locale } from "@/i18n.config";
 
 const navIcons = {
   about: (
@@ -39,7 +38,7 @@ const navIcons = {
   ),
 };
 
-export default function Navbar({ locale }: { locale: Locale }) {
+export default function Navbar() {
   const t = useTranslations();
   const [open, setOpen] = useState(false);
 
@@ -71,7 +70,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
             </li>
           ))}
           <li>
-            <LocaleSwitcher locale={locale} />
+            <LocaleSwitcher />
           </li>
         </ul>
         <button
@@ -100,7 +99,7 @@ export default function Navbar({ locale }: { locale: Locale }) {
               {l.label}
             </Link>
           ))}
-          <LocaleSwitcher locale={locale} />
+          <LocaleSwitcher />
         </div>
       )}
     </nav>

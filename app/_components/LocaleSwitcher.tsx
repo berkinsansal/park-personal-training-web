@@ -1,32 +1,18 @@
 'use client';
 
 import { useRouter, usePathname } from 'next/navigation';
-import type { Locale } from '@/lib/i18n';
+import { useLocale } from 'next-intl';
+import type { Locale } from '@/i18n.config';
 
-export default function LocaleSwitcher({ locale, isAdminPath }: { locale: Locale; isAdminPath?: boolean }) {
+export default function LocaleSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
+  const currentLocale = useLocale();
 
   const handleSwitch = () => {
-    const newLocale: Locale = locale === 'tr' ? 'en' : 'tr';
-    let newPath: string;
-
-    if (isAdminPath) {
-      // Admin pages: preserve path, switch between /admin and /en/admin
-      if (newLocale === 'en') {
-        newPath = `/en${pathname.replace(/^\/en/, '')}`;
-      } else {
-        newPath = pathname.replace(/^\/en/, '');
-      }
-    } else {
-      // Public pages: preserve path, switch between / and /en/
-      if (newLocale === 'en') {
-        newPath = `/en${pathname}`;
-      } else {
-        newPath = pathname.replace(/^\/en/, '') || '/';
-      }
-    }
-
+    const newLocale: Locale = currentLocale === 'tr' ? 'en' : 'tr';
+    const pathWithoutLocale = pathname.replace(/^\/(en|tr)/, '') || '/';
+    const newPath = newLocale === 'en' ? `/en${pathWithoutLocale}` : pathWithoutLocale;
     router.push(newPath);
   };
 
@@ -35,9 +21,9 @@ export default function LocaleSwitcher({ locale, isAdminPath }: { locale: Locale
       onClick={handleSwitch}
       className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-zinc-400 hover:text-white transition-colors"
     >
-      <span className={locale === 'tr' ? 'text-amber-400' : 'text-zinc-500'}>TR</span>
+      <span className={currentLocale === 'tr' ? 'text-amber-400' : 'text-zinc-500'}>TR</span>
       <span className="text-zinc-600">|</span>
-      <span className={locale === 'en' ? 'text-amber-400' : 'text-zinc-500'}>EN</span>
+      <span className={currentLocale === 'en' ? 'text-amber-400' : 'text-zinc-500'}>EN</span>
     </button>
   );
 }

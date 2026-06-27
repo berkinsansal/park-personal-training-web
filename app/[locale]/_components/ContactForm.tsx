@@ -2,7 +2,7 @@
 
 import { useRef, useState, useTransition } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { sendContactAction } from '@/app/[[...locale]]/actions';
+import { sendContactAction } from '@/app/actions';
 
 function SubmitButton({ label, pending }: { label: string; pending: boolean }) {
   return (
@@ -26,9 +26,8 @@ export default function ContactForm() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    formData.set('locale', locale);
     startTransition(async () => {
-      const result = await sendContactAction(null, formData);
+      const result = await sendContactAction(formData);
       setState(result);
       if (result?.success) {
         formRef.current?.reset();

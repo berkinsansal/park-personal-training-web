@@ -46,11 +46,11 @@ export default async function RootLayout({
       <head />
       <body className="bg-zinc-950 text-white antialiased">
         <NextIntlClientProvider messages={messages}>
-          <Navbar locale={locale} />
+          <Navbar />
           <main>
             {children}
           </main>
-          <Footer igHandle={siteInfo.ig_handle ?? ''} locale={locale} />
+          <Footer igHandle={siteInfo.ig_handle ?? ''} />
         </NextIntlClientProvider>
       </body>
     </html>

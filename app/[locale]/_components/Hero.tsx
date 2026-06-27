@@ -54,7 +54,6 @@ export default function Hero() {
     </>
   );
   };
-  const t = dict.hero;
   return (
     <section
       id="hero"

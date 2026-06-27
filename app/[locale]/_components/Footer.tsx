@@ -9,7 +9,7 @@ async function getCurrentYear() {
   return new Date().getFullYear();
 }
 
-export default async function Footer({ igHandle, locale }: { igHandle: string; locale: string }) {
+export default async function Footer({ igHandle }: { igHandle: string }) {
   const t = await getTranslations();
   const currentYear = await getCurrentYear();
 
