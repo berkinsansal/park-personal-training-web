@@ -63,7 +63,7 @@
     "nameLabel": "Full Name",
     "phoneLabel": "Phone",
     "emailLabel": "Email",
-    "messageLabel": "Your Message",
+    "messageLabel": "Message",
     "submit": "Send Message",
     "emailSubject": "New contact form message",
     "successMessage": "Your message was sent! We'll get back to you soon.",
