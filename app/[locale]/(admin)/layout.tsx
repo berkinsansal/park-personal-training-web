@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { siteConfig } from "@/lib/site.config";
+import { routing } from "@/i18n.config";
 import "../../globals.css";
-
-export const skipStaticGeneration = true;
 
 const geist = Geist({
   variable: "--font-geist-sans",
@@ -13,6 +12,11 @@ const geist = Geist({
 export const metadata: Metadata = {
   title: `Admin | ${siteConfig.siteName}`,
 };
+
+// Generate static params for all locales, but admin pages handle build-time errors gracefully
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export default async function AdminLayout({
   children,
