@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import {
   addTrainerAction,
@@ -159,12 +160,14 @@ export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
               key={trainer.id}
               className={`flex items-center gap-3 bg-zinc-900 border border-zinc-800 rounded-xl p-4 transition-opacity ${pendingOp === `delete:${trainer.id}` ? 'opacity-50 pointer-events-none' : ''}`}
             >
-              <div className="w-10 h-10 rounded-full bg-amber-400/10 border border-amber-400/30 flex items-center justify-center shrink-0 overflow-hidden">
+              <div className="relative w-10 h-10 rounded-full bg-amber-400/10 border border-amber-400/30 flex items-center justify-center shrink-0 overflow-hidden">
                 {trainer.photo_url ? (
-                  <img
+                  <Image
+                    fill
+                    sizes="100vw"
                     src={trainer.photo_url}
                     alt={trainer.name}
-                    className="w-full h-full object-cover rounded-full"
+                    className="object-cover rounded-full"
                   />
                 ) : (
                   <span className="text-amber-400 font-bold text-sm">
@@ -291,11 +294,15 @@ function TrainerForm({
         <label className="block text-zinc-400 text-xs mb-1">{t('photo')}</label>
         {defaults?.photo_url && (
           <>
-            <img
-              src={defaults.photo_url}
-              alt={defaults.name}
-              className="w-12 h-12 rounded-full object-cover mb-2 border border-zinc-700"
-            />
+            <div className="relative w-12 h-12 rounded-full overflow-hidden mb-2 border border-zinc-700">
+              <Image
+                fill
+                sizes="100vw"
+                src={defaults.photo_url}
+                alt={defaults.name}
+                className="object-cover"
+              />
+            </div>
             <label className="flex items-center gap-2 text-zinc-400 text-xs cursor-pointer mb-2">
               <input
                 type="checkbox"

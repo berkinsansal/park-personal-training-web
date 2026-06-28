@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import {
   addGalleryPhotoAction,
@@ -163,10 +164,12 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
             >
               <div className="relative w-full h-40 bg-zinc-800">
                 {photo.image_url && (
-                  <img
+                  <Image
+                    fill
+                    sizes="100vw"
                     src={photo.image_url}
                     alt={photo.alt_text}
-                    className="w-full h-full object-cover"
+                    className="object-cover"
                   />
                 )}
               </div>
@@ -268,11 +271,13 @@ function GalleryForm({
           onChange={handleImageChange}
         />
         {preview && (
-          <div className="mt-2 rounded-lg overflow-hidden border border-zinc-700 bg-zinc-800 w-full max-h-48">
-            <img
+          <div className="mt-2 rounded-lg overflow-hidden border border-zinc-700 bg-zinc-800 w-full aspect-video relative">
+            <Image
+              fill
+              sizes="100vw"
               src={preview}
               alt="Preview"
-              className="w-full h-auto object-cover max-h-48"
+              className="object-cover"
             />
           </div>
         )}

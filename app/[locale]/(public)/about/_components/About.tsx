@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import type { GalleryPhoto } from '@/lib/types';
 
@@ -160,14 +161,16 @@ export default function About({
             {gallery.length > 0 && (
               <div className="mt-16">
                 <div
-                  className="overflow-hidden rounded-2xl bg-zinc-800 border border-zinc-700 aspect-video hover:border-amber-400/50 transition-all duration-300 touch-none"
+                  className="overflow-hidden rounded-2xl bg-zinc-800 border border-zinc-700 aspect-video hover:border-amber-400/50 transition-all duration-300 touch-none relative"
                   onPointerDown={handlePointerDown}
                   onPointerUp={handlePointerUp}
                 >
-                  <img
+                  <Image
+                    fill
+                    sizes="100vw"
                     src={gallery[currentSlide].image_url}
                     alt={gallery[currentSlide].alt_text}
-                    className="w-full h-full object-cover select-none"
+                    className="object-cover select-none"
                     draggable={false}
                   />
                 </div>
