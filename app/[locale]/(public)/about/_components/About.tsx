@@ -136,7 +136,7 @@ export default function About({
           </div>
           <div>
             <div ref={statsRef} className="grid grid-cols-2 gap-6">
-              {stats.map((s, i) => {
+              {stats.map((s, _i) => {
                 const numMatch = s.value.match(/\d+/);
                 const num = numMatch ? parseInt(numMatch[0]) : 0;
                 const suffix = s.value.replace(/\d+/g, '');
