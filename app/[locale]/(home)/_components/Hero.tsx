@@ -168,7 +168,7 @@ export default function Hero() {
         </div>
       </div>
       <a
-        href={`/${locale}/about`}
+        href="#about"
         className="absolute bottom-4 left-1/2 -translate-x-1/2 animate-bounce"
       >
         <svg className="w-6 h-6 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">

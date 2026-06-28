@@ -58,7 +58,7 @@ export default function AboutPreview({ happyCustomers, yearsExperience, trainerC
   ];
 
   return (
-    <section className="py-24 bg-zinc-900">
+    <section id="about" className="py-24 bg-zinc-900">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16 items-start">
           <div>
