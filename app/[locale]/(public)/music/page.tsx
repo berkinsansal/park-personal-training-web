@@ -12,9 +12,8 @@ export function generateStaticParams() {
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('meta');
   return {
-    title: `Music | ${siteConfig.siteName}`,
-    description:
-      'Discover the Spotify playlists we play at our studio to keep you motivated during your workout.',
+    title: `${t('musicTitle')} | ${siteConfig.siteName}`,
+    description: t('musicDescription'),
   };
 }
 

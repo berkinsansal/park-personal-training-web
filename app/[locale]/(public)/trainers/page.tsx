@@ -13,9 +13,8 @@ export function generateStaticParams() {
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('meta');
   return {
-    title: `Our Team | ${siteConfig.siteName}`,
-    description:
-      'Meet our expert trainers who are dedicated to helping you achieve your fitness goals.',
+    title: `${t('trainersTitle')} | ${siteConfig.siteName}`,
+    description: t('trainersDescription'),
   };
 }
 

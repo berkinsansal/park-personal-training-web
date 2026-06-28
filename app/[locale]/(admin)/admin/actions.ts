@@ -199,7 +199,7 @@ export async function addTrainerAction(formData: FormData) {
     return { error: error.message };
   }
 
-  let photo_url = '';
+  let photoUrl = '';
   const photo = formData.get('photo');
   if (photo instanceof File && photo.size > 0) {
     const ext = getFileExt(photo);
@@ -210,12 +210,12 @@ export async function addTrainerAction(formData: FormData) {
         data: { publicUrl },
       } = db.storage.from('trainer-photos').getPublicUrl(path);
       await db.from('trainers').update({ photo_url: publicUrl }).eq('id', inserted.id);
-      photo_url = publicUrl;
+      photoUrl = publicUrl;
     }
   }
 
   updateTag('trainers');
-  return { success: true, data: { ...inserted, photo_url } };
+  return { success: true, data: { ...inserted, photo_url: photoUrl } };
 }
 
 export async function updateTrainerAction(formData: FormData) {
@@ -373,7 +373,7 @@ export async function addGalleryPhotoAction(formData: FormData) {
     return { error: error.message };
   }
 
-  let image_url = '';
+  let imageUrl = '';
   const image = formData.get('image');
   if (image instanceof File && image.size > 0) {
     const ext = getFileExt(image);
@@ -384,12 +384,12 @@ export async function addGalleryPhotoAction(formData: FormData) {
         data: { publicUrl },
       } = db.storage.from('gallery-images').getPublicUrl(path);
       await db.from('gallery').update({ image_url: publicUrl }).eq('id', inserted.id);
-      image_url = publicUrl;
+      imageUrl = publicUrl;
     }
   }
 
   updateTag('gallery');
-  return { success: true, data: { ...inserted, image_url } };
+  return { success: true, data: { ...inserted, image_url: imageUrl } };
 }
 
 export async function updateGalleryPhotoAction(formData: FormData) {

@@ -1,8 +1,8 @@
 'use client';
 
-import { useRef, useState, useTransition } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
 import { sendContactAction } from '@/app/actions';
+import { useTranslations } from 'next-intl';
+import { useRef, useState, useTransition } from 'react';
 
 function SubmitButton({ label, pending }: { label: string; pending: boolean }) {
   return (
@@ -17,7 +17,6 @@ function SubmitButton({ label, pending }: { label: string; pending: boolean }) {
 }
 
 export default function ContactForm() {
-  const locale = useLocale();
   const t = useTranslations('contact');
   const formRef = useRef<HTMLFormElement>(null);
   const [isPending, startTransition] = useTransition();

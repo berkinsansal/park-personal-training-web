@@ -12,8 +12,8 @@ export function generateStaticParams() {
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('meta');
   return {
-    title: `About Us | ${siteConfig.siteName}`,
-    description: 'Learn more about Park Personal Training and our expert team.',
+    title: `${t('aboutTitle')} | ${siteConfig.siteName}`,
+    description: t('aboutDescription'),
   };
 }
 

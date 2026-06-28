@@ -13,8 +13,8 @@ export function generateStaticParams() {
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('meta');
   return {
-    title: `Services | ${siteConfig.siteName}`,
-    description: 'Explore all our training services and programs.',
+    title: `${t('servicesTitle')} | ${siteConfig.siteName}`,
+    description: t('servicesDescription'),
   };
 }
 

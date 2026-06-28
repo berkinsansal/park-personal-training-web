@@ -1,7 +1,7 @@
-import { Suspense, ViewTransition } from 'react';
-import { getSiteInfo } from '@/lib/data';
-import Navbar from '@/app/[locale]/_components/Navbar';
 import Footer from '@/app/[locale]/_components/Footer';
+import Navbar from '@/app/[locale]/_components/Navbar';
+import { getSiteInfo } from '@/lib/data';
+import { ViewTransition } from 'react';
 
 export default async function PublicLayout({
   children,
