@@ -63,6 +63,7 @@ export default defineConfig([
           shorthandFirst: true,
           reservedFirst: true,
           ignoreCase: true,
+          noSortAlphabetically: true,
         },
       ],
 
