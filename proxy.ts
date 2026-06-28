@@ -11,14 +11,11 @@ export async function proxy(request: NextRequest) {
 
   const intlResponse = intlMiddleware(request);
 
-  const isAdminRoute = /^(\/tr)?\/admin/.test(pathname) || /^\/en\/admin/.test(pathname);
-  const isLoginRoute = /^(\/tr)?\/admin\/login/.test(pathname) || /^\/en\/admin\/login/.test(pathname);
-
-  if (!isAdminRoute) {
+  if (!pathname.startsWith('/admin') && !pathname.startsWith('/en/admin')) {
     return intlResponse;
   }
 
-  if (isLoginRoute) {
+  if (pathname.startsWith('/admin/login') || pathname.startsWith('/en/admin/login')) {
     return intlResponse;
   }
 
