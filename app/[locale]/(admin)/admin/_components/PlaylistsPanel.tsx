@@ -69,7 +69,7 @@ export default function PlaylistsPanel({
     }
   };
 
-  const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleUpdate = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const id = Number(fd.get('id'));
@@ -99,7 +99,7 @@ export default function PlaylistsPanel({
     }
   };
 
-  const handleAdd = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleAdd = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     setPendingOp('add');
@@ -235,7 +235,7 @@ function PlaylistForm({
 }: {
   t: ReturnType<typeof useTranslations>;
   defaults?: Playlist;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit: (e: React.SubmitEvent<HTMLFormElement>) => void;
   onCancel: () => void;
   label: string;
   pendingOp: string | null;

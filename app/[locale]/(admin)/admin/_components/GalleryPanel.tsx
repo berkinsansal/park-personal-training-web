@@ -65,7 +65,7 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
     }
   };
 
-  const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleUpdate = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const id = Number(fd.get('id'));
@@ -95,7 +95,7 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
     }
   };
 
-  const handleAdd = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleAdd = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const maxOrder =
@@ -232,7 +232,7 @@ function GalleryForm({
   pendingOp,
 }: {
   t: ReturnType<typeof useTranslations>;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
+  onSubmit: (e: React.SubmitEvent<HTMLFormElement>) => Promise<void>;
   onCancel: () => void;
   label: string;
   defaults?: GalleryPhoto;

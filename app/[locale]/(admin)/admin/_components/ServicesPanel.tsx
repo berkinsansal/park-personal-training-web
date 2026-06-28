@@ -65,7 +65,7 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
     }
   };
 
-  const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleUpdate = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const id = Number(fd.get('id'));
@@ -97,7 +97,7 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
     }
   };
 
-  const handleAdd = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleAdd = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     setPendingOp('add');
@@ -231,7 +231,7 @@ function ServiceForm({
 }: {
   t: ReturnType<typeof useTranslations>;
   defaults?: Service;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit: (e: React.SubmitEvent<HTMLFormElement>) => void;
   onCancel: () => void;
   label: string;
   pendingOp: string | null;
