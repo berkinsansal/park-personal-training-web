@@ -5,6 +5,9 @@ const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
   cacheComponents: true,
+  experimental: {
+    viewTransition: true,
+  },
 };
 
 export default withNextIntl(nextConfig);

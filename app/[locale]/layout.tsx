@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
+import { Suspense, ViewTransition } from "react";
 import { Geist } from "next/font/google";
 import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
@@ -27,9 +27,11 @@ async function LayoutShell({ children }: { children: React.ReactNode }) {
   return (
     <NextIntlClientProvider messages={messages}>
       <Navbar />
-      <main>
-        {children}
-      </main>
+        <main>
+          <ViewTransition default="page-slices">
+            {children}
+          </ViewTransition>
+        </main>
       <Footer igHandle={siteInfo.ig_handle ?? ''} />
     </NextIntlClientProvider>
   );
