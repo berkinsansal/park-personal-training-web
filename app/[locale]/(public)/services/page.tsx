@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/lib/site.config';
-import { getTrainers } from '@/lib/data';
+import { getServices } from '@/lib/data';
 import { routing } from '@/i18n.config';
-import Trainers from "@/app/[locale]/trainers/_components/Trainers";
+import Services from "@/app/[locale]/(public)/services/_components/Services";
 import ContactPreview from "@/app/[locale]/(home)/_components/ContactPreview";
 
 export function generateStaticParams() {
@@ -13,22 +13,22 @@ export function generateStaticParams() {
 export async function generateMetadata(): Promise<Metadata> {
   const t = await getTranslations('meta');
   return {
-    title: `Our Team | ${siteConfig.siteName}`,
-    description: 'Meet our expert trainers who are dedicated to helping you achieve your fitness goals.',
+    title: `Services | ${siteConfig.siteName}`,
+    description: 'Explore all our training services and programs.',
   };
 }
 
-async function TrainersContent() {
-  const trainers = await getTrainers();
+async function ServicesContent() {
+  const services = await getServices();
 
   return (
     <>
-      <Trainers trainers={trainers} />
+      <Services services={services} />
       <ContactPreview />
     </>
   );
 }
 
-export default async function TrainersPage() {
-  return <TrainersContent />;
+export default async function ServicesPage() {
+  return <ServicesContent />;
 }

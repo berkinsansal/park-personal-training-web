@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import { Suspense, ViewTransition } from "react";
+import { Suspense } from "react";
 import { Geist } from "next/font/google";
 import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
 import { siteConfig } from "@/lib/site.config";
-import { getSiteInfo } from "@/lib/data";
-import Navbar from "@/app/[locale]/_components/Navbar";
-import Footer from "@/app/[locale]/_components/Footer";
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n.config';
 import "../globals.css";
@@ -22,17 +19,10 @@ export const metadata: Metadata = {
 
 async function LayoutShell({ children }: { children: React.ReactNode }) {
   const messages = await getMessages();
-  const siteInfo = await getSiteInfo();
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <Navbar />
-        <main>
-          <ViewTransition default="page-slices">
-            {children}
-          </ViewTransition>
-        </main>
-      <Footer igHandle={siteInfo.ig_handle ?? ''} />
+      {children}
     </NextIntlClientProvider>
   );
 }
