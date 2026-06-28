@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import type { GalleryPhoto } from "@/lib/types";
+import type { GalleryPhoto } from '@/lib/types';
 
 interface Props {
   happyCustomers: number;
@@ -15,7 +15,9 @@ interface Props {
 function useCountUp(target: number, duration: number, active: boolean) {
   const [count, setCount] = useState(0);
   useEffect(() => {
-    if (!active) {return;}
+    if (!active) {
+      return;
+    }
     const start = performance.now();
     let rafId: number;
     const raf = (now: number) => {
@@ -23,7 +25,9 @@ function useCountUp(target: number, duration: number, active: boolean) {
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.round(eased * target));
-      if (progress < 1) {rafId = requestAnimationFrame(raf);}
+      if (progress < 1) {
+        rafId = requestAnimationFrame(raf);
+      }
     };
     rafId = requestAnimationFrame(raf);
     return () => cancelAnimationFrame(rafId);
@@ -31,7 +35,13 @@ function useCountUp(target: number, duration: number, active: boolean) {
   return count;
 }
 
-export default function About({ happyCustomers, yearsExperience, trainerCount, serviceCount, gallery }: Props) {
+export default function About({
+  happyCustomers,
+  yearsExperience,
+  trainerCount,
+  serviceCount,
+  gallery,
+}: Props) {
   const t = useTranslations('about');
   const locale = useLocale();
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -57,17 +67,25 @@ export default function About({ happyCustomers, yearsExperience, trainerCount, s
     const diffY = dragStart.y - dragEnd.y;
 
     if (Math.abs(diffX) > 50) {
-      if (diffX > 0) {nextSlide();}
-      else {prevSlide();}
+      if (diffX > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
     } else if (Math.abs(diffY) > 50) {
-      if (diffY > 0) {nextSlide();}
-      else {prevSlide();}
+      if (diffY > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
     }
   };
 
   useEffect(() => {
     const el = statsRef.current;
-    if (!el) {return;}
+    if (!el) {
+      return;
+    }
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -75,7 +93,7 @@ export default function About({ happyCustomers, yearsExperience, trainerCount, s
           obs.disconnect();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.15 },
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -97,8 +115,10 @@ export default function About({ happyCustomers, yearsExperience, trainerCount, s
               {t('label')}
             </span>
             <h2 className="mt-3 text-4xl md:text-5xl font-black text-white leading-tight">
-              {t('heading1')}<br />
-              <span className="text-amber-400">{t('heading2')}</span> {t('heading3')}
+              {t('heading1')}
+              <br />
+              <span className="text-amber-400">{t('heading2')}</span>{' '}
+              {t('heading3')}
             </h2>
             <p className="mt-6 text-zinc-400 text-lg leading-relaxed">
               {t('p1')}
@@ -125,8 +145,13 @@ export default function About({ happyCustomers, yearsExperience, trainerCount, s
                     key={s.label}
                     className="bg-zinc-800 rounded-2xl p-8 text-center border border-zinc-700 hover:border-amber-400/50 transition-colors"
                   >
-                    <div className="text-4xl font-black text-amber-400">{counted}{suffix}</div>
-                    <div className="mt-2 text-zinc-400 text-sm font-medium">{s.label}</div>
+                    <div className="text-4xl font-black text-amber-400">
+                      {counted}
+                      {suffix}
+                    </div>
+                    <div className="mt-2 text-zinc-400 text-sm font-medium">
+                      {s.label}
+                    </div>
                   </div>
                 );
               })}
@@ -134,7 +159,11 @@ export default function About({ happyCustomers, yearsExperience, trainerCount, s
 
             {gallery.length > 0 && (
               <div className="mt-16">
-                <div className="overflow-hidden rounded-2xl bg-zinc-800 border border-zinc-700 aspect-video hover:border-amber-400/50 transition-all duration-300 touch-none" onPointerDown={handlePointerDown} onPointerUp={handlePointerUp}>
+                <div
+                  className="overflow-hidden rounded-2xl bg-zinc-800 border border-zinc-700 aspect-video hover:border-amber-400/50 transition-all duration-300 touch-none"
+                  onPointerDown={handlePointerDown}
+                  onPointerUp={handlePointerUp}
+                >
                   <img
                     src={gallery[currentSlide].image_url}
                     alt={gallery[currentSlide].alt_text}
@@ -156,7 +185,9 @@ export default function About({ happyCustomers, yearsExperience, trainerCount, s
                         <button
                           key={idx}
                           className={`w-2 h-2 rounded-full transition-all ${
-                            idx === currentSlide ? 'bg-amber-400 w-6' : 'bg-zinc-600 hover:bg-zinc-500'
+                            idx === currentSlide
+                              ? 'bg-amber-400 w-6'
+                              : 'bg-zinc-600 hover:bg-zinc-500'
                           }`}
                           onClick={() => setCurrentSlide(idx)}
                         />

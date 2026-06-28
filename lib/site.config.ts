@@ -1,3 +1,3 @@
 export const siteConfig = {
-  siteName: "Park Personal Training",
+  siteName: 'Park Personal Training',
 };

@@ -1,1 +1,1 @@
-export { default } from "@/app/[locale]/(public)/layout";
+export { default } from '@/app/[locale]/(public)/layout';

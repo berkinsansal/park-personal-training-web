@@ -1,16 +1,16 @@
-import type { Metadata } from "next";
-import { Suspense } from "react";
-import { Geist } from "next/font/google";
+import type { Metadata } from 'next';
+import { Suspense } from 'react';
+import { Geist } from 'next/font/google';
 import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
-import { siteConfig } from "@/lib/site.config";
+import { siteConfig } from '@/lib/site.config';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n.config';
-import "../globals.css";
+import '../globals.css';
 
 const geist = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
@@ -44,7 +44,11 @@ export default async function RootLayout({
   const htmlLang = locale === 'en' ? 'en' : 'tr';
 
   return (
-    <html lang={htmlLang} className={`${geist.variable} scroll-smooth`} data-scroll-behavior="smooth">
+    <html
+      lang={htmlLang}
+      className={`${geist.variable} scroll-smooth`}
+      data-scroll-behavior="smooth"
+    >
       <head />
       <body className="bg-zinc-950 text-white antialiased">
         <Suspense fallback={null}>

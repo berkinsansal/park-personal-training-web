@@ -8,22 +8,22 @@ export const routing = defineRouting({
   pathnames: {
     '/': '/',
     '/about': {
-      tr: '/hakkimizda'
+      tr: '/hakkimizda',
     },
     '/services': {
-      tr: '/hizmetler'
+      tr: '/hizmetler',
     },
     '/trainers': {
-      tr: '/egitmenler'
+      tr: '/egitmenler',
     },
     '/contact': {
-      tr: '/iletisim'
+      tr: '/iletisim',
     },
     '/music': {
-      tr: '/muzik'
+      tr: '/muzik',
     },
-    '/admin': '/admin'
-  }
+    '/admin': '/admin',
+  },
 });
 
 export type Locale = (typeof routing.locales)[number];

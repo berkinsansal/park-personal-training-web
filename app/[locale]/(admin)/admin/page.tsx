@@ -1,9 +1,9 @@
 import { Suspense } from 'react';
 import Link from 'next/link';
-import Image from "next/image";
+import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { createAdminClient } from '@/lib/supabase-server';
-import { siteConfig } from "@/lib/site.config";
+import { siteConfig } from '@/lib/site.config';
 import SiteInfoForm from './_components/SiteInfoForm';
 import ServicesPanel from './_components/ServicesPanel';
 import TrainersPanel from './_components/TrainersPanel';
@@ -17,7 +17,13 @@ async function AdminContent() {
   const t = await getTranslations('admin');
   const db = createAdminClient();
 
-  const [{ data: siteInfo }, { data: services }, { data: trainers }, { data: playlists }, { data: gallery }] = await Promise.all([
+  const [
+    { data: siteInfo },
+    { data: services },
+    { data: trainers },
+    { data: playlists },
+    { data: gallery },
+  ] = await Promise.all([
     db.from('site_info').select('*').single(),
     db.from('services').select('*').order('order_index'),
     db.from('trainers').select('*').order('order_index'),
@@ -28,7 +34,10 @@ async function AdminContent() {
   return (
     <>
       <header className="border-b border-zinc-800 bg-zinc-900 px-6 py-4 flex items-center justify-between">
-        <Link href="/" className="hover:opacity-80 transition-opacity flex items-center gap-3">
+        <Link
+          href="/"
+          className="hover:opacity-80 transition-opacity flex items-center gap-3"
+        >
           <Image
             src="/logo.png"
             alt={`${siteConfig.siteName} Logo`}
@@ -37,7 +46,9 @@ async function AdminContent() {
             className="rounded-full bg-amber-400/10 border border-amber-400/30"
           />
           <div>
-            <h1 className="text-amber-400 font-bold text-lg tracking-wide">{siteConfig.siteName}</h1>
+            <h1 className="text-amber-400 font-bold text-lg tracking-wide">
+              {siteConfig.siteName}
+            </h1>
             <p className="text-zinc-500 text-sm mt-0.5">{t('subtitle')}</p>
           </div>
         </Link>
@@ -66,7 +77,13 @@ async function AdminContent() {
 
 export default function AdminPage() {
   return (
-    <Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
+    <Suspense
+      fallback={
+        <div className="flex items-center justify-center min-h-screen">
+          Loading...
+        </div>
+      }
+    >
       <AdminContent />
     </Suspense>
   );

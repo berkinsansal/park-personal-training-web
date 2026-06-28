@@ -7,6 +7,7 @@ This is a Next.js 16 App Router project. The framework version has breaking chan
 ## What This Project Is
 
 A Turkish personal training studio marketing site with an admin CMS. Two audiences:
+
 - **Public** (`/`): single-page site, fully server-rendered, reads from Supabase
 - **Admin** (`/admin`): protected dashboard for editing all dynamic content
 
@@ -23,6 +24,7 @@ A Turkish personal training studio marketing site with an admin CMS. Two audienc
 **Server Actions for all mutations.** CRUD in the admin panel uses `'use server'` actions in `app/(admin)/admin/actions.ts`. No API routes exist.
 
 **Two Supabase clients, never mix them:**
+
 - `createSessionClient()` — SSR client, reads the session cookie, used for auth checks. Use in server actions that need to verify the user.
 - `createAdminClient()` — uses the service key, bypasses RLS. Use for all data reads and writes (the tables have public read RLS, and the service key handles admin writes).
 
@@ -31,6 +33,7 @@ A Turkish personal training studio marketing site with an admin CMS. Two audienc
 **Route groups separate the two audiences.** `app/(public)/` contains the public marketing site routes with its own root layout (includes `scroll-smooth`, marketing metadata). `app/(admin)/` contains the admin CMS routes with its own root layout (admin metadata, no `scroll-smooth`). Route group folders are omitted from URL paths — `/` and `/admin` are unaffected.
 
 **Auth has two layers:**
+
 1. `proxy.ts` at the project root — Next.js 16's middleware convention (renamed from `middleware.ts`). Guards every `/admin/*` route at the edge.
 2. `requireAuth()` in `app/(admin)/admin/actions.ts` — called at the top of every mutating server action as a belt-and-suspenders check.
 
@@ -38,17 +41,17 @@ A Turkish personal training studio marketing site with an admin CMS. Two audienc
 
 ## File Locations
 
-| What | Where |
-|---|---|
-| Shared TS types | `lib/types.ts` |
-| Supabase clients | `lib/supabase-server.ts` |
-| Auth middleware | `proxy.ts` (root) |
-| Shared server actions | `app/actions.ts` (`setLocaleAction`) |
-| Public-only server actions | `app/(public)/actions.ts` (`sendContactAction`) |
-| All admin server actions | `app/(admin)/admin/actions.ts` |
-| Shared admin input style | `app/(admin)/admin/_components/styles.ts` → `inputCls` |
-| DB schema | `supabase/migrations/002_redesign_schema.sql` |
-| Seed data | `supabase/seed.sql` |
+| What                       | Where                                                  |
+| -------------------------- | ------------------------------------------------------ |
+| Shared TS types            | `lib/types.ts`                                         |
+| Supabase clients           | `lib/supabase-server.ts`                               |
+| Auth middleware            | `proxy.ts` (root)                                      |
+| Shared server actions      | `app/actions.ts` (`setLocaleAction`)                   |
+| Public-only server actions | `app/(public)/actions.ts` (`sendContactAction`)        |
+| All admin server actions   | `app/(admin)/admin/actions.ts`                         |
+| Shared admin input style   | `app/(admin)/admin/_components/styles.ts` → `inputCls` |
+| DB schema                  | `supabase/migrations/002_redesign_schema.sql`          |
+| Seed data                  | `supabase/seed.sql`                                    |
 
 ## Database Tables
 

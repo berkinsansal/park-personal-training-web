@@ -5,7 +5,12 @@ import type { Trainer } from '@/lib/types';
 import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
 
 function getInitials(name: string) {
-  return name.split(' ').map((w) => w[0]).join('').toUpperCase().slice(0, 2);
+  return name
+    .split(' ')
+    .map((w) => w[0])
+    .join('')
+    .toUpperCase()
+    .slice(0, 2);
 }
 
 export default function TrainersPreview({ trainers }: { trainers: Trainer[] }) {
@@ -32,9 +37,7 @@ export default function TrainersPreview({ trainers }: { trainers: Trainer[] }) {
         <div className="flex flex-wrap justify-center gap-6">
           {previewTrainers.map((trainer, i) => (
             <AnimateIn key={trainer.id} delay={i * 100}>
-              <div
-                className="bg-zinc-800 rounded-2xl p-8 border border-zinc-700 hover:border-amber-400/40 transition-all duration-300 text-center group w-72"
-              >
+              <div className="bg-zinc-800 rounded-2xl p-8 border border-zinc-700 hover:border-amber-400/40 transition-all duration-300 text-center group w-72">
                 {trainer.photo_url ? (
                   <img
                     src={trainer.photo_url}

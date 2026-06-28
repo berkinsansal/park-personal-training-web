@@ -10,9 +10,12 @@ export default function LocaleSwitcher() {
   const currentLocale = useLocale();
 
   const handleLocaleChange = (locale: Locale) => {
-    if (locale === currentLocale) {return;}
+    if (locale === currentLocale) {
+      return;
+    }
     const pathWithoutLocale = pathname.replace(/^\/(en|tr)/, '') || '/';
-    const newPath = locale === 'en' ? `/en${pathWithoutLocale}` : pathWithoutLocale;
+    const newPath =
+      locale === 'en' ? `/en${pathWithoutLocale}` : pathWithoutLocale;
     router.push(newPath);
   };
 

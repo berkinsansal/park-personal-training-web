@@ -2,7 +2,12 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { addGalleryPhotoAction, deleteGalleryPhotoAction, reorderGalleryPhotoAction, updateGalleryPhotoAction } from '../actions';
+import {
+  addGalleryPhotoAction,
+  deleteGalleryPhotoAction,
+  reorderGalleryPhotoAction,
+  updateGalleryPhotoAction,
+} from '../actions';
 import type { GalleryPhoto } from '@/lib/types';
 import { inputCls } from './styles';
 
@@ -14,13 +19,18 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
   const [feedback, setFeedback] = useState('');
   const [pendingOp, setPendingOp] = useState<string | null>(null);
 
-  const flash = (msg: string) => { setFeedback(msg); setTimeout(() => setFeedback(''), 2500); };
+  const flash = (msg: string) => {
+    setFeedback(msg);
+    setTimeout(() => setFeedback(''), 2500);
+  };
 
   const handleDelete = async (id: number) => {
     setPendingOp(`delete:${id}`);
     try {
       const res = await deleteGalleryPhotoAction(id);
-      if (res?.error) {return flash(res.error);}
+      if (res?.error) {
+        return flash(res.error);
+      }
       setList((prev) => prev.filter((p) => p.id !== id));
       flash(t('deleted'));
     } finally {
@@ -32,13 +42,19 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
     setPendingOp(`${direction}:${id}`);
     try {
       const res = await reorderGalleryPhotoAction(id, direction);
-      if (res?.error) {return flash(res.error);}
+      if (res?.error) {
+        return flash(res.error);
+      }
       setList((prev) => {
         const sorted = [...prev].sort((a, b) => a.order_index - b.order_index);
         const idx = sorted.findIndex((p) => p.id === id);
-        if (idx === -1) {return prev;}
+        if (idx === -1) {
+          return prev;
+        }
         const swapIdx = direction === 'up' ? idx - 1 : idx + 1;
-        if (swapIdx < 0 || swapIdx >= sorted.length) {return prev;}
+        if (swapIdx < 0 || swapIdx >= sorted.length) {
+          return prev;
+        }
         const newIdx = sorted[idx].order_index;
         sorted[idx].order_index = sorted[swapIdx].order_index;
         sorted[swapIdx].order_index = newIdx;
@@ -56,16 +72,22 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
     setPendingOp(`update:${id}`);
     try {
       const res = await updateGalleryPhotoAction(fd);
-      if (res?.error) {return flash(res.error);}
-      setList((prev) => prev.map((photo) => {
-        if (photo.id !== id) {return photo;}
-        return {
-          id,
-          image_url: res.imageUrl ?? photo.image_url,
-          alt_text: fd.get('alt_text') as string,
-          order_index: Number(fd.get('order_index')),
-        };
-      }));
+      if (res?.error) {
+        return flash(res.error);
+      }
+      setList((prev) =>
+        prev.map((photo) => {
+          if (photo.id !== id) {
+            return photo;
+          }
+          return {
+            id,
+            image_url: res.imageUrl ?? photo.image_url,
+            alt_text: fd.get('alt_text') as string,
+            order_index: Number(fd.get('order_index')),
+          };
+        }),
+      );
       setEditingId(null);
       flash(t('updated'));
     } finally {
@@ -76,14 +98,19 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
   const handleAdd = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
-    const maxOrder = list.length > 0 ? Math.max(...list.map(p => p.order_index)) : -1;
+    const maxOrder =
+      list.length > 0 ? Math.max(...list.map((p) => p.order_index)) : -1;
     fd.set('order_index', String(maxOrder + 1));
     setPendingOp('add');
     try {
       const res = await addGalleryPhotoAction(fd);
-      if (res?.error) {return flash(res.error);}
+      if (res?.error) {
+        return flash(res.error);
+      }
       if (res.data) {
-        setList((prev) => [...prev, res.data].sort((a, b) => a.order_index - b.order_index));
+        setList((prev) =>
+          [...prev, res.data].sort((a, b) => a.order_index - b.order_index),
+        );
       }
       setAdding(false);
       flash(t('added'));
@@ -108,7 +135,13 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
       {feedback && <p className="text-amber-400 text-sm mb-3">{feedback}</p>}
 
       {adding && (
-        <GalleryForm t={t} label={t('add').replace('+ ', '')} pendingOp={pendingOp} onSubmit={handleAdd} onCancel={() => setAdding(false)} />
+        <GalleryForm
+          t={t}
+          label={t('add').replace('+ ', '')}
+          pendingOp={pendingOp}
+          onSubmit={handleAdd}
+          onCancel={() => setAdding(false)}
+        />
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -124,23 +157,66 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
               onCancel={() => setEditingId(null)}
             />
           ) : (
-            <div key={photo.id} className={`flex flex-col bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden transition-opacity ${pendingOp === `delete:${photo.id}` ? 'opacity-50 pointer-events-none' : ''}`}>
+            <div
+              key={photo.id}
+              className={`flex flex-col bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden transition-opacity ${pendingOp === `delete:${photo.id}` ? 'opacity-50 pointer-events-none' : ''}`}
+            >
               <div className="relative w-full h-40 bg-zinc-800">
                 {photo.image_url && (
-                  <img src={photo.image_url} alt={photo.alt_text} className="w-full h-full object-cover" />
+                  <img
+                    src={photo.image_url}
+                    alt={photo.alt_text}
+                    className="w-full h-full object-cover"
+                  />
                 )}
               </div>
               <div className="p-3 flex-1 flex flex-col">
-                <p className="text-white font-semibold text-sm">{photo.alt_text || '(No description)'}</p>
+                <p className="text-white font-semibold text-sm">
+                  {photo.alt_text || '(No description)'}
+                </p>
                 <div className="flex gap-2 mt-auto pt-2 flex-wrap">
-                  <button disabled={pendingOp !== null || photo.order_index === Math.min(...list.map(p => p.order_index))} className={`text-xs px-2 py-1 rounded transition-colors ${pendingOp === `up:${photo.id}` ? 'opacity-40 text-zinc-400 bg-zinc-800' : 'text-zinc-400 hover:text-amber-400 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move up" onClick={() => handleReorder(photo.id, 'up')}>↑</button>
-                  <button disabled={pendingOp !== null || photo.order_index === Math.max(...list.map(p => p.order_index))} className={`text-xs px-2 py-1 rounded transition-colors ${pendingOp === `down:${photo.id}` ? 'opacity-40 text-zinc-400 bg-zinc-800' : 'text-zinc-400 hover:text-amber-400 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move down" onClick={() => handleReorder(photo.id, 'down')}>↓</button>
-                  <button disabled={pendingOp !== null} className="text-xs px-2 py-1 rounded text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors bg-zinc-800 hover:bg-zinc-700" onClick={() => setEditingId(photo.id)}>{t('edit')}</button>
-                  <button disabled={pendingOp !== null} className="text-xs px-2 py-1 rounded text-zinc-400 hover:text-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors bg-zinc-800 hover:bg-zinc-700" onClick={() => handleDelete(photo.id)}>{t('delete')}</button>
+                  <button
+                    disabled={
+                      pendingOp !== null ||
+                      photo.order_index ===
+                        Math.min(...list.map((p) => p.order_index))
+                    }
+                    className={`text-xs px-2 py-1 rounded transition-colors ${pendingOp === `up:${photo.id}` ? 'opacity-40 text-zinc-400 bg-zinc-800' : 'text-zinc-400 hover:text-amber-400 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 disabled:cursor-not-allowed'}`}
+                    title="Move up"
+                    onClick={() => handleReorder(photo.id, 'up')}
+                  >
+                    ↑
+                  </button>
+                  <button
+                    disabled={
+                      pendingOp !== null ||
+                      photo.order_index ===
+                        Math.max(...list.map((p) => p.order_index))
+                    }
+                    className={`text-xs px-2 py-1 rounded transition-colors ${pendingOp === `down:${photo.id}` ? 'opacity-40 text-zinc-400 bg-zinc-800' : 'text-zinc-400 hover:text-amber-400 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 disabled:cursor-not-allowed'}`}
+                    title="Move down"
+                    onClick={() => handleReorder(photo.id, 'down')}
+                  >
+                    ↓
+                  </button>
+                  <button
+                    disabled={pendingOp !== null}
+                    className="text-xs px-2 py-1 rounded text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors bg-zinc-800 hover:bg-zinc-700"
+                    onClick={() => setEditingId(photo.id)}
+                  >
+                    {t('edit')}
+                  </button>
+                  <button
+                    disabled={pendingOp !== null}
+                    className="text-xs px-2 py-1 rounded text-zinc-400 hover:text-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors bg-zinc-800 hover:bg-zinc-700"
+                    onClick={() => handleDelete(photo.id)}
+                  >
+                    {t('delete')}
+                  </button>
                 </div>
               </div>
             </div>
-          )
+          ),
         )}
       </div>
     </section>
@@ -148,7 +224,12 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
 }
 
 function GalleryForm({
-  t, onSubmit, onCancel, label, defaults, pendingOp
+  t,
+  onSubmit,
+  onCancel,
+  label,
+  defaults,
+  pendingOp,
 }: {
   t: ReturnType<typeof useTranslations>;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>;
@@ -169,11 +250,16 @@ function GalleryForm({
   };
 
   return (
-    <form className="bg-zinc-900 border border-amber-400/20 rounded-xl p-4 mb-3" onSubmit={onSubmit}>
+    <form
+      className="bg-zinc-900 border border-amber-400/20 rounded-xl p-4 mb-3"
+      onSubmit={onSubmit}
+    >
       {defaults && <input type="hidden" name="id" value={defaults.id} />}
 
       <div className="mb-3">
-        <label className="block text-zinc-300 text-sm font-medium mb-2">{t('image')}</label>
+        <label className="block text-zinc-300 text-sm font-medium mb-2">
+          {t('image')}
+        </label>
         <input
           type="file"
           name="image"
@@ -183,13 +269,19 @@ function GalleryForm({
         />
         {preview && (
           <div className="mt-2 rounded-lg overflow-hidden border border-zinc-700 bg-zinc-800 w-full max-h-48">
-            <img src={preview} alt="Preview" className="w-full h-auto object-cover max-h-48" />
+            <img
+              src={preview}
+              alt="Preview"
+              className="w-full h-auto object-cover max-h-48"
+            />
           </div>
         )}
       </div>
 
       <div className="mb-3">
-        <label className="block text-zinc-300 text-sm font-medium mb-2">{t('altText')}</label>
+        <label className="block text-zinc-300 text-sm font-medium mb-2">
+          {t('altText')}
+        </label>
         <input
           type="text"
           name="alt_text"
@@ -199,7 +291,11 @@ function GalleryForm({
         />
       </div>
 
-      <input type="hidden" name="order_index" defaultValue={defaults?.order_index || 0} />
+      <input
+        type="hidden"
+        name="order_index"
+        defaultValue={defaults?.order_index || 0}
+      />
 
       <div className="flex gap-2">
         <button

@@ -14,7 +14,9 @@ export function AnimateIn({ children, delay = 0, className = '' }: Props) {
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) {return;}
+    if (!el) {
+      return;
+    }
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -22,7 +24,7 @@ export function AnimateIn({ children, delay = 0, className = '' }: Props) {
           obs.disconnect();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.15 },
     );
     obs.observe(el);
     return () => obs.disconnect();

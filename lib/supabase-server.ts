@@ -4,32 +4,22 @@ import { cookies } from 'next/headers';
 
 export async function createSessionClient() {
   const cookieStore = await cookies();
-  return createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
-    {
-      cookies: {
-        getAll: () => cookieStore.getAll(),
-        setAll: (toSet) => {
-          toSet.forEach(({ name, value, options }) =>
-            cookieStore.set(name, value, options)
-          );
-        },
+  return createServerClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!, {
+    cookies: {
+      getAll: () => cookieStore.getAll(),
+      setAll: (toSet) => {
+        toSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
       },
-    }
-  );
+    },
+  });
 }
 
 export function createAdminClient() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SECRET_KEY!,
-    {
-      auth: {
-        persistSession: false,
-        autoRefreshToken: false,
-        detectSessionInUrl: false,
-      },
-    }
-  );
+  return createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SECRET_KEY!, {
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+      detectSessionInUrl: false,
+    },
+  });
 }

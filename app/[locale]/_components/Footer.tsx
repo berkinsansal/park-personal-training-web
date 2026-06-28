@@ -1,7 +1,7 @@
-import Image from "next/image";
+import Image from 'next/image';
 import { cacheLife } from 'next/cache';
 import { getTranslations } from 'next-intl/server';
-import { siteConfig } from "@/lib/site.config";
+import { siteConfig } from '@/lib/site.config';
 
 async function getCurrentYear() {
   'use cache';
@@ -17,8 +17,15 @@ export default async function Footer({ igHandle }: { igHandle: string }) {
     <footer className="bg-zinc-900 border-t border-zinc-800 py-8">
       <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <Image src="/logo.png" alt={`${siteConfig.siteName} Logo`} width={48} height={48} />
-          <span className="text-amber-400 font-black text-xl tracking-wide">{siteConfig.siteName}</span>
+          <Image
+            src="/logo.png"
+            alt={`${siteConfig.siteName} Logo`}
+            width={48}
+            height={48}
+          />
+          <span className="text-amber-400 font-black text-xl tracking-wide">
+            {siteConfig.siteName}
+          </span>
         </div>
         <p className="text-zinc-500 text-sm text-center">
           &copy; {currentYear} {siteConfig.siteName}. {t('footer.copyright')}

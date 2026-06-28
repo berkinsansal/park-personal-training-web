@@ -2,7 +2,12 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { addTrainerAction, deleteTrainerAction, reorderTrainerAction, updateTrainerAction } from '../actions';
+import {
+  addTrainerAction,
+  deleteTrainerAction,
+  reorderTrainerAction,
+  updateTrainerAction,
+} from '../actions';
 import type { Trainer } from '@/lib/types';
 import { inputCls } from './styles';
 
@@ -14,13 +19,18 @@ export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
   const [feedback, setFeedback] = useState('');
   const [pendingOp, setPendingOp] = useState<string | null>(null);
 
-  const flash = (msg: string) => { setFeedback(msg); setTimeout(() => setFeedback(''), 2500); };
+  const flash = (msg: string) => {
+    setFeedback(msg);
+    setTimeout(() => setFeedback(''), 2500);
+  };
 
   const handleDelete = async (id: number) => {
     setPendingOp(`delete:${id}`);
     try {
       const res = await deleteTrainerAction(id);
-      if (res?.error) {return flash(res.error);}
+      if (res?.error) {
+        return flash(res.error);
+      }
       setList((prev) => prev.filter((trainer) => trainer.id !== id));
       flash(t('deleted'));
     } finally {
@@ -32,13 +42,19 @@ export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
     setPendingOp(`${direction}:${id}`);
     try {
       const res = await reorderTrainerAction(id, direction);
-      if (res?.error) {return flash(res.error);}
+      if (res?.error) {
+        return flash(res.error);
+      }
       setList((prev) => {
         const sorted = [...prev].sort((a, b) => a.order_index - b.order_index);
         const idx = sorted.findIndex((t) => t.id === id);
-        if (idx === -1) {return prev;}
+        if (idx === -1) {
+          return prev;
+        }
         const swapIdx = direction === 'up' ? idx - 1 : idx + 1;
-        if (swapIdx < 0 || swapIdx >= sorted.length) {return prev;}
+        if (swapIdx < 0 || swapIdx >= sorted.length) {
+          return prev;
+        }
         const newIdx = sorted[idx].order_index;
         sorted[idx].order_index = sorted[swapIdx].order_index;
         sorted[swapIdx].order_index = newIdx;
@@ -56,17 +72,23 @@ export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
     setPendingOp(`update:${id}`);
     try {
       const res = await updateTrainerAction(fd);
-      if (res?.error) {return flash(res.error);}
-      setList((prev) => prev.map((trainer) => {
-        if (trainer.id !== id) {return trainer;}
-        return {
-          id,
-          name: fd.get('name') as string,
-          ig_handle: fd.get('ig_handle') as string,
-          photo_url: res.photoUrl ?? trainer.photo_url,
-          order_index: Number(fd.get('order_index')),
-        };
-      }));
+      if (res?.error) {
+        return flash(res.error);
+      }
+      setList((prev) =>
+        prev.map((trainer) => {
+          if (trainer.id !== id) {
+            return trainer;
+          }
+          return {
+            id,
+            name: fd.get('name') as string,
+            ig_handle: fd.get('ig_handle') as string,
+            photo_url: res.photoUrl ?? trainer.photo_url,
+            order_index: Number(fd.get('order_index')),
+          };
+        }),
+      );
       setEditingId(null);
       flash(t('updated'));
     } finally {
@@ -80,9 +102,13 @@ export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
     setPendingOp('add');
     try {
       const res = await addTrainerAction(fd);
-      if (res?.error) {return flash(res.error);}
+      if (res?.error) {
+        return flash(res.error);
+      }
       if (res.data) {
-        setList((prev) => [...prev, res.data].sort((a, b) => a.order_index - b.order_index));
+        setList((prev) =>
+          [...prev, res.data].sort((a, b) => a.order_index - b.order_index),
+        );
       }
       setAdding(false);
       flash(t('added'));
@@ -107,7 +133,13 @@ export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
       {feedback && <p className="text-amber-400 text-sm mb-3">{feedback}</p>}
 
       {adding && (
-        <TrainerForm t={t} label={t('add').replace('+ ', '')} pendingOp={pendingOp} onSubmit={handleAdd} onCancel={() => setAdding(false)} />
+        <TrainerForm
+          t={t}
+          label={t('add').replace('+ ', '')}
+          pendingOp={pendingOp}
+          onSubmit={handleAdd}
+          onCancel={() => setAdding(false)}
+        />
       )}
 
       <div className="flex flex-col gap-3">
@@ -123,39 +155,96 @@ export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
               onCancel={() => setEditingId(null)}
             />
           ) : (
-            <div key={trainer.id} className={`flex items-center gap-3 bg-zinc-900 border border-zinc-800 rounded-xl p-4 transition-opacity ${pendingOp === `delete:${trainer.id}` ? 'opacity-50 pointer-events-none' : ''}`}>
+            <div
+              key={trainer.id}
+              className={`flex items-center gap-3 bg-zinc-900 border border-zinc-800 rounded-xl p-4 transition-opacity ${pendingOp === `delete:${trainer.id}` ? 'opacity-50 pointer-events-none' : ''}`}
+            >
               <div className="w-10 h-10 rounded-full bg-amber-400/10 border border-amber-400/30 flex items-center justify-center shrink-0 overflow-hidden">
                 {trainer.photo_url ? (
-                  <img src={trainer.photo_url} alt={trainer.name} className="w-full h-full object-cover rounded-full" />
+                  <img
+                    src={trainer.photo_url}
+                    alt={trainer.name}
+                    className="w-full h-full object-cover rounded-full"
+                  />
                 ) : (
                   <span className="text-amber-400 font-bold text-sm">
-                    {trainer.name.split(' ').map((w: string) => w[0]).join('').toUpperCase().slice(0, 2)}
+                    {trainer.name
+                      .split(' ')
+                      .map((w: string) => w[0])
+                      .join('')
+                      .toUpperCase()
+                      .slice(0, 2)}
                   </span>
                 )}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-white font-semibold text-sm">{trainer.name}</p>
-                <p className="text-zinc-500 text-xs mt-0.5">@{trainer.ig_handle}</p>
+                <p className="text-white font-semibold text-sm">
+                  {trainer.name}
+                </p>
+                <p className="text-zinc-500 text-xs mt-0.5">
+                  @{trainer.ig_handle}
+                </p>
               </div>
               <div className="flex flex-col gap-1 shrink-0">
                 <div className="flex gap-2">
-                  <button disabled={pendingOp !== null || trainer.order_index === Math.min(...list.map(t => t.order_index))} className={`text-xs transition-colors ${pendingOp === `up:${trainer.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move up" onClick={() => handleReorder(trainer.id, 'up')}>↑</button>
-                  <button disabled={pendingOp !== null || trainer.order_index === Math.max(...list.map(t => t.order_index))} className={`text-xs transition-colors ${pendingOp === `down:${trainer.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move down" onClick={() => handleReorder(trainer.id, 'down')}>↓</button>
+                  <button
+                    disabled={
+                      pendingOp !== null ||
+                      trainer.order_index ===
+                        Math.min(...list.map((t) => t.order_index))
+                    }
+                    className={`text-xs transition-colors ${pendingOp === `up:${trainer.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
+                    title="Move up"
+                    onClick={() => handleReorder(trainer.id, 'up')}
+                  >
+                    ↑
+                  </button>
+                  <button
+                    disabled={
+                      pendingOp !== null ||
+                      trainer.order_index ===
+                        Math.max(...list.map((t) => t.order_index))
+                    }
+                    className={`text-xs transition-colors ${pendingOp === `down:${trainer.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
+                    title="Move down"
+                    onClick={() => handleReorder(trainer.id, 'down')}
+                  >
+                    ↓
+                  </button>
                 </div>
                 <div className="flex gap-2">
-                  <button disabled={pendingOp !== null} className="text-xs text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors" onClick={() => setEditingId(trainer.id)}>{t('edit')}</button>
-                  <button disabled={pendingOp !== null} className="text-xs text-zinc-400 hover:text-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors" onClick={() => handleDelete(trainer.id)}>{t('delete')}</button>
+                  <button
+                    disabled={pendingOp !== null}
+                    className="text-xs text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                    onClick={() => setEditingId(trainer.id)}
+                  >
+                    {t('edit')}
+                  </button>
+                  <button
+                    disabled={pendingOp !== null}
+                    className="text-xs text-zinc-400 hover:text-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                    onClick={() => handleDelete(trainer.id)}
+                  >
+                    {t('delete')}
+                  </button>
                 </div>
               </div>
             </div>
-          )
+          ),
         )}
       </div>
     </section>
   );
 }
 
-function TrainerForm({ t, defaults, onSubmit, onCancel, label, pendingOp }: {
+function TrainerForm({
+  t,
+  defaults,
+  onSubmit,
+  onCancel,
+  label,
+  pendingOp,
+}: {
   t: ReturnType<typeof useTranslations>;
   defaults?: Trainer;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -163,37 +252,85 @@ function TrainerForm({ t, defaults, onSubmit, onCancel, label, pendingOp }: {
   label: string;
   pendingOp: string | null;
 }) {
-  const isSubmitting = pendingOp === 'add' || (defaults && pendingOp === `update:${defaults.id}`);
+  const isSubmitting =
+    pendingOp === 'add' || (defaults && pendingOp === `update:${defaults.id}`);
   return (
-    <form className="bg-zinc-900 border border-amber-400/30 rounded-xl p-4 flex flex-col gap-3 mb-3" onSubmit={onSubmit}>
+    <form
+      className="bg-zinc-900 border border-amber-400/30 rounded-xl p-4 flex flex-col gap-3 mb-3"
+      onSubmit={onSubmit}
+    >
       {defaults && <input type="hidden" name="id" value={defaults.id} />}
       <div>
         <label className="block text-zinc-400 text-xs mb-1">{t('name')}</label>
-        <input required name="name" defaultValue={defaults?.name} disabled={pendingOp !== null} className={inputCls} />
+        <input
+          required
+          name="name"
+          defaultValue={defaults?.name}
+          disabled={pendingOp !== null}
+          className={inputCls}
+        />
       </div>
-      {defaults && <input type="hidden" name="order_index" value={defaults.order_index} />}
+      {defaults && (
+        <input type="hidden" name="order_index" value={defaults.order_index} />
+      )}
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label className="block text-zinc-400 text-xs mb-1">{t('igHandle')}</label>
-          <input required name="ig_handle" defaultValue={defaults?.ig_handle} disabled={pendingOp !== null} className={inputCls} />
+          <label className="block text-zinc-400 text-xs mb-1">
+            {t('igHandle')}
+          </label>
+          <input
+            required
+            name="ig_handle"
+            defaultValue={defaults?.ig_handle}
+            disabled={pendingOp !== null}
+            className={inputCls}
+          />
         </div>
       </div>
       <div>
         <label className="block text-zinc-400 text-xs mb-1">{t('photo')}</label>
         {defaults?.photo_url && (
           <>
-            <img src={defaults.photo_url} alt={defaults.name} className="w-12 h-12 rounded-full object-cover mb-2 border border-zinc-700" />
+            <img
+              src={defaults.photo_url}
+              alt={defaults.name}
+              className="w-12 h-12 rounded-full object-cover mb-2 border border-zinc-700"
+            />
             <label className="flex items-center gap-2 text-zinc-400 text-xs cursor-pointer mb-2">
-              <input type="checkbox" name="removePhoto" disabled={pendingOp !== null} className="w-3 h-3 rounded border-zinc-600 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed" />
+              <input
+                type="checkbox"
+                name="removePhoto"
+                disabled={pendingOp !== null}
+                className="w-3 h-3 rounded border-zinc-600 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+              />
               {t('removePhoto')}
             </label>
           </>
         )}
-        <input name="photo" type="file" accept="image/*" disabled={pendingOp !== null} className={inputCls} />
+        <input
+          name="photo"
+          type="file"
+          accept="image/*"
+          disabled={pendingOp !== null}
+          className={inputCls}
+        />
       </div>
       <div className="flex gap-2">
-        <button type="submit" disabled={pendingOp !== null} className="px-4 py-2 bg-amber-400 text-zinc-950 font-bold rounded-lg text-xs hover:bg-amber-300 disabled:bg-zinc-600 disabled:cursor-not-allowed transition-colors">{isSubmitting ? '...' : label}</button>
-        <button type="button" disabled={pendingOp !== null} className="px-4 py-2 text-zinc-400 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed text-xs transition-colors" onClick={onCancel}>{t('cancel')}</button>
+        <button
+          type="submit"
+          disabled={pendingOp !== null}
+          className="px-4 py-2 bg-amber-400 text-zinc-950 font-bold rounded-lg text-xs hover:bg-amber-300 disabled:bg-zinc-600 disabled:cursor-not-allowed transition-colors"
+        >
+          {isSubmitting ? '...' : label}
+        </button>
+        <button
+          type="button"
+          disabled={pendingOp !== null}
+          className="px-4 py-2 text-zinc-400 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed text-xs transition-colors"
+          onClick={onCancel}
+        >
+          {t('cancel')}
+        </button>
       </div>
     </form>
   );

@@ -4,13 +4,13 @@ A Turkish personal training studio website with a Supabase-backed content manage
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Framework | Next.js 16 (App Router) |
-| Language | TypeScript |
-| Styling | Tailwind CSS v4 |
-| Database | Supabase (PostgreSQL + Auth) |
-| Deployment | Vercel |
+| Layer      | Technology                   |
+| ---------- | ---------------------------- |
+| Framework  | Next.js 16 (App Router)      |
+| Language   | TypeScript                   |
+| Styling    | Tailwind CSS v4              |
+| Database   | Supabase (PostgreSQL + Auth) |
+| Deployment | Vercel                       |
 
 ## Project Structure
 
@@ -49,11 +49,11 @@ supabase/
 
 Three tables, all with RLS enabled and a public read policy.
 
-| Table | Purpose |
-|---|---|
+| Table       | Purpose                                                                   |
+| ----------- | ------------------------------------------------------------------------- |
 | `site_info` | Single-row table: contact details, working hours, Instagram handle, stats |
-| `services` | Offered services: emoji icon, title, description, display order |
-| `trainers` | Trainers: name, Instagram handle, initials, display order |
+| `services`  | Offered services: emoji icon, title, description, display order           |
+| `trainers`  | Trainers: name, Instagram handle, initials, display order                 |
 
 The admin user is created directly in the Supabase dashboard (Authentication → Users). There is no public sign-up.
 
@@ -89,6 +89,7 @@ SUPABASE_SECRET_KEY=sb_secret_...
 ```
 
 Get these from your Supabase project → Settings → API:
+
 - **Project URL**
 - **Publishable key** — safe for client bundles
 - **Secret key** — server-only, never expose to the browser

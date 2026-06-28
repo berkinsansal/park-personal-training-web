@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
-import { siteConfig } from "@/lib/site.config";
-import { routing } from "@/i18n.config";
+import type { Metadata } from 'next';
+import { siteConfig } from '@/lib/site.config';
+import { routing } from '@/i18n.config';
 
 export const metadata: Metadata = {
   title: `Admin | ${siteConfig.siteName}`,
@@ -15,9 +15,5 @@ export default function AdminLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <div className="bg-zinc-950 overflow-auto">
-      {children}
-    </div>
-  );
+  return <div className="bg-zinc-950 overflow-auto">{children}</div>;
 }

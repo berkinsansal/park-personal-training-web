@@ -3,8 +3,8 @@ import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/lib/site.config';
 import { getServices } from '@/lib/data';
 import { routing } from '@/i18n.config';
-import Services from "@/app/[locale]/(public)/services/_components/Services";
-import ContactPreview from "@/app/[locale]/(home)/_components/ContactPreview";
+import Services from '@/app/[locale]/(public)/services/_components/Services';
+import ContactPreview from '@/app/[locale]/(home)/_components/ContactPreview';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

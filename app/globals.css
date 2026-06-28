@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #09090b;
@@ -29,15 +29,29 @@ html {
 }
 
 @keyframes blob-drift-a {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%      { transform: translate(30px, -40px) scale(1.05); }
-  66%      { transform: translate(-20px, 20px) scale(0.97); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -40px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.97);
+  }
 }
 
 @keyframes blob-drift-b {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33%      { transform: translate(-40px, 30px) scale(0.95); }
-  66%      { transform: translate(25px, -25px) scale(1.08); }
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-40px, 30px) scale(0.95);
+  }
+  66% {
+    transform: translate(25px, -25px) scale(1.08);
+  }
 }
 
 @keyframes float-up {
@@ -63,24 +77,23 @@ html {
   animation-fill-mode: both;
   overflow: hidden;
 
-  background:
-    linear-gradient(
-      90deg,
-      #6f4a00 0%,
-      #6f4a00 20%,
+  background: linear-gradient(
+    90deg,
+    #6f4a00 0%,
+    #6f4a00 20%,
 
-      #ffb800 20%,
-      #ffb800 40%,
+    #ffb800 20%,
+    #ffb800 40%,
 
-      #a87300 40%,
-      #a87300 60%,
+    #a87300 40%,
+    #a87300 60%,
 
-      #ffd15a 60%,
-      #ffd15a 80%,
+    #ffd15a 60%,
+    #ffd15a 80%,
 
-      #d99400 80%,
-      #d99400 100%
-    );
+    #d99400 80%,
+    #d99400 100%
+  );
 }
 
 ::view-transition-old(.page-slices),

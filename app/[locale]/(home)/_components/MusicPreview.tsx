@@ -18,9 +18,7 @@ export default function MusicPreview({ playlists }: { playlists: Playlist[] }) {
           <h2 className="mt-3 text-3xl md:text-4xl font-black text-white mb-6">
             {t('heading')}
           </h2>
-          <p className="text-zinc-400 text-lg mb-8">
-            {t('p1')}
-          </p>
+          <p className="text-zinc-400 text-lg mb-8">{t('p1')}</p>
           <a
             href={`/${locale}/music`}
             className="inline-block px-8 py-3 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600 transition-colors text-sm uppercase tracking-wider"

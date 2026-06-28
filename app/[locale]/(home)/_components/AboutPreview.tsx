@@ -13,7 +13,9 @@ interface Props {
 function useCountUp(target: number, duration: number, active: boolean) {
   const [count, setCount] = useState(0);
   useEffect(() => {
-    if (!active) {return;}
+    if (!active) {
+      return;
+    }
     const start = performance.now();
     let rafId: number;
     const raf = (now: number) => {
@@ -21,7 +23,9 @@ function useCountUp(target: number, duration: number, active: boolean) {
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.round(eased * target));
-      if (progress < 1) {rafId = requestAnimationFrame(raf);}
+      if (progress < 1) {
+        rafId = requestAnimationFrame(raf);
+      }
     };
     rafId = requestAnimationFrame(raf);
     return () => cancelAnimationFrame(rafId);
@@ -29,7 +33,12 @@ function useCountUp(target: number, duration: number, active: boolean) {
   return count;
 }
 
-export default function AboutPreview({ happyCustomers, yearsExperience, trainerCount, serviceCount }: Props) {
+export default function AboutPreview({
+  happyCustomers,
+  yearsExperience,
+  trainerCount,
+  serviceCount,
+}: Props) {
   const t = useTranslations('about');
   const locale = useLocale();
   const statsRef = useRef<HTMLDivElement>(null);
@@ -37,7 +46,9 @@ export default function AboutPreview({ happyCustomers, yearsExperience, trainerC
 
   useEffect(() => {
     const el = statsRef.current;
-    if (!el) {return;}
+    if (!el) {
+      return;
+    }
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -45,7 +56,7 @@ export default function AboutPreview({ happyCustomers, yearsExperience, trainerC
           obs.disconnect();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.15 },
     );
     obs.observe(el);
     return () => obs.disconnect();
@@ -66,8 +77,10 @@ export default function AboutPreview({ happyCustomers, yearsExperience, trainerC
               {t('label')}
             </span>
             <h2 className="mt-3 text-4xl md:text-5xl font-black text-white leading-tight">
-              {t('heading1')}<br />
-              <span className="text-amber-400">{t('heading2')}</span> {t('heading3')}
+              {t('heading1')}
+              <br />
+              <span className="text-amber-400">{t('heading2')}</span>{' '}
+              {t('heading3')}
             </h2>
             <p className="mt-6 text-zinc-400 text-lg leading-relaxed">
               {t('p1')}
@@ -91,8 +104,13 @@ export default function AboutPreview({ happyCustomers, yearsExperience, trainerC
                     key={s.label}
                     className="bg-zinc-800 rounded-2xl p-8 text-center border border-zinc-700 hover:border-amber-400/50 transition-colors"
                   >
-                    <div className="text-4xl font-black text-amber-400">{counted}{suffix}</div>
-                    <div className="mt-2 text-zinc-400 text-sm font-medium">{s.label}</div>
+                    <div className="text-4xl font-black text-amber-400">
+                      {counted}
+                      {suffix}
+                    </div>
+                    <div className="mt-2 text-zinc-400 text-sm font-medium">
+                      {s.label}
+                    </div>
                   </div>
                 );
               })}

@@ -7,12 +7,15 @@ import { getLocale, getTranslations } from 'next-intl/server';
 
 async function requireAuth() {
   const supabase = await createSessionClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
   const locale = await getLocale();
-  if (!user) {redirect(`/${locale === 'en' ? 'en/' : ''}admin/login`);}
+  if (!user) {
+    redirect(`/${locale === 'en' ? 'en/' : ''}admin/login`);
+  }
   return supabase;
 }
-
 
 async function reorderItem(
   table: 'services' | 'trainers' | 'playlists' | 'gallery',
@@ -21,13 +24,19 @@ async function reorderItem(
 ) {
   const db = createAdminClient();
   const { data: items } = await db.from(table).select('id, order_index').order('order_index');
-  if (!items) {return { error: 'Not found' };}
+  if (!items) {
+    return { error: 'Not found' };
+  }
 
   const idx = items.findIndex((x) => x.id === id);
-  if (idx === -1) {return { error: 'Not found' };}
+  if (idx === -1) {
+    return { error: 'Not found' };
+  }
 
   const swapIdx = direction === 'up' ? idx - 1 : idx + 1;
-  if (swapIdx < 0 || swapIdx >= items.length) {return { error: 'Cannot reorder' };}
+  if (swapIdx < 0 || swapIdx >= items.length) {
+    return { error: 'Cannot reorder' };
+  }
 
   const now = new Date().toISOString();
   await Promise.all([
@@ -69,26 +78,31 @@ export async function updateSiteInfoAction(_prev: unknown, formData: FormData) {
   await requireAuth();
   const db = createAdminClient();
 
-  const { error } = await db.from('site_info').update({
-    ig_handle: formData.get('ig_handle'),
-    phone: formData.get('phone'),
-    email: formData.get('email'),
-    address_line1: formData.get('address_line1'),
-    address_line2: formData.get('address_line2'),
-    weekday_hours: formData.get('weekday_hours'),
-    weekend_hours: formData.get('weekend_hours'),
-    address_line1_en: formData.get('address_line1_en'),
-    address_line2_en: formData.get('address_line2_en'),
-    weekday_hours_en: formData.get('weekday_hours_en'),
-    weekend_hours_en: formData.get('weekend_hours_en'),
-    happy_customers: Number(formData.get('happy_customers')),
-    years_experience: Number(formData.get('years_experience')),
-    latitude: Number(formData.get('latitude')),
-    longitude: Number(formData.get('longitude')),
-    updated_at: new Date().toISOString(),
-  }).eq('id', 1);
+  const { error } = await db
+    .from('site_info')
+    .update({
+      ig_handle: formData.get('ig_handle'),
+      phone: formData.get('phone'),
+      email: formData.get('email'),
+      address_line1: formData.get('address_line1'),
+      address_line2: formData.get('address_line2'),
+      weekday_hours: formData.get('weekday_hours'),
+      weekend_hours: formData.get('weekend_hours'),
+      address_line1_en: formData.get('address_line1_en'),
+      address_line2_en: formData.get('address_line2_en'),
+      weekday_hours_en: formData.get('weekday_hours_en'),
+      weekend_hours_en: formData.get('weekend_hours_en'),
+      happy_customers: Number(formData.get('happy_customers')),
+      years_experience: Number(formData.get('years_experience')),
+      latitude: Number(formData.get('latitude')),
+      longitude: Number(formData.get('longitude')),
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', 1);
 
-  if (error) {return { error: error.message };}
+  if (error) {
+    return { error: error.message };
+  }
   updateTag('siteinfo');
   return { success: true };
 }
@@ -98,16 +112,22 @@ export async function addServiceAction(formData: FormData) {
   await requireAuth();
   const db = createAdminClient();
 
-  const { data, error } = await db.from('services').insert({
-    icon: formData.get('icon'),
-    title: formData.get('title'),
-    description: formData.get('description'),
-    title_en: formData.get('title_en') ?? '',
-    description_en: formData.get('description_en') ?? '',
-    order_index: Number(formData.get('order_index') || 0),
-  }).select('*').single();
+  const { data, error } = await db
+    .from('services')
+    .insert({
+      icon: formData.get('icon'),
+      title: formData.get('title'),
+      description: formData.get('description'),
+      title_en: formData.get('title_en') ?? '',
+      description_en: formData.get('description_en') ?? '',
+      order_index: Number(formData.get('order_index') || 0),
+    })
+    .select('*')
+    .single();
 
-  if (error) {return { error: error.message };}
+  if (error) {
+    return { error: error.message };
+  }
   updateTag('services');
   return { success: true, data };
 }
@@ -116,17 +136,22 @@ export async function updateServiceAction(formData: FormData) {
   await requireAuth();
   const db = createAdminClient();
 
-  const { error } = await db.from('services').update({
-    icon: formData.get('icon'),
-    title: formData.get('title'),
-    description: formData.get('description'),
-    title_en: formData.get('title_en') ?? '',
-    description_en: formData.get('description_en') ?? '',
-    order_index: Number(formData.get('order_index') || 0),
-    updated_at: new Date().toISOString(),
-  }).eq('id', Number(formData.get('id')));
+  const { error } = await db
+    .from('services')
+    .update({
+      icon: formData.get('icon'),
+      title: formData.get('title'),
+      description: formData.get('description'),
+      title_en: formData.get('title_en') ?? '',
+      description_en: formData.get('description_en') ?? '',
+      order_index: Number(formData.get('order_index') || 0),
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', Number(formData.get('id')));
 
-  if (error) {return { error: error.message };}
+  if (error) {
+    return { error: error.message };
+  }
   updateTag('services');
   return { success: true };
 }
@@ -136,7 +161,9 @@ export async function deleteServiceAction(id: number) {
   const db = createAdminClient();
 
   const { error } = await db.from('services').delete().eq('id', id);
-  if (error) {return { error: error.message };}
+  if (error) {
+    return { error: error.message };
+  }
   updateTag('services');
   return { success: true };
 }
@@ -158,13 +185,19 @@ export async function addTrainerAction(formData: FormData) {
   await requireAuth();
   const db = createAdminClient();
 
-  const { data: inserted, error } = await db.from('trainers').insert({
-    name: formData.get('name'),
-    ig_handle: formData.get('ig_handle'),
-    order_index: Number(formData.get('order_index') || 0),
-  }).select('*').single();
+  const { data: inserted, error } = await db
+    .from('trainers')
+    .insert({
+      name: formData.get('name'),
+      ig_handle: formData.get('ig_handle'),
+      order_index: Number(formData.get('order_index') || 0),
+    })
+    .select('*')
+    .single();
 
-  if (error) {return { error: error.message };}
+  if (error) {
+    return { error: error.message };
+  }
 
   let photo_url = '';
   const photo = formData.get('photo');
@@ -173,7 +206,9 @@ export async function addTrainerAction(formData: FormData) {
     const path = `${inserted.id}.${ext}`;
     const { error: uploadError } = await db.storage.from('trainer-photos').upload(path, photo, { upsert: true });
     if (!uploadError) {
-      const { data: { publicUrl } } = db.storage.from('trainer-photos').getPublicUrl(path);
+      const {
+        data: { publicUrl },
+      } = db.storage.from('trainer-photos').getPublicUrl(path);
       await db.from('trainers').update({ photo_url: publicUrl }).eq('id', inserted.id);
       photo_url = publicUrl;
     }
@@ -213,14 +248,18 @@ export async function updateTrainerAction(formData: FormData) {
     const path = `${id}.${ext}`;
     const { error: uploadError } = await db.storage.from('trainer-photos').upload(path, photo, { upsert: true });
     if (!uploadError) {
-      const { data: { publicUrl } } = db.storage.from('trainer-photos').getPublicUrl(path);
+      const {
+        data: { publicUrl },
+      } = db.storage.from('trainer-photos').getPublicUrl(path);
       updates.photo_url = publicUrl;
       photoUrl = publicUrl;
     }
   }
 
   const { error } = await db.from('trainers').update(updates).eq('id', id);
-  if (error) {return { error: error.message };}
+  if (error) {
+    return { error: error.message };
+  }
   updateTag('trainers');
   return { success: true, photoUrl };
 }
@@ -231,7 +270,9 @@ export async function deleteTrainerAction(id: number) {
 
   const { data: trainer } = await db.from('trainers').select('photo_url').eq('id', id).single();
   const { error } = await db.from('trainers').delete().eq('id', id);
-  if (error) {return { error: error.message };}
+  if (error) {
+    return { error: error.message };
+  }
 
   if (trainer?.photo_url) {
     const marker = '/trainer-photos/';
@@ -256,13 +297,19 @@ export async function addPlaylistAction(formData: FormData) {
   await requireAuth();
   const db = createAdminClient();
 
-  const { data, error } = await db.from('playlists').insert({
-    title: formData.get('title'),
-    spotify_id: formData.get('spotify_id'),
-    order_index: Number(formData.get('order_index') || 0),
-  }).select('*').single();
+  const { data, error } = await db
+    .from('playlists')
+    .insert({
+      title: formData.get('title'),
+      spotify_id: formData.get('spotify_id'),
+      order_index: Number(formData.get('order_index') || 0),
+    })
+    .select('*')
+    .single();
 
-  if (error) {return { error: error.message };}
+  if (error) {
+    return { error: error.message };
+  }
   updateTag('playlists');
   return { success: true, data };
 }
@@ -271,14 +318,19 @@ export async function updatePlaylistAction(formData: FormData) {
   await requireAuth();
   const db = createAdminClient();
 
-  const { error } = await db.from('playlists').update({
-    title: formData.get('title'),
-    spotify_id: formData.get('spotify_id'),
-    order_index: Number(formData.get('order_index') || 0),
-    updated_at: new Date().toISOString(),
-  }).eq('id', Number(formData.get('id')));
+  const { error } = await db
+    .from('playlists')
+    .update({
+      title: formData.get('title'),
+      spotify_id: formData.get('spotify_id'),
+      order_index: Number(formData.get('order_index') || 0),
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', Number(formData.get('id')));
 
-  if (error) {return { error: error.message };}
+  if (error) {
+    return { error: error.message };
+  }
   updateTag('playlists');
   return { success: true };
 }
@@ -288,7 +340,9 @@ export async function deletePlaylistAction(id: number) {
   const db = createAdminClient();
 
   const { error } = await db.from('playlists').delete().eq('id', id);
-  if (error) {return { error: error.message };}
+  if (error) {
+    return { error: error.message };
+  }
   updateTag('playlists');
   return { success: true };
 }
@@ -305,13 +359,19 @@ export async function addGalleryPhotoAction(formData: FormData) {
   await requireAuth();
   const db = createAdminClient();
 
-  const { data: inserted, error } = await db.from('gallery').insert({
-    alt_text: formData.get('alt_text') || '',
-    image_url: '',
-    order_index: Number(formData.get('order_index') || 0),
-  }).select('*').single();
+  const { data: inserted, error } = await db
+    .from('gallery')
+    .insert({
+      alt_text: formData.get('alt_text') || '',
+      image_url: '',
+      order_index: Number(formData.get('order_index') || 0),
+    })
+    .select('*')
+    .single();
 
-  if (error) {return { error: error.message };}
+  if (error) {
+    return { error: error.message };
+  }
 
   let image_url = '';
   const image = formData.get('image');
@@ -320,7 +380,9 @@ export async function addGalleryPhotoAction(formData: FormData) {
     const path = `${inserted.id}.${ext}`;
     const { error: uploadError } = await db.storage.from('gallery-images').upload(path, image, { upsert: true });
     if (!uploadError) {
-      const { data: { publicUrl } } = db.storage.from('gallery-images').getPublicUrl(path);
+      const {
+        data: { publicUrl },
+      } = db.storage.from('gallery-images').getPublicUrl(path);
       await db.from('gallery').update({ image_url: publicUrl }).eq('id', inserted.id);
       image_url = publicUrl;
     }
@@ -350,14 +412,18 @@ export async function updateGalleryPhotoAction(formData: FormData) {
     const path = `${id}.${ext}`;
     const { error: uploadError } = await db.storage.from('gallery-images').upload(path, image, { upsert: true });
     if (!uploadError) {
-      const { data: { publicUrl } } = db.storage.from('gallery-images').getPublicUrl(path);
+      const {
+        data: { publicUrl },
+      } = db.storage.from('gallery-images').getPublicUrl(path);
       updates.image_url = publicUrl;
       imageUrl = publicUrl;
     }
   }
 
   const { error } = await db.from('gallery').update(updates).eq('id', id);
-  if (error) {return { error: error.message };}
+  if (error) {
+    return { error: error.message };
+  }
   updateTag('gallery');
   return { success: true, imageUrl };
 }
@@ -368,7 +434,9 @@ export async function deleteGalleryPhotoAction(id: number) {
 
   const { data: photo } = await db.from('gallery').select('image_url').eq('id', id).single();
   const { error } = await db.from('gallery').delete().eq('id', id);
-  if (error) {return { error: error.message };}
+  if (error) {
+    return { error: error.message };
+  }
 
   if (photo?.image_url) {
     const marker = '/gallery-images/';

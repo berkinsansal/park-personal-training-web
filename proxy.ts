@@ -28,15 +28,15 @@ export async function proxy(request: NextRequest) {
       cookies: {
         getAll: () => request.cookies.getAll(),
         setAll: (toSet) => {
-          toSet.forEach(({ name, value, options }) =>
-            response.cookies.set(name, value, options)
-          );
+          toSet.forEach(({ name, value, options }) => response.cookies.set(name, value, options));
         },
       },
-    }
+    },
   );
 
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   if (!user) {
     const locale = pathname.startsWith('/en') ? '/en' : '';
@@ -47,5 +47,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next|.*\\..*).*)']
+  matcher: ['/((?!_next|.*\\..*).*)'],
 };

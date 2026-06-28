@@ -25,7 +25,9 @@ export default function LoginForm({
           <LocaleSwitcher />
         </div>
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-black text-amber-400">{siteConfig.siteName}</h1>
+          <h1 className="text-2xl font-black text-amber-400">
+            {siteConfig.siteName}
+          </h1>
           <p className="text-zinc-400 text-sm mt-1">{t('subtitle')}</p>
         </div>
 
@@ -34,7 +36,9 @@ export default function LoginForm({
           className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4"
         >
           <div>
-            <label className="block text-zinc-400 text-sm mb-2">{t('email')}</label>
+            <label className="block text-zinc-400 text-sm mb-2">
+              {t('email')}
+            </label>
             <input
               required
               type="email"
@@ -45,7 +49,9 @@ export default function LoginForm({
           </div>
 
           <div>
-            <label className="block text-zinc-400 text-sm mb-2">{t('password')}</label>
+            <label className="block text-zinc-400 text-sm mb-2">
+              {t('password')}
+            </label>
             <input
               required
               type="password"
@@ -69,7 +75,10 @@ export default function LoginForm({
         </form>
 
         <div className="text-center mt-6">
-          <Link href="/" className="text-zinc-400 text-sm hover:text-white transition-colors">
+          <Link
+            href="/"
+            className="text-zinc-400 text-sm hover:text-white transition-colors"
+          >
             {t('backToHome')}
           </Link>
         </div>

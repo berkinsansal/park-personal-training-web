@@ -21,7 +21,10 @@ export default function ContactForm() {
   const t = useTranslations('contact');
   const formRef = useRef<HTMLFormElement>(null);
   const [isPending, startTransition] = useTransition();
-  const [state, setState] = useState<{ error?: string; success?: boolean } | null>(null);
+  const [state, setState] = useState<{
+    error?: string;
+    success?: boolean;
+  } | null>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,10 +39,18 @@ export default function ContactForm() {
   };
 
   return (
-    <form ref={formRef} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4" onSubmit={handleSubmit}>
-      <h3 className="text-amber-400 font-bold text-lg mb-6">{t('formHeading')}</h3>
+    <form
+      ref={formRef}
+      className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4"
+      onSubmit={handleSubmit}
+    >
+      <h3 className="text-amber-400 font-bold text-lg mb-6">
+        {t('formHeading')}
+      </h3>
       <div>
-        <label className="block text-zinc-400 text-sm mb-2">{t('nameLabel')}</label>
+        <label className="block text-zinc-400 text-sm mb-2">
+          {t('nameLabel')}
+        </label>
         <input
           type="text"
           name="name"
@@ -47,7 +58,9 @@ export default function ContactForm() {
         />
       </div>
       <div>
-        <label className="block text-zinc-400 text-sm mb-2">{t('phoneLabel')}</label>
+        <label className="block text-zinc-400 text-sm mb-2">
+          {t('phoneLabel')}
+        </label>
         <input
           type="text"
           name="phone"
@@ -55,7 +68,9 @@ export default function ContactForm() {
         />
       </div>
       <div>
-        <label className="block text-zinc-400 text-sm mb-2">{t('emailLabel')}</label>
+        <label className="block text-zinc-400 text-sm mb-2">
+          {t('emailLabel')}
+        </label>
         <input
           type="text"
           name="email"
@@ -63,7 +78,9 @@ export default function ContactForm() {
         />
       </div>
       <div>
-        <label className="block text-zinc-400 text-sm mb-2">{t('messageLabel')}</label>
+        <label className="block text-zinc-400 text-sm mb-2">
+          {t('messageLabel')}
+        </label>
         <textarea
           rows={4}
           name="message"
@@ -72,7 +89,9 @@ export default function ContactForm() {
       </div>
 
       {state?.error && <p className="text-red-400 text-sm">{state.error}</p>}
-      {state?.success && <p className="text-green-400 text-sm">{t('successMessage')}</p>}
+      {state?.success && (
+        <p className="text-green-400 text-sm">{t('successMessage')}</p>
+      )}
 
       <SubmitButton label={t('submit')} pending={isPending} />
     </form>
