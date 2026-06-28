@@ -1,10 +1,9 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
-import type { Playlist } from '@/lib/types';
 import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
+import { useLocale, useTranslations } from 'next-intl';
 
-export default function MusicPreview({ playlists }: { playlists: Playlist[] }) {
+export default function MusicPreview() {
   const locale = useLocale();
   const t = useTranslations('playlists');
 

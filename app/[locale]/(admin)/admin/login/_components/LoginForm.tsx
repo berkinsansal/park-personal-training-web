@@ -1,11 +1,11 @@
 'use client';
 
-import { useActionState } from 'react';
-import { useLocale, useTranslations } from 'next-intl';
-import { loginAction } from '../../actions';
 import LocaleSwitcher from '@/app/_components/LocaleSwitcher';
-import Link from 'next/link';
 import { siteConfig } from '@/lib/site.config';
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useActionState } from 'react';
+import { loginAction } from '../../actions';
 
 export default function LoginForm({
   defaultEmail,
@@ -14,7 +14,6 @@ export default function LoginForm({
   defaultEmail?: string;
   defaultPassword?: string;
 }) {
-  const locale = useLocale() as 'tr' | 'en';
   const t = useTranslations('admin.login');
   const [state, action, pending] = useActionState(loginAction, null);
 

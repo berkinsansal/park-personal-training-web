@@ -1,17 +1,16 @@
-import { Suspense } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { getTranslations } from 'next-intl/server';
-import { createAdminClient } from '@/lib/supabase-server';
-import { siteConfig } from '@/lib/site.config';
-import SiteInfoForm from './_components/SiteInfoForm';
-import ServicesPanel from './_components/ServicesPanel';
-import TrainersPanel from './_components/TrainersPanel';
-import PlaylistsPanel from './_components/PlaylistsPanel';
-import GalleryPanel from './_components/GalleryPanel';
 import LocaleSwitcher from '@/app/_components/LocaleSwitcher';
+import { siteConfig } from '@/lib/site.config';
+import { createAdminClient } from '@/lib/supabase-server';
+import { getTranslations } from 'next-intl/server';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Suspense } from 'react';
+import GalleryPanel from './_components/GalleryPanel';
+import PlaylistsPanel from './_components/PlaylistsPanel';
+import ServicesPanel from './_components/ServicesPanel';
+import SiteInfoForm from './_components/SiteInfoForm';
+import TrainersPanel from './_components/TrainersPanel';
 import { logoutAction } from './actions';
-import { routing } from '@/i18n.config';
 
 async function AdminContent() {
   const t = await getTranslations('admin');
