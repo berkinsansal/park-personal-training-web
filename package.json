@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "lint:prettier": "prettier --check .",
+    "lint:prettier:fix": "prettier --write .",
+    "lint:all": "npm run lint && npm run lint:prettier",
+    "lint:all:fix": "npm run lint:fix && npm run lint:prettier:fix",
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",
