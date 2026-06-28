@@ -8,10 +8,10 @@ const config = {
   trailingComma: 'all',
   bracketSpacing: true,
   arrowParens: 'always',
-  printWidth: 80, // for html, css, scss files
+  printWidth: 80, // for JSX, CSS, SCSS, JSON, Markdown, etc.
   overrides: [
     {
-      files: '*.ts',
+      files: ['*.ts', '*.tsx'],
       options: {
         printWidth: 120,
       },
