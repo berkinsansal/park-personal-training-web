@@ -127,6 +127,7 @@ export default function PlaylistsPanel({
         <h2 className="text-white font-bold text-lg">{t('heading')}</h2>
         <button
           className="text-sm text-amber-400 hover:text-amber-300 transition-colors"
+          type="button"
           onClick={() => setAdding((v) => !v)}
         >
           {adding ? t('cancel') : t('add')}
@@ -183,6 +184,7 @@ export default function PlaylistsPanel({
                     }
                     className={`text-xs transition-colors ${pendingOp === `up:${playlist.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
                     title="Move up"
+                    type="button"
                     onClick={() => handleReorder(playlist.id, 'up')}
                   >
                     ↑
@@ -195,6 +197,7 @@ export default function PlaylistsPanel({
                     }
                     className={`text-xs transition-colors ${pendingOp === `down:${playlist.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
                     title="Move down"
+                    type="button"
                     onClick={() => handleReorder(playlist.id, 'down')}
                   >
                     ↓
@@ -204,6 +207,7 @@ export default function PlaylistsPanel({
                   <button
                     disabled={pendingOp !== null}
                     className="text-xs text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                    type="button"
                     onClick={() => setEditingId(playlist.id)}
                   >
                     {t('edit')}
@@ -211,6 +215,7 @@ export default function PlaylistsPanel({
                   <button
                     disabled={pendingOp !== null}
                     className="text-xs text-zinc-400 hover:text-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                    type="button"
                     onClick={() => handleDelete(playlist.id)}
                   >
                     {t('delete')}

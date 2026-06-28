@@ -127,6 +127,7 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
         <h2 className="text-white font-bold text-lg">{t('heading')}</h2>
         <button
           className="text-sm text-amber-400 hover:text-amber-300 transition-colors"
+          type="button"
           onClick={() => setAdding((v) => !v)}
         >
           {adding ? t('cancel') : t('add')}
@@ -186,6 +187,7 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
                     }
                     className={`text-xs px-2 py-1 rounded transition-colors ${pendingOp === `up:${photo.id}` ? 'opacity-40 text-zinc-400 bg-zinc-800' : 'text-zinc-400 hover:text-amber-400 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 disabled:cursor-not-allowed'}`}
                     title="Move up"
+                    type="button"
                     onClick={() => handleReorder(photo.id, 'up')}
                   >
                     ↑
@@ -198,6 +200,7 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
                     }
                     className={`text-xs px-2 py-1 rounded transition-colors ${pendingOp === `down:${photo.id}` ? 'opacity-40 text-zinc-400 bg-zinc-800' : 'text-zinc-400 hover:text-amber-400 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 disabled:cursor-not-allowed'}`}
                     title="Move down"
+                    type="button"
                     onClick={() => handleReorder(photo.id, 'down')}
                   >
                     ↓
@@ -205,6 +208,7 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
                   <button
                     disabled={pendingOp !== null}
                     className="text-xs px-2 py-1 rounded text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors bg-zinc-800 hover:bg-zinc-700"
+                    type="button"
                     onClick={() => setEditingId(photo.id)}
                   >
                     {t('edit')}
@@ -212,6 +216,7 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
                   <button
                     disabled={pendingOp !== null}
                     className="text-xs px-2 py-1 rounded text-zinc-400 hover:text-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors bg-zinc-800 hover:bg-zinc-700"
+                    type="button"
                     onClick={() => handleDelete(photo.id)}
                   >
                     {t('delete')}

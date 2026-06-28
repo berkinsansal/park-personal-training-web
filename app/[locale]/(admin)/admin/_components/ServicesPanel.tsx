@@ -125,6 +125,7 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
         <h2 className="text-white font-bold text-lg">{t('heading')}</h2>
         <button
           className="text-sm text-amber-400 hover:text-amber-300 transition-colors"
+          type="button"
           onClick={() => setAdding((v) => !v)}
         >
           {adding ? t('cancel') : t('add')}
@@ -179,6 +180,7 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
                     }
                     className={`text-xs transition-colors ${pendingOp === `up:${service.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
                     title="Move up"
+                    type="button"
                     onClick={() => handleReorder(service.id, 'up')}
                   >
                     ↑
@@ -191,6 +193,7 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
                     }
                     className={`text-xs transition-colors ${pendingOp === `down:${service.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
                     title="Move down"
+                    type="button"
                     onClick={() => handleReorder(service.id, 'down')}
                   >
                     ↓
@@ -200,6 +203,7 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
                   <button
                     disabled={pendingOp !== null}
                     className="text-xs text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                    type="button"
                     onClick={() => setEditingId(service.id)}
                   >
                     {t('edit')}
@@ -207,6 +211,7 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
                   <button
                     disabled={pendingOp !== null}
                     className="text-xs text-zinc-400 hover:text-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                    type="button"
                     onClick={() => handleDelete(service.id)}
                   >
                     {t('delete')}

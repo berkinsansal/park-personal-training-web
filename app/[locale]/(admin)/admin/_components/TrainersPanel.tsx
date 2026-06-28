@@ -125,6 +125,7 @@ export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
         <h2 className="text-white font-bold text-lg">{t('heading')}</h2>
         <button
           className="text-sm text-amber-400 hover:text-amber-300 transition-colors"
+          type="button"
           onClick={() => setAdding((v) => !v)}
         >
           {adding ? t('cancel') : t('add')}
@@ -198,6 +199,7 @@ export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
                     }
                     className={`text-xs transition-colors ${pendingOp === `up:${trainer.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
                     title="Move up"
+                    type="button"
                     onClick={() => handleReorder(trainer.id, 'up')}
                   >
                     ↑
@@ -210,6 +212,7 @@ export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
                     }
                     className={`text-xs transition-colors ${pendingOp === `down:${trainer.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
                     title="Move down"
+                    type="button"
                     onClick={() => handleReorder(trainer.id, 'down')}
                   >
                     ↓
@@ -219,6 +222,7 @@ export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
                   <button
                     disabled={pendingOp !== null}
                     className="text-xs text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                    type="button"
                     onClick={() => setEditingId(trainer.id)}
                   >
                     {t('edit')}
@@ -226,6 +230,7 @@ export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
                   <button
                     disabled={pendingOp !== null}
                     className="text-xs text-zinc-400 hover:text-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                    type="button"
                     onClick={() => handleDelete(trainer.id)}
                   >
                     {t('delete')}

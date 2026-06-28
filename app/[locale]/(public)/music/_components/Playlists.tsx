@@ -40,6 +40,7 @@ export default function Playlists({ playlists }: { playlists: Playlist[] }) {
                         ? 'bg-amber-400 text-black'
                         : 'bg-zinc-700 text-white hover:bg-zinc-600'
                     }`}
+                    type="button"
                     onClick={() => setSelectedId(playlist.id)}
                   >
                     {playlist.title}

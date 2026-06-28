@@ -29,6 +29,7 @@ export default function LocaleSwitcher() {
               ? 'bg-amber-400 text-zinc-950 shadow-lg shadow-amber-400/30 scale-100'
               : 'text-zinc-400 hover:text-zinc-200 hover:cursor-pointer active:scale-95'
           }`}
+          type="button"
           onClick={() => handleLocaleChange(locale)}
         >
           {locale}

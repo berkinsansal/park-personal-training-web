@@ -179,6 +179,7 @@ export default function About({
                   <div className="flex items-center justify-center gap-4 mt-4">
                     <button
                       className="px-3 py-2 text-white bg-zinc-800 hover:bg-zinc-700 rounded-full transition-colors"
+                      type="button"
                       onClick={prevSlide}
                     >
                       &lt;
@@ -192,12 +193,14 @@ export default function About({
                               ? 'bg-amber-400 w-6'
                               : 'bg-zinc-600 hover:bg-zinc-500'
                           }`}
+                          type="button"
                           onClick={() => setCurrentSlide(idx)}
                         />
                       ))}
                     </div>
                     <button
                       className="px-3 py-2 text-white bg-zinc-800 hover:bg-zinc-700 rounded-full transition-colors"
+                      type="button"
                       onClick={nextSlide}
                     >
                       &gt;

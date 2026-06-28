@@ -95,6 +95,7 @@ export default function Navbar() {
         </ul>
         <button
           className="md:hidden text-zinc-300"
+          type="button"
           onClick={() => setOpen(!open)}
         >
           <svg
