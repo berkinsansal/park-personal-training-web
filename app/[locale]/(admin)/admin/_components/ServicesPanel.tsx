@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { addServiceAction, updateServiceAction, deleteServiceAction, reorderServiceAction } from '../actions';
+import { addServiceAction, deleteServiceAction, reorderServiceAction, updateServiceAction } from '../actions';
 import type { Service } from '@/lib/types';
 import { inputCls } from './styles';
 
@@ -20,7 +20,7 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
     setPendingOp(`delete:${id}`);
     try {
       const res = await deleteServiceAction(id);
-      if (res?.error) return flash(res.error);
+      if (res?.error) {return flash(res.error);}
       setList((prev) => prev.filter((s) => s.id !== id));
       flash(t('deleted'));
     } finally {
@@ -32,13 +32,13 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
     setPendingOp(`${direction}:${id}`);
     try {
       const res = await reorderServiceAction(id, direction);
-      if (res?.error) return flash(res.error);
+      if (res?.error) {return flash(res.error);}
       setList((prev) => {
         const sorted = [...prev].sort((a, b) => a.order_index - b.order_index);
         const idx = sorted.findIndex((s) => s.id === id);
-        if (idx === -1) return prev;
+        if (idx === -1) {return prev;}
         const swapIdx = direction === 'up' ? idx - 1 : idx + 1;
-        if (swapIdx < 0 || swapIdx >= sorted.length) return prev;
+        if (swapIdx < 0 || swapIdx >= sorted.length) {return prev;}
         const newIdx = sorted[idx].order_index;
         sorted[idx].order_index = sorted[swapIdx].order_index;
         sorted[swapIdx].order_index = newIdx;
@@ -56,7 +56,7 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
     setPendingOp(`update:${id}`);
     try {
       const res = await updateServiceAction(fd);
-      if (res?.error) return flash(res.error);
+      if (res?.error) {return flash(res.error);}
       setList((prev) => prev.map((s) => s.id === id ? {
         id,
         icon: fd.get('icon') as string,
@@ -79,7 +79,7 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
     setPendingOp('add');
     try {
       const res = await addServiceAction(fd);
-      if (res?.error) return flash(res.error);
+      if (res?.error) {return flash(res.error);}
       if (res.data) {
         setList((prev) => [...prev, res.data].sort((a, b) => a.order_index - b.order_index));
       }
@@ -96,8 +96,8 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
       <div className="flex items-center justify-between mb-4 pb-2 border-b border-zinc-800">
         <h2 className="text-white font-bold text-lg">{t('heading')}</h2>
         <button
-          onClick={() => setAdding((v) => !v)}
           className="text-sm text-amber-400 hover:text-amber-300 transition-colors"
+          onClick={() => setAdding((v) => !v)}
         >
           {adding ? t('cancel') : t('add')}
         </button>
@@ -106,7 +106,7 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
       {feedback && <p className="text-amber-400 text-sm mb-3">{feedback}</p>}
 
       {adding && (
-        <ServiceForm t={t} onSubmit={handleAdd} onCancel={() => setAdding(false)} label={t('add').replace('+ ', '')} pendingOp={pendingOp} />
+        <ServiceForm t={t} label={t('add').replace('+ ', '')} pendingOp={pendingOp} onSubmit={handleAdd} onCancel={() => setAdding(false)} />
       )}
 
       <div className="flex flex-col gap-3">
@@ -116,10 +116,10 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
               key={service.id}
               t={t}
               defaults={service}
-              onSubmit={handleUpdate}
-              onCancel={() => setEditingId(null)}
               label={t('update')}
               pendingOp={pendingOp}
+              onSubmit={handleUpdate}
+              onCancel={() => setEditingId(null)}
             />
           ) : (
             <div key={service.id} className={`flex items-start gap-3 bg-zinc-900 border border-zinc-800 rounded-xl p-4 transition-opacity ${pendingOp === `delete:${service.id}` ? 'opacity-50 pointer-events-none' : ''}`}>
@@ -130,12 +130,12 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
               </div>
               <div className="flex flex-col gap-1 shrink-0">
                 <div className="flex gap-2">
-                  <button onClick={() => handleReorder(service.id, 'up')} disabled={pendingOp !== null || service.order_index === Math.min(...list.map(s => s.order_index))} className={`text-xs transition-colors ${pendingOp === `up:${service.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move up">↑</button>
-                  <button onClick={() => handleReorder(service.id, 'down')} disabled={pendingOp !== null || service.order_index === Math.max(...list.map(s => s.order_index))} className={`text-xs transition-colors ${pendingOp === `down:${service.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move down">↓</button>
+                  <button disabled={pendingOp !== null || service.order_index === Math.min(...list.map(s => s.order_index))} className={`text-xs transition-colors ${pendingOp === `up:${service.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move up" onClick={() => handleReorder(service.id, 'up')}>↑</button>
+                  <button disabled={pendingOp !== null || service.order_index === Math.max(...list.map(s => s.order_index))} className={`text-xs transition-colors ${pendingOp === `down:${service.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move down" onClick={() => handleReorder(service.id, 'down')}>↓</button>
                 </div>
                 <div className="flex gap-2">
-                  <button onClick={() => setEditingId(service.id)} disabled={pendingOp !== null} className="text-xs text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">{t('edit')}</button>
-                  <button onClick={() => handleDelete(service.id)} disabled={pendingOp !== null} className="text-xs text-zinc-400 hover:text-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">{t('delete')}</button>
+                  <button disabled={pendingOp !== null} className="text-xs text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors" onClick={() => setEditingId(service.id)}>{t('edit')}</button>
+                  <button disabled={pendingOp !== null} className="text-xs text-zinc-400 hover:text-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors" onClick={() => handleDelete(service.id)}>{t('delete')}</button>
                 </div>
               </div>
             </div>
@@ -156,17 +156,17 @@ function ServiceForm({ t, defaults, onSubmit, onCancel, label, pendingOp }: {
 }) {
   const isSubmitting = pendingOp === 'add' || (defaults && pendingOp === `update:${defaults.id}`);
   return (
-    <form onSubmit={onSubmit} className="bg-zinc-900 border border-amber-400/30 rounded-xl p-4 flex flex-col gap-3 mb-3">
+    <form className="bg-zinc-900 border border-amber-400/30 rounded-xl p-4 flex flex-col gap-3 mb-3" onSubmit={onSubmit}>
       {defaults && <input type="hidden" name="id" value={defaults.id} />}
       <div>
         <label className="block text-zinc-400 text-xs mb-1">{t('icon')}</label>
-        <input name="icon" defaultValue={defaults?.icon} required disabled={pendingOp !== null} className={inputCls} />
+        <input required name="icon" defaultValue={defaults?.icon} disabled={pendingOp !== null} className={inputCls} />
       </div>
       {defaults && <input type="hidden" name="order_index" value={defaults.order_index} />}
       <div className="grid grid-cols-2 gap-3">
         <div>
           <label className="block text-zinc-400 text-xs mb-1">{t('title')}</label>
-          <input name="title" defaultValue={defaults?.title} required disabled={pendingOp !== null} className={inputCls} />
+          <input required name="title" defaultValue={defaults?.title} disabled={pendingOp !== null} className={inputCls} />
         </div>
         <div>
           <label className="block text-zinc-400 text-xs mb-1">{t('titleEn')}</label>
@@ -175,15 +175,15 @@ function ServiceForm({ t, defaults, onSubmit, onCancel, label, pendingOp }: {
       </div>
       <div>
         <label className="block text-zinc-400 text-xs mb-1">{t('description')}</label>
-        <textarea name="description" defaultValue={defaults?.description} rows={3} required disabled={pendingOp !== null} className={inputCls + ' resize-none'} />
+        <textarea required name="description" defaultValue={defaults?.description} rows={3} disabled={pendingOp !== null} className={`${inputCls  } resize-none`} />
       </div>
       <div>
         <label className="block text-zinc-400 text-xs mb-1">{t('descriptionEn')}</label>
-        <textarea name="description_en" defaultValue={defaults?.description_en} rows={3} disabled={pendingOp !== null} className={inputCls + ' resize-none'} />
+        <textarea name="description_en" defaultValue={defaults?.description_en} rows={3} disabled={pendingOp !== null} className={`${inputCls  } resize-none`} />
       </div>
       <div className="flex gap-2">
         <button type="submit" disabled={pendingOp !== null} className="px-4 py-2 bg-amber-400 text-zinc-950 font-bold rounded-lg text-xs hover:bg-amber-300 disabled:bg-zinc-600 disabled:cursor-not-allowed transition-colors">{isSubmitting ? '...' : label}</button>
-        <button type="button" onClick={onCancel} disabled={pendingOp !== null} className="px-4 py-2 text-zinc-400 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed text-xs transition-colors">{t('cancel')}</button>
+        <button type="button" disabled={pendingOp !== null} className="px-4 py-2 text-zinc-400 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed text-xs transition-colors" onClick={onCancel}>{t('cancel')}</button>
       </div>
     </form>
   );

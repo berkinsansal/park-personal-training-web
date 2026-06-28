@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { addGalleryPhotoAction, updateGalleryPhotoAction, deleteGalleryPhotoAction, reorderGalleryPhotoAction } from '../actions';
+import { addGalleryPhotoAction, deleteGalleryPhotoAction, reorderGalleryPhotoAction, updateGalleryPhotoAction } from '../actions';
 import type { GalleryPhoto } from '@/lib/types';
 import { inputCls } from './styles';
 
@@ -20,7 +20,7 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
     setPendingOp(`delete:${id}`);
     try {
       const res = await deleteGalleryPhotoAction(id);
-      if (res?.error) return flash(res.error);
+      if (res?.error) {return flash(res.error);}
       setList((prev) => prev.filter((p) => p.id !== id));
       flash(t('deleted'));
     } finally {
@@ -32,13 +32,13 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
     setPendingOp(`${direction}:${id}`);
     try {
       const res = await reorderGalleryPhotoAction(id, direction);
-      if (res?.error) return flash(res.error);
+      if (res?.error) {return flash(res.error);}
       setList((prev) => {
         const sorted = [...prev].sort((a, b) => a.order_index - b.order_index);
         const idx = sorted.findIndex((p) => p.id === id);
-        if (idx === -1) return prev;
+        if (idx === -1) {return prev;}
         const swapIdx = direction === 'up' ? idx - 1 : idx + 1;
-        if (swapIdx < 0 || swapIdx >= sorted.length) return prev;
+        if (swapIdx < 0 || swapIdx >= sorted.length) {return prev;}
         const newIdx = sorted[idx].order_index;
         sorted[idx].order_index = sorted[swapIdx].order_index;
         sorted[swapIdx].order_index = newIdx;
@@ -56,9 +56,9 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
     setPendingOp(`update:${id}`);
     try {
       const res = await updateGalleryPhotoAction(fd);
-      if (res?.error) return flash(res.error);
+      if (res?.error) {return flash(res.error);}
       setList((prev) => prev.map((photo) => {
-        if (photo.id !== id) return photo;
+        if (photo.id !== id) {return photo;}
         return {
           id,
           image_url: res.imageUrl ?? photo.image_url,
@@ -81,7 +81,7 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
     setPendingOp('add');
     try {
       const res = await addGalleryPhotoAction(fd);
-      if (res?.error) return flash(res.error);
+      if (res?.error) {return flash(res.error);}
       if (res.data) {
         setList((prev) => [...prev, res.data].sort((a, b) => a.order_index - b.order_index));
       }
@@ -98,8 +98,8 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
       <div className="flex items-center justify-between mb-4 pb-2 border-b border-zinc-800">
         <h2 className="text-white font-bold text-lg">{t('heading')}</h2>
         <button
-          onClick={() => setAdding((v) => !v)}
           className="text-sm text-amber-400 hover:text-amber-300 transition-colors"
+          onClick={() => setAdding((v) => !v)}
         >
           {adding ? t('cancel') : t('add')}
         </button>
@@ -108,7 +108,7 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
       {feedback && <p className="text-amber-400 text-sm mb-3">{feedback}</p>}
 
       {adding && (
-        <GalleryForm t={t} onSubmit={handleAdd} onCancel={() => setAdding(false)} label={t('add').replace('+ ', '')} pendingOp={pendingOp} />
+        <GalleryForm t={t} label={t('add').replace('+ ', '')} pendingOp={pendingOp} onSubmit={handleAdd} onCancel={() => setAdding(false)} />
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -118,10 +118,10 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
               key={photo.id}
               t={t}
               defaults={photo}
-              onSubmit={handleUpdate}
-              onCancel={() => setEditingId(null)}
               label={t('update')}
               pendingOp={pendingOp}
+              onSubmit={handleUpdate}
+              onCancel={() => setEditingId(null)}
             />
           ) : (
             <div key={photo.id} className={`flex flex-col bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden transition-opacity ${pendingOp === `delete:${photo.id}` ? 'opacity-50 pointer-events-none' : ''}`}>
@@ -133,10 +133,10 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
               <div className="p-3 flex-1 flex flex-col">
                 <p className="text-white font-semibold text-sm">{photo.alt_text || '(No description)'}</p>
                 <div className="flex gap-2 mt-auto pt-2 flex-wrap">
-                  <button onClick={() => handleReorder(photo.id, 'up')} disabled={pendingOp !== null || photo.order_index === Math.min(...list.map(p => p.order_index))} className={`text-xs px-2 py-1 rounded transition-colors ${pendingOp === `up:${photo.id}` ? 'opacity-40 text-zinc-400 bg-zinc-800' : 'text-zinc-400 hover:text-amber-400 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move up">↑</button>
-                  <button onClick={() => handleReorder(photo.id, 'down')} disabled={pendingOp !== null || photo.order_index === Math.max(...list.map(p => p.order_index))} className={`text-xs px-2 py-1 rounded transition-colors ${pendingOp === `down:${photo.id}` ? 'opacity-40 text-zinc-400 bg-zinc-800' : 'text-zinc-400 hover:text-amber-400 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move down">↓</button>
-                  <button onClick={() => setEditingId(photo.id)} disabled={pendingOp !== null} className="text-xs px-2 py-1 rounded text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors bg-zinc-800 hover:bg-zinc-700">{t('edit')}</button>
-                  <button onClick={() => handleDelete(photo.id)} disabled={pendingOp !== null} className="text-xs px-2 py-1 rounded text-zinc-400 hover:text-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors bg-zinc-800 hover:bg-zinc-700">{t('delete')}</button>
+                  <button disabled={pendingOp !== null || photo.order_index === Math.min(...list.map(p => p.order_index))} className={`text-xs px-2 py-1 rounded transition-colors ${pendingOp === `up:${photo.id}` ? 'opacity-40 text-zinc-400 bg-zinc-800' : 'text-zinc-400 hover:text-amber-400 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move up" onClick={() => handleReorder(photo.id, 'up')}>↑</button>
+                  <button disabled={pendingOp !== null || photo.order_index === Math.max(...list.map(p => p.order_index))} className={`text-xs px-2 py-1 rounded transition-colors ${pendingOp === `down:${photo.id}` ? 'opacity-40 text-zinc-400 bg-zinc-800' : 'text-zinc-400 hover:text-amber-400 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move down" onClick={() => handleReorder(photo.id, 'down')}>↓</button>
+                  <button disabled={pendingOp !== null} className="text-xs px-2 py-1 rounded text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors bg-zinc-800 hover:bg-zinc-700" onClick={() => setEditingId(photo.id)}>{t('edit')}</button>
+                  <button disabled={pendingOp !== null} className="text-xs px-2 py-1 rounded text-zinc-400 hover:text-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors bg-zinc-800 hover:bg-zinc-700" onClick={() => handleDelete(photo.id)}>{t('delete')}</button>
                 </div>
               </div>
             </div>
@@ -169,7 +169,7 @@ function GalleryForm({
   };
 
   return (
-    <form onSubmit={onSubmit} className="bg-zinc-900 border border-amber-400/20 rounded-xl p-4 mb-3">
+    <form className="bg-zinc-900 border border-amber-400/20 rounded-xl p-4 mb-3" onSubmit={onSubmit}>
       {defaults && <input type="hidden" name="id" value={defaults.id} />}
 
       <div className="mb-3">
@@ -178,8 +178,8 @@ function GalleryForm({
           type="file"
           name="image"
           accept="image/jpeg,image/png,image/webp"
-          onChange={handleImageChange}
           className={`${inputCls} block`}
+          onChange={handleImageChange}
         />
         {preview && (
           <div className="mt-2 rounded-lg overflow-hidden border border-zinc-700 bg-zinc-800 w-full max-h-48">
@@ -211,9 +211,9 @@ function GalleryForm({
         </button>
         <button
           type="button"
-          onClick={onCancel}
           disabled={pendingOp !== null}
           className="flex-1 px-3 py-2 bg-zinc-800 text-zinc-300 font-semibold rounded-lg hover:bg-zinc-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-sm"
+          onClick={onCancel}
         >
           {t('cancel')}
         </button>

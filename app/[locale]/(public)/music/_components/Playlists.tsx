@@ -35,12 +35,12 @@ export default function Playlists({ playlists }: { playlists: Playlist[] }) {
                 {playlists.map((playlist) => (
                   <button
                     key={playlist.id}
-                    onClick={() => setSelectedId(playlist.id)}
                     className={`px-4 py-2 rounded-lg font-medium transition-all ${
                       selectedId === playlist.id
                         ? 'bg-amber-400 text-black'
                         : 'bg-zinc-700 text-white hover:bg-zinc-600'
                     }`}
+                    onClick={() => setSelectedId(playlist.id)}
                   >
                     {playlist.title}
                   </button>
@@ -53,12 +53,12 @@ export default function Playlists({ playlists }: { playlists: Playlist[] }) {
             {selectedPlaylist && (
               <div className="flex justify-center overflow-hidden">
                 <iframe
+                  allowFullScreen
                   style={{ borderRadius: '12px' }}
                   src={`https://open.spotify.com/embed/playlist/${selectedPlaylist.spotify_id}?utm_source=generator&theme=0`}
                   width=""
                   height="352"
                   className="h-[360px] w-full md:h-[360px] md:w-[50%]"
-                  allowFullScreen
                   allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
                   loading="lazy"
                 />

@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations, useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import type { Trainer } from '@/lib/types';
 import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
 

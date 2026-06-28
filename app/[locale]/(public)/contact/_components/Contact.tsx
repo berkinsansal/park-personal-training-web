@@ -134,11 +134,11 @@ export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
           >
             <div style={{ filter: 'invert(0.93) hue-rotate(180deg)', position: 'relative' }}>
               <iframe
+                allowFullScreen
                 width="100%"
                 height="450"
                 style={{ border: 0, pointerEvents: 'none' }}
                 loading="lazy"
-                allowFullScreen
                 referrerPolicy="no-referrer-when-downgrade"
                 src={embedUrl}
               />

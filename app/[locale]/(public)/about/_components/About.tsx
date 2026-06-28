@@ -1,21 +1,21 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { useTranslations, useLocale } from 'next-intl';
+import { useEffect, useRef, useState } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
 import type { GalleryPhoto } from "@/lib/types";
 
-type Props = {
+interface Props {
   happyCustomers: number;
   yearsExperience: number;
   trainerCount: number;
   serviceCount: number;
   gallery: GalleryPhoto[];
-};
+}
 
 function useCountUp(target: number, duration: number, active: boolean) {
   const [count, setCount] = useState(0);
   useEffect(() => {
-    if (!active) return;
+    if (!active) {return;}
     const start = performance.now();
     let rafId: number;
     const raf = (now: number) => {
@@ -23,7 +23,7 @@ function useCountUp(target: number, duration: number, active: boolean) {
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.round(eased * target));
-      if (progress < 1) rafId = requestAnimationFrame(raf);
+      if (progress < 1) {rafId = requestAnimationFrame(raf);}
     };
     rafId = requestAnimationFrame(raf);
     return () => cancelAnimationFrame(rafId);
@@ -57,17 +57,17 @@ export default function About({ happyCustomers, yearsExperience, trainerCount, s
     const diffY = dragStart.y - dragEnd.y;
 
     if (Math.abs(diffX) > 50) {
-      if (diffX > 0) nextSlide();
-      else prevSlide();
+      if (diffX > 0) {nextSlide();}
+      else {prevSlide();}
     } else if (Math.abs(diffY) > 50) {
-      if (diffY > 0) nextSlide();
-      else prevSlide();
+      if (diffY > 0) {nextSlide();}
+      else {prevSlide();}
     }
   };
 
   useEffect(() => {
     const el = statsRef.current;
-    if (!el) return;
+    if (!el) {return;}
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -114,7 +114,7 @@ export default function About({ happyCustomers, yearsExperience, trainerCount, s
             </a>
           </div>
           <div>
-            <div className="grid grid-cols-2 gap-6" ref={statsRef}>
+            <div ref={statsRef} className="grid grid-cols-2 gap-6">
               {stats.map((s, i) => {
                 const numMatch = s.value.match(/\d+/);
                 const num = numMatch ? parseInt(numMatch[0]) : 0;
@@ -146,8 +146,8 @@ export default function About({ happyCustomers, yearsExperience, trainerCount, s
                 {gallery.length > 1 && (
                   <div className="flex items-center justify-center gap-4 mt-4">
                     <button
-                      onClick={prevSlide}
                       className="px-3 py-2 text-white bg-zinc-800 hover:bg-zinc-700 rounded-full transition-colors"
+                      onClick={prevSlide}
                     >
                       &lt;
                     </button>
@@ -155,16 +155,16 @@ export default function About({ happyCustomers, yearsExperience, trainerCount, s
                       {gallery.map((_, idx) => (
                         <button
                           key={idx}
-                          onClick={() => setCurrentSlide(idx)}
                           className={`w-2 h-2 rounded-full transition-all ${
                             idx === currentSlide ? 'bg-amber-400 w-6' : 'bg-zinc-600 hover:bg-zinc-500'
                           }`}
+                          onClick={() => setCurrentSlide(idx)}
                         />
                       ))}
                     </div>
                     <button
-                      onClick={nextSlide}
                       className="px-3 py-2 text-white bg-zinc-800 hover:bg-zinc-700 rounded-full transition-colors"
+                      onClick={nextSlide}
                     >
                       &gt;
                     </button>

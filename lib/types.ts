@@ -1,4 +1,4 @@
-export type SiteInfo = {
+export interface SiteInfo {
   ig_handle: string;
   phone: string;
   email: string;
@@ -14,9 +14,9 @@ export type SiteInfo = {
   years_experience: number;
   latitude: number;
   longitude: number;
-};
+}
 
-export type Service = {
+export interface Service {
   id: number;
   icon: string;
   title: string;
@@ -24,26 +24,26 @@ export type Service = {
   title_en: string;
   description_en: string;
   order_index: number;
-};
+}
 
-export type Trainer = {
+export interface Trainer {
   id: number;
   name: string;
   ig_handle: string;
   photo_url: string;
   order_index: number;
-};
+}
 
-export type Playlist = {
+export interface Playlist {
   id: number;
   spotify_id: string;
   title: string;
   order_index: number;
-};
+}
 
-export type GalleryPhoto = {
+export interface GalleryPhoto {
   id: number;
   image_url: string;
   alt_text: string;
   order_index: number;
-};
+}

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/lib/site.config';
-import { getSiteInfo, getServices, getTrainers, getGallery } from '@/lib/data';
+import { getGallery, getServices, getSiteInfo, getTrainers } from '@/lib/data';
 import { routing } from '@/i18n.config';
 import About from "@/app/[locale]/(public)/about/_components/About";
 

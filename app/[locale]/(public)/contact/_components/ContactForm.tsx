@@ -36,7 +36,7 @@ export default function ContactForm() {
   };
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4">
+    <form ref={formRef} className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4" onSubmit={handleSubmit}>
       <h3 className="text-amber-400 font-bold text-lg mb-6">{t('formHeading')}</h3>
       <div>
         <label className="block text-zinc-400 text-sm mb-2">{t('nameLabel')}</label>

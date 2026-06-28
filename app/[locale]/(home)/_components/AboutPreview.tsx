@@ -1,19 +1,19 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { useTranslations, useLocale } from 'next-intl';
+import { useEffect, useRef, useState } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
 
-type Props = {
+interface Props {
   happyCustomers: number;
   yearsExperience: number;
   trainerCount: number;
   serviceCount: number;
-};
+}
 
 function useCountUp(target: number, duration: number, active: boolean) {
   const [count, setCount] = useState(0);
   useEffect(() => {
-    if (!active) return;
+    if (!active) {return;}
     const start = performance.now();
     let rafId: number;
     const raf = (now: number) => {
@@ -21,7 +21,7 @@ function useCountUp(target: number, duration: number, active: boolean) {
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       setCount(Math.round(eased * target));
-      if (progress < 1) rafId = requestAnimationFrame(raf);
+      if (progress < 1) {rafId = requestAnimationFrame(raf);}
     };
     rafId = requestAnimationFrame(raf);
     return () => cancelAnimationFrame(rafId);
@@ -37,7 +37,7 @@ export default function AboutPreview({ happyCustomers, yearsExperience, trainerC
 
   useEffect(() => {
     const el = statsRef.current;
-    if (!el) return;
+    if (!el) {return;}
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -80,7 +80,7 @@ export default function AboutPreview({ happyCustomers, yearsExperience, trainerC
             </a>
           </div>
           <div>
-            <div className="grid grid-cols-2 gap-6" ref={statsRef}>
+            <div ref={statsRef} className="grid grid-cols-2 gap-6">
               {stats.map((s) => {
                 const numMatch = s.value.match(/\d+/);
                 const num = numMatch ? parseInt(numMatch[0]) : 0;

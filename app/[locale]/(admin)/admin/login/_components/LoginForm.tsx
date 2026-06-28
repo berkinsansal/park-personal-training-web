@@ -36,9 +36,9 @@ export default function LoginForm({
           <div>
             <label className="block text-zinc-400 text-sm mb-2">{t('email')}</label>
             <input
+              required
               type="email"
               name="email"
-              required
               defaultValue={defaultEmail}
               className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm"
             />
@@ -47,9 +47,9 @@ export default function LoginForm({
           <div>
             <label className="block text-zinc-400 text-sm mb-2">{t('password')}</label>
             <input
+              required
               type="password"
               name="password"
-              required
               defaultValue={defaultPassword}
               className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm"
             />

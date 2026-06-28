@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from "@/lib/site.config";
-import { getSiteInfo, getServices, getTrainers, getPlaylists } from "@/lib/data";
+import { getPlaylists, getServices, getSiteInfo, getTrainers } from "@/lib/data";
 import { routing } from "@/i18n.config";
 import Hero from "@/app/[locale]/(home)/_components/Hero";
 import AboutPreview from "@/app/[locale]/(home)/_components/AboutPreview";

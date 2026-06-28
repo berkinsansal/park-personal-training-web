@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface Props {
   children: React.ReactNode;
@@ -14,7 +14,7 @@ export function AnimateIn({ children, delay = 0, className = '' }: Props) {
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el) {return;}
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

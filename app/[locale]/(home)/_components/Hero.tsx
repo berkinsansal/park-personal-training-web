@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Image from "next/image";
-import { useTranslations, useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { siteConfig } from "@/lib/site.config";
 
 export default function Hero() {
@@ -129,8 +129,8 @@ export default function Hero() {
 
       {/* Content layer */}
       <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-        <div className="flex justify-center mb-8" ref={logoRef} style={{ willChange: 'transform' }}>
-          <Image src="/logo.png" alt={`${siteConfig.siteName} Logo`} width={200} height={200} priority />
+        <div ref={logoRef} className="flex justify-center mb-8" style={{ willChange: 'transform' }}>
+          <Image priority src="/logo.png" alt={`${siteConfig.siteName} Logo`} width={200} height={200} />
         </div>
         <h1 className="text-5xl md:text-7xl font-black mb-6 leading-none tracking-tight text-amber-400">
           {alternatingText()}

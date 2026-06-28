@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter, usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import type { Locale } from '@/i18n.config';
 
@@ -10,7 +10,7 @@ export default function LocaleSwitcher() {
   const currentLocale = useLocale();
 
   const handleLocaleChange = (locale: Locale) => {
-    if (locale === currentLocale) return;
+    if (locale === currentLocale) {return;}
     const pathWithoutLocale = pathname.replace(/^\/(en|tr)/, '') || '/';
     const newPath = locale === 'en' ? `/en${pathWithoutLocale}` : pathWithoutLocale;
     router.push(newPath);
@@ -21,12 +21,12 @@ export default function LocaleSwitcher() {
       {(['tr', 'en'] as const).map((locale) => (
         <button
           key={locale}
-          onClick={() => handleLocaleChange(locale)}
           className={`px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 ${
             currentLocale === locale
               ? 'bg-amber-400 text-zinc-950 shadow-lg shadow-amber-400/30 scale-100'
               : 'text-zinc-400 hover:text-zinc-200 hover:cursor-pointer active:scale-95'
           }`}
+          onClick={() => handleLocaleChange(locale)}
         >
           {locale}
         </button>

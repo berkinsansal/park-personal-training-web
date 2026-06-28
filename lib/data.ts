@@ -1,6 +1,6 @@
 import { cacheLife, cacheTag } from 'next/cache';
 import { createAdminClient } from '@/lib/supabase-server';
-import type { SiteInfo, Service, Trainer, Playlist, GalleryPhoto } from '@/lib/types';
+import type { GalleryPhoto, Playlist, Service, SiteInfo, Trainer } from '@/lib/types';
 
 async function fetchWithRetry<T>(fn: () => Promise<T>, attempt = 0): Promise<T> {
   try {
@@ -23,7 +23,7 @@ export async function getSiteInfo(): Promise<SiteInfo> {
   const db = createAdminClient();
   return fetchWithRetry(async () => {
     const { data, error } = await db.from('site_info').select('*').single();
-    if (error) throw new Error(`site_info: ${error.message}`);
+    if (error) {throw new Error(`site_info: ${error.message}`);}
     return data as SiteInfo;
   });
 }
@@ -36,7 +36,7 @@ export async function getServices(): Promise<Service[]> {
   const db = createAdminClient();
   return fetchWithRetry(async () => {
     const { data, error } = await db.from('services').select('*').order('order_index');
-    if (error) throw new Error(`services: ${error.message}`);
+    if (error) {throw new Error(`services: ${error.message}`);}
     return data as Service[];
   });
 }
@@ -49,7 +49,7 @@ export async function getTrainers(): Promise<Trainer[]> {
   const db = createAdminClient();
   return fetchWithRetry(async () => {
     const { data, error } = await db.from('trainers').select('*').order('order_index');
-    if (error) throw new Error(`trainers: ${error.message}`);
+    if (error) {throw new Error(`trainers: ${error.message}`);}
     return data as Trainer[];
   });
 }
@@ -62,7 +62,7 @@ export async function getGallery(): Promise<GalleryPhoto[]> {
   const db = createAdminClient();
   return fetchWithRetry(async () => {
     const { data, error } = await db.from('gallery').select('*').order('order_index');
-    if (error) throw new Error(`gallery: ${error.message}`);
+    if (error) {throw new Error(`gallery: ${error.message}`);}
     return data as GalleryPhoto[];
   });
 }
@@ -75,7 +75,7 @@ export async function getPlaylists(): Promise<Playlist[]> {
   const db = createAdminClient();
   return fetchWithRetry(async () => {
     const { data, error } = await db.from('playlists').select('*').order('order_index');
-    if (error) throw new Error(`playlists: ${error.message}`);
+    if (error) {throw new Error(`playlists: ${error.message}`);}
     return data as Playlist[];
   });
 }

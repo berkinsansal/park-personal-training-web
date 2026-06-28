@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { addPlaylistAction, updatePlaylistAction, deletePlaylistAction, reorderPlaylistAction } from '../actions';
+import { addPlaylistAction, deletePlaylistAction, reorderPlaylistAction, updatePlaylistAction } from '../actions';
 import type { Playlist } from '@/lib/types';
 import { inputCls } from './styles';
 
@@ -20,7 +20,7 @@ export default function PlaylistsPanel({ playlists }: { playlists: Playlist[] })
     setPendingOp(`delete:${id}`);
     try {
       const res = await deletePlaylistAction(id);
-      if (res?.error) return flash(res.error);
+      if (res?.error) {return flash(res.error);}
       setList((prev) => prev.filter((p) => p.id !== id));
       flash(t('deleted'));
     } finally {
@@ -32,13 +32,13 @@ export default function PlaylistsPanel({ playlists }: { playlists: Playlist[] })
     setPendingOp(`${direction}:${id}`);
     try {
       const res = await reorderPlaylistAction(id, direction);
-      if (res?.error) return flash(res.error);
+      if (res?.error) {return flash(res.error);}
       setList((prev) => {
         const sorted = [...prev].sort((a, b) => a.order_index - b.order_index);
         const idx = sorted.findIndex((p) => p.id === id);
-        if (idx === -1) return prev;
+        if (idx === -1) {return prev;}
         const swapIdx = direction === 'up' ? idx - 1 : idx + 1;
-        if (swapIdx < 0 || swapIdx >= sorted.length) return prev;
+        if (swapIdx < 0 || swapIdx >= sorted.length) {return prev;}
         const newIdx = sorted[idx].order_index;
         sorted[idx].order_index = sorted[swapIdx].order_index;
         sorted[swapIdx].order_index = newIdx;
@@ -56,9 +56,9 @@ export default function PlaylistsPanel({ playlists }: { playlists: Playlist[] })
     setPendingOp(`update:${id}`);
     try {
       const res = await updatePlaylistAction(fd);
-      if (res?.error) return flash(res.error);
+      if (res?.error) {return flash(res.error);}
       setList((prev) => prev.map((p) => {
-        if (p.id !== id) return p;
+        if (p.id !== id) {return p;}
         return {
           id,
           spotify_id: fd.get('spotify_id') as string,
@@ -79,7 +79,7 @@ export default function PlaylistsPanel({ playlists }: { playlists: Playlist[] })
     setPendingOp('add');
     try {
       const res = await addPlaylistAction(fd);
-      if (res?.error) return flash(res.error);
+      if (res?.error) {return flash(res.error);}
       if (res.data) {
         setList((prev) => [...prev, res.data].sort((a, b) => a.order_index - b.order_index));
       }
@@ -96,8 +96,8 @@ export default function PlaylistsPanel({ playlists }: { playlists: Playlist[] })
       <div className="flex items-center justify-between mb-4 pb-2 border-b border-zinc-800">
         <h2 className="text-white font-bold text-lg">{t('heading')}</h2>
         <button
-          onClick={() => setAdding((v) => !v)}
           className="text-sm text-amber-400 hover:text-amber-300 transition-colors"
+          onClick={() => setAdding((v) => !v)}
         >
           {adding ? t('cancel') : t('add')}
         </button>
@@ -106,7 +106,7 @@ export default function PlaylistsPanel({ playlists }: { playlists: Playlist[] })
       {feedback && <p className="text-amber-400 text-sm mb-3">{feedback}</p>}
 
       {adding && (
-        <PlaylistForm t={t} onSubmit={handleAdd} onCancel={() => setAdding(false)} label={t('add').replace('+ ', '')} pendingOp={pendingOp} />
+        <PlaylistForm t={t} label={t('add').replace('+ ', '')} pendingOp={pendingOp} onSubmit={handleAdd} onCancel={() => setAdding(false)} />
       )}
 
       <div className="flex flex-col gap-3">
@@ -116,10 +116,10 @@ export default function PlaylistsPanel({ playlists }: { playlists: Playlist[] })
               key={playlist.id}
               t={t}
               defaults={playlist}
-              onSubmit={handleUpdate}
-              onCancel={() => setEditingId(null)}
               label={t('update')}
               pendingOp={pendingOp}
+              onSubmit={handleUpdate}
+              onCancel={() => setEditingId(null)}
             />
           ) : (
             <div key={playlist.id} className={`flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-xl p-4 transition-opacity ${pendingOp === `delete:${playlist.id}` ? 'opacity-50 pointer-events-none' : ''}`}>
@@ -132,12 +132,12 @@ export default function PlaylistsPanel({ playlists }: { playlists: Playlist[] })
               </div>
               <div className="flex flex-col gap-1 shrink-0">
                 <div className="flex gap-2">
-                  <button onClick={() => handleReorder(playlist.id, 'up')} disabled={pendingOp !== null || playlist.order_index === Math.min(...list.map(p => p.order_index))} className={`text-xs transition-colors ${pendingOp === `up:${playlist.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move up">↑</button>
-                  <button onClick={() => handleReorder(playlist.id, 'down')} disabled={pendingOp !== null || playlist.order_index === Math.max(...list.map(p => p.order_index))} className={`text-xs transition-colors ${pendingOp === `down:${playlist.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move down">↓</button>
+                  <button disabled={pendingOp !== null || playlist.order_index === Math.min(...list.map(p => p.order_index))} className={`text-xs transition-colors ${pendingOp === `up:${playlist.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move up" onClick={() => handleReorder(playlist.id, 'up')}>↑</button>
+                  <button disabled={pendingOp !== null || playlist.order_index === Math.max(...list.map(p => p.order_index))} className={`text-xs transition-colors ${pendingOp === `down:${playlist.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`} title="Move down" onClick={() => handleReorder(playlist.id, 'down')}>↓</button>
                 </div>
                 <div className="flex gap-2">
-                  <button onClick={() => setEditingId(playlist.id)} disabled={pendingOp !== null} className="text-xs text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">{t('edit')}</button>
-                  <button onClick={() => handleDelete(playlist.id)} disabled={pendingOp !== null} className="text-xs text-zinc-400 hover:text-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors">{t('delete')}</button>
+                  <button disabled={pendingOp !== null} className="text-xs text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors" onClick={() => setEditingId(playlist.id)}>{t('edit')}</button>
+                  <button disabled={pendingOp !== null} className="text-xs text-zinc-400 hover:text-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors" onClick={() => handleDelete(playlist.id)}>{t('delete')}</button>
                 </div>
               </div>
             </div>
@@ -158,20 +158,20 @@ function PlaylistForm({ t, defaults, onSubmit, onCancel, label, pendingOp }: {
 }) {
   const isSubmitting = pendingOp === 'add' || (defaults && pendingOp === `update:${defaults.id}`);
   return (
-    <form onSubmit={onSubmit} className="bg-zinc-900 border border-amber-400/30 rounded-xl p-4 flex flex-col gap-3 mb-3">
+    <form className="bg-zinc-900 border border-amber-400/30 rounded-xl p-4 flex flex-col gap-3 mb-3" onSubmit={onSubmit}>
       {defaults && <input type="hidden" name="id" value={defaults.id} />}
       {defaults && <input type="hidden" name="order_index" value={defaults.order_index} />}
       <div>
         <label className="block text-zinc-400 text-xs mb-1">{t('title')}</label>
-        <input name="title" defaultValue={defaults?.title} required disabled={pendingOp !== null} className={inputCls} placeholder="e.g. Morning Workout" />
+        <input required name="title" defaultValue={defaults?.title} disabled={pendingOp !== null} className={inputCls} placeholder="e.g. Morning Workout" />
       </div>
       <div>
         <label className="block text-zinc-400 text-xs mb-1">{t('spotifyId')}</label>
-        <input name="spotify_id" defaultValue={defaults?.spotify_id} required disabled={pendingOp !== null} className={inputCls} placeholder="e.g. 37i9dQZF1DX8FwnYE6PRvL" />
+        <input required name="spotify_id" defaultValue={defaults?.spotify_id} disabled={pendingOp !== null} className={inputCls} placeholder="e.g. 37i9dQZF1DX8FwnYE6PRvL" />
       </div>
       <div className="flex gap-2">
         <button type="submit" disabled={pendingOp !== null} className="px-4 py-2 bg-amber-400 text-zinc-950 font-bold rounded-lg text-xs hover:bg-amber-300 disabled:bg-zinc-600 disabled:cursor-not-allowed transition-colors">{isSubmitting ? '...' : label}</button>
-        <button type="button" onClick={onCancel} disabled={pendingOp !== null} className="px-4 py-2 text-zinc-400 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed text-xs transition-colors">{t('cancel')}</button>
+        <button type="button" disabled={pendingOp !== null} className="px-4 py-2 text-zinc-400 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed text-xs transition-colors" onClick={onCancel}>{t('cancel')}</button>
       </div>
     </form>
   );

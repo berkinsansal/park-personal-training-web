@@ -9,7 +9,7 @@ export default function SiteInfoForm({ data }: { data: SiteInfo | null }) {
   const t = useTranslations('admin.siteInfo');
   const [state, action, pending] = useActionState(updateSiteInfoAction, null);
 
-  if (!data) return null;
+  if (!data) {return null;}
 
   return (
     <section>
