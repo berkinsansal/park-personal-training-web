@@ -9,21 +9,28 @@ export default function LocaleSwitcher() {
   const pathname = usePathname();
   const currentLocale = useLocale();
 
-  const handleSwitch = () => {
-    const newLocale: Locale = currentLocale === 'tr' ? 'en' : 'tr';
+  const handleLocaleChange = (locale: Locale) => {
+    if (locale === currentLocale) return;
     const pathWithoutLocale = pathname.replace(/^\/(en|tr)/, '') || '/';
-    const newPath = newLocale === 'en' ? `/en${pathWithoutLocale}` : pathWithoutLocale;
+    const newPath = locale === 'en' ? `/en${pathWithoutLocale}` : pathWithoutLocale;
     router.push(newPath);
   };
 
   return (
-    <button
-      onClick={handleSwitch}
-      className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-zinc-400 hover:text-white transition-colors"
-    >
-      <span className={currentLocale === 'tr' ? 'text-amber-400' : 'text-zinc-500'}>TR</span>
-      <span className="text-zinc-600">|</span>
-      <span className={currentLocale === 'en' ? 'text-amber-400' : 'text-zinc-500'}>EN</span>
-    </button>
+    <div className="inline-flex items-center gap-0.5 bg-zinc-900/60 border border-zinc-700/50 rounded-full p-0.5 backdrop-blur-sm hover:border-zinc-600/80 transition-colors duration-200">
+      {(['tr', 'en'] as const).map((locale) => (
+        <button
+          key={locale}
+          onClick={() => handleLocaleChange(locale)}
+          className={`px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 ${
+            currentLocale === locale
+              ? 'bg-amber-400 text-zinc-950 shadow-lg shadow-amber-400/30 scale-100'
+              : 'text-zinc-400 hover:text-zinc-200 hover:cursor-pointer active:scale-95'
+          }`}
+        >
+          {locale}
+        </button>
+      ))}
+    </div>
   );
 }
