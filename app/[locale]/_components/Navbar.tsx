@@ -137,7 +137,9 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <LocaleSwitcher />
+          <div className="flex justify-start">
+            <LocaleSwitcher />
+          </div>
         </div>
       )}
     </nav>
