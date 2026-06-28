@@ -7,7 +7,6 @@ import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
 export default function ServicesPreview({ services }: { services: Service[] }) {
   const locale = useLocale();
   const t = useTranslations('services');
-  const previewServices = services.slice(0, 3);
 
   return (
     <section className="py-24 bg-zinc-950">
@@ -25,19 +24,14 @@ export default function ServicesPreview({ services }: { services: Service[] }) {
             </p>
           </div>
         </AnimateIn>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {previewServices.map((s, i) => (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {services.map((s, i) => (
             <AnimateIn key={s.id} delay={i * 80}>
-              <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800 hover:border-amber-400/40 hover:-translate-y-1 transition-all duration-300 group">
+              <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800 hover:border-amber-400/40 hover:-translate-y-1 transition-all duration-300 group text-center">
                 <div className="text-4xl mb-4">{s.icon}</div>
-                <h3 className="text-white font-bold text-lg mb-3 group-hover:text-amber-400 transition-colors">
+                <h3 className="text-white font-bold text-lg group-hover:text-amber-400 transition-colors">
                   {locale === 'en' ? s.title_en || s.title : s.title}
                 </h3>
-                <p className="text-zinc-400 text-sm leading-relaxed">
-                  {locale === 'en'
-                    ? s.description_en || s.description
-                    : s.description}
-                </p>
               </div>
             </AnimateIn>
           ))}
@@ -47,7 +41,7 @@ export default function ServicesPreview({ services }: { services: Service[] }) {
             href={`/${locale}/services`}
             className="inline-block px-8 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
           >
-            {t('viewAll')}
+            {t('details')}
           </a>
         </div>
       </div>

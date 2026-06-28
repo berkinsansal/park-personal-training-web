@@ -17,7 +17,6 @@ function getInitials(name: string) {
 export default function TrainersPreview({ trainers }: { trainers: Trainer[] }) {
   const t = useTranslations('trainers');
   const locale = useLocale();
-  const previewTrainers = trainers.slice(0, 3);
 
   return (
     <section className="py-24 bg-zinc-900">
@@ -36,7 +35,7 @@ export default function TrainersPreview({ trainers }: { trainers: Trainer[] }) {
           </div>
         </AnimateIn>
         <div className="flex flex-wrap justify-center gap-6">
-          {previewTrainers.map((trainer, i) => (
+          {trainers.map((trainer, i) => (
             <AnimateIn key={trainer.id} delay={i * 100}>
               <div className="bg-zinc-800 rounded-2xl p-8 border border-zinc-700 hover:border-amber-400/40 transition-all duration-300 text-center group w-72">
                 {trainer.photo_url ? (
@@ -72,7 +71,7 @@ export default function TrainersPreview({ trainers }: { trainers: Trainer[] }) {
             href={`/${locale}/trainers`}
             className="inline-block px-8 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
           >
-            {t('viewAll')}
+            {t('details')}
           </a>
         </div>
       </div>

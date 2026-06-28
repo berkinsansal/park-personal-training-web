@@ -43,13 +43,13 @@
     "label": "Hizmetlerimiz",
     "heading": "Ne Sunuyoruz?",
     "description": "Her seviyeye ve hedefe uygun programlarla seni en iyi şekilde destekliyoruz.",
-    "viewAll": "Tüm Hizmetler"
+    "details": "Detaya Git"
   },
   "trainers": {
     "label": "Ekibimiz",
     "heading": "Uzman Eğitmenlerimiz",
     "description": "Sertifikalı ve deneyimli eğitmenlerimiz, seni hedeflerine ulaştırmak için burada.",
-    "viewAll": "Ekibi Tanı"
+    "details": "Ekibi Tanı"
   },
   "contact": {
     "label": "İletişim",

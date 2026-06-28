@@ -43,13 +43,13 @@
     "label": "Our Services",
     "heading": "What Do We Offer?",
     "description": "We support you in the best way possible with programs suitable for every level and goal.",
-    "viewAll": "View All Services"
+    "details": "View Details"
   },
   "trainers": {
     "label": "Our Team",
     "heading": "Expert Trainers",
     "description": "Our certified and experienced trainers are here to help you reach your goals.",
-    "viewAll": "Meet The Team"
+    "details": "Meet The Team"
   },
   "contact": {
     "label": "Contact",
