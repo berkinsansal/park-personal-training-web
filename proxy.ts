@@ -19,7 +19,7 @@ export async function proxy(request: NextRequest) {
     return intlResponse;
   }
 
-  const response = NextResponse.next();
+  const response = intlResponse;
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
