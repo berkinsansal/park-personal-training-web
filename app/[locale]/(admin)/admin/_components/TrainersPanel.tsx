@@ -48,7 +48,7 @@ export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
       }
       setList((prev) => {
         const sorted = [...prev].sort((a, b) => a.order_index - b.order_index);
-        const idx = sorted.findIndex((t) => t.id === id);
+        const idx = sorted.findIndex((tr) => tr.id === id);
         if (idx === -1) {
           return prev;
         }
@@ -195,7 +195,7 @@ export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
                     disabled={
                       pendingOp !== null ||
                       trainer.order_index ===
-                        Math.min(...list.map((t) => t.order_index))
+                        Math.min(...list.map((tr) => tr.order_index))
                     }
                     className={`text-xs transition-colors ${pendingOp === `up:${trainer.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
                     title="Move up"
@@ -208,7 +208,7 @@ export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
                     disabled={
                       pendingOp !== null ||
                       trainer.order_index ===
-                        Math.max(...list.map((t) => t.order_index))
+                        Math.max(...list.map((tr) => tr.order_index))
                     }
                     className={`text-xs transition-colors ${pendingOp === `down:${trainer.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
                     title="Move down"
