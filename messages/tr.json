@@ -74,20 +74,19 @@
   "musicPreview": {
     "label": "Müzik",
     "heading": "Müziklerimizi Keşfet",
-    "description": "Spor salonumuzun müzikleri eşliğinde antrenman yapın.",
+    "description": "Spor salonumuzun müzikleri eşliğinde antrenman yap.",
     "cta": "Çalma Listelerini Keşfet"
   },
   "contactPreview": {
     "label": "İletişim",
     "heading": "Başlamaya Hazır mısın?",
-    "description": "Fitness hedeflerinizi tartışmak için ekibimizle iletişime geçin.",
+    "description": "Fitness hedeflerini tartışmak için ekibimizle iletişime geç.",
     "cta": "Bize Ulaş"
   },
   "playlists": {
     "label": "Müzik",
     "heading": "Çalma Listeleri",
-    "description": "Spor salonumuzun müzikleri eşliğinde antrenman yapın. Enerjinizi yüksek tutmak, motivasyonunuzu artırmak ve her antrenmanı daha hareketli hale getirmek için salonumuzda çalan Spotify çalma listelerini keşfedin.",
-    "explorePlaylists": "Çalma Listelerini Keşfet"
+    "description": "Spor salonumuzun müzikleri eşliğinde antrenman yap. Enerjini yüksek tutmak, motivasyonunu artırmak ve her antrenmanı daha hareketli hale getirmek için salonumuzda çalan Spotify çalma listelerini keşfet."
   },
   "footer": {
     "copyright": "Tüm hakları saklıdır."
