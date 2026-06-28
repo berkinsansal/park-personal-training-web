@@ -7,7 +7,13 @@ import LocaleSwitcher from '@/app/_components/LocaleSwitcher';
 import Link from 'next/link';
 import { siteConfig } from '@/lib/site.config';
 
-export default function LoginForm() {
+export default function LoginForm({
+  defaultEmail,
+  defaultPassword,
+}: {
+  defaultEmail?: string;
+  defaultPassword?: string;
+}) {
   const locale = useLocale() as 'tr' | 'en';
   const t = useTranslations('admin.login');
   const [state, action, pending] = useActionState(loginAction, null);
@@ -33,6 +39,7 @@ export default function LoginForm() {
               type="email"
               name="email"
               required
+              defaultValue={defaultEmail}
               className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm"
             />
           </div>
@@ -43,6 +50,7 @@ export default function LoginForm() {
               type="password"
               name="password"
               required
+              defaultValue={defaultPassword}
               className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm"
             />
           </div>
