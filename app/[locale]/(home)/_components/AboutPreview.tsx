@@ -76,7 +76,7 @@ export default function AboutPreview({ happyCustomers, yearsExperience, trainerC
               href={`/${locale}/about`}
               className="mt-8 inline-block px-6 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
             >
-              Learn More
+              {t('learnMore')}
             </a>
           </div>
           <div>

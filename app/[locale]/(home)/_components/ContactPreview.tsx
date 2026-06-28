@@ -5,7 +5,7 @@ import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
 
 export default function ContactPreview() {
   const locale = useLocale();
-  const t = useTranslations('contactPreview');
+  const t = useTranslations('contact');
 
   return (
     <section className="py-16 bg-zinc-900">
@@ -15,16 +15,16 @@ export default function ContactPreview() {
             {t('label')}
           </span>
           <h2 className="mt-3 text-3xl md:text-4xl font-black text-white mb-6">
-            {t('heading')}
+            {t('previewHeading')}
           </h2>
           <p className="text-zinc-400 text-lg mb-8 max-w-2xl mx-auto">
-            {t('description')}
+            {t('previewDescription')}
           </p>
           <a
             href={`/${locale}/contact`}
             className="inline-block px-8 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
           >
-            {t('cta')}
+            {t('contactUs')}
           </a>
         </AnimateIn>
       </div>

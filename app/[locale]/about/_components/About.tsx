@@ -110,7 +110,7 @@ export default function About({ happyCustomers, yearsExperience, trainerCount, s
               href={`/${locale}/contact`}
               className="mt-8 inline-block px-6 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
             >
-              {t('cta')}
+              {t('contactUs')}
             </a>
           </div>
           <div>

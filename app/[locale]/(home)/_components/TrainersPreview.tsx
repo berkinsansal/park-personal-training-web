@@ -64,7 +64,7 @@ export default function TrainersPreview({ trainers }: { trainers: Trainer[] }) {
             href={`/${locale}/trainers`}
             className="inline-block px-8 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
           >
-            Meet The Team
+            {t('viewAll')}
           </a>
         </div>
       </div>

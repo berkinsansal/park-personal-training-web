@@ -22,8 +22,8 @@
   },
   "hero": {
     "subtitle": "The right place to reach your goals. Become the best version of yourself with personalized programs led by expert trainers.",
-    "cta": "Get Started",
-    "ctaSecondary": "View Services"
+    "getStarted": "Get Started",
+    "viewServices": "View Services"
   },
   "about": {
     "label": "About Us",
@@ -32,11 +32,11 @@
     "heading3": "Just for You",
     "p1": "We know every individual is different. Our expert trainers analyze your goals, lifestyle, and physical condition to create a workout and nutrition plan that is completely tailored to you.",
     "p2": "From small group classes to one-on-one training sessions, we offer a program for everyone. Professional equipment and a welcoming atmosphere await you at our studio.",
-    "cta": "Contact Us",
     "statHappyCustomers": "Happy Members",
     "statYearsExperience": "Years Experience",
     "statTrainers": "Expert Trainers",
     "statServices": "Program Types",
+    "contactUs": "Contact Us",
     "learnMore": "Learn More"
   },
   "services": {
@@ -69,24 +69,17 @@
     "successMessage": "Your message was sent! We'll get back to you soon.",
     "errorMessage": "Something went wrong. Please try again.",
     "validationError": "Please fill in all required fields.",
-    "sendError": "Unable to send message. Please try again later."
-  },
-  "musicPreview": {
-    "label": "Music",
-    "heading": "Discover Our Music",
-    "description": "Train to the sound of our gym with our curated Spotify playlists.",
-    "cta": "Explore Playlists"
-  },
-  "contactPreview": {
-    "label": "Contact",
-    "heading": "Ready to Start Your Journey?",
-    "description": "Get in touch with our team to discuss your fitness goals.",
-    "cta": "Contact Us"
+    "sendError": "Unable to send message. Please try again later.",
+    "previewHeading": "Ready to Start Your Journey?",
+    "previewDescription": "Get in touch with our team to discuss your fitness goals.",
+    "contactUs": "Contact Us"
   },
   "playlists": {
     "label": "Music",
     "heading": "Playlists",
-    "description": "Train to the sound of our gym. Discover the Spotify playlists we play on the floor to keep energy high, motivation strong, and every workout moving."
+    "p1": "Train to the sound of our gym.",
+    "p2": "Discover the Spotify playlists we play on the floor to keep energy high, motivation strong, and every workout moving.",
+    "explore": "Explore"
   },
   "footer": {
     "copyright": "All rights reserved."

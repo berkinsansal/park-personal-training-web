@@ -22,8 +22,8 @@
   },
   "hero": {
     "subtitle": "Hedeflerine ulaşmak için doğru yer. Uzman eğitmenlerimizle sana özel programlarla en iyi versiyonun ol.",
-    "cta": "Hemen Başvur",
-    "ctaSecondary": "Hizmetleri Gör"
+    "getStarted": "Hemen Başvur",
+    "viewServices": "Hizmetleri Gör"
   },
   "about": {
     "label": "Hakkımızda",
@@ -32,11 +32,11 @@
     "heading3": "Çalışıyoruz",
     "p1": "Her bireyin farklı olduğunu biliyoruz. Uzman eğitmenlerimiz, senin hedeflerini, yaşam tarzını ve fiziksel durumunu analiz ederek tamamen sana özel bir antrenman ve beslenme planı oluşturuyor.",
     "p2": "Küçük grup derslerinden bire bir antrenmanlarımıza kadar herkese uygun bir program sunuyoruz. Stüdyomuzda profesyonel ekipmanlar ve sıcak bir atmosfer seni bekliyor.",
-    "cta": "Bize Ulaş",
     "statHappyCustomers": "Mutlu Üye",
     "statYearsExperience": "Yıl Deneyim",
     "statTrainers": "Uzman Eğitmen",
     "statServices": "Program Çeşidi",
+    "contactUs": "Bize Ulaş",
     "learnMore": "Daha Fazla"
   },
   "services": {
@@ -69,24 +69,17 @@
     "successMessage": "Mesajın gönderildi! En kısa sürede dönüş yapacağız.",
     "errorMessage": "Bir hata oluştu. Lütfen tekrar deneyin.",
     "validationError": "Lütfen tüm gerekli alanları doldurun.",
-    "sendError": "Mesaj gönderilemedi. Lütfen daha sonra tekrar deneyiniz."
-  },
-  "musicPreview": {
-    "label": "Müzik",
-    "heading": "Müziklerimizi Keşfet",
-    "description": "Spor salonumuzun müzikleri eşliğinde antrenman yap.",
-    "cta": "Çalma Listelerini Keşfet"
-  },
-  "contactPreview": {
-    "label": "İletişim",
-    "heading": "Başlamaya Hazır mısın?",
-    "description": "Fitness hedeflerini tartışmak için ekibimizle iletişime geç.",
-    "cta": "Bize Ulaş"
+    "sendError": "Mesaj gönderilemedi. Lütfen daha sonra tekrar deneyiniz.",
+    "previewHeading": "Başlamaya Hazır mısın?",
+    "previewDescription": "Fitness hedeflerini tartışmak için ekibimizle iletişime geç.",
+    "contactUs": "Bize Ulaş"
   },
   "playlists": {
     "label": "Müzik",
     "heading": "Çalma Listeleri",
-    "description": "Spor salonumuzun müzikleri eşliğinde antrenman yap. Enerjini yüksek tutmak, motivasyonunu artırmak ve her antrenmanı daha hareketli hale getirmek için salonumuzda çalan Spotify çalma listelerini keşfet."
+    "p1": "Spor salonumuzun müzikleri eşliğinde antrenman yap.",
+    "p2": "Enerjini yüksek tutmak, motivasyonunu artırmak ve her antrenmanı daha hareketli hale getirmek için salonumuzda çalan Spotify çalma listelerini keşfet.",
+    "explore": "Keşfet"
   },
   "footer": {
     "copyright": "Tüm hakları saklıdır."

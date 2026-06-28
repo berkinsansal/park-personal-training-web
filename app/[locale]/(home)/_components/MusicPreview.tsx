@@ -6,7 +6,7 @@ import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
 
 export default function MusicPreview({ playlists }: { playlists: Playlist[] }) {
   const locale = useLocale();
-  const t = useTranslations('musicPreview');
+  const t = useTranslations('playlists');
 
   return (
     <section className="py-16 bg-zinc-950">
@@ -19,13 +19,13 @@ export default function MusicPreview({ playlists }: { playlists: Playlist[] }) {
             {t('heading')}
           </h2>
           <p className="text-zinc-400 text-lg mb-8">
-            {t('description')}
+            {t('p1')}
           </p>
           <a
             href={`/${locale}/music`}
             className="inline-block px-8 py-3 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600 transition-colors text-sm uppercase tracking-wider"
           >
-            {t('cta')}
+            {t('explore')}
           </a>
         </AnimateIn>
       </div>

@@ -23,7 +23,7 @@ export default function Playlists({ playlists }: { playlists: Playlist[] }) {
               {t('heading')}
             </h2>
             <p className="mt-4 text-zinc-400 text-lg max-w-2xl mx-auto">
-              {t('description')}
+              {t('p1')} {t('p2')}
             </p>
           </div>
         </AnimateIn>
