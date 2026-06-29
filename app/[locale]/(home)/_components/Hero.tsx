@@ -61,7 +61,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-16 pb-16 sm:pb-10"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-24 pb-16"
     >
       {/* Base dark gradient background */}
       <div className="absolute inset-0 bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950" />

@@ -26,7 +26,7 @@ export default function Playlists({ playlists }: { playlists: Playlist[] }) {
               {playlists.map((playlist) => (
                 <button
                   key={playlist.id}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                  className={`px-2 py-2 rounded-lg font-medium transition-all ${
                     selectedId === playlist.id
                       ? 'bg-amber-400 text-black'
                       : 'bg-zinc-700 text-white hover:bg-zinc-600'
