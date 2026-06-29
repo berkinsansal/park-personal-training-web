@@ -42,7 +42,7 @@ export default function ContactPhoneDialog({
             />
           </svg>
         </div>
-        <div>
+        <div className="text-left">
           <div className="text-white font-bold group-hover:text-amber-400 transition-colors">
             {t('phone')}
           </div>

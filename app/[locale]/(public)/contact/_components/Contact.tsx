@@ -73,29 +73,6 @@ export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
             <ContactPhoneDialog phone={phone} />
 
             <a
-              href={`https://wa.me/${phone.replace(/\D/g, '')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group"
-            >
-              <div className="w-12 h-12 rounded-xl bg-green-600 flex items-center justify-center flex-shrink-0">
-                <svg
-                  className="w-6 h-6 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.272-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-9.746 9.798c0 2.558.685 5.045 1.986 7.231L.957 23.08l7.52-2.475a9.874 9.874 0 004.768 1.226h.005c5.436 0 9.87-4.434 9.87-9.87 0-2.633-.997-5.111-2.813-6.984a9.858 9.858 0 00-7.038-2.908zM12.14 0C5.581 0 .294 5.287.294 11.85c0 2.096.547 4.142 1.588 5.945L0 24l6.305-2.08c1.856 1.113 4.01 1.7 6.216 1.7 6.56 0 11.897-5.287 11.897-11.85 0-3.172-1.264-6.165-3.56-8.44C18.275 1.266 15.374 0 12.14 0z" />
-                </svg>
-              </div>
-              <div>
-                <div className="text-white font-bold group-hover:text-amber-400 transition-colors">
-                  WhatsApp
-                </div>
-                <div className="text-zinc-400 text-sm">{phone}</div>
-              </div>
-            </a>
-
-            <a
               href={`mailto:${email}`}
               className="flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group"
             >
