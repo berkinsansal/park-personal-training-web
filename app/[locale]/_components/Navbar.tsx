@@ -61,7 +61,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur bg-zinc-950/98 border-b border-amber-400/20 shadow-lg shadow-amber-400/5">
+    <nav className="sticky top-0 left-0 right-0 z-50 backdrop-blur bg-zinc-950 border-b border-amber-400/20 shadow-lg shadow-amber-400/5">
       <div className="mx-auto px-6 flex items-center justify-between h-16">
         <Link href={`/${locale}`} className="flex items-center gap-3">
           <Image

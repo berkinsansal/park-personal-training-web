@@ -8,7 +8,7 @@ export default function MusicPreview() {
   const t = useTranslations('playlists');
 
   return (
-    <section className="py-16 bg-zinc-950">
+    <section className="py-16 bg-green-950">
       <div className="max-w-4xl mx-auto px-6 text-center">
         <AnimateIn>
           <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">
@@ -20,7 +20,7 @@ export default function MusicPreview() {
           <p className="text-zinc-400 text-lg mb-8">{t('p1')}</p>
           <a
             href={`/${locale}/music`}
-            className="inline-block px-8 py-3 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600 transition-colors text-sm uppercase tracking-wider"
+            className="inline-block px-8 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
           >
             {t('explore')}
           </a>

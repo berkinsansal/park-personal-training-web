@@ -14,7 +14,7 @@ export default async function Footer({ igHandle }: { igHandle: string }) {
   const currentYear = await getCurrentYear();
 
   return (
-    <footer className="bg-zinc-900 border-t border-zinc-800 py-8">
+    <footer className="bg-amber-950 border-t border-zinc-800 py-2">
       <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <Image
@@ -23,7 +23,7 @@ export default async function Footer({ igHandle }: { igHandle: string }) {
             width={48}
             height={48}
           />
-          <span className="text-amber-400 font-black text-xl tracking-wide">
+          <span className="text-white font-black text-xl tracking-wide">
             {siteConfig.siteName}
           </span>
         </div>

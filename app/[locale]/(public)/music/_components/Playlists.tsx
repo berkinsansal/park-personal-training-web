@@ -12,7 +12,7 @@ export default function Playlists({ playlists }: { playlists: Playlist[] }) {
   const selectedPlaylist = playlists.find((p) => p.id === selectedId);
 
   return (
-    <section id="music" className="py-16 bg-green-500/20">
+    <section id="music" className="py-16 bg-green-950">
       <div className="max-w-7xl mx-auto px-6">
         <AnimateIn>
           <div className="text-center mb-12">

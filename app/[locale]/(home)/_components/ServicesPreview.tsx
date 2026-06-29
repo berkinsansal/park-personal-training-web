@@ -11,7 +11,7 @@ export default function ServicesPreview({ services }: { services: Service[] }) {
   const isReversed = (index: number) => index % 2 === 1;
 
   return (
-    <section className="py-24 bg-zinc-950">
+    <section className="py-16 bg-zinc-900">
       <div className="max-w-6xl mx-auto px-6">
         <AnimateIn>
           <div className="text-center mb-16">
@@ -30,11 +30,11 @@ export default function ServicesPreview({ services }: { services: Service[] }) {
           {services.map((s, i) => (
             <AnimateIn key={s.id} delay={i * 80}>
               <div
-                className={`flex items-center gap-4 p-2 bg-zinc-900/50 border border-zinc-800 rounded-xl hover:border-amber-400/40 hover:bg-zinc-900 transition-all duration-300 group ${
+                className={`flex items-center gap-4 p-2 bg-zinc-950 border border-zinc-800 rounded-xl hover:border-amber-400/40 hover:p-4 transition-all duration-300 group ${
                   isReversed(i) ? 'flex-row-reverse ml-12' : 'mr-12'
                 }`}
               >
-                <div className="flex-shrink-0 text-4xl group-hover:scale-110 transition-transform duration-300">
+                <div className="flex-shrink-0 text-4xl group-hover:scale-120 transition-transform duration-300">
                   {s.icon}
                 </div>
                 <h3 className="text-lg font-bold text-white group-hover:text-amber-400 transition-colors duration-300">

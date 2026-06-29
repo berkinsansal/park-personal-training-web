@@ -36,7 +36,7 @@ export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
     : '';
 
   return (
-    <section id="contact" className="py-24 bg-zinc-950">
+    <section id="contact" className="py-16 bg-zinc-950">
       <div className="max-w-4xl mx-auto px-6">
         <AnimateIn>
           <div className="text-center mb-16">

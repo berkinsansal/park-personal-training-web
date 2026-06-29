@@ -8,7 +8,7 @@ export default function Services({ services }: { services: Service[] }) {
   const locale = useLocale();
   const t = useTranslations('services');
   return (
-    <section id="services" className="py-24 bg-zinc-950">
+    <section id="services" className="py-16 bg-zinc-950">
       <div className="max-w-6xl mx-auto px-6">
         <AnimateIn>
           <div className="text-center mb-16">

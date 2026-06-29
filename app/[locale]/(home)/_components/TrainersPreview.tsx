@@ -19,7 +19,7 @@ export default function TrainersPreview({ trainers }: { trainers: Trainer[] }) {
   const locale = useLocale();
 
   return (
-    <section className="py-24 bg-zinc-900">
+    <section className="py-16 bg-zinc-950">
       <div className="max-w-6xl mx-auto px-6">
         <AnimateIn>
           <div className="text-center mb-16">
@@ -39,7 +39,7 @@ export default function TrainersPreview({ trainers }: { trainers: Trainer[] }) {
             <AnimateIn key={trainer.id} delay={i * 100}>
               <div className="bg-zinc-800 rounded-2xl p-8 border border-zinc-700 hover:border-amber-400/40 transition-all duration-300 text-center group w-72">
                 {trainer.photo_url ? (
-                  <div className="relative w-24 h-24 rounded-full overflow-hidden mx-auto mb-5 group-hover:scale-105 transition-transform bg-amber-400/10 border border-amber-400/30">
+                  <div className="relative w-24 h-24 rounded-full overflow-hidden mx-auto mb-5 group-hover:scale-120 transition-transform bg-amber-400/10 border border-amber-400/30">
                     <Image
                       fill
                       sizes="100vw"
@@ -49,7 +49,7 @@ export default function TrainersPreview({ trainers }: { trainers: Trainer[] }) {
                     />
                   </div>
                 ) : (
-                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center mx-auto mb-5 text-3xl font-black text-zinc-950 group-hover:scale-105 transition-transform">
+                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center mx-auto mb-5 text-3xl font-black text-zinc-950 group-hover:scale-120 transition-transform">
                     {getInitials(trainer.name)}
                   </div>
                 )}
