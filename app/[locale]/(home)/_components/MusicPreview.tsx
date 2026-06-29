@@ -13,7 +13,6 @@ export default function MusicPreview() {
       heading={t('heading')}
       description={t('p1')}
       sectionClassName="bg-green-950"
-      containerClassName="max-w-4xl"
     >
       <div className="text-center">
         <a

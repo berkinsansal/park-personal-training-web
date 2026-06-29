@@ -1,33 +1,27 @@
 'use client';
 
+import { SectionShell } from '@/app/[locale]/_components/SectionShell';
 import { useLocale, useTranslations } from 'next-intl';
-import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
 
 export default function ContactPreview() {
   const locale = useLocale();
   const t = useTranslations('contact');
 
   return (
-    <section className="py-16 bg-zinc-900">
-      <div className="max-w-4xl mx-auto px-6 text-center">
-        <AnimateIn>
-          <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">
-            {t('label')}
-          </span>
-          <h2 className="mt-3 text-3xl md:text-4xl font-black text-white mb-6">
-            {t('previewHeading')}
-          </h2>
-          <p className="text-zinc-400 text-lg mb-8 max-w-2xl mx-auto">
-            {t('previewDescription')}
-          </p>
-          <a
-            href={`/${locale}/contact`}
-            className="inline-block px-8 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
-          >
-            {t('contactUs')}
-          </a>
-        </AnimateIn>
+    <SectionShell
+      label={t('label')}
+      heading={t('previewHeading')}
+      description={t('previewDescription')}
+      sectionClassName="bg-zinc-900"
+    >
+      <div className="text-center">
+        <a
+          href={`/${locale}/contact`}
+          className="inline-block px-8 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
+        >
+          {t('contactUs')}
+        </a>
       </div>
-    </section>
+    </SectionShell>
   );
 }
