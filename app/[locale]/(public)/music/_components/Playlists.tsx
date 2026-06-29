@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import type { Playlist } from '@/lib/types';
 import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
+import { SectionShell } from '@/app/[locale]/_components/SectionShell';
 
 export default function Playlists({ playlists }: { playlists: Playlist[] }) {
   const t = useTranslations('playlists');
@@ -12,23 +13,16 @@ export default function Playlists({ playlists }: { playlists: Playlist[] }) {
   const selectedPlaylist = playlists.find((p) => p.id === selectedId);
 
   return (
-    <section id="music" className="py-16 bg-green-950">
-      <div className="max-w-7xl mx-auto px-6">
-        <AnimateIn>
-          <div className="text-center mb-12">
-            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">
-              {t('label')}
-            </span>
-            <h2 className="mt-3 text-4xl md:text-5xl font-black text-white">
-              {t('heading')}
-            </h2>
-            <p className="mt-4 text-zinc-400 text-lg max-w-2xl mx-auto">
-              {t('p1')} {t('p2')}
-            </p>
-          </div>
-        </AnimateIn>
-
-        <div className="flex flex-col gap-8">
+    <SectionShell
+      id="music"
+      label={t('label')}
+      heading={t('heading')}
+      description={`${t('p1')} ${t('p2')}`}
+      sectionClassName="bg-green-950"
+      containerClassName="max-w-7xl"
+      headerClassName="mb-12"
+    >
+      <div className="flex flex-col gap-8">
           <AnimateIn delay={0}>
             {playlists.length > 0 && (
               <div className="flex flex-wrap justify-center gap-3">
@@ -67,7 +61,6 @@ export default function Playlists({ playlists }: { playlists: Playlist[] }) {
             )}
           </AnimateIn>
         </div>
-      </div>
-    </section>
+    </SectionShell>
   );
 }

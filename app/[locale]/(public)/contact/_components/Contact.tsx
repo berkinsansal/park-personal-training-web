@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import type { SiteInfo } from '@/lib/types';
 import ContactForm from './ContactForm';
 import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
+import { SectionShell } from '@/app/[locale]/_components/SectionShell';
 
 export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
   const locale = useLocale();
@@ -36,21 +37,14 @@ export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
     : '';
 
   return (
-    <section id="contact" className="py-16 bg-zinc-950">
-      <div className="max-w-4xl mx-auto px-6">
-        <AnimateIn>
-          <div className="text-center mb-16">
-            <span className="text-amber-400 text-sm font-semibold uppercase tracking-widest">
-              {t('label')}
-            </span>
-            <h2 className="mt-3 text-4xl md:text-5xl font-black text-white">
-              {t('heading')}
-            </h2>
-            <p className="mt-4 text-zinc-400 text-lg max-w-xl mx-auto">
-              {t('description')}
-            </p>
-          </div>
-        </AnimateIn>
+    <SectionShell
+      id="contact"
+      label={t('label')}
+      heading={t('heading')}
+      description={t('description')}
+      containerClassName="max-w-4xl"
+      descriptionContainerClassName="max-w-xl"
+    >
 
         <div className="grid md:grid-cols-2 gap-10 mb-16">
           <AnimateIn delay={0}>
@@ -228,7 +222,6 @@ export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
             </div>
           </a>
         )}
-      </div>
-    </section>
+    </SectionShell>
   );
 }
