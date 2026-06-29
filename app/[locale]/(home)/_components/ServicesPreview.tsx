@@ -8,6 +8,8 @@ export default function ServicesPreview({ services }: { services: Service[] }) {
   const locale = useLocale();
   const t = useTranslations('services');
 
+  const isReversed = (index: number) => index % 2 === 1;
+
   return (
     <section className="py-24 bg-zinc-950">
       <div className="max-w-6xl mx-auto px-6">
@@ -24,19 +26,26 @@ export default function ServicesPreview({ services }: { services: Service[] }) {
             </p>
           </div>
         </AnimateIn>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="space-y-4 max-w-sm mx-auto">
           {services.map((s, i) => (
             <AnimateIn key={s.id} delay={i * 80}>
-              <div className="bg-zinc-900 rounded-2xl p-8 border border-zinc-800 hover:border-amber-400/40 hover:-translate-y-1 transition-all duration-300 group text-center">
-                <div className="text-4xl mb-4">{s.icon}</div>
-                <h3 className="text-white font-bold text-lg group-hover:text-amber-400 transition-colors">
+              <div
+                className={`flex items-center gap-4 p-2 bg-zinc-900/50 border border-zinc-800 rounded-xl hover:border-amber-400/40 hover:bg-zinc-900 transition-all duration-300 group ${
+                  isReversed(i) ? 'flex-row-reverse ml-12' : 'mr-12'
+                }`}
+              >
+                <div className="flex-shrink-0 text-4xl group-hover:scale-110 transition-transform duration-300">
+                  {s.icon}
+                </div>
+                <h3 className="text-lg font-bold text-white group-hover:text-amber-400 transition-colors duration-300">
                   {locale === 'en' ? s.title_en || s.title : s.title}
                 </h3>
               </div>
             </AnimateIn>
           ))}
         </div>
-        <div className="mt-12 text-center">
+
+        <div className="mt-16 text-center">
           <a
             href={`/${locale}/services`}
             className="inline-block px-8 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
