@@ -10,7 +10,6 @@ export default function Services({ services }: { services: Service[] }) {
   const t = useTranslations('services');
   return (
     <SectionShell
-      id="services"
       label={t('label')}
       heading={t('heading')}
       description={t('description')}

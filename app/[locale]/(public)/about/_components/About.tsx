@@ -108,7 +108,7 @@ export default function About({
   ];
 
   return (
-    <section id="about" className="py-16 bg-zinc-950">
+    <section className="py-16 bg-zinc-950">
       <div className="max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-16 items-start">
           <div>

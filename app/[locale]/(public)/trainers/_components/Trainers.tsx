@@ -19,7 +19,6 @@ export default function Trainers({ trainers }: { trainers: Trainer[] }) {
   const t = useTranslations('trainers');
   return (
     <SectionShell
-      id="trainers"
       label={t('label')}
       heading={t('heading')}
       description={t('description')}
