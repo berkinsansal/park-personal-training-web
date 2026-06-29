@@ -19,7 +19,7 @@ export default function MusicPreview() {
           href={`/${locale}/music`}
           className="inline-block px-8 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
         >
-          {t('explore')}
+          {t('listen')}
         </a>
       </div>
     </SectionShell>
