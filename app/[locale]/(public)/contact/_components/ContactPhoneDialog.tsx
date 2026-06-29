@@ -24,8 +24,9 @@ export default function ContactPhoneDialog({
   return (
     <>
       <button
-        onClick={() => setIsOpen(true)}
         className="flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group cursor-pointer w-full"
+        type="button"
+        onClick={() => setIsOpen(true)}
       >
         <div className="w-12 h-12 rounded-xl bg-zinc-700 flex items-center justify-center flex-shrink-0">
           <svg
@@ -62,8 +63,9 @@ export default function ContactPhoneDialog({
 
             <div className="flex flex-col gap-3">
               <button
-                onClick={handleWhatsApp}
                 className="w-full flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"
+                type="button"
+                onClick={handleWhatsApp}
               >
                 <svg
                   className="w-5 h-5"
@@ -76,8 +78,9 @@ export default function ContactPhoneDialog({
               </button>
 
               <button
-                onClick={handleCall}
                 className="w-full flex items-center gap-3 bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"
+                type="button"
+                onClick={handleCall}
               >
                 <svg
                   className="w-5 h-5"
@@ -97,8 +100,9 @@ export default function ContactPhoneDialog({
             </div>
 
             <button
-              onClick={() => setIsOpen(false)}
               className="w-full mt-3 text-zinc-400 hover:text-white transition-colors py-2"
+              type="button"
+              onClick={() => setIsOpen(false)}
             >
               {t('phoneDialogCancel')}
             </button>
