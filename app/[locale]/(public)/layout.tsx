@@ -12,7 +12,7 @@ export default async function PublicLayout({
 
   return (
     <>
-      <Navbar />
+      <Navbar siteInfo={siteInfo} />
       <main>
         <ViewTransition default="page-slices">{children}</ViewTransition>
       </main>
