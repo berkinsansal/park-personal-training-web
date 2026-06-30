@@ -166,9 +166,9 @@ export default function ContactPhoneDialog({
 
       {/* Back Side */}
       {isFlipped && (
-        <div className="flip-card-back flex flex-col gap-3 bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-950 border border-amber-400/30 rounded-2xl p-6 w-full card-glow flipped">
+        <div className="flip-card-back flex items-center justify-center gap-3 bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-950 border border-amber-400/30 rounded-2xl p-6 w-full card-glow flipped">
           <button
-            className="action-btn btn-whatsapp flex items-center justify-center gap-2 w-full py-3 px-4 rounded-lg font-semibold text-white transition-all duration-300"
+            className="action-btn btn-whatsapp flex flex-col items-center justify-center gap-2 flex-1 py-4 px-3 rounded-lg font-semibold text-white transition-all duration-300"
             type="button"
             onClick={() => {
               handleWhatsApp();
@@ -176,7 +176,7 @@ export default function ContactPhoneDialog({
             }}
           >
             <svg
-              className="w-5 h-5"
+              className="w-6 h-6"
               fill="currentColor"
               viewBox="0 0 62.541 62.51"
             >
@@ -191,11 +191,11 @@ export default function ContactPhoneDialog({
                 fill="currentColor"
               />
             </svg>
-            WhatsApp
+            <span className="text-xs">WhatsApp</span>
           </button>
 
           <button
-            className="action-btn btn-call flex items-center justify-center gap-2 w-full py-3 px-4 rounded-lg font-semibold text-white transition-all duration-300"
+            className="action-btn btn-call flex flex-col items-center justify-center gap-2 flex-1 py-4 px-3 rounded-lg font-semibold text-white transition-all duration-300"
             type="button"
             onClick={() => {
               handleCall();
@@ -203,7 +203,7 @@ export default function ContactPhoneDialog({
             }}
           >
             <svg
-              className="w-5 h-5"
+              className="w-6 h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -215,16 +215,16 @@ export default function ContactPhoneDialog({
                 d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
               />
             </svg>
-            {t('phoneDialogCall')}
+            <span className="text-xs">{t('phoneDialogCall')}</span>
           </button>
 
           <button
-            className="action-btn btn-cancel flex items-center justify-center gap-2 w-full py-3 px-4 rounded-lg font-semibold text-white transition-all duration-300"
+            className="action-btn btn-cancel flex flex-col items-center justify-center gap-2 flex-1 py-4 px-3 rounded-lg font-semibold text-white transition-all duration-300"
             type="button"
             onClick={() => setIsFlipped(false)}
           >
             <svg
-              className="w-5 h-5"
+              className="w-6 h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -236,7 +236,7 @@ export default function ContactPhoneDialog({
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>
-            {t('phoneDialogCancel')}
+            <span className="text-xs">{t('phoneDialogCancel')}</span>
           </button>
         </div>
       )}
