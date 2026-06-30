@@ -21,14 +21,103 @@ export default function ContactPhoneDialog({
 
   return (
     <div className="group relative w-full">
+      <style>{`
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(-8px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes slideUpStagger1 {
+          0% {
+            opacity: 0;
+            transform: translateY(-12px) scale(0.95);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
+        @keyframes slideUpStagger2 {
+          0% {
+            opacity: 0;
+            transform: translateY(-12px) scale(0.95);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
+        @keyframes iconRotate {
+          from {
+            transform: rotate(0deg) scale(1);
+          }
+          to {
+            transform: rotate(180deg) scale(1);
+          }
+        }
+
+        @keyframes pulse-ring {
+          0% {
+            box-shadow: 0 0 0 0 rgba(251, 146, 60, 0.7);
+          }
+          70% {
+            box-shadow: 0 0 0 10px rgba(251, 146, 60, 0);
+          }
+          100% {
+            box-shadow: 0 0 0 0 rgba(251, 146, 60, 0);
+          }
+        }
+
+        .phone-menu-open {
+          animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .phone-option-1 {
+          animation: slideUpStagger1 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.05s forwards;
+        }
+
+        .phone-option-2 {
+          animation: slideUpStagger2 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s forwards;
+        }
+
+        .phone-icon {
+          animation: iconRotate 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .phone-btn-hover:hover {
+          animation: pulse-ring 1.5s ease-out;
+        }
+
+        .menu-item:hover .menu-arrow {
+          animation: slideRight 0.3s ease-out forwards;
+        }
+
+        @keyframes slideRight {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(4px);
+          }
+        }
+      `}</style>
+
       <button
-        className="flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group cursor-pointer w-full"
+        className={`flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group cursor-pointer w-full ${isOpen ? 'border-amber-400/50 -translate-y-0.5' : ''}`}
         type="button"
         onClick={() => setIsOpen(!isOpen)}
       >
-        <div className="w-12 h-12 rounded-xl bg-zinc-700 flex items-center justify-center flex-shrink-0">
+        <div className="w-12 h-12 rounded-xl bg-zinc-700 flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-amber-500/20">
           <svg
-            className="w-6 h-6 text-amber-400"
+            className="w-6 h-6 text-amber-400 transition-transform duration-300 group-hover:scale-110"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -47,7 +136,7 @@ export default function ContactPhoneDialog({
           </div>
           <div className="text-zinc-400 text-sm">{phone}</div>
         </div>
-        <div className={`ml-auto transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+        <div className={`ml-auto transition-all duration-400 ${isOpen ? 'phone-icon' : ''}`}>
           <svg
             className="w-5 h-5 text-amber-400"
             fill="none"
@@ -65,18 +154,18 @@ export default function ContactPhoneDialog({
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-3 bg-zinc-900 border border-zinc-800 rounded-2xl overflow-hidden shadow-2xl z-40 animate-in fade-in slide-in-from-top-2 duration-200">
-          <div className="flex flex-col">
+        <div className="absolute top-full left-0 right-0 mt-3 bg-zinc-900 border border-amber-400/30 rounded-2xl overflow-hidden shadow-2xl shadow-black/50 z-40 phone-menu-open backdrop-blur-sm">
+          <div className="flex flex-col bg-gradient-to-b from-zinc-900 to-zinc-950 border-t border-amber-400/10">
             <button
-              className="flex items-center gap-4 px-6 py-4 hover:bg-green-900/30 border-b border-zinc-800 transition-all group/btn relative overflow-hidden"
+              className="flex items-center gap-4 px-6 py-4 hover:bg-green-900/40 border-b border-zinc-800/50 transition-all group/btn relative overflow-hidden menu-item"
               type="button"
               onClick={handleWhatsApp}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-green-600/0 to-green-600/0 group-hover/btn:from-green-600/10 group-hover/btn:to-green-600/20 transition-all duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-r from-green-600/0 via-green-600/0 to-green-600/0 group-hover/btn:from-green-600/15 group-hover/btn:via-green-600/10 group-hover/btn:to-green-600/5 transition-all duration-300" />
 
-              <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center flex-shrink-0">
+              <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover/btn:scale-110 group-hover/btn:shadow-lg group-hover/btn:shadow-green-500/50 phone-option-1">
                 <svg
-                  className="w-5 h-5 text-white"
+                  className="w-5 h-5 text-white transition-transform duration-300"
                   fill="currentColor"
                   viewBox="0 0 62.541 62.51"
                 >
@@ -94,31 +183,41 @@ export default function ContactPhoneDialog({
               </div>
 
               <div className="relative text-left flex-1">
-                <div className="text-white font-bold text-sm group-hover/btn:text-green-400 transition-colors">
+                <div className="text-white font-bold text-sm group-hover/btn:text-green-300 transition-colors">
                   WhatsApp
                 </div>
-                <div className="text-zinc-400 text-xs">
+                <div className="text-zinc-400 text-xs group-hover/btn:text-zinc-300 transition-colors">
                   {t('phoneDialogWhatsApp')}
                 </div>
               </div>
 
-              <div className="relative text-amber-400/60 group-hover/btn:text-green-400 transition-colors">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              <div className="relative text-amber-400/40 group-hover/btn:text-green-400 transition-all duration-300 menu-arrow">
+                <svg
+                  className="w-5 h-5 transition-transform duration-300 group-hover/btn:scale-125"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
                 </svg>
               </div>
             </button>
 
             <button
-              className="flex items-center gap-4 px-6 py-4 hover:bg-amber-900/30 transition-all group/btn relative overflow-hidden"
+              className="flex items-center gap-4 px-6 py-4 hover:bg-amber-900/40 transition-all group/btn relative overflow-hidden menu-item"
               type="button"
               onClick={handleCall}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-amber-600/0 to-amber-600/0 group-hover/btn:from-amber-600/10 group-hover/btn:to-amber-600/20 transition-all duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-r from-amber-600/0 via-amber-600/0 to-amber-600/0 group-hover/btn:from-amber-600/15 group-hover/btn:via-amber-600/10 group-hover/btn:to-amber-600/5 transition-all duration-300" />
 
-              <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center flex-shrink-0">
+              <div className="relative w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover/btn:scale-110 group-hover/btn:shadow-lg group-hover/btn:shadow-amber-500/50 phone-option-2">
                 <svg
-                  className="w-5 h-5 text-white"
+                  className="w-5 h-5 text-white transition-transform duration-300"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -133,17 +232,27 @@ export default function ContactPhoneDialog({
               </div>
 
               <div className="relative text-left flex-1">
-                <div className="text-white font-bold text-sm group-hover/btn:text-amber-400 transition-colors">
+                <div className="text-white font-bold text-sm group-hover/btn:text-amber-300 transition-colors">
                   {t('phoneDialogCall')}
                 </div>
-                <div className="text-zinc-400 text-xs">
+                <div className="text-zinc-400 text-xs group-hover/btn:text-zinc-300 transition-colors">
                   {phone}
                 </div>
               </div>
 
-              <div className="relative text-amber-400/60 group-hover/btn:text-amber-400 transition-colors">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              <div className="relative text-amber-400/40 group-hover/btn:text-amber-300 transition-all duration-300 menu-arrow">
+                <svg
+                  className="w-5 h-5 transition-transform duration-300 group-hover/btn:scale-125"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 5l7 7-7 7"
+                  />
                 </svg>
               </div>
             </button>
