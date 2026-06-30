@@ -54,13 +54,6 @@ export default function ContactPhoneDialog({
       {isOpen && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
           <div className="bg-zinc-900 rounded-2xl border border-zinc-800 max-w-sm w-full p-8 animate-in fade-in zoom-in-95 duration-200">
-            <h3 className="text-xl font-bold text-white mb-2">
-              {t('phoneDialogTitle')}
-            </h3>
-            <p className="text-zinc-400 mb-6">
-              {t('phoneDialogSubtitle')}
-            </p>
-
             <div className="flex flex-col gap-3">
               <button
                 className="w-full flex items-center gap-3 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"
