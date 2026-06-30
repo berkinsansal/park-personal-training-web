@@ -3,21 +3,9 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 
-export default function ContactPhoneDialog({
-  phone,
-}: {
-  phone: string;
-}) {
+export default function ContactPhoneDialog({ phone }: { phone: string }) {
   const t = useTranslations('contact');
   const [isFlipped, setIsFlipped] = useState(false);
-
-  const handleCall = () => {
-    window.location.href = `tel:${phone}`;
-  };
-
-  const handleWhatsApp = () => {
-    window.open(`https://wa.me/${phone.replace(/\D/g, '')}`, '_blank');
-  };
 
   return (
     <>
@@ -79,36 +67,6 @@ export default function ContactPhoneDialog({
           animation-delay: 0.2s;
         }
 
-        .btn-whatsapp {
-          background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
-        }
-
-        .btn-whatsapp:hover {
-          background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
-          box-shadow: 0 10px 25px rgba(34, 197, 94, 0.3);
-          transform: translateY(-2px);
-        }
-
-        .btn-call {
-          background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-        }
-
-        .btn-call:hover {
-          background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
-          box-shadow: 0 10px 25px rgba(249, 115, 22, 0.3);
-          transform: translateY(-2px);
-        }
-
-        .btn-cancel {
-          background: linear-gradient(135deg, #71717a 0%, #52525b 100%);
-        }
-
-        .btn-cancel:hover {
-          background: linear-gradient(135deg, #a1a1aa 0%, #71717a 100%);
-          box-shadow: 0 10px 25px rgba(113, 113, 122, 0.3);
-          transform: translateY(-2px);
-        }
-
         .card-glow {
           box-shadow: 0 0 30px rgba(251, 146, 60, 0.15);
         }
@@ -146,9 +104,21 @@ export default function ContactPhoneDialog({
             </div>
             <div className="text-zinc-400 text-sm">{phone}</div>
           </div>
-          <div className="ml-auto text-amber-400/60 group-hover:text-amber-400 transition-colors">
+        </button>
+      )}
+
+      {/* Back Side */}
+      {isFlipped && (
+        <div className="flip-card-back flex items-center justify-center gap-3 bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-950 border border-amber-400/30 rounded-2xl p-6 w-full card-glow flipped">
+          <a
+            href={`tel:${phone}`}
+            className="action-btn flex flex-col items-center justify-center gap-2 flex-1 h-12 px-3 rounded-lg font-semibold text-white transition-all duration-300 bg-amber-900 hover:bg-amber-800"
+            onClick={() => {
+              setIsFlipped(false);
+            }}
+          >
             <svg
-              className="w-5 h-5 animate-bounce"
+              className="w-6 h-6"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -157,21 +127,17 @@ export default function ContactPhoneDialog({
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={2}
-                d="M9 5l7 7-7 7"
+                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
               />
             </svg>
-          </div>
-        </button>
-      )}
+          </a>
 
-      {/* Back Side */}
-      {isFlipped && (
-        <div className="flip-card-back flex items-center justify-center gap-3 bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-950 border border-amber-400/30 rounded-2xl p-6 w-full card-glow flipped">
-          <button
-            className="action-btn btn-whatsapp flex flex-col items-center justify-center gap-2 flex-1 py-4 px-3 rounded-lg font-semibold text-white transition-all duration-300"
-            type="button"
+          <a
+            href={`https://wa.me/${phone.replace(/\D/g, '')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="action-btn flex flex-col items-center justify-center gap-2 flex-1 h-12 px-3 rounded-lg font-semibold text-white transition-all duration-300 bg-green-900 hover:bg-green-800"
             onClick={() => {
-              handleWhatsApp();
               setIsFlipped(false);
             }}
           >
@@ -191,35 +157,10 @@ export default function ContactPhoneDialog({
                 fill="currentColor"
               />
             </svg>
-            <span className="text-xs">WhatsApp</span>
-          </button>
+          </a>
 
           <button
-            className="action-btn btn-call flex flex-col items-center justify-center gap-2 flex-1 py-4 px-3 rounded-lg font-semibold text-white transition-all duration-300"
-            type="button"
-            onClick={() => {
-              handleCall();
-              setIsFlipped(false);
-            }}
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-              />
-            </svg>
-            <span className="text-xs">{t('phoneDialogCall')}</span>
-          </button>
-
-          <button
-            className="action-btn btn-cancel flex flex-col items-center justify-center gap-2 flex-1 py-4 px-3 rounded-lg font-semibold text-white transition-all duration-300"
+            className="action-btn flex flex-col items-center justify-center gap-2 flex-1 h-12 px-3 rounded-lg font-semibold text-white transition-all duration-300 bg-slate-600 hover:bg-slate-500"
             type="button"
             onClick={() => setIsFlipped(false)}
           >
@@ -236,7 +177,6 @@ export default function ContactPhoneDialog({
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>
-            <span className="text-xs">{t('phoneDialogCancel')}</span>
           </button>
         </div>
       )}
