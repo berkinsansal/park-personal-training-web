@@ -66,24 +66,16 @@ export default function ContactPhoneDialog({ phone }: { phone: string }) {
         .action-btn:nth-child(3) {
           animation-delay: 0.2s;
         }
-
-        .card-glow {
-          box-shadow: 0 0 30px rgba(251, 146, 60, 0.15);
-        }
-
-        .card-glow.flipped {
-          box-shadow: 0 0 30px rgba(251, 146, 60, 0.25);
-        }
       `}</style>
 
       {/* Front Side */}
       {!isFlipped && (
         <button
-          className="flip-card-front flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group cursor-pointer w-full card-glow"
+          className="flip-card-front flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group cursor-pointer w-full"
           type="button"
           onClick={() => setIsFlipped(true)}
         >
-          <div className="w-12 h-12 rounded-xl bg-zinc-700 flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:bg-amber-500/20 group-hover:scale-110">
+          <div className="w-12 h-12 rounded-xl bg-zinc-700 flex items-center justify-center flex-shrink-0">
             <svg
               className="w-6 h-6 text-amber-400 transition-transform duration-300"
               fill="none"
@@ -98,7 +90,7 @@ export default function ContactPhoneDialog({ phone }: { phone: string }) {
               />
             </svg>
           </div>
-          <div className="text-left flex-1">
+          <div className="text-left">
             <div className="text-white font-bold group-hover:text-amber-400 transition-colors">
               {t('phone')}
             </div>
@@ -109,10 +101,10 @@ export default function ContactPhoneDialog({ phone }: { phone: string }) {
 
       {/* Back Side */}
       {isFlipped && (
-        <div className="flip-card-back flex items-center justify-center gap-3 bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-950 border border-amber-400/30 rounded-2xl p-6 w-full card-glow flipped">
+        <div className="flip-card-back flex items-center gap-4 bg-zinc-900 border border-amber-400/50 rounded-2xl p-6 w-full">
           <a
             href={`tel:${phone}`}
-            className="action-btn flex flex-col items-center justify-center gap-2 flex-1 h-12 px-3 rounded-lg font-semibold text-white transition-all duration-300 bg-amber-900 hover:bg-amber-800"
+            className="action-btn flex flex-col items-center justify-center gap-2 flex-1 h-12 px-3 rounded-lg font-semibold text-white transition-all duration-300 bg-amber-900 hover:bg-amber-800 hover:scale-110"
             onClick={() => {
               setIsFlipped(false);
             }}
@@ -136,7 +128,7 @@ export default function ContactPhoneDialog({ phone }: { phone: string }) {
             href={`https://wa.me/${phone.replace(/\D/g, '')}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="action-btn flex flex-col items-center justify-center gap-2 flex-1 h-12 px-3 rounded-lg font-semibold text-white transition-all duration-300 bg-green-900 hover:bg-green-800"
+            className="action-btn flex flex-col items-center justify-center gap-2 flex-1 h-12 px-3 rounded-lg font-semibold text-white transition-all duration-300 bg-green-900 hover:bg-green-800 hover:scale-110"
             onClick={() => {
               setIsFlipped(false);
             }}
@@ -160,7 +152,7 @@ export default function ContactPhoneDialog({ phone }: { phone: string }) {
           </a>
 
           <button
-            className="action-btn flex flex-col items-center justify-center gap-2 flex-1 h-12 px-3 rounded-lg font-semibold text-white transition-all duration-300 bg-slate-600 hover:bg-slate-500"
+            className="action-btn flex flex-col items-center justify-center gap-2 flex-1 h-12 px-3 rounded-lg font-semibold text-white transition-all duration-300 bg-slate-600 hover:bg-slate-500 hover:scale-110 cursor-pointer"
             type="button"
             onClick={() => setIsFlipped(false)}
           >
