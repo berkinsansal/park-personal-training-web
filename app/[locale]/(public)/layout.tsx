@@ -1,7 +1,6 @@
 import Footer from '@/app/[locale]/_components/Footer';
 import Navbar from '@/app/[locale]/_components/Navbar';
 import { getSiteInfo } from '@/lib/data';
-import { ViewTransition } from 'react';
 
 export default async function PublicLayout({
   children,
@@ -14,7 +13,7 @@ export default async function PublicLayout({
     <>
       <Navbar siteInfo={siteInfo} />
       <main>
-        <ViewTransition default="page-slices">{children}</ViewTransition>
+        {children}
       </main>
       <Footer igHandle={siteInfo.ig_handle ?? ''} />
     </>

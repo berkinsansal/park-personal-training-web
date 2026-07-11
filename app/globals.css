@@ -15,6 +15,7 @@ html {
   scroll-behavior: smooth;
 }
 
+/* HERO animations - START */
 @keyframes word-reveal {
   from {
     opacity: 0;
@@ -70,8 +71,11 @@ html {
     opacity: 0;
   }
 }
+/* HERO animations - END */
 
-::view-transition-group(.page-slices) {
+/* PAGE ROUTE animations - START */
+/* SLICE animation - START */
+/* ::view-transition-group(.page-slices) {
   animation-duration: 480ms;
   animation-timing-function: cubic-bezier(0.8, 0, 0.2, 1);
   animation-fill-mode: both;
@@ -199,7 +203,45 @@ html {
     filter: blur(0) saturate(1);
     transform: scale(1);
   }
+} */
+/* SLICE animation - END */
+
+/* CURTAIN animation - START */
+::view-transition-group(.curtain) {
+  animation-duration: 0.3s;
+  background: #ffb900;
 }
+
+::view-transition-old(.curtain) {
+  animation: curtain-out 0.3s ease forwards;
+}
+
+::view-transition-new(.curtain) {
+  animation: curtain-in 0.3s ease forwards;
+}
+
+@keyframes curtain-out {
+  from {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+
+  to {
+    clip-path: inset(0 0 0 0);
+    opacity: 0.5;
+  }
+}
+
+@keyframes curtain-in {
+  from {
+    clip-path: inset(0 50% 0 50%);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+/* CURTAIN animation - END */
+/* PAGE ROUTE animations - END */
 
 @media (prefers-reduced-motion: reduce) {
   *,

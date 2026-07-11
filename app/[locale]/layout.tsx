@@ -1,11 +1,11 @@
-import type { Metadata } from 'next';
-import { Suspense } from 'react';
-import { Geist } from 'next/font/google';
-import { getMessages } from 'next-intl/server';
-import { NextIntlClientProvider } from 'next-intl';
-import { siteConfig } from '@/lib/site.config';
-import { notFound } from 'next/navigation';
 import { routing } from '@/i18n.config';
+import { siteConfig } from '@/lib/site.config';
+import type { Metadata } from 'next';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+import { Geist } from 'next/font/google';
+import { notFound } from 'next/navigation';
+import { Suspense, ViewTransition } from 'react';
 import '../globals.css';
 
 const geist = Geist({
@@ -52,7 +52,9 @@ export default async function RootLayout({
       <head />
       <body className="bg-zinc-950 text-white antialiased">
         <Suspense fallback={null}>
-          <LayoutShell>{children}</LayoutShell>
+          <LayoutShell>
+            <ViewTransition default="curtain">{children}</ViewTransition>
+          </LayoutShell>
         </Suspense>
       </body>
     </html>
