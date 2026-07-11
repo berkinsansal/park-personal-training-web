@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import type { Playlist } from '@/lib/types';
 import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
@@ -8,9 +8,17 @@ import { SectionShell } from '@/app/[locale]/_components/SectionShell';
 
 export default function Playlists({ playlists }: { playlists: Playlist[] }) {
   const t = useTranslations('playlists');
-  const [selectedId, setSelectedId] = useState(playlists[0]?.id || '');
+  const defaultPlaylistId = playlists[0]?.id ?? '';
+  const [selectedId, setSelectedId] = useState(defaultPlaylistId);
 
   const selectedPlaylist = playlists.find((p) => p.id === selectedId);
+
+  useLayoutEffect(() => {
+    return () => {
+      // Runs when Next.js hides the route
+      setSelectedId(defaultPlaylistId);
+    };
+  }, [defaultPlaylistId]);
 
   return (
     <SectionShell
@@ -45,6 +53,7 @@ export default function Playlists({ playlists }: { playlists: Playlist[] }) {
           {selectedPlaylist && (
             <div className="flex justify-center overflow-hidden">
               <iframe
+                key={selectedPlaylist.spotify_id}
                 allowFullScreen
                 style={{ borderRadius: '12px' }}
                 src={`https://open.spotify.com/embed/playlist/${selectedPlaylist.spotify_id}?utm_source=generator&theme=0`}

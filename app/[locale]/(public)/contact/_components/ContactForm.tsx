@@ -39,7 +39,9 @@ export default function ContactForm() {
 
   return (
     <form
-      ref={formRef}
+      ref={(form) => {
+        return () => form?.reset() // Runs when Next.js hides the route
+      }}
       className="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 flex flex-col gap-4"
       onSubmit={handleSubmit}
     >

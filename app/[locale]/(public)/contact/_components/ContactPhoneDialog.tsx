@@ -1,11 +1,18 @@
 'use client';
 
-import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { useLayoutEffect, useState } from 'react';
 
 export default function ContactPhoneDialog({ phone }: { phone: string }) {
   const t = useTranslations('contact');
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [isFlipped, setIsFlipped] = useState<boolean | null>(null);
+
+  useLayoutEffect(() => {
+    return () => {
+      // Runs when Next.js hides the route
+      setIsFlipped(null);
+    };
+  }, []);
 
   return (
     <>
@@ -71,7 +78,7 @@ export default function ContactPhoneDialog({ phone }: { phone: string }) {
       {/* Front Side */}
       {!isFlipped && (
         <button
-          className="flip-card-front flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group cursor-pointer w-full"
+          className={`${isFlipped === false ? 'flip-card-front' : ''} flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group cursor-pointer w-full`}
           type="button"
           onClick={() => setIsFlipped(true)}
         >
