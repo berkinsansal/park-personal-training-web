@@ -45,7 +45,7 @@ export default function LoginForm({
               type="email"
               name="email"
               defaultValue={defaultEmail}
-              size="lg"
+              sizeStr="lg"
             />
           </div>
 
@@ -58,7 +58,7 @@ export default function LoginForm({
               type="password"
               name="password"
               defaultValue={defaultPassword}
-              size="lg"
+              sizeStr="lg"
             />
           </div>
 

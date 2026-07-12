@@ -62,7 +62,7 @@ export default function ContactForm() {
         <Input
           type="text"
           name="name"
-          size="lg"
+          sizeStr="lg"
         />
       </div>
       <div>
@@ -72,7 +72,7 @@ export default function ContactForm() {
         <Input
           type="text"
           name="phone"
-          size="lg"
+          sizeStr="lg"
         />
       </div>
       <div>
@@ -82,7 +82,7 @@ export default function ContactForm() {
         <Input
           type="text"
           name="email"
-          size="lg"
+          sizeStr="lg"
         />
       </div>
       <div>
