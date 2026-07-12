@@ -5,9 +5,14 @@ import type { SiteInfo } from '@/lib/types';
 import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon';
 import { Button } from '@/components/ui/button';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 
 const navIcons = {
   home: (
@@ -60,25 +65,7 @@ export default function Navbar({ siteInfo }: { siteInfo: SiteInfo | null }) {
   const t = useTranslations();
   const locale = useLocale();
   const [open, setOpen] = useState(false);
-  const [localePopoverOpen, setLocalePopoverOpen] = useState(false);
-  const localePopoverRef = useRef<HTMLLIElement>(null);
   const phone = siteInfo?.phone ?? '';
-
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (
-        localePopoverRef.current &&
-        !localePopoverRef.current.contains(e.target as Node)
-      ) {
-        setLocalePopoverOpen(false);
-      }
-    }
-
-    if (localePopoverOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
-    }
-  }, [localePopoverOpen]);
 
   const links = [
     { href: `/${locale}`, label: t('nav.home'), key: 'home' },
@@ -136,19 +123,18 @@ export default function Navbar({ siteInfo }: { siteInfo: SiteInfo | null }) {
               </a>
             </li>
           )}
-          <li ref={localePopoverRef} className="relative">
-            <button
-              type="button"
-              className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-zinc-800 hover:bg-zinc-700 transition-colors cursor-pointer"
-              onClick={() => setLocalePopoverOpen(!localePopoverOpen)}
-            >
-              {navIcons.world}
-            </button>
-            {localePopoverOpen && (
-              <div className="absolute top-full right-0 mt-2 bg-zinc-900 border border-zinc-700 rounded-lg shadow-lg p-2 z-40">
+          <li>
+            <Popover>
+              <PopoverTrigger
+                type="button"
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-zinc-800 hover:bg-zinc-700 transition-colors cursor-pointer"
+              >
+                {navIcons.world}
+              </PopoverTrigger>
+              <PopoverContent className="w-fit p-2">
                 <LocaleSwitcher />
-              </div>
-            )}
+              </PopoverContent>
+            </Popover>
           </li>
         </ul>
         <div className="flex items-center gap-3">
