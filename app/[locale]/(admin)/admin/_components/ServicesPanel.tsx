@@ -9,8 +9,9 @@ import {
   updateServiceAction,
 } from '../actions';
 import type { Service } from '@/lib/types';
-import { inputCls } from './styles';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
 export default function ServicesPanel({ services }: { services: Service[] }) {
   const t = useTranslations('admin.services');
@@ -250,12 +251,11 @@ function ServiceForm({
       {defaults && <input type="hidden" name="id" value={defaults.id} />}
       <div>
         <label className="block text-zinc-400 text-xs mb-1">{t('icon')}</label>
-        <input
+        <Input
           required
           name="icon"
           defaultValue={defaults?.icon}
           disabled={pendingOp !== null}
-          className={inputCls}
         />
       </div>
       {defaults && (
@@ -266,23 +266,21 @@ function ServiceForm({
           <label className="block text-zinc-400 text-xs mb-1">
             {t('title')}
           </label>
-          <input
+          <Input
             required
             name="title"
             defaultValue={defaults?.title}
             disabled={pendingOp !== null}
-            className={inputCls}
           />
         </div>
         <div>
           <label className="block text-zinc-400 text-xs mb-1">
             {t('titleEn')}
           </label>
-          <input
+          <Input
             name="title_en"
             defaultValue={defaults?.title_en}
             disabled={pendingOp !== null}
-            className={inputCls}
           />
         </div>
       </div>
@@ -290,25 +288,23 @@ function ServiceForm({
         <label className="block text-zinc-400 text-xs mb-1">
           {t('description')}
         </label>
-        <textarea
+        <Textarea
           required
           name="description"
           defaultValue={defaults?.description}
           rows={3}
           disabled={pendingOp !== null}
-          className={`${inputCls} resize-none`}
         />
       </div>
       <div>
         <label className="block text-zinc-400 text-xs mb-1">
           {t('descriptionEn')}
         </label>
-        <textarea
+        <Textarea
           name="description_en"
           defaultValue={defaults?.description_en}
           rows={3}
           disabled={pendingOp !== null}
-          className={`${inputCls} resize-none`}
         />
       </div>
       <div className="flex gap-2">

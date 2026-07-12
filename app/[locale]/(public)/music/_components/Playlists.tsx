@@ -36,7 +36,7 @@ export default function Playlists({ playlists }: { playlists: Playlist[] }) {
                   key={playlist.id}
                   className={`px-2 py-2 rounded-lg font-medium transition-all ${
                     selectedId === playlist.id
-                      ? 'bg-amber-400 text-black'
+                      ? 'bg-amber-400 text-zinc-950'
                       : 'bg-zinc-700 text-white hover:bg-zinc-600'
                   }`}
                   type="button"

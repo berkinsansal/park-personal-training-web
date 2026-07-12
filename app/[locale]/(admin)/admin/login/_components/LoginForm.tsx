@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useActionState } from 'react';
 import { loginAction } from '../../actions';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 export default function LoginForm({
   defaultEmail,
@@ -39,12 +40,12 @@ export default function LoginForm({
             <label className="block text-zinc-400 text-sm mb-2">
               {t('email')}
             </label>
-            <input
+            <Input
               required
               type="email"
               name="email"
               defaultValue={defaultEmail}
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm"
+              size="lg"
             />
           </div>
 
@@ -52,12 +53,12 @@ export default function LoginForm({
             <label className="block text-zinc-400 text-sm mb-2">
               {t('password')}
             </label>
-            <input
+            <Input
               required
               type="password"
               name="password"
               defaultValue={defaultPassword}
-              className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm"
+              size="lg"
             />
           </div>
 

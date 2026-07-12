@@ -4,6 +4,8 @@ import { sendContactAction } from '@/app/actions';
 import { useTranslations } from 'next-intl';
 import { useRef, useState, useTransition } from 'react';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
 function SubmitButton({ label, pending }: { label: string; pending: boolean }) {
   return (
@@ -57,41 +59,40 @@ export default function ContactForm() {
         <label className="block text-zinc-400 text-sm mb-2">
           {t('nameLabel')}
         </label>
-        <input
+        <Input
           type="text"
           name="name"
-          className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm"
+          size="lg"
         />
       </div>
       <div>
         <label className="block text-zinc-400 text-sm mb-2">
           {t('phoneLabel')}
         </label>
-        <input
+        <Input
           type="text"
           name="phone"
-          className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm"
+          size="lg"
         />
       </div>
       <div>
         <label className="block text-zinc-400 text-sm mb-2">
           {t('emailLabel')}
         </label>
-        <input
+        <Input
           type="text"
           name="email"
-          className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm"
+          size="lg"
         />
       </div>
       <div>
         <label className="block text-zinc-400 text-sm mb-2">
           {t('messageLabel')}
         </label>
-        <textarea
+        <Textarea
           rows={4}
           name="message"
           defaultValue={defaultMessage}
-          className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm resize-none"
         />
       </div>
 
