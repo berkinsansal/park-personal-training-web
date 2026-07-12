@@ -62,7 +62,10 @@
       "Bash(git diff *)",
       "Bash(npx next *)",
       "WebFetch(domain:next-intl.dev)",
-      "Bash(cat > *)"
+      "Bash(cat > *)",
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(curl -s http://localhost:3000)"
     ],
     "additionalDirectories": [
       "C:\\GitHub\\park-personal-training-web\\app",
