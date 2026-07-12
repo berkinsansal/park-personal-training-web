@@ -123,7 +123,6 @@ export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
 
             <ContactInfoCard
               asButton
-              onClick={() => {}}
               label={t('hours')}
               value={
                 <>
@@ -146,6 +145,7 @@ export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
                   />
                 </svg>
               }
+              onClick={() => {}}
             />
           </div>
         </AnimateIn>

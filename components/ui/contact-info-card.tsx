@@ -32,8 +32,8 @@ const ContactInfoCard = React.forwardRef<HTMLAnchorElement, ContactInfoCardProps
       return (
         <button
           type="button"
-          onClick={onClick}
           className={cn(baseClasses, className)}
+          onClick={onClick}
         >
           <div
             className={cn(
