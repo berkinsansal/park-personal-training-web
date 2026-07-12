@@ -1,11 +1,11 @@
 'use client';
-import { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useLocale, useTranslations } from 'next-intl';
 import LocaleSwitcher from '@/app/_components/LocaleSwitcher';
 import { siteConfig } from '@/lib/site.config';
 import type { SiteInfo } from '@/lib/types';
+import { useLocale, useTranslations } from 'next-intl';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 
 const navIcons = {
   home: (
@@ -59,13 +59,37 @@ const navIcons = {
       />
     </svg>
   ),
+  world: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+      <circle cx="12" cy="12" r="10" />
+      <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+    </svg>
+  ),
 };
 
 export default function Navbar({ siteInfo }: { siteInfo: SiteInfo | null }) {
   const t = useTranslations();
   const locale = useLocale();
   const [open, setOpen] = useState(false);
+  const [localePopoverOpen, setLocalePopoverOpen] = useState(false);
+  const localePopoverRef = useRef<HTMLLIElement>(null);
   const phone = siteInfo?.phone ?? '';
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (
+        localePopoverRef.current &&
+        !localePopoverRef.current.contains(e.target as Node)
+      ) {
+        setLocalePopoverOpen(false);
+      }
+    }
+
+    if (localePopoverOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [localePopoverOpen]);
 
   const links = [
     { href: `/${locale}`, label: t('nav.home'), key: 'home' },
@@ -112,14 +136,24 @@ export default function Navbar({ siteInfo }: { siteInfo: SiteInfo | null }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center w-10 h-10 bg-green-900 hover:bg-green-800 rounded-full transition-colors"
-                title="WhatsApp"
               >
                 {navIcons.whatsapp}
               </a>
             </li>
           )}
-          <li>
-            <LocaleSwitcher />
+          <li ref={localePopoverRef} className="relative">
+            <button
+              type="button"
+              className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-zinc-800 hover:bg-zinc-700 transition-colors cursor-pointer"
+              onClick={() => setLocalePopoverOpen(!localePopoverOpen)}
+            >
+              {navIcons.world}
+            </button>
+            {localePopoverOpen && (
+              <div className="absolute top-full right-0 mt-2 bg-zinc-900 border border-zinc-700 rounded-lg shadow-lg p-2 z-40">
+                <LocaleSwitcher />
+              </div>
+            )}
           </li>
         </ul>
         <div className="flex items-center gap-4">
@@ -129,7 +163,6 @@ export default function Navbar({ siteInfo }: { siteInfo: SiteInfo | null }) {
               target="_blank"
               rel="noopener noreferrer"
               className="md:hidden inline-flex items-center justify-center w-10 h-10 bg-green-900 hover:bg-green-800 rounded-full transition-colors"
-              title="WhatsApp"
             >
               {navIcons.whatsapp}
             </a>
