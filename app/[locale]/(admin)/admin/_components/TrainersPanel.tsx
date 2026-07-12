@@ -11,6 +11,7 @@ import {
 } from '../actions';
 import type { Trainer } from '@/lib/types';
 import { inputCls } from './styles';
+import { Button } from '@/components/ui/button';
 
 export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
   const t = useTranslations('admin.trainers');
@@ -326,13 +327,14 @@ function TrainerForm({
         />
       </div>
       <div className="flex gap-2">
-        <button
+        <Button
           type="submit"
           disabled={pendingOp !== null}
-          className="px-4 py-2 bg-amber-400 text-zinc-950 font-bold rounded-lg text-xs hover:bg-amber-300 disabled:bg-zinc-600 disabled:cursor-not-allowed transition-colors"
+          variant="primary"
+          size="sm"
         >
           {isSubmitting ? '...' : label}
-        </button>
+        </Button>
         <button
           type="button"
           disabled={pendingOp !== null}

@@ -1,36 +1,16 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
+import { StatCounter } from '@/components/ui/stat-counter';
+import { Button } from '@/components/ui/button';
 
 interface Props {
   happyCustomers: number;
   yearsExperience: number;
   trainerCount: number;
   serviceCount: number;
-}
-
-function useCountUp(target: number, duration: number, active: boolean) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!active) {
-      return;
-    }
-    const start = performance.now();
-    let rafId: number;
-    const raf = (now: number) => {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.round(eased * target));
-      if (progress < 1) {
-        rafId = requestAnimationFrame(raf);
-      }
-    };
-    rafId = requestAnimationFrame(raf);
-    return () => cancelAnimationFrame(rafId);
-  }, [active, target, duration]);
-  return count;
 }
 
 export default function AboutPreview({
@@ -85,12 +65,11 @@ export default function AboutPreview({
             <p className="mt-6 text-zinc-400 text-lg leading-relaxed">
               {t('p1')}
             </p>
-            <a
-              href={`/${locale}/about`}
-              className="mt-8 inline-block px-6 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
-            >
-              {t('learnMore')}
-            </a>
+            <Button asChild variant="primary" size="default" className="mt-8">
+              <Link href={`/${locale}/about`}>
+                {t('learnMore')}
+              </Link>
+            </Button>
           </div>
           <div>
             <div ref={statsRef} className="grid grid-cols-2 gap-6">
@@ -98,20 +77,14 @@ export default function AboutPreview({
                 const numMatch = s.value.match(/\d+/);
                 const num = numMatch ? parseInt(numMatch[0]) : 0;
                 const suffix = s.value.replace(/\d+/g, '');
-                const counted = useCountUp(num, 1400, statsVisible);
                 return (
-                  <div
+                  <StatCounter
                     key={s.label}
-                    className="bg-zinc-800 rounded-2xl p-8 text-center border border-zinc-700 hover:border-amber-400/50 transition-colors"
-                  >
-                    <div className="text-4xl font-black text-amber-400">
-                      {counted}
-                      {suffix}
-                    </div>
-                    <div className="mt-2 text-zinc-400 text-sm font-medium">
-                      {s.label}
-                    </div>
-                  </div>
+                    target={num}
+                    suffix={suffix}
+                    label={s.label}
+                    active={statsVisible}
+                  />
                 );
               })}
             </div>

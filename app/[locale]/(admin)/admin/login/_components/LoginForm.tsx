@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useActionState } from 'react';
 import { loginAction } from '../../actions';
+import { Button } from '@/components/ui/button';
 
 export default function LoginForm({
   defaultEmail,
@@ -64,13 +65,15 @@ export default function LoginForm({
             <p className="text-red-400 text-sm">{state.error}</p>
           )}
 
-          <button
+          <Button
             type="submit"
             disabled={pending}
-            className="w-full py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider mt-2 disabled:opacity-50"
+            variant="primary"
+            size="full"
+            className="mt-2"
           >
             {pending ? t('submitting') : t('submit')}
-          </button>
+          </Button>
         </form>
 
         <div className="text-center mt-6">

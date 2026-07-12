@@ -3,16 +3,18 @@
 import { sendContactAction } from '@/app/actions';
 import { useTranslations } from 'next-intl';
 import { useRef, useState, useTransition } from 'react';
+import { Button } from '@/components/ui/button';
 
 function SubmitButton({ label, pending }: { label: string; pending: boolean }) {
   return (
-    <button
+    <Button
       type="submit"
       disabled={pending}
-      className="w-full py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider disabled:opacity-75 disabled:cursor-not-allowed"
+      variant="primary"
+      size="full"
     >
       {pending ? '...' : label}
-    </button>
+    </Button>
   );
 }
 

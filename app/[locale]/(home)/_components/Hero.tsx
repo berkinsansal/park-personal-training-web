@@ -2,8 +2,10 @@
 
 import { useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { siteConfig } from '@/lib/site.config';
+import { Button } from '@/components/ui/button';
 
 export default function Hero() {
   const t = useTranslations();
@@ -181,18 +183,16 @@ export default function Hero() {
             animationFillMode: 'backwards',
           }}
         >
-          <a
-            href={`/${locale}/contact`}
-            className="px-8 py-4 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
-          >
-            {t('cta.startNow')}
-          </a>
-          <a
-            href={`/${locale}/services`}
-            className="px-8 py-4 border border-zinc-600 text-white font-medium rounded-lg hover:border-amber-400 hover:text-amber-400 transition-colors text-sm uppercase tracking-wider"
-          >
-            {t('cta.viewServices')}
-          </a>
+          <Button asChild variant="primary" size="lg">
+            <Link href={`/${locale}/contact`}>
+              {t('cta.startNow')}
+            </Link>
+          </Button>
+          <Button asChild variant="ghost" size="lg">
+            <Link href={`/${locale}/services`}>
+              {t('cta.viewServices')}
+            </Link>
+          </Button>
         </div>
       </div>
       <a

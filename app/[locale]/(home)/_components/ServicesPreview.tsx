@@ -1,9 +1,11 @@
 'use client';
 
+import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import type { Service } from '@/lib/types';
 import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
 import { SectionShell } from '@/app/[locale]/_components/SectionShell';
+import { Button } from '@/components/ui/button';
 
 export default function ServicesPreview({ services }: { services: Service[] }) {
   const locale = useLocale();
@@ -38,12 +40,11 @@ export default function ServicesPreview({ services }: { services: Service[] }) {
       </div>
 
       <div className="mt-16 text-center">
-        <a
-          href={`/${locale}/services`}
-          className="inline-block px-8 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
-        >
-          {t('details')}
-        </a>
+        <Button asChild variant="primary">
+          <Link href={`/${locale}/services`}>
+            {t('details')}
+          </Link>
+        </Button>
       </div>
     </SectionShell>
   );

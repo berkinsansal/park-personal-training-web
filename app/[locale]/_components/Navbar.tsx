@@ -6,6 +6,8 @@ import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import { WhatsAppIcon } from '@/components/ui/whatsapp-icon';
+import { Button } from '@/components/ui/button';
 
 const navIcons = {
   home: (
@@ -45,20 +47,7 @@ const navIcons = {
       <path d="M15 6H3v2h12V6zm0 4H3v2h12v-2zM3 16h8v-2H3v2zM17 6v8.18c-.31-.11-.65-.18-1-.18-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3V8h3V6h-5z" />
     </svg>
   ),
-  whatsapp: (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 62.541 62.51">
-      <path
-        data-name="layer1"
-        d="M30.19.031a31.753 31.753 0 0 0-26.735 46.12L.085 62.509A1.235 1.235 0 0 0 1.58 63.96l16.029-3.8A31.744 31.744 0 1 0 30.19.031zM49.316 49.31A24.871 24.871 0 0 1 20.68 54l-2.232-1.112-9.828 2.326 2.069-10.042-1.1-2.154a24.874 24.874 0 0 1 4.578-28.857A24.854 24.854 0 0 1 49.316 49.31zm0 0"
-        fill="currentColor"
-      />
-      <path
-        data-name="layer1"
-        d="M47.147 38.619L41 36.854a2.292 2.292 0 0 0-2.267.6l-1.5 1.531a2.239 2.239 0 0 1-2.435.514C31.883 38.32 25.765 32.88 24.2 30.16a2.239 2.239 0 0 1 .177-2.483l1.312-1.7a2.292 2.292 0 0 0 .283-2.328L23.388 17.8a2.293 2.293 0 0 0-3.58-.82c-1.716 1.451-3.752 3.657-4 6.1-.436 4.308 1.411 9.738 8.4 16.258 8.071 7.534 14.534 8.528 18.743 7.509 2.387-.578 4.294-2.9 5.5-4.793a2.293 2.293 0 0 0-1.3-3.436z"
-        fill="currentColor"
-      />
-    </svg>
-  ),
+  whatsapp: <WhatsAppIcon />,
   world: (
     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
       <circle cx="12" cy="12" r="10" />
@@ -129,12 +118,11 @@ export default function Navbar({ siteInfo }: { siteInfo: SiteInfo | null }) {
             </li>
           ))}
           <li>
-            <Link
-              href={`/${locale}/contact`}
-              className="px-5 py-2 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-xs uppercase tracking-wider"
-            >
-              {t('cta.startNow')}
-            </Link>
+            <Button asChild variant="primary" size="sm">
+              <Link href={`/${locale}/contact`}>
+                {t('cta.startNow')}
+              </Link>
+            </Button>
           </li>
           {phone && (
             <li>
@@ -164,12 +152,11 @@ export default function Navbar({ siteInfo }: { siteInfo: SiteInfo | null }) {
           </li>
         </ul>
         <div className="flex items-center gap-3">
-          <Link
-            href={`/${locale}/contact`}
-            className="md:hidden px-3 py-2 bg-amber-400 text-zinc-950 font-bold rounded text-xs uppercase tracking-wider hover:bg-amber-300 transition-colors"
-          >
-            {t('cta.startNow')}
-          </Link>
+          <Button asChild variant="primary" size="sm" className="md:hidden">
+            <Link href={`/${locale}/contact`}>
+              {t('cta.startNow')}
+            </Link>
+          </Button>
           {phone && (
             <a
               href={`https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(t('cta.whatsappMessage'))}`}

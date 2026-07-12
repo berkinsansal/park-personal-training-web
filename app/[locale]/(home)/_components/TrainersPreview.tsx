@@ -1,10 +1,12 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import type { Trainer } from '@/lib/types';
 import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
 import { SectionShell } from '@/app/[locale]/_components/SectionShell';
+import { Button } from '@/components/ui/button';
 
 function getInitials(name: string) {
   return name
@@ -58,12 +60,11 @@ export default function TrainersPreview({ trainers }: { trainers: Trainer[] }) {
         ))}
       </div>
       <div className="mt-12 text-center">
-        <a
-          href={`/${locale}/trainers`}
-          className="inline-block px-8 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
-        >
-          {t('details')}
-        </a>
+        <Button asChild variant="primary">
+          <Link href={`/${locale}/trainers`}>
+            {t('details')}
+          </Link>
+        </Button>
       </div>
     </SectionShell>
   );

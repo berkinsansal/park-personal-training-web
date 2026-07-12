@@ -4,6 +4,7 @@ import { useActionState } from 'react';
 import { useTranslations } from 'next-intl';
 import { updateSiteInfoAction } from '../actions';
 import type { SiteInfo } from '@/lib/types';
+import { Button } from '@/components/ui/button';
 
 export default function SiteInfoForm({ data }: { data: SiteInfo | null }) {
   const t = useTranslations('admin.siteInfo');
@@ -94,13 +95,14 @@ export default function SiteInfoForm({ data }: { data: SiteInfo | null }) {
         />
 
         <div className="sm:col-span-2 flex items-center gap-4 pt-2">
-          <button
+          <Button
             type="submit"
             disabled={pending}
-            className="px-6 py-2.5 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm disabled:opacity-50"
+            variant="primary"
+            size="default"
           >
             {pending ? t('saving') : t('save')}
-          </button>
+          </Button>
           {state?.success && (
             <span className="text-green-400 text-sm">{t('saved')}</span>
           )}
