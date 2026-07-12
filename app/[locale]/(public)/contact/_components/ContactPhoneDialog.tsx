@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { useLayoutEffect, useState } from 'react';
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon';
+import styles from './ContactPhoneDialog.module.css';
 
 export default function ContactPhoneDialog({ phone }: { phone: string }) {
   const t = useTranslations('contact');
@@ -18,69 +19,11 @@ export default function ContactPhoneDialog({ phone }: { phone: string }) {
 
   return (
     <>
-      <style>{`
-        @keyframes flipIn {
-          0% {
-            transform: perspective(1200px) rotateY(-90deg);
-            opacity: 0;
-          }
-          100% {
-            transform: perspective(1200px) rotateY(0deg);
-            opacity: 1;
-          }
-        }
-
-        @keyframes flipOut {
-          0% {
-            transform: perspective(1200px) rotateY(0deg);
-            opacity: 1;
-          }
-          100% {
-            transform: perspective(1200px) rotateY(90deg);
-            opacity: 0;
-          }
-        }
-
-        @keyframes buttonScaleIn {
-          0% {
-            opacity: 0;
-            transform: scale(0.8) translateY(10px);
-          }
-          100% {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-          }
-        }
-
-        .flip-card-front {
-          animation: flipIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
-        }
-
-        .flip-card-back {
-          animation: flipOut 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) reverse forwards;
-        }
-
-        .action-btn {
-          animation: buttonScaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .action-btn:nth-child(1) {
-          animation-delay: 0.1s;
-        }
-
-        .action-btn:nth-child(2) {
-          animation-delay: 0.15s;
-        }
-
-        .action-btn:nth-child(3) {
-          animation-delay: 0.2s;
-        }
-      `}</style>
 
       {/* Front Side */}
       {!isFlipped && (
         <button
-          className={`${isFlipped === false ? 'flip-card-front' : ''} flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group cursor-pointer w-full`}
+          className={`${isFlipped === false ? styles.flipCardFront : ''} flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group cursor-pointer w-full`}
           type="button"
           onClick={() => setIsFlipped(true)}
         >
@@ -110,10 +53,10 @@ export default function ContactPhoneDialog({ phone }: { phone: string }) {
 
       {/* Back Side */}
       {isFlipped && (
-        <div className="flip-card-back flex items-center gap-4 bg-zinc-900 border border-amber-400/50 rounded-2xl p-6 w-full">
+        <div className={`${styles.flipCardBack} flex items-center gap-4 bg-zinc-900 border border-amber-400/50 rounded-2xl p-6 w-full`}>
           <a
             href={`tel:${phone}`}
-            className="action-btn flex flex-col items-center justify-center gap-2 flex-1 h-12 px-3 rounded-lg font-semibold text-white transition-all duration-300 bg-amber-900 hover:bg-amber-800 hover:scale-110"
+            className={`${styles.actionBtn} flex flex-col items-center justify-center gap-2 flex-1 h-12 px-3 rounded-lg font-semibold text-white transition-all duration-300 bg-amber-900 hover:bg-amber-800 hover:scale-110`}
             onClick={() => {
               setIsFlipped(false);
             }}
@@ -137,7 +80,7 @@ export default function ContactPhoneDialog({ phone }: { phone: string }) {
             href={`https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(tCta('whatsappMessage'))}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="action-btn flex flex-col items-center justify-center gap-2 flex-1 h-12 px-3 rounded-lg font-semibold text-white transition-all duration-300 bg-green-900 hover:bg-green-800 hover:scale-110"
+            className={`${styles.actionBtn} flex flex-col items-center justify-center gap-2 flex-1 h-12 px-3 rounded-lg font-semibold text-white transition-all duration-300 bg-green-900 hover:bg-green-800 hover:scale-110`}
             onClick={() => {
               setIsFlipped(false);
             }}
@@ -146,7 +89,7 @@ export default function ContactPhoneDialog({ phone }: { phone: string }) {
           </a>
 
           <button
-            className="action-btn flex flex-col items-center justify-center gap-2 flex-1 h-12 px-3 rounded-lg font-semibold text-white transition-all duration-300 bg-slate-600 hover:bg-slate-500 hover:scale-110 cursor-pointer"
+            className={`${styles.actionBtn} flex flex-col items-center justify-center gap-2 flex-1 h-12 px-3 rounded-lg font-semibold text-white transition-all duration-300 bg-slate-600 hover:bg-slate-500 hover:scale-110 cursor-pointer`}
             type="button"
             onClick={() => setIsFlipped(false)}
           >
