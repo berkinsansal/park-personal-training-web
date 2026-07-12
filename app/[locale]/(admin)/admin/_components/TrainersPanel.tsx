@@ -156,9 +156,10 @@ export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
               onCancel={() => setEditingId(null)}
             />
           ) : (
-            <div
+            <ItemRow
               key={trainer.id}
-              className={`flex items-center gap-3 bg-zinc-900 border border-zinc-800 rounded-xl p-4 transition-opacity ${pendingOp === `delete:${trainer.id}` ? 'opacity-50 pointer-events-none' : ''}`}
+              className="flex items-center gap-3"
+              isPending={pendingOp === `delete:${trainer.id}`}
             >
               <div className="relative w-10 h-10 rounded-full bg-amber-400/10 border border-amber-400/30 flex items-center justify-center shrink-0 overflow-hidden">
                 {trainer.photo_url ? (
@@ -234,7 +235,7 @@ export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
                   </button>
                 </div>
               </div>
-            </div>
+            </ItemRow>
           ),
         )}
       </div>

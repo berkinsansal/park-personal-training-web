@@ -14,6 +14,7 @@ import { inputCls } from './styles';
 import { Button } from '@/components/ui/button';
 import { PanelHeader } from '@/components/admin/panel-header';
 import { FeedbackFlash } from '@/components/admin/feedback-flash';
+import { ItemRow } from '@/components/admin/item-row';
 
 export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
   const t = useTranslations('admin.gallery');
@@ -157,9 +158,10 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
               onCancel={() => setEditingId(null)}
             />
           ) : (
-            <div
+            <ItemRow
               key={photo.id}
-              className={`flex flex-col bg-zinc-900 border border-zinc-800 rounded-xl overflow-hidden transition-opacity ${pendingOp === `delete:${photo.id}` ? 'opacity-50 pointer-events-none' : ''}`}
+              className="flex flex-col overflow-hidden"
+              isPending={pendingOp === `delete:${photo.id}`}
             >
               <div className="relative w-full h-40 bg-zinc-800">
                 {photo.image_url && (
@@ -219,7 +221,7 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
                   </button>
                 </div>
               </div>
-            </div>
+            </ItemRow>
           ),
         )}
       </div>

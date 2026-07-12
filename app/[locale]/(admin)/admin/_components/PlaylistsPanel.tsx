@@ -158,9 +158,10 @@ export default function PlaylistsPanel({
               onCancel={() => setEditingId(null)}
             />
           ) : (
-            <div
+            <ItemRow
               key={playlist.id}
-              className={`flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-xl p-4 transition-opacity ${pendingOp === `delete:${playlist.id}` ? 'opacity-50 pointer-events-none' : ''}`}
+              className="flex items-center gap-4"
+              isPending={pendingOp === `delete:${playlist.id}`}
             >
               <div className="w-12 h-12 rounded-lg bg-green-500/20 border border-green-500/30 flex items-center justify-center shrink-0 text-green-400 text-xl">
                 🎵
@@ -219,7 +220,7 @@ export default function PlaylistsPanel({
                   </button>
                 </div>
               </div>
-            </div>
+            </ItemRow>
           ),
         )}
       </div>
