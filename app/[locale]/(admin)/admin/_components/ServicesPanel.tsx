@@ -179,7 +179,6 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
                         Math.min(...list.map((s) => s.order_index))
                     }
                     className={`text-xs transition-colors ${pendingOp === `up:${service.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
-                    title="Move up"
                     type="button"
                     onClick={() => handleReorder(service.id, 'up')}
                   >
@@ -192,7 +191,6 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
                         Math.max(...list.map((s) => s.order_index))
                     }
                     className={`text-xs transition-colors ${pendingOp === `down:${service.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
-                    title="Move down"
                     type="button"
                     onClick={() => handleReorder(service.id, 'down')}
                   >

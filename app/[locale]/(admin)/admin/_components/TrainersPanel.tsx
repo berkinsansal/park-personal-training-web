@@ -198,7 +198,6 @@ export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
                         Math.min(...list.map((tr) => tr.order_index))
                     }
                     className={`text-xs transition-colors ${pendingOp === `up:${trainer.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
-                    title="Move up"
                     type="button"
                     onClick={() => handleReorder(trainer.id, 'up')}
                   >
@@ -211,7 +210,6 @@ export default function TrainersPanel({ trainers }: { trainers: Trainer[] }) {
                         Math.max(...list.map((tr) => tr.order_index))
                     }
                     className={`text-xs transition-colors ${pendingOp === `down:${trainer.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
-                    title="Move down"
                     type="button"
                     onClick={() => handleReorder(trainer.id, 'down')}
                   >

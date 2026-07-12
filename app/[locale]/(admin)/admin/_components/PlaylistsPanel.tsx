@@ -183,7 +183,6 @@ export default function PlaylistsPanel({
                         Math.min(...list.map((p) => p.order_index))
                     }
                     className={`text-xs transition-colors ${pendingOp === `up:${playlist.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
-                    title="Move up"
                     type="button"
                     onClick={() => handleReorder(playlist.id, 'up')}
                   >
@@ -196,7 +195,6 @@ export default function PlaylistsPanel({
                         Math.max(...list.map((p) => p.order_index))
                     }
                     className={`text-xs transition-colors ${pendingOp === `down:${playlist.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
-                    title="Move down"
                     type="button"
                     onClick={() => handleReorder(playlist.id, 'down')}
                   >

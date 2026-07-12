@@ -186,7 +186,6 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
                         Math.min(...list.map((p) => p.order_index))
                     }
                     className={`text-xs px-2 py-1 rounded transition-colors ${pendingOp === `up:${photo.id}` ? 'opacity-40 text-zinc-400 bg-zinc-800' : 'text-zinc-400 hover:text-amber-400 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 disabled:cursor-not-allowed'}`}
-                    title="Move up"
                     type="button"
                     onClick={() => handleReorder(photo.id, 'up')}
                   >
@@ -199,7 +198,6 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
                         Math.max(...list.map((p) => p.order_index))
                     }
                     className={`text-xs px-2 py-1 rounded transition-colors ${pendingOp === `down:${photo.id}` ? 'opacity-40 text-zinc-400 bg-zinc-800' : 'text-zinc-400 hover:text-amber-400 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 disabled:cursor-not-allowed'}`}
-                    title="Move down"
                     type="button"
                     onClick={() => handleReorder(photo.id, 'down')}
                   >
