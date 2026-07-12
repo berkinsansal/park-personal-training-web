@@ -145,7 +145,6 @@ export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
                   />
                 </svg>
               }
-              onClick={() => {}}
             />
           </div>
         </AnimateIn>

@@ -118,7 +118,7 @@ export default function About({
             <div ref={statsRef} className="grid grid-cols-2 gap-6">
               {stats.map((s) => {
                 const numMatch = s.value.match(/\d+/);
-                const num = numMatch ? parseInt(numMatch[0]) : 0;
+                const num = numMatch ? parseInt(numMatch[0], 10) : 0;
                 const suffix = s.value.replace(/\d+/g, '');
                 return (
                   <StatCounter

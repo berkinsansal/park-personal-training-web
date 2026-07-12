@@ -1,20 +1,19 @@
 'use client';
 
-import { useState } from 'react';
-import Image from 'next/image';
+import { FeedbackFlash } from '@/components/admin/feedback-flash';
+import { ItemRow } from '@/components/admin/item-row';
+import { PanelHeader } from '@/components/admin/panel-header';
+import type { GalleryPhoto } from '@/lib/types';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
+import { useState } from 'react';
 import {
   addGalleryPhotoAction,
   deleteGalleryPhotoAction,
   reorderGalleryPhotoAction,
   updateGalleryPhotoAction,
 } from '../actions';
-import type { GalleryPhoto } from '@/lib/types';
 import { inputCls } from './styles';
-import { Button } from '@/components/ui/button';
-import { PanelHeader } from '@/components/admin/panel-header';
-import { FeedbackFlash } from '@/components/admin/feedback-flash';
-import { ItemRow } from '@/components/admin/item-row';
 
 export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
   const t = useTranslations('admin.gallery');

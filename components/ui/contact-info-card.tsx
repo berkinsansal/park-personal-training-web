@@ -43,7 +43,7 @@ const ContactInfoCard = React.forwardRef<HTMLAnchorElement, ContactInfoCardProps
           >
             {icon}
           </div>
-          <div>
+          <div className="text-left">
             {label && (
               <div className="text-white font-bold group-hover:text-amber-400 transition-colors">
                 {label}
