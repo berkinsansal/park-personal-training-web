@@ -1,16 +1,17 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
-import type { SiteInfo } from '@/lib/types';
-import ContactForm from './ContactForm';
 import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
 import { SectionShell } from '@/app/[locale]/_components/SectionShell';
-import ContactPhoneDialog from './ContactPhoneDialog';
 import { ContactInfoCard } from '@/components/ui/contact-info-card';
+import { WhatsAppIcon } from '@/components/ui/whatsapp-icon';
+import type { SiteInfo } from '@/lib/types';
+import { useLocale, useTranslations } from 'next-intl';
+import ContactForm from './ContactForm';
 
 export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
   const locale = useLocale();
   const t = useTranslations('contact');
+  const tCta = useTranslations('cta');
   const ig = siteInfo?.ig_handle ?? '';
   const phone = siteInfo?.phone ?? '';
   const email = siteInfo?.email ?? '';
@@ -48,25 +49,54 @@ export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
       <div className="grid md:grid-cols-2 gap-10 mb-16">
         <AnimateIn delay={0}>
           <div className="flex flex-col gap-6">
+            <div className="grid grid-cols-2 gap-4">
+              <ContactInfoCard
+                href={`https://instagram.com/${ig}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                label="Instagram"
+                iconClassName="bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400"
+                icon={
+                  <svg
+                    className="w-6 h-6 text-white"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                  </svg>
+                }
+              />
+
+              <ContactInfoCard
+                href={`https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(tCta('whatsappMessage'))}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                label="WhatsApp"
+                iconClassName="bg-green-600"
+                icon={<WhatsAppIcon className="w-6 h-6" />}
+              />
+            </div>
+
             <ContactInfoCard
-              href={`https://instagram.com/${ig}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              label="Instagram"
-              value={`@${ig}`}
-              iconClassName="bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400"
+              href={`tel:${phone}`}
+              label={t('phone')}
+              value={phone}
               icon={
                 <svg
-                  className="w-6 h-6 text-white"
-                  fill="currentColor"
+                  className="w-6 h-6 text-amber-400"
+                  fill="none"
+                  stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                  />
                 </svg>
               }
             />
-
-            <ContactPhoneDialog phone={phone} />
 
             <ContactInfoCard
               href={`mailto:${email}`}
@@ -92,12 +122,7 @@ export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
             <ContactInfoCard
               href={mapsUrl}
               label={t('address')}
-              value={
-                <>
-                  <div className="text-zinc-400 text-sm">{address1}</div>
-                  <div className="text-zinc-400 text-sm">{address2}</div>
-                </>
-              }
+              value={[address1, address2]}
               icon={
                 <svg
                   className="w-6 h-6 text-amber-400"
@@ -124,12 +149,7 @@ export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
             <ContactInfoCard
               asButton
               label={t('hours')}
-              value={
-                <>
-                  <div className="text-zinc-400 text-sm">{weekday}</div>
-                  <div className="text-zinc-400 text-sm">{weekend}</div>
-                </>
-              }
+              value={[weekday, weekend]}
               icon={
                 <svg
                   className="w-6 h-6 text-amber-400"

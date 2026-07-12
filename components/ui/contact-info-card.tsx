@@ -1,17 +1,19 @@
 import * as React from 'react';
 import { cn } from '@/lib/utils';
 
-export interface ContactInfoCardProps
-  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface ContactInfoCardProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   icon: React.ReactNode;
   label?: string;
-  value: string | React.ReactNode;
+  value?: string | React.ReactNode;
   onClick?: () => void;
   iconClassName?: string;
   asButton?: boolean;
 }
 
-const ContactInfoCard = React.forwardRef<HTMLAnchorElement, ContactInfoCardProps>(
+const ContactInfoCard = React.forwardRef<
+  HTMLAnchorElement,
+  ContactInfoCardProps
+>(
   (
     {
       icon,
@@ -23,7 +25,7 @@ const ContactInfoCard = React.forwardRef<HTMLAnchorElement, ContactInfoCardProps
       className,
       ...props
     },
-    ref
+    ref,
   ) => {
     const baseClasses =
       'flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group';
@@ -38,7 +40,7 @@ const ContactInfoCard = React.forwardRef<HTMLAnchorElement, ContactInfoCardProps
           <div
             className={cn(
               'w-12 h-12 rounded-xl bg-zinc-700 flex items-center justify-center flex-shrink-0',
-              iconClassName
+              iconClassName,
             )}
           >
             {icon}
@@ -49,26 +51,27 @@ const ContactInfoCard = React.forwardRef<HTMLAnchorElement, ContactInfoCardProps
                 {label}
               </div>
             )}
-            {typeof value === 'string' ? (
-              <div className="text-zinc-400 text-sm">{value}</div>
-            ) : (
-              value
-            )}
+            {value &&
+              (Array.isArray(value) ? (
+                value.map((item) => (
+                  <div key={item} className="text-zinc-400 text-sm">
+                    {item}
+                  </div>
+                ))
+              ) : (
+                <div className="text-zinc-400 text-sm">{value}</div>
+              ))}
           </div>
         </button>
       );
     }
 
     return (
-      <a
-        ref={ref}
-        className={cn(baseClasses, className)}
-        {...props}
-      >
+      <a ref={ref} className={cn(baseClasses, className)} {...props}>
         <div
           className={cn(
             'w-12 h-12 rounded-xl bg-zinc-700 flex items-center justify-center flex-shrink-0',
-            iconClassName
+            iconClassName,
           )}
         >
           {icon}
@@ -79,15 +82,20 @@ const ContactInfoCard = React.forwardRef<HTMLAnchorElement, ContactInfoCardProps
               {label}
             </div>
           )}
-          {typeof value === 'string' ? (
-            <div className="text-zinc-400 text-sm">{value}</div>
-          ) : (
-            value
-          )}
+          {value &&
+            (Array.isArray(value) ? (
+              value.map((item) => (
+                <div key={item} className="text-zinc-400 text-sm">
+                  {item}
+                </div>
+              ))
+            ) : (
+              <div className="text-zinc-400 text-sm">{value}</div>
+            ))}
         </div>
       </a>
     );
-  }
+  },
 );
 ContactInfoCard.displayName = 'ContactInfoCard';
 
