@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/lib/site.config';
-import { getServices } from '@/lib/data';
+import { getServices, getSiteInfo } from '@/lib/data';
 import { routing } from '@/i18n.config';
 import Services from '@/app/[locale]/(public)/services/_components/Services';
 import ContactPreview from '@/app/[locale]/(home)/_components/ContactPreview';
@@ -19,12 +19,15 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 async function ServicesContent() {
-  const services = await getServices();
+  const [siteInfo, services] = await Promise.all([
+    getSiteInfo(),
+    getServices(),
+  ]);
 
   return (
     <>
       <Services services={services} />
-      <ContactPreview />
+      <ContactPreview phone={siteInfo.phone} />
     </>
   );
 }

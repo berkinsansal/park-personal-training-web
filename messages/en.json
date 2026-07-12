@@ -17,12 +17,14 @@
     "home": "Home",
     "about": "About",
     "services": "Services",
-    "trainers": "Trainers",
-    "contact": "Contact"
+    "trainers": "Trainers"
   },
   "hero": {
-    "subtitle": "The right place to reach your goals. Become the best version of yourself with personalized programs led by expert trainers.",
-    "getStarted": "Get Started",
+    "subtitle": "The right place to reach your goals. Become the best version of yourself with personalized programs led by expert trainers."
+  },
+  "cta": {
+    "startNow": "Start Now!",
+    "whatsappMessage": "Hi, I would like to get information about Park Personal Training.",
     "viewServices": "View Services"
   },
   "about": {
@@ -36,7 +38,6 @@
     "statYearsExperience": "Years Experience",
     "statTrainers": "Expert Trainers",
     "statServices": "Program Types",
-    "contactUs": "Contact Us",
     "learnMore": "Learn More"
   },
   "services": {
@@ -54,7 +55,7 @@
   "contact": {
     "label": "Contact",
     "heading": "Take Action",
-    "description": "Have a question? Reach us on Instagram or fill out the form below.",
+    "description": "Contact us to ask about programs, available times, and membership details.",
     "formHeading": "Contact Us",
     "phone": "Phone",
     "email": "Email",
@@ -70,9 +71,8 @@
     "errorMessage": "Something went wrong. Please try again.",
     "validationError": "Please fill in all required fields.",
     "sendError": "Unable to send message. Please try again later.",
-    "previewHeading": "Ready to Start Your Journey?",
-    "previewDescription": "Get in touch with our team to discuss your fitness goals.",
-    "contactUs": "Contact Us"
+    "previewHeading": "Ready to Start?",
+    "previewDescription": "Get in touch with our team to discuss your fitness goals."
   },
   "playlists": {
     "label": "Music",

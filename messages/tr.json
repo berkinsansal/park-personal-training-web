@@ -17,12 +17,14 @@
     "home": "Anasayfa",
     "about": "Hakkımızda",
     "services": "Hizmetler",
-    "trainers": "Eğitmenler",
-    "contact": "İletişim"
+    "trainers": "Eğitmenler"
   },
   "hero": {
-    "subtitle": "Hedeflerine ulaşmak için doğru yer. Uzman eğitmenlerimizle sana özel programlarla en iyi versiyonun ol.",
-    "getStarted": "Hemen Başvur",
+    "subtitle": "Hedeflerine ulaşmak için doğru yer. Uzman eğitmenlerimizle sana özel programlarla en iyi versiyonun ol."
+  },
+  "cta": {
+    "startNow": "Hemen Başla!",
+    "whatsappMessage": "Merhaba, Park Personal Training hakkında bilgi almak istiyorum.",
     "viewServices": "Hizmetleri Gör"
   },
   "about": {
@@ -36,7 +38,6 @@
     "statYearsExperience": "Yıl Deneyim",
     "statTrainers": "Uzman Eğitmen",
     "statServices": "Program Çeşidi",
-    "contactUs": "Bize Ulaş",
     "learnMore": "Daha Fazla"
   },
   "services": {
@@ -54,7 +55,7 @@
   "contact": {
     "label": "İletişim",
     "heading": "Harekete Geç",
-    "description": "Sormak istediğin bir şey mi var? Bize Instagram üzerinden ulaşabilir ya da aşağıdaki formu doldurabilirsin.",
+    "description": "Programlar, uygun saatler ve üyelik detayları için bizimle iletişime geç.",
     "formHeading": "Bize Ulaş",
     "phone": "Telefon",
     "email": "E-posta",
@@ -71,8 +72,7 @@
     "validationError": "Lütfen tüm gerekli alanları doldurun.",
     "sendError": "Mesaj gönderilemedi. Lütfen daha sonra tekrar deneyiniz.",
     "previewHeading": "Başlamaya Hazır mısın?",
-    "previewDescription": "Fitness hedeflerini tartışmak için ekibimizle iletişime geç.",
-    "contactUs": "Bize Ulaş"
+    "previewDescription": "Fitness hedeflerini tartışmak için ekibimizle iletişime geç."
   },
   "playlists": {
     "label": "Müzik",

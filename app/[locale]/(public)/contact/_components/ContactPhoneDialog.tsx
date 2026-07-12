@@ -5,6 +5,7 @@ import { useLayoutEffect, useState } from 'react';
 
 export default function ContactPhoneDialog({ phone }: { phone: string }) {
   const t = useTranslations('contact');
+  const tCta = useTranslations('cta');
   const [isFlipped, setIsFlipped] = useState<boolean | null>(null);
 
   useLayoutEffect(() => {
@@ -132,7 +133,7 @@ export default function ContactPhoneDialog({ phone }: { phone: string }) {
           </a>
 
           <a
-            href={`https://wa.me/${phone.replace(/\D/g, '')}`}
+            href={`https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(tCta('whatsappMessage'))}`}
             target="_blank"
             rel="noopener noreferrer"
             className="action-btn flex flex-col items-center justify-center gap-2 flex-1 h-12 px-3 rounded-lg font-semibold text-white transition-all duration-300 bg-green-900 hover:bg-green-800 hover:scale-110"

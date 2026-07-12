@@ -44,6 +44,7 @@ export default function About({
   gallery,
 }: Props) {
   const t = useTranslations('about');
+  const tCta = useTranslations('cta');
   const locale = useLocale();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
@@ -131,7 +132,7 @@ export default function About({
               href={`/${locale}/contact`}
               className="mt-8 inline-block px-6 py-3 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
             >
-              {t('contactUs')}
+              {tCta('startNow')}
             </a>
           </div>
           <div>

@@ -18,12 +18,15 @@ function SubmitButton({ label, pending }: { label: string; pending: boolean }) {
 
 export default function ContactForm() {
   const t = useTranslations('contact');
+  const tCta = useTranslations('cta');
   const formRef = useRef<HTMLFormElement>(null);
   const [isPending, startTransition] = useTransition();
   const [state, setState] = useState<{
     error?: string;
     success?: boolean;
   } | null>(null);
+
+  const defaultMessage = tCta('whatsappMessage');
 
   const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -85,6 +88,7 @@ export default function ContactForm() {
         <textarea
           rows={4}
           name="message"
+          defaultValue={defaultMessage}
           className="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-amber-400 transition-colors text-sm resize-none"
         />
       </div>

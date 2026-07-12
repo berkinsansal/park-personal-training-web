@@ -97,7 +97,6 @@ export default function Navbar({ siteInfo }: { siteInfo: SiteInfo | null }) {
     { href: `/${locale}/services`, label: t('nav.services'), key: 'services' },
     { href: `/${locale}/trainers`, label: t('nav.trainers'), key: 'trainers' },
     { href: `/${locale}/music`, label: t('playlists.label'), key: 'playlists' },
-    { href: `/${locale}/contact`, label: t('nav.contact'), key: 'contact' },
   ];
 
   return (
@@ -115,7 +114,7 @@ export default function Navbar({ siteInfo }: { siteInfo: SiteInfo | null }) {
             {siteConfig.siteName}
           </span>
         </Link>
-        <ul className="hidden md:flex gap-8 items-center">
+        <ul className="hidden md:flex gap-6 items-center">
           {links.map((l) => (
             <li key={l.key}>
               <Link
@@ -129,13 +128,21 @@ export default function Navbar({ siteInfo }: { siteInfo: SiteInfo | null }) {
               </Link>
             </li>
           ))}
+          <li>
+            <Link
+              href={`/${locale}/contact`}
+              className="px-5 py-2 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-xs uppercase tracking-wider"
+            >
+              {t('cta.startNow')}
+            </Link>
+          </li>
           {phone && (
             <li>
               <a
-                href={`https://wa.me/${phone.replace(/\D/g, '')}`}
+                href={`https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(t('cta.whatsappMessage'))}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center w-10 h-10 bg-green-900 hover:bg-green-800 rounded-full transition-colors"
+                className="inline-flex items-center justify-center w-10 h-10 bg-green-600 hover:bg-green-500 rounded-full transition-colors"
               >
                 {navIcons.whatsapp}
               </a>
@@ -156,13 +163,19 @@ export default function Navbar({ siteInfo }: { siteInfo: SiteInfo | null }) {
             )}
           </li>
         </ul>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          <Link
+            href={`/${locale}/contact`}
+            className="md:hidden px-3 py-2 bg-amber-400 text-zinc-950 font-bold rounded text-xs uppercase tracking-wider hover:bg-amber-300 transition-colors"
+          >
+            {t('cta.startNow')}
+          </Link>
           {phone && (
             <a
-              href={`https://wa.me/${phone.replace(/\D/g, '')}`}
+              href={`https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(t('cta.whatsappMessage'))}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="md:hidden inline-flex items-center justify-center w-10 h-10 bg-green-900 hover:bg-green-800 rounded-full transition-colors"
+              className="md:hidden inline-flex items-center justify-center w-10 h-10 bg-green-600 hover:bg-green-500 rounded-full transition-colors"
             >
               {navIcons.whatsapp}
             </a>

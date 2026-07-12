@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { siteConfig } from '@/lib/site.config';
-import { getTrainers } from '@/lib/data';
+import { getSiteInfo, getTrainers } from '@/lib/data';
 import { routing } from '@/i18n.config';
 import Trainers from '@/app/[locale]/(public)/trainers/_components/Trainers';
 import ContactPreview from '@/app/[locale]/(home)/_components/ContactPreview';
@@ -19,12 +19,15 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 async function TrainersContent() {
-  const trainers = await getTrainers();
+  const [siteInfo, trainers] = await Promise.all([
+    getSiteInfo(),
+    getTrainers(),
+  ]);
 
   return (
     <>
       <Trainers trainers={trainers} />
-      <ContactPreview />
+      <ContactPreview phone={siteInfo.phone} />
     </>
   );
 }

@@ -185,13 +185,13 @@ export default function Hero() {
             href={`/${locale}/contact`}
             className="px-8 py-4 bg-amber-400 text-zinc-950 font-bold rounded-lg hover:bg-amber-300 transition-colors text-sm uppercase tracking-wider"
           >
-            {t('hero.getStarted')}
+            {t('cta.startNow')}
           </a>
           <a
             href={`/${locale}/services`}
             className="px-8 py-4 border border-zinc-600 text-white font-medium rounded-lg hover:border-amber-400 hover:text-amber-400 transition-colors text-sm uppercase tracking-wider"
           >
-            {t('hero.viewServices')}
+            {t('cta.viewServices')}
           </a>
         </div>
       </div>

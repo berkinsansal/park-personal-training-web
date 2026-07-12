@@ -33,7 +33,7 @@ async function HomeContent() {
       <ServicesPreview services={services} />
       <TrainersPreview trainers={trainers} />
       <MusicPreview />
-      <ContactPreview />
+      <ContactPreview phone={siteInfo.phone} />
     </>
   );
 }
