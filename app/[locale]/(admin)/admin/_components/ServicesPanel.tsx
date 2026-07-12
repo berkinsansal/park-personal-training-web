@@ -12,6 +12,9 @@ import type { Service } from '@/lib/types';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+import { PanelHeader } from '@/components/admin/panel-header';
+import { FeedbackFlash } from '@/components/admin/feedback-flash';
+import { ItemRow } from '@/components/admin/item-row';
 
 export default function ServicesPanel({ services }: { services: Service[] }) {
   const t = useTranslations('admin.services');
@@ -123,18 +126,13 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
 
   return (
     <section>
-      <div className="flex items-center justify-between mb-4 pb-2 border-b border-zinc-800">
-        <h2 className="text-white font-bold text-lg">{t('heading')}</h2>
-        <button
-          className="text-sm text-amber-400 hover:text-amber-300 transition-colors"
-          type="button"
-          onClick={() => setAdding((v) => !v)}
-        >
-          {adding ? t('cancel') : t('add')}
-        </button>
-      </div>
+      <PanelHeader
+        title={t('heading')}
+        isAdding={adding}
+        onToggleAdd={() => setAdding((v) => !v)}
+      />
 
-      {feedback && <p className="text-amber-400 text-sm mb-3">{feedback}</p>}
+      <FeedbackFlash message={feedback} />
 
       {adding && (
         <ServiceForm
@@ -159,9 +157,10 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
               onCancel={() => setEditingId(null)}
             />
           ) : (
-            <div
+            <ItemRow
               key={service.id}
-              className={`flex items-start gap-3 bg-zinc-900 border border-zinc-800 rounded-xl p-4 transition-opacity ${pendingOp === `delete:${service.id}` ? 'opacity-50 pointer-events-none' : ''}`}
+              className="flex items-start gap-3"
+              isPending={pendingOp === `delete:${service.id}`}
             >
               <span className="text-2xl">{service.icon}</span>
               <div className="flex-1 min-w-0">
@@ -218,7 +217,7 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
                   </button>
                 </div>
               </div>
-            </div>
+            </ItemRow>
           ),
         )}
       </div>

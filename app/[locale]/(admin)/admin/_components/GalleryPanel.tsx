@@ -11,6 +11,9 @@ import {
 } from '../actions';
 import type { GalleryPhoto } from '@/lib/types';
 import { inputCls } from './styles';
+import { Button } from '@/components/ui/button';
+import { PanelHeader } from '@/components/admin/panel-header';
+import { FeedbackFlash } from '@/components/admin/feedback-flash';
 
 export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
   const t = useTranslations('admin.gallery');
@@ -123,18 +126,13 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
 
   return (
     <section>
-      <div className="flex items-center justify-between mb-4 pb-2 border-b border-zinc-800">
-        <h2 className="text-white font-bold text-lg">{t('heading')}</h2>
-        <button
-          className="text-sm text-amber-400 hover:text-amber-300 transition-colors"
-          type="button"
-          onClick={() => setAdding((v) => !v)}
-        >
-          {adding ? t('cancel') : t('add')}
-        </button>
-      </div>
+      <PanelHeader
+        title={t('heading')}
+        isAdding={adding}
+        onToggleAdd={() => setAdding((v) => !v)}
+      />
 
-      {feedback && <p className="text-amber-400 text-sm mb-3">{feedback}</p>}
+      <FeedbackFlash message={feedback} />
 
       {adding && (
         <GalleryForm
