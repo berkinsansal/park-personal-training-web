@@ -1,12 +1,19 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel';
+import { StatCounter } from '@/components/ui/stat-counter';
+import type { GalleryPhoto } from '@/lib/types';
+import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useLocale, useTranslations } from 'next-intl';
-import type { GalleryPhoto } from '@/lib/types';
-import { StatCounter } from '@/components/ui/stat-counter';
-import { Button } from '@/components/ui/button';
+import { useEffect, useRef, useState } from 'react';
 
 interface Props {
   happyCustomers: number;
@@ -26,42 +33,8 @@ export default function About({
   const t = useTranslations('about');
   const tCta = useTranslations('cta');
   const locale = useLocale();
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const statsRef = useRef<HTMLDivElement>(null);
   const [statsVisible, setStatsVisible] = useState(false);
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % gallery.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + gallery.length) % gallery.length);
-  };
-
-  const handlePointerDown = (e: React.PointerEvent) => {
-    setDragStart({ x: e.clientX, y: e.clientY });
-  };
-
-  const handlePointerUp = (e: React.PointerEvent) => {
-    const dragEnd = { x: e.clientX, y: e.clientY };
-    const diffX = dragStart.x - dragEnd.x;
-    const diffY = dragStart.y - dragEnd.y;
-
-    if (Math.abs(diffX) > 50) {
-      if (diffX > 0) {
-        nextSlide();
-      } else {
-        prevSlide();
-      }
-    } else if (Math.abs(diffY) > 50) {
-      if (diffY > 0) {
-        nextSlide();
-      } else {
-        prevSlide();
-      }
-    }
-  };
 
   useEffect(() => {
     const el = statsRef.current;
@@ -109,9 +82,7 @@ export default function About({
               {t('p2')}
             </p>
             <Button asChild variant="primary" className="mt-8">
-              <Link href={`/${locale}/contact`}>
-                {tCta('startNow')}
-              </Link>
+              <Link href={`/${locale}/contact`}>{tCta('startNow')}</Link>
             </Button>
           </div>
           <div>
@@ -131,60 +102,38 @@ export default function About({
                 );
               })}
             </div>
-
-            {gallery.length > 0 && (
-              <div className="mt-16">
-                <div
-                  className="overflow-hidden rounded-2xl bg-zinc-800 border border-zinc-700 aspect-video hover:border-amber-400/50 transition-all duration-300 touch-none relative"
-                  onPointerDown={handlePointerDown}
-                  onPointerUp={handlePointerUp}
-                >
-                  <Image
-                    fill
-                    sizes="100vw"
-                    src={gallery[currentSlide].image_url}
-                    alt={gallery[currentSlide].alt_text}
-                    className="object-cover select-none"
-                    draggable={false}
-                  />
-                </div>
-
-                {gallery.length > 1 && (
-                  <div className="flex items-center justify-center gap-4 mt-4">
-                    <button
-                      className="px-3 py-2 text-white bg-zinc-800 hover:bg-zinc-700 rounded-full transition-colors"
-                      type="button"
-                      onClick={prevSlide}
-                    >
-                      &lt;
-                    </button>
-                    <div className="flex justify-center gap-2">
-                      {gallery.map((_, idx) => (
-                        <button
-                          key={idx}
-                          className={`w-2 h-2 rounded-full transition-all ${
-                            idx === currentSlide
-                              ? 'bg-amber-400 w-6'
-                              : 'bg-zinc-600 hover:bg-zinc-500'
-                          }`}
-                          type="button"
-                          onClick={() => setCurrentSlide(idx)}
-                        />
-                      ))}
-                    </div>
-                    <button
-                      className="px-3 py-2 text-white bg-zinc-800 hover:bg-zinc-700 rounded-full transition-colors"
-                      type="button"
-                      onClick={nextSlide}
-                    >
-                      &gt;
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
           </div>
         </div>
+
+        {gallery.length > 0 && (
+          <div className="mt-12">
+            <Carousel className="w-full">
+              <CarouselContent>
+                {gallery.map((photo) => (
+                  <CarouselItem key={photo.id}>
+                    <div className="overflow-hidden rounded-2xl bg-zinc-800 border border-zinc-700 aspect-video hover:border-amber-400/50 transition-all duration-300 relative">
+                      <Image
+                        fill
+                        sizes="100vw"
+                        src={photo.image_url}
+                        alt={photo.alt_text}
+                        className="object-cover"
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              {gallery.length > 1 && (
+                <>
+                  <div className="flex items-center justify-center gap-4 mt-4">
+                    <CarouselPrevious />
+                    <CarouselNext />
+                  </div>
+                </>
+              )}
+            </Carousel>
+          </div>
+        )}
       </div>
     </section>
   );
