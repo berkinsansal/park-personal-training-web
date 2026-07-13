@@ -54,7 +54,13 @@ const navIcons = {
   ),
   whatsapp: <WhatsAppIcon />,
   world: (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+    <svg
+      className="w-5 h-5"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      strokeWidth={2}
+    >
       <circle cx="12" cy="12" r="10" />
       <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
     </svg>
@@ -90,97 +96,95 @@ export default function Navbar({ siteInfo }: { siteInfo: SiteInfo | null }) {
             {siteConfig.siteName}
           </span>
         </Link>
-        <ul className="hidden md:flex gap-6 items-center">
-          {links.map((l) => (
-            <li key={l.key}>
-              <Link
-                href={l.href}
-                className="flex items-center gap-2 text-zinc-300 hover:text-amber-400 transition-colors text-sm font-medium uppercase tracking-wider"
-              >
-                <span className="hidden xl:inline text-base">
-                  {navIcons[l.key as keyof typeof navIcons]}
-                </span>
-                {l.label}
-              </Link>
-            </li>
-          ))}
-          <li>
-            <Button asChild variant="primary" size="sm">
-              <Link href={`/${locale}/contact`}>
-                {t('cta.startNow')}
-              </Link>
-            </Button>
-          </li>
-          {phone && (
+        <div>
+          <ul className="hidden md:flex gap-6 items-center">
+            {links.map((l) => (
+              <li key={l.key}>
+                <Link
+                  href={l.href}
+                  className="flex items-center gap-2 text-zinc-300 hover:text-amber-400 transition-colors text-sm font-medium uppercase tracking-wider"
+                >
+                  <span className="hidden xl:inline text-base">
+                    {navIcons[l.key as keyof typeof navIcons]}
+                  </span>
+                  {l.label}
+                </Link>
+              </li>
+            ))}
             <li>
+              <Button asChild variant="primary" size="sm">
+                <Link href={`/${locale}/contact`}>{t('cta.startNow')}</Link>
+              </Button>
+            </li>
+            {phone && (
+              <li>
+                <a
+                  href={`https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(t('cta.whatsappMessage'))}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center w-10 h-10 bg-green-600 hover:bg-green-500 rounded-full transition-colors"
+                >
+                  {navIcons.whatsapp}
+                </a>
+              </li>
+            )}
+            <li>
+              <Popover>
+                <PopoverTrigger
+                  type="button"
+                  className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-zinc-800 hover:bg-zinc-700 transition-colors cursor-pointer"
+                >
+                  {navIcons.world}
+                </PopoverTrigger>
+                <PopoverContent className="w-fit p-2">
+                  <LocaleSwitcher />
+                </PopoverContent>
+              </Popover>
+            </li>
+          </ul>
+          <div className="flex items-center gap-3">
+            <Button asChild variant="primary" size="sm" className="md:hidden">
+              <Link href={`/${locale}/contact`}>{t('cta.startNow')}</Link>
+            </Button>
+            {phone && (
               <a
                 href={`https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(t('cta.whatsappMessage'))}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center w-10 h-10 bg-green-600 hover:bg-green-500 rounded-full transition-colors"
+                className="md:hidden inline-flex items-center justify-center w-10 h-10 bg-green-600 hover:bg-green-500 rounded-full transition-colors"
               >
                 {navIcons.whatsapp}
               </a>
-            </li>
-          )}
-          <li>
-            <Popover>
-              <PopoverTrigger
-                type="button"
-                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-zinc-800 hover:bg-zinc-700 transition-colors cursor-pointer"
+            )}
+            <button
+              className="md:hidden text-zinc-300"
+              type="button"
+              onClick={() => setOpen(!open)}
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                {navIcons.world}
-              </PopoverTrigger>
-              <PopoverContent className="w-fit p-2">
-                <LocaleSwitcher />
-              </PopoverContent>
-            </Popover>
-          </li>
-        </ul>
-        <div className="flex items-center gap-3">
-          <Button asChild variant="primary" size="sm" className="md:hidden">
-            <Link href={`/${locale}/contact`}>
-              {t('cta.startNow')}
-            </Link>
-          </Button>
-          {phone && (
-            <a
-              href={`https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(t('cta.whatsappMessage'))}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="md:hidden inline-flex items-center justify-center w-10 h-10 bg-green-600 hover:bg-green-500 rounded-full transition-colors"
-            >
-              {navIcons.whatsapp}
-            </a>
-          )}
-          <button
-            className="md:hidden text-zinc-300"
-            type="button"
-            onClick={() => setOpen(!open)}
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {open ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
+                {open ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
       {open && (
