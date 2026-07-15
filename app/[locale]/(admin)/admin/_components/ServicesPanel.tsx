@@ -172,49 +172,49 @@ export default function ServicesPanel({ services }: { services: Service[] }) {
                 </p>
               </div>
               <div className="flex flex-col gap-1 shrink-0">
-                <div className="flex gap-2">
-                  <button
+                <div className="flex">
+                  <Button
                     disabled={
                       pendingOp !== null ||
                       service.order_index ===
                         Math.min(...list.map((s) => s.order_index))
                     }
-                    className={`text-xs transition-colors ${pendingOp === `up:${service.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
-                    type="button"
+                    variant="ghost"
+                    size="xs"
                     onClick={() => handleReorder(service.id, 'up')}
                   >
                     ↑
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     disabled={
                       pendingOp !== null ||
                       service.order_index ===
                         Math.max(...list.map((s) => s.order_index))
                     }
-                    className={`text-xs transition-colors ${pendingOp === `down:${service.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
-                    type="button"
+                    variant="ghost"
+                    size="xs"
                     onClick={() => handleReorder(service.id, 'down')}
                   >
                     ↓
-                  </button>
+                  </Button>
                 </div>
-                <div className="flex gap-2">
-                  <button
+                <div className="flex">
+                  <Button
                     disabled={pendingOp !== null}
-                    className="text-xs text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-                    type="button"
+                    variant="ghost"
+                    size="xs"
                     onClick={() => setEditingId(service.id)}
                   >
                     {t('edit')}
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     disabled={pendingOp !== null}
-                    className="text-xs text-zinc-400 hover:text-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-                    type="button"
+                    variant="destructive"
+                    size="xs"
                     onClick={() => handleDelete(service.id)}
                   >
                     {t('delete')}
-                  </button>
+                  </Button>
                 </div>
               </div>
             </ItemRow>
@@ -248,6 +248,9 @@ function ServiceForm({
       onSubmit={onSubmit}
     >
       {defaults && <input type="hidden" name="id" value={defaults.id} />}
+      {defaults && (
+        <input type="hidden" name="order_index" value={defaults.order_index} />
+      )}
       <div>
         <label className="block text-zinc-400 text-xs mb-1">{t('icon')}</label>
         <Input
@@ -257,9 +260,6 @@ function ServiceForm({
           disabled={pendingOp !== null}
         />
       </div>
-      {defaults && (
-        <input type="hidden" name="order_index" value={defaults.order_index} />
-      )}
       <div className="grid grid-cols-2 gap-3">
         <div>
           <label className="block text-zinc-400 text-xs mb-1">
@@ -307,22 +307,18 @@ function ServiceForm({
         />
       </div>
       <div className="flex gap-2">
-        <Button
-          type="submit"
-          disabled={pendingOp !== null}
-          variant="primary"
-          size="sm"
-        >
+        <Button type="submit" disabled={pendingOp !== null} size="sm">
           {isSubmitting ? '...' : label}
         </Button>
-        <button
+        <Button
           type="button"
           disabled={pendingOp !== null}
-          className="px-4 py-2 text-zinc-400 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed text-xs transition-colors"
+          variant="secondary"
+          size="sm"
           onClick={onCancel}
         >
           {t('cancel')}
-        </button>
+        </Button>
       </div>
     </form>
   );

@@ -15,10 +15,11 @@ export function PanelHeader({ title, isAdding, onToggleAdd }: PanelHeaderProps) 
       <Button
         variant="link"
         size="sm"
-        className="text-sm text-amber-400 hover:text-amber-300"
         onClick={onToggleAdd}
       >
-        {isAdding ? 'Cancel' : '+ Add'}
+        {/*  */}
+        {isAdding ? 'Cancel' : '+ Add' }
+        {/*  */}
       </Button>
     </div>
   );

@@ -81,7 +81,7 @@ export default function About({
             <p className="mt-4 text-zinc-400 text-lg leading-relaxed">
               {t('p2')}
             </p>
-            <Button asChild variant="primary" className="mt-8">
+            <Button asChild overrideSize="cta" className="mt-8">
               <Link href={`/${locale}/contact`}>{tCta('startNow')}</Link>
             </Button>
           </div>

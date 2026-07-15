@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import { FeedbackFlash } from '@/components/admin/feedback-flash';
 import { ItemRow } from '@/components/admin/item-row';
 import { PanelHeader } from '@/components/admin/panel-header';
@@ -178,46 +179,50 @@ export default function GalleryPanel({ gallery }: { gallery: GalleryPhoto[] }) {
                   {photo.alt_text || '(No description)'}
                 </p>
                 <div className="flex gap-2 mt-auto pt-2 flex-wrap">
-                  <button
+                  <Button
                     disabled={
                       pendingOp !== null ||
                       photo.order_index ===
                         Math.min(...list.map((p) => p.order_index))
                     }
-                    className={`text-xs px-2 py-1 rounded transition-colors ${pendingOp === `up:${photo.id}` ? 'opacity-40 text-zinc-400 bg-zinc-800' : 'text-zinc-400 hover:text-amber-400 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 disabled:cursor-not-allowed'}`}
-                    type="button"
+                    variant="secondary"
+                    size="sm"
+                    className="text-xs"
                     onClick={() => handleReorder(photo.id, 'up')}
                   >
                     ↑
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     disabled={
                       pendingOp !== null ||
                       photo.order_index ===
                         Math.max(...list.map((p) => p.order_index))
                     }
-                    className={`text-xs px-2 py-1 rounded transition-colors ${pendingOp === `down:${photo.id}` ? 'opacity-40 text-zinc-400 bg-zinc-800' : 'text-zinc-400 hover:text-amber-400 bg-zinc-800 hover:bg-zinc-700 disabled:opacity-40 disabled:cursor-not-allowed'}`}
-                    type="button"
+                    variant="secondary"
+                    size="sm"
+                    className="text-xs"
                     onClick={() => handleReorder(photo.id, 'down')}
                   >
                     ↓
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     disabled={pendingOp !== null}
-                    className="text-xs px-2 py-1 rounded text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors bg-zinc-800 hover:bg-zinc-700"
-                    type="button"
+                    variant="secondary"
+                    size="sm"
+                    className="text-xs"
                     onClick={() => setEditingId(photo.id)}
                   >
                     {t('edit')}
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     disabled={pendingOp !== null}
-                    className="text-xs px-2 py-1 rounded text-zinc-400 hover:text-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors bg-zinc-800 hover:bg-zinc-700"
-                    type="button"
+                    variant="secondary"
+                    size="sm"
+                    className="text-xs hover:text-red-400"
                     onClick={() => handleDelete(photo.id)}
                   >
                     {t('delete')}
-                  </button>
+                  </Button>
                 </div>
               </div>
             </ItemRow>
@@ -305,21 +310,20 @@ function GalleryForm({
       />
 
       <div className="flex gap-2">
-        <button
+        <Button
           type="submit"
           disabled={pendingOp !== null}
-          className="flex-1 px-3 py-2 bg-amber-400 text-zinc-950 font-semibold rounded-lg hover:bg-amber-300 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-sm"
         >
           {label}
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
           disabled={pendingOp !== null}
-          className="flex-1 px-3 py-2 bg-zinc-800 text-zinc-300 font-semibold rounded-lg hover:bg-zinc-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors text-sm"
+          variant="secondary"
           onClick={onCancel}
         >
           {t('cancel')}
-        </button>
+        </Button>
       </div>
     </form>
   );

@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { WhatsAppIcon } from '@/components/ui/whatsapp-icon';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import {
   Popover,
   PopoverContent,
@@ -83,7 +83,7 @@ export default function Navbar({ siteInfo }: { siteInfo: SiteInfo | null }) {
 
   return (
     <nav className="sticky top-0 left-0 right-0 z-50 backdrop-blur bg-zinc-950 border-b border-amber-400/20 shadow-lg shadow-amber-400/5">
-      <div className="mx-auto px-6 flex items-center justify-between h-16">
+      <div className="mx-auto px-3 md:px-6 flex items-center justify-between h-16">
         <Link href={`/${locale}`} className="flex items-center gap-3">
           <Image
             src="/logo.png"
@@ -112,7 +112,7 @@ export default function Navbar({ siteInfo }: { siteInfo: SiteInfo | null }) {
               </li>
             ))}
             <li>
-              <Button asChild variant="primary" size="sm">
+              <Button asChild overrideSize="cta-sm">
                 <Link href={`/${locale}/contact`}>{t('cta.startNow')}</Link>
               </Button>
             </li>
@@ -136,14 +136,14 @@ export default function Navbar({ siteInfo }: { siteInfo: SiteInfo | null }) {
                 >
                   {navIcons.world}
                 </PopoverTrigger>
-                <PopoverContent className="w-fit p-2">
+                <PopoverContent align="end" className="w-fit p-2">
                   <LocaleSwitcher />
                 </PopoverContent>
               </Popover>
             </li>
           </ul>
-          <div className="flex items-center gap-3">
-            <Button asChild variant="primary" size="sm" className="md:hidden">
+          <div className="flex items-center gap-2">
+            <Button asChild overrideSize="cta-sm" className="md:hidden">
               <Link href={`/${locale}/contact`}>{t('cta.startNow')}</Link>
             </Button>
             {phone && (
@@ -156,9 +156,10 @@ export default function Navbar({ siteInfo }: { siteInfo: SiteInfo | null }) {
                 {navIcons.whatsapp}
               </a>
             )}
-            <button
-              className="md:hidden text-zinc-300"
-              type="button"
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              className="md:hidden"
               onClick={() => setOpen(!open)}
             >
               <svg
@@ -183,7 +184,7 @@ export default function Navbar({ siteInfo }: { siteInfo: SiteInfo | null }) {
                   />
                 )}
               </svg>
-            </button>
+            </Button>
           </div>
         </div>
       </div>

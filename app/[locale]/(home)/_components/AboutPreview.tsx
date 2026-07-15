@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useLocale, useTranslations } from 'next-intl';
 import { StatCounter } from '@/components/ui/stat-counter';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 
 interface Props {
   happyCustomers: number;
@@ -65,11 +65,12 @@ export default function AboutPreview({
             <p className="mt-6 text-zinc-400 text-lg leading-relaxed">
               {t('p1')}
             </p>
-            <Button asChild variant="primary" size="default" className="mt-8">
-              <Link href={`/${locale}/about`}>
-                {t('learnMore')}
-              </Link>
-            </Button>
+            <Link
+              href={`/${locale}/about`}
+              className={`${buttonVariants({ variant: 'default' })} mt-8`}
+            >
+              {t('learnMore')}
+            </Link>
           </div>
           <div>
             <div ref={statsRef} className="grid grid-cols-2 gap-6">

@@ -40,7 +40,7 @@ export default function ServicesPreview({ services }: { services: Service[] }) {
       </div>
 
       <div className="mt-16 text-center">
-        <Button asChild variant="primary">
+        <Button asChild overrideSize="cta">
           <Link href={`/${locale}/services`}>
             {t('details')}
           </Link>

@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import LocaleSwitcher from '@/app/_components/LocaleSwitcher';
 import { siteConfig } from '@/lib/site.config';
 import { createAdminClient } from '@/lib/supabase-server';
@@ -54,12 +55,9 @@ async function AdminContent() {
         <div className="flex items-center gap-4">
           <LocaleSwitcher />
           <form action={logoutAction}>
-            <button
-              type="submit"
-              className="text-sm text-zinc-400 hover:text-white transition-colors border border-zinc-700 hover:border-zinc-500 rounded-lg px-4 py-2"
-            >
+            <Button type="submit" variant="outline">
               {t('logout')}
-            </button>
+            </Button>
           </form>
         </div>
       </header>

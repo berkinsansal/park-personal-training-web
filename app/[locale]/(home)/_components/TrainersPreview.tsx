@@ -26,7 +26,7 @@ export default function TrainersPreview({ trainers }: { trainers: Trainer[] }) {
         ))}
       </div>
       <div className="mt-12 text-center">
-        <Button asChild variant="primary">
+        <Button asChild overrideSize="cta">
           <Link href={`/${locale}/trainers`}>
             {t('details')}
           </Link>

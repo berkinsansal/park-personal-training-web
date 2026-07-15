@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import { useLayoutEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import type { Playlist } from '@/lib/types';
@@ -30,20 +31,15 @@ export default function Playlists({ playlists }: { playlists: Playlist[] }) {
       <div className="flex flex-col gap-8">
         <AnimateIn delay={0}>
           {playlists.length > 0 && (
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-wrap justify-center gap-1">
               {playlists.map((playlist) => (
-                <button
+                <Button
                   key={playlist.id}
-                  className={`px-2 py-2 rounded-lg font-medium transition-all ${
-                    selectedId === playlist.id
-                      ? 'bg-amber-400 text-zinc-950'
-                      : 'bg-zinc-700 text-white hover:bg-zinc-600'
-                  }`}
-                  type="button"
+                  variant={selectedId === playlist.id ? 'default' : 'secondary'}
                   onClick={() => setSelectedId(playlist.id)}
                 >
                   {playlist.title}
-                </button>
+                </Button>
               ))}
             </div>
           )}

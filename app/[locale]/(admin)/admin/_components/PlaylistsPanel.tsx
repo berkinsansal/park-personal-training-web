@@ -175,49 +175,49 @@ export default function PlaylistsPanel({
                 </p>
               </div>
               <div className="flex flex-col gap-1 shrink-0">
-                <div className="flex gap-2">
-                  <button
+                <div className="flex">
+                  <Button
                     disabled={
                       pendingOp !== null ||
                       playlist.order_index ===
                         Math.min(...list.map((p) => p.order_index))
                     }
-                    className={`text-xs transition-colors ${pendingOp === `up:${playlist.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
-                    type="button"
+                    variant="ghost"
+                    size="xs"
                     onClick={() => handleReorder(playlist.id, 'up')}
                   >
                     ↑
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     disabled={
                       pendingOp !== null ||
                       playlist.order_index ===
                         Math.max(...list.map((p) => p.order_index))
                     }
-                    className={`text-xs transition-colors ${pendingOp === `down:${playlist.id}` ? 'opacity-40 text-zinc-400' : 'text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed'}`}
-                    type="button"
+                    variant="ghost"
+                    size="xs"
                     onClick={() => handleReorder(playlist.id, 'down')}
                   >
                     ↓
-                  </button>
+                  </Button>
                 </div>
-                <div className="flex gap-2">
-                  <button
+                <div className="flex">
+                  <Button
                     disabled={pendingOp !== null}
-                    className="text-xs text-zinc-400 hover:text-amber-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-                    type="button"
+                    variant="ghost"
+                    size="xs"
                     onClick={() => setEditingId(playlist.id)}
                   >
                     {t('edit')}
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     disabled={pendingOp !== null}
-                    className="text-xs text-zinc-400 hover:text-red-400 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
-                    type="button"
+                    variant="destructive"
+                    size="xs"
                     onClick={() => handleDelete(playlist.id)}
                   >
                     {t('delete')}
-                  </button>
+                  </Button>
                 </div>
               </div>
             </ItemRow>
@@ -282,19 +282,19 @@ function PlaylistForm({
         <Button
           type="submit"
           disabled={pendingOp !== null}
-          variant="primary"
           size="sm"
         >
           {isSubmitting ? '...' : label}
         </Button>
-        <button
+        <Button
           type="button"
           disabled={pendingOp !== null}
-          className="px-4 py-2 text-zinc-400 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed text-xs transition-colors"
+          variant="secondary"
+          size="sm"
           onClick={onCancel}
         >
           {t('cancel')}
-        </button>
+        </Button>
       </div>
     </form>
   );

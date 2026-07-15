@@ -183,12 +183,12 @@ export default function Hero() {
             animationFillMode: 'backwards',
           }}
         >
-          <Button asChild variant="primary" size="lg">
+          <Button asChild overrideSize="cta">
             <Link href={`/${locale}/contact`}>
               {t('cta.startNow')}
             </Link>
           </Button>
-          <Button asChild variant="ghost" size="lg">
+          <Button asChild variant="outline" overrideSize="cta">
             <Link href={`/${locale}/services`}>
               {t('cta.viewServices')}
             </Link>

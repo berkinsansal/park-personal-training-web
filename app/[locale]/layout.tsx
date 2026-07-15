@@ -46,7 +46,7 @@ export default async function RootLayout({
   return (
     <html
       lang={htmlLang}
-      className={`${geist.variable} scroll-smooth`}
+      className={`${geist.variable} scroll-smooth dark`}
       data-scroll-behavior="smooth"
     >
       <head />

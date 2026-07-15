@@ -9,7 +9,7 @@ export function ItemRow({ isPending, className, children, ...props }: ItemRowPro
   return (
     <div
       className={cn(
-        'bg-zinc-900 border border-zinc-800 rounded-xl p-4',
+        'bg-zinc-900 border border-zinc-800 rounded-xl p-2',
         isPending && 'opacity-50 pointer-events-none',
         className
       )}

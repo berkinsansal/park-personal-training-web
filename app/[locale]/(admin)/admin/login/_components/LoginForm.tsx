@@ -45,7 +45,6 @@ export default function LoginForm({
               type="email"
               name="email"
               defaultValue={defaultEmail}
-              sizeStr="lg"
             />
           </div>
 
@@ -58,7 +57,6 @@ export default function LoginForm({
               type="password"
               name="password"
               defaultValue={defaultPassword}
-              sizeStr="lg"
             />
           </div>
 
@@ -69,8 +67,6 @@ export default function LoginForm({
           <Button
             type="submit"
             disabled={pending}
-            variant="primary"
-            size="full"
             className="mt-2"
           >
             {pending ? t('submitting') : t('submit')}
@@ -78,12 +74,13 @@ export default function LoginForm({
         </form>
 
         <div className="text-center mt-6">
-          <Link
-            href="/"
-            className="text-zinc-400 text-sm hover:text-white transition-colors"
-          >
-            {t('backToHome')}
-          </Link>
+          <Button asChild variant="ghost">
+            <Link
+              href="/"
+            >
+              {t('backToHome')}
+            </Link>
+          </Button>
         </div>
       </div>
     </div>

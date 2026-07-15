@@ -19,13 +19,13 @@ export default function ContactPreview({ phone }: { phone?: string }) {
       sectionClassName="bg-zinc-900"
     >
       <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <Button asChild variant="primary">
+        <Button asChild overrideSize="cta">
           <Link href={`/${locale}/contact`}>
             {tCta('startNow')}
           </Link>
         </Button>
         {phone && (
-          <Button asChild variant="whatsapp">
+          <Button asChild variant="outline" overrideColor="outline-whatsapp" overrideSize="cta">
             <a
               href={`https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(tCta('whatsappMessage'))}`}
               target="_blank"

@@ -98,8 +98,6 @@ export default function SiteInfoForm({ data }: { data: SiteInfo | null }) {
           <Button
             type="submit"
             disabled={pending}
-            variant="primary"
-            size="default"
           >
             {pending ? t('saving') : t('save')}
           </Button>

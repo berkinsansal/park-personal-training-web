@@ -12,8 +12,7 @@ function SubmitButton({ label, pending }: { label: string; pending: boolean }) {
     <Button
       type="submit"
       disabled={pending}
-      variant="primary"
-      size="full"
+      overrideSize="cta"
     >
       {pending ? '...' : label}
     </Button>
@@ -62,7 +61,6 @@ export default function ContactForm() {
         <Input
           type="text"
           name="name"
-          sizeStr="lg"
         />
       </div>
       <div>
@@ -72,7 +70,6 @@ export default function ContactForm() {
         <Input
           type="text"
           name="phone"
-          sizeStr="lg"
         />
       </div>
       <div>
@@ -82,7 +79,6 @@ export default function ContactForm() {
         <Input
           type="text"
           name="email"
-          sizeStr="lg"
         />
       </div>
       <div>

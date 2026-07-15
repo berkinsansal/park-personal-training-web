@@ -17,7 +17,7 @@ export default function MusicPreview() {
       sectionClassName="bg-green-950"
     >
       <div className="text-center">
-        <Button asChild variant="primary">
+        <Button asChild overrideSize="cta">
           <Link href={`/${locale}/music`}>
             {t('listen')}
           </Link>

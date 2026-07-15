@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import { usePathname, useRouter } from 'next/navigation';
 import { useLocale } from 'next-intl';
 import type { Locale } from '@/i18n.config';
@@ -22,18 +23,15 @@ export default function LocaleSwitcher() {
   return (
     <div className="inline-flex items-center gap-0.5 bg-zinc-900/60 border border-zinc-700/50 rounded-full p-0.5 backdrop-blur-sm hover:border-zinc-600/80 transition-colors duration-200">
       {(['tr', 'en'] as const).map((locale) => (
-        <button
+        <Button
           key={locale}
-          className={`px-3 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 ${
-            currentLocale === locale
-              ? 'bg-amber-400 text-zinc-950 shadow-lg shadow-amber-400/30 scale-100'
-              : 'text-zinc-400 hover:text-zinc-200 hover:cursor-pointer active:scale-95'
-          }`}
-          type="button"
+          variant={currentLocale === locale ? 'default' : 'ghost'}
+          size="sm"
+          className="uppercase rounded-full"
           onClick={() => handleLocaleChange(locale)}
         >
           {locale}
-        </button>
+        </Button>
       ))}
     </div>
   );
