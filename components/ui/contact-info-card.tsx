@@ -1,5 +1,6 @@
-import * as React from 'react';
 import { cn } from '@/lib/utils';
+import { ExternalLinkIcon } from 'lucide-react';
+import * as React from 'react';
 
 export interface ContactInfoCardProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   icon: React.ReactNode;
@@ -27,8 +28,9 @@ const ContactInfoCard = React.forwardRef<
     },
     ref,
   ) => {
-    const baseClasses =
-      'flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group';
+    const baseClasses = `flex items-center gap-4 bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-amber-400/50 hover:-translate-y-0.5 transition-all group${
+      !label ? ' justify-between' : ''
+    }`;
 
     if (asButton) {
       return (
@@ -77,11 +79,14 @@ const ContactInfoCard = React.forwardRef<
           {icon}
         </div>
         <div>
-          {label && (
-            <div className="text-white font-bold group-hover:text-amber-400 transition-colors">
-              {label}
-            </div>
-          )}
+          <div className="text-white font-bold group-hover:text-amber-400 transition-colors">
+            {label}
+            {!label && (
+              <>
+                <ExternalLinkIcon className="w-6 h-6" />
+              </>
+            )}
+          </div>
           {value &&
             (Array.isArray(value) ? (
               value.map((item) => (

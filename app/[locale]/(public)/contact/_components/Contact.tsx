@@ -54,7 +54,6 @@ export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
                 href={`https://instagram.com/${ig}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                label="Instagram"
                 iconClassName="bg-gradient-to-br from-purple-500 via-pink-500 to-orange-400"
                 icon={
                   <svg
@@ -71,7 +70,6 @@ export default function Contact({ siteInfo }: { siteInfo: SiteInfo | null }) {
                 href={`https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(tCta('whatsappMessage'))}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                label="WhatsApp"
                 iconClassName="bg-green-600"
                 icon={<WhatsAppIcon className="w-6 h-6" />}
               />
