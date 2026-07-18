@@ -65,12 +65,9 @@ export default function AboutPreview({
             <p className="mt-6 text-zinc-400 text-lg leading-relaxed">
               {t('p1')}
             </p>
-            <Link
-              href={`/${locale}/about`}
-              className={`${buttonVariants({ variant: 'default' })} mt-8`}
-            >
-              {t('learnMore')}
-            </Link>
+            <Button asChild overrideSize="cta" className="mt-8">
+              <Link href={`/${locale}/about`}>{t('learnMore')}</Link>
+            </Button>
           </div>
           <div>
             <div ref={statsRef} className="grid grid-cols-2 gap-6">
