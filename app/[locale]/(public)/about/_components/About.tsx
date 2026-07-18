@@ -106,7 +106,7 @@ export default function About({
         </div>
 
         {gallery.length > 0 && (
-          <div className="mt-12">
+          <div className="mt-12 px-12">
             <Carousel className="w-full">
               <CarouselContent>
                 {gallery.map((photo) => (
