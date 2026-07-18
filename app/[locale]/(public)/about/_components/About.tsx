@@ -8,7 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { StatCounter } from '@/components/ui/stat-counter';
+import { StatCounter } from '@/components/shared/stat-counter';
 import type { GalleryPhoto } from '@/lib/types';
 import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';

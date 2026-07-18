@@ -2,8 +2,8 @@
 
 import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
 import { SectionShell } from '@/app/[locale]/_components/SectionShell';
-import { ContactInfoCard } from '@/components/ui/contact-info-card';
-import { WhatsAppIcon } from '@/components/ui/whatsapp-icon';
+import { ContactInfoCard } from '@/app/[locale]/(public)/contact/_components/contact-info-card';
+import { WhatsAppIcon } from '@/components/shared/whatsapp-icon';
 import type { SiteInfo } from '@/lib/types';
 import { useLocale, useTranslations } from 'next-intl';
 import ContactForm from './ContactForm';

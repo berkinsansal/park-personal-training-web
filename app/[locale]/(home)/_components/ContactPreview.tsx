@@ -3,7 +3,7 @@
 import { SectionShell } from '@/app/[locale]/_components/SectionShell';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { WhatsAppIcon } from '@/components/ui/whatsapp-icon';
+import { WhatsAppIcon } from '@/components/shared/whatsapp-icon';
 import { Button } from '@/components/ui/button';
 
 export default function ContactPreview({ phone }: { phone?: string }) {

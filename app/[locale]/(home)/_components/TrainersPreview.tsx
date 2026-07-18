@@ -6,7 +6,7 @@ import type { Trainer } from '@/lib/types';
 import { AnimateIn } from '@/app/[locale]/_components/AnimateIn';
 import { SectionShell } from '@/app/[locale]/_components/SectionShell';
 import { Button } from '@/components/ui/button';
-import { TrainerCard } from '@/components/ui/trainer-card';
+import { TrainerCard } from '@/app/[locale]/_components/trainers/trainer-card';
 
 export default function TrainersPreview({ trainers }: { trainers: Trainer[] }) {
   const t = useTranslations('trainers');

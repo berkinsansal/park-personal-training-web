@@ -6,7 +6,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import { WhatsAppIcon } from '@/components/ui/whatsapp-icon';
+import { WhatsAppIcon } from '@/components/shared/whatsapp-icon';
 import { Button, buttonVariants } from '@/components/ui/button';
 import {
   Popover,

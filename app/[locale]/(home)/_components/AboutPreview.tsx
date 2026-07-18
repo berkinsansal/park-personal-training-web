@@ -1,10 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
+import { StatCounter } from '@/components/shared/stat-counter';
+import { Button } from '@/components/ui/button';
 import { useLocale, useTranslations } from 'next-intl';
-import { StatCounter } from '@/components/ui/stat-counter';
-import { Button, buttonVariants } from '@/components/ui/button';
+import Link from 'next/link';
+import { useEffect, useRef, useState } from 'react';
 
 interface Props {
   happyCustomers: number;
